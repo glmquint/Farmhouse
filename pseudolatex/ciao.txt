@@ -3,6 +3,11 @@
 #> !Nome costrutto!Tipo costrutto(E/R)!Numero operazioni elementari(volume interessato)!Tipo!Descrizione
 #]
 
+***Altra tabella***
+[
+>!oioi
+]
+
 [
 >!?1cTotale!?3r9001
 >!1!2!3!4
