@@ -41,5 +41,3 @@ Implementazione
 Parlare della strategia mista per lo sviluppo della BD
 colorare relazioni non ristrutturato
 aggiungere pasto per locale in volumi (e rimuovere vecchie relazioni "pasto contenuto")
-
---- ---
