@@ -1,0 +1,103 @@
+
+    
+\hline
+compila 				& \begin{flushleft}\vspace{-15pt}  \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item (1,1) con Scheda medica: ogni scheda è compilata da un solo veterinario
+						\item (0,N) con Veterinario: alcuni veterinari possono compilare più di una scheda medica
+					\end{itemize}\\ 
+
+\hline
+composta da 				& \begin{flushleft}\vspace{-25pt} posologia \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item (1,N) con Terapia: ogni terapia è composta da almeno un farmaco
+						\item (1,N) con Farmaco: ogni farmaco è impiegato in almeno una terapia, altrimenti non è memorizzato nel database
+					\end{itemize}\\ 
+
+\hline
+controlli effettuati 				& \begin{flushleft}\vspace{-15pt}  \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item (0,1) con Visita: le visite di controllo successive ad una riproduzione si riferiscono ad una sola scheda  di gestazione
+						\item (1,N) con Scheda gestazione: una scheda di gestazione può contenere più visite di controllo
+					\end{itemize}\\ 
+
+\hline
+esegue 				& \begin{flushleft}\vspace{-15pt}  \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item (0,N) con Veterinario: alcuni veterinari possono eseguire più visite di controllo
+						\item (1,1) con Visita: ogni visita è effettuata da un solo veterinario
+					\end{itemize}\\ 
+
+\hline
+possiede 				& \begin{flushleft}\vspace{-15pt}  \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item (0,N) con Animale: alcuni animali possono avere più di una scheda
+						\item (1,1) con Scheda medica: ogni scheda è assocata ad un solo animale
+					\end{itemize}\\ 
+
+\hline
+possiede esame 				& \begin{flushleft}\vspace{-15pt}  \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item (1,N) con Animale: ogni animale possiede almeno un esame diagnostico, sia che sia nato nell'agriturismo, sia che sia stato acquisito
+						\item (1,1) con Esame: ogni esame veterinario si riferisce ad un solo animale
+					\end{itemize}\\ 
+
+\hline
+possiede terapia 				& \begin{flushleft}\vspace{-15pt} \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item (0,1) con Animale: ogni animale può possedere al massimo una terapia
+						\item (1,1) con Terapia: ogni terapia è associata ad un solo animale
+					\end{itemize}\\ 
+
+\hline
+prescrive esame 				& \begin{flushleft}\vspace{-15pt}  \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item (0,N) con Veterinario: alcuni veterinari possono prescrivere più di un esame
+						\item (1,1) con Esame: ogni esame è prescritto da un solo veterinario
+					\end{itemize}\\ 
+
+\hline
+prescrive terapia 				& \begin{flushleft}\vspace{-15pt}  \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item (0,N) con Veterinario: alcuni veterinari possono prescrivere più di un terapia
+						\item (1,1) con Terapia: ogni terapia è prescritta da un solo veterinario
+					\end{itemize}\\ 
+
+\hline
+stato salute 				& \begin{flushleft}\vspace{-15pt}  \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item (1,N) con Animale: ogni animale può avere più indici di salute in diverse date
+						\item (1,1) con Indici salute: ogni set di indici di salute si riferisce ad un solo animale
+					\end{itemize}\\ 
+
+\hline

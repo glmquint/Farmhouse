@@ -1,0 +1,233 @@
+
+    
+\hline
+Cliente
+ & 
+\begin{center}\vspace{-25pt}E\end{center}
+ & 
+\begin{center}\vspace{-25pt}10000\end{center}
+ & 
+\begin{flushleft}\vspace{-25pt}Ogni agriturismo ha in media 500 clienti all'anno\end{flushleft}
+\\
+
+\hline
+Escursione
+ & 
+\begin{center}\vspace{-25pt}E\end{center}
+ & 
+\begin{center}\vspace{-25pt}100\end{center}
+ & 
+\begin{flushleft}\vspace{-25pt}Ogni agriturismo dispone di cinque escursioni\end{flushleft}
+\\
+
+\hline
+Guida
+ & 
+\begin{center}\vspace{-25pt}E\end{center}
+ & 
+\begin{center}\vspace{-25pt}60\end{center}
+ & 
+\begin{flushleft}\vspace{-25pt}Si suppone che ogni agriturismo disponga di tre guide $20\times 3= 60$\end{flushleft}
+\\
+
+\hline
+Itinerario
+ & 
+\begin{center}\vspace{-25pt}E\end{center}
+ & 
+\begin{center}\vspace{-25pt}500\end{center}
+ & 
+\begin{flushleft}\vspace{-25pt}Ogni escursione può comprendere al massimo 5 itinerari $100\times 5= 500$\end{flushleft}
+\\
+
+\hline
+Pagamenti
+ & 
+\begin{center}\vspace{-25pt}E\end{center}
+ & 
+\begin{center}\vspace{-25pt}166000\end{center}
+ & 
+\begin{flushleft}\vspace{-25pt}Si considera la somma dei pagamenti per gli ordini sullo store online, per la prenotazione delle stanze e delle escursioni $146000+2\times 10000= 166000$\end{flushleft}
+\\
+
+\hline
+Prenotazione Escursione
+ & 
+\begin{center}\vspace{-25pt}E\end{center}
+ & 
+\begin{center}\vspace{-25pt}10000\end{center}
+ & 
+\begin{flushleft}\vspace{-25pt}Si stima che in un anno ogni cliente prenoti un'escursione \end{flushleft}
+\\
+
+\hline
+Prenotazione Stanza
+ & 
+\begin{center}\vspace{-25pt}E\end{center}
+ & 
+\begin{center}\vspace{-25pt}10000\end{center}
+ & 
+\begin{flushleft}\vspace{-25pt}Si stima che mediamente in un anno ogni cliente prenoti una stanza\end{flushleft}
+\\
+
+\hline
+Servizio Aggiuntivo
+ & 
+\begin{center}\vspace{-25pt}E\end{center}
+ & 
+\begin{center}\vspace{-25pt}10\end{center}
+ & 
+\begin{flushleft}\vspace{-25pt}Ogni agriturismo dispone delle stesse 10 tipologie di servizi aggiuntivi\end{flushleft}
+\\
+
+\hline
+Servizio per Stanza
+ & 
+\begin{center}\vspace{-25pt}E\end{center}
+ & 
+\begin{center}\vspace{-25pt}1500\end{center}
+ & 
+\begin{flushleft}\vspace{-25pt}Si considera che la metà delle stanze prenotate abbia usufruito di tre servizi aggiuntivi $1000\times 0.5 \times 3 = 1500$\end{flushleft}
+\\
+
+\hline
+Stanza
+ & 
+\begin{center}\vspace{-25pt}E\end{center}
+ & 
+\begin{center}\vspace{-25pt}200\end{center}
+ & 
+\begin{flushleft}\vspace{-25pt}Ogni agriturismo ha in media 10 stanze\end{flushleft}
+\\
+
+\hline
+Tappe
+ & 
+\begin{center}\vspace{-25pt}E\end{center}
+ & 
+\begin{center}\vspace{-25pt}5000\end{center}
+ & 
+\begin{flushleft}\vspace{-25pt}Ogni itinerario ha al massimo dieci tappe $500\times 10= 5000$\end{flushleft}
+\\
+
+\hline
+assegnazione cliente
+ & 
+\begin{center}\vspace{-25pt}R\end{center}
+ & 
+\begin{center}\vspace{-25pt}10000\end{center}
+ & 
+\begin{flushleft}\vspace{-25pt}Cardinalità (1,1) con Prenotazione Stanza\end{flushleft}
+\\
+
+\hline
+assegnazione stanza
+ & 
+\begin{center}\vspace{-25pt}R\end{center}
+ & 
+\begin{center}\vspace{-25pt}10000\end{center}
+ & 
+\begin{flushleft}\vspace{-25pt}Cardinalità (1,1) con Prenotazione Stan\-za \end{flushleft}
+\\
+
+\hline
+composto da
+ & 
+\begin{center}\vspace{-25pt}R\end{center}
+ & 
+\begin{center}\vspace{-25pt}2500000\end{center}
+ & 
+\begin{flushleft}\vspace{-25pt}Tutte le possibili combinazioni di itinerari e tappe\end{flushleft}
+\\
+
+\hline
+divisione stanza
+ & 
+\begin{center}\vspace{-25pt}R\end{center}
+ & 
+\begin{center}\vspace{-25pt}200\end{center}
+ & 
+\begin{flushleft}\vspace{-25pt}Cardinalità (1,1) con Stanza\end{flushleft}
+\\
+
+\hline
+effettua
+ & 
+\begin{center}\vspace{-25pt}R\end{center}
+ & 
+\begin{center}\vspace{-25pt}166000\end{center}
+ & 
+\begin{flushleft}\vspace{-25pt}Cardinalità (1,1) con Pagamenti\end{flushleft}
+\\
+
+\hline
+effettuata da
+ & 
+\begin{center}\vspace{-25pt}R\end{center}
+ & 
+\begin{center}\vspace{-25pt}100\end{center}
+ & 
+\begin{flushleft}\vspace{-25pt}Cardinalità (1,1) con escursione\end{flushleft}
+\\
+
+\hline
+legata a
+ & 
+\begin{center}\vspace{-25pt}R\end{center}
+ & 
+\begin{center}\vspace{-25pt}50000\end{center}
+ & 
+\begin{flushleft}\vspace{-25pt}Tutte le possibili combinazioni tra escursioni e itinerari $100\times 500= 50000$\end{flushleft}
+\\
+
+\hline
+possiede
+ & 
+\begin{center}\vspace{-25pt}R\end{center}
+ & 
+\begin{center}\vspace{-25pt}7000\end{center}
+ & 
+\begin{flushleft}\vspace{-25pt}Cardinalità (1,1) con Account\end{flushleft}
+\\
+
+\hline
+prenotazione cliente
+ & 
+\begin{center}\vspace{-25pt}R\end{center}
+ & 
+\begin{center}\vspace{-25pt}10000\end{center}
+ & 
+\begin{flushleft}\vspace{-25pt}Cardinalità (1,1) con Prenotazione Escursione\end{flushleft}
+\\
+
+\hline
+prenotazione escursione
+ & 
+\begin{center}\vspace{-25pt}R\end{center}
+ & 
+\begin{center}\vspace{-25pt}10000\end{center}
+ & 
+\begin{flushleft}\vspace{-25pt}Cardinalità (1,1) con Prenotazione Escursione\end{flushleft}
+\\
+
+\hline
+servizio associato
+ & 
+\begin{center}\vspace{-25pt}R\end{center}
+ & 
+\begin{center}\vspace{-25pt}1500\end{center}
+ & 
+\begin{flushleft}\vspace{-25pt}Cardinalità (1,1) con Servizio per Stanza\end{flushleft}
+\\
+
+\hline
+stanza associata
+ & 
+\begin{center}\vspace{-25pt}R\end{center}
+ & 
+\begin{center}\vspace{-25pt}1500\end{center}
+ & 
+\begin{flushleft}\vspace{-25pt}Cardinalità (1,1) con Servizio per Stanza\end{flushleft}
+\\
+
+\hline

@@ -1,0 +1,10 @@
+- tolto nome da Fornitore in quanto ricavabile da ragione sociale
+- eliminato ridondanza su Visite di controllo 
+- eliminato codice neonato da Riproduzione, ricavabile da id_madre, id_padre e data_nascita di Animale con animali coinvolti e data di Riproduzione
+- eliminato interventi di controllo programmati da Scheda gestazione
+- si mantiene la ridondanza di capianza max di Locale seppur possa essere ricavata dalla specie ospitante e dalle dimensioni dello stesso
+- si mantiene le ridondanza delle kcal/kg del Foraggio seppur possa essere ricavato (in qualche modo) dalle quantità di fibre, proteine e glucidi contenute
+- si mantiene il nome ed il cognome dei Veterinari seppur possano essere ricavati dal codice fiscale
+- si mantiene il nome ed il cognome degli Account seppur possano essere ricavati dal codice fiscale
+- si mantiene la scadenza del Formaggio Prodotto seppur possa essere ricavato dalla deperibilità del Formaggio e dalla data di produzione del Lotto associato
+- si mantiene il totale da pagare nei Pagamenti seppur ricavabile come somma di tutti i costi delle camere, delle escursioni e dei servizi aggiuntivi, perchè è utile centralizzare l'informazione del pagamento totale in un unica tabella

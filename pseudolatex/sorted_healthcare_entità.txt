@@ -1,0 +1,137 @@
+
+    
+\hline
+
+Disturbi Comportamentali				 	& \begin{flushleft}\vspace{-15pt} Informazioni su abitudini fuori dal comune di un animale \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item nome
+						\item entità
+					\end{itemize}
+					& \begin{flushleft}\vspace{-25pt} Animale, Veterinario \end{flushleft} \\ 
+
+\hline
+Esame				 	& \begin{flushleft}\vspace{-25pt} Esame medico prescritto da un veterinario effettuato con un determinato macchinario \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item \underline{codiceEsame}
+						\item nome
+						\item descrizione
+						\item macchinario
+						\item data
+						\item codAnimale*
+					\end{itemize}
+					& \begin{flushleft}\vspace{-25pt} Veterinario, Animale \end{flushleft} \\ 
+
+\hline
+Farmaco				 	& \begin{flushleft}\vspace{-25pt} Medicinale prescritto da un veterinario da assumere durante una terapia \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item \underline{nome}
+						\item dosaggio
+						\item principioAttivo
+					\end{itemize}
+					& \begin{flushleft}\vspace{-25pt} Terapia \end{flushleft} \\ 
+
+\hline
+Indici Salute				 	& \begin{flushleft}\vspace{-25pt} Informazioni relative alle condizioni di salute di un animale \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item \underline{dataRilevazione}
+						\item lucentezzaPelo
+						\item vigilanza
+						\item idratazione
+						\item deambulazione
+						\item tipologiaRespirazione
+						\item codAnimale*
+					\end{itemize}
+					& \begin{flushleft}\vspace{-25pt} Animale \end{flushleft} \\ 
+
+\hline
+Lesioni				 	& \begin{flushleft}\vspace{-25pt} Ferite riportate da un animale \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item tipologia
+						\item parteDelCorpo
+						\item entità
+					\end{itemize}
+					& \begin{flushleft}\vspace{-25pt} Animale, Veterinario \end{flushleft} \\ 
+
+\hline
+Scheda Medica				 	& \begin{flushleft}\vspace{-25pt} Documento contenente tutte le informazioni relative ad una visita effettuata da un veterinario su un animale \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item \underline{codiceScheda}
+						\item massaMagra
+						\item massaGrassa
+						\item rispostaOculare
+						\item emocromo
+						\item spessoreZoccolo
+						\item fegato
+						\item cuore
+						\item pancreas
+						\item data
+						\item patologie
+						\item carenze
+						\item codAnimale*
+						\item codVeterinario*
+					\end{itemize}
+					& \begin{flushleft}\vspace{-25pt} Animale, Veterinario \end{flushleft} \\ 
+
+\hline
+Terapia				 	& \begin{flushleft}\vspace{-25pt} Trattamento prescritto da un veterinario conseguentemente alla rilevazione di malattie in un animale \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item \underline{codiceTerapia}
+						\item dataInizio
+						\item durata
+						\item secondaTerapiaConse\-cutiva
+						\item codFiscVeterinario*
+						\item codAnimale
+					\end{itemize}
+					& \begin{flushleft}\vspace{-25pt} Veterinario, Farmaco\ \end{flushleft} \\ 
+
+\hline
+Veterinario				 	& \begin{flushleft}\vspace{-25pt} Medico specializzato per la visita degli animali \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item \underline{codiceFiscale}
+						\item nome
+						\item cognome
+						\item contatto
+					\end{itemize}
+					& \begin{flushleft}\vspace{-25pt} Scheda Medica, Terapia, Esame, Riproduzione, Visita \end{flushleft} \\ 
+
+\hline
+Visita				 	& \begin{flushleft}\vspace{-25pt} Visita di controllo effettuata per rilevare valori anomali negli indici di salute di un animale \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item \underline{codiceVisita}
+						\item esito
+						\item dataProgrammata
+						\item dataEffettiva
+						\item stato
+						\item codVeterinario*
+						\item codGestazione*
+					\end{itemize}
+					& \begin{flushleft}\vspace{-25pt} Veterinario, Scheda gestazione \end{flushleft} \\ 
+
+\hline

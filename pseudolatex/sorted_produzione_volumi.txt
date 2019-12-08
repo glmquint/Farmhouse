@@ -1,0 +1,243 @@
+
+    
+\hline
+Cantine 				& \begin{center}
+\vspace{-25pt}E
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}100\end{center}
+					& \begin{flushleft}\vspace{-25pt} Mediamente sono disponibili 5 cantine per ogni agriturismo $20\times 5=100$ \end{flushleft}\\ 
+
+\hline
+Fasi 				& \begin{center}
+\vspace{-25pt}E
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}3000\end{center}
+					& \begin{flushleft}\vspace{-25pt} Ogni ricetta è divisa mediamente in 10 fasi \end{flushleft}\\ 
+
+\hline
+Formaggio 				& \begin{center}
+\vspace{-25pt}E
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}400\end{center}
+					& \begin{flushleft}\vspace{-25pt} Ogni agriturismo produce circa 20 formaggi differenti \end{flushleft}\\ 
+
+\hline
+Latte 				& \begin{center}
+\vspace{-25pt}E
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}400\end{center}
+					& \begin{flushleft}\vspace{-25pt} Ogni agriturismo produce 20 tipologie di latte differente $20\times 20 = 400$\end{flushleft}\\ 
+
+\hline
+Lotto 				& \begin{center}
+\vspace{-25pt}E
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}400\end{center}
+					& \begin{flushleft}\vspace{-25pt} Ogni agriturismo produce 20 lotti di formaggio all'anno \end{flushleft}\\ 
+
+\hline
+Magazzini 				& \begin{center}
+\vspace{-25pt}E
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}100\end{center}
+					& \begin{flushleft}\vspace{-25pt} Mediamente sono disponibili 5 magazzini per ogni agriturismo $20\times 5 = 100$ \end{flushleft}\\ 
+
+\hline
+Mungitrice 				& \begin{center}
+\vspace{-25pt}E
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}2000\end{center}
+					& \begin{flushleft}\vspace{-25pt} Ogni agriturismo dispone di circa 100 mungitrici $20\times 100= 2000$ \end{flushleft}\\ 
+
+\hline
+Mungitura 				& \begin{center}
+\vspace{-25pt}E
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}7300000\end{center}
+					& \begin{flushleft}\vspace{-25pt} Si suppone che ogni giorno dell'anno ogni animale di un agriturismo venga munto una volta $20000\times 365 = 7300000$ \end{flushleft}\\ 
+
+\hline
+Parametri 				& \begin{center}
+\vspace{-25pt}E
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}36500\end{center}
+					& \begin{flushleft}\vspace{-25pt} Ogni giorno dell'anno vengono prelevati i parametri di tutte le cantine $365\times 100= 36500$ \end{flushleft}\\ 
+
+\hline
+Ricetta 				& \begin{center}
+\vspace{-25pt}E
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}300\end{center}
+					& \begin{flushleft}\vspace{-25pt} Si considerano circa 300 ricette differenti \end{flushleft}\\ 
+
+\hline
+Scaffalature 				& \begin{center}
+\vspace{-25pt}E
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}1000\end{center}
+					& \begin{flushleft}\vspace{-25pt} Ogni cantina è suddivisa in 10 scaffalature \end{flushleft}\\ 
+
+\hline
+Scaffali 				& \begin{center}
+\vspace{-25pt}E
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}1000\end{center}
+					& \begin{flushleft}\vspace{-25pt} Ogni magazzino è suddiviso in 10 scaffali $100\times 10=1000$\end{flushleft}\\ 
+
+\hline
+Silos 				& \begin{center}
+\vspace{-25pt}E
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}200\end{center}
+					& \begin{flushleft}\vspace{-25pt} Sono disponibili circa 10 silos per ogni agriturismo $10\times 20=200$ \end{flushleft}\\ 
+
+\hline
+appartenente a 				& \begin{center}
+\vspace{-25pt}R
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}3000000\end{center}
+					& \begin{flushleft}\vspace{-25pt} Cardinalità (1,1) con Formaggio Prodotto \end{flushleft}\\ 
+
+\hline
+che munge 				& \begin{center}
+\vspace{-25pt}R
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}800000\end{center}
+					& \begin{flushleft}\vspace{-25pt} Combinazione tra tutte le mungitrici e tutti i tipi di latte $2000\times 400= 800000$ \end{flushleft}\\ 
+
+\hline
+composizione formaggio 				& \begin{center}
+\vspace{-25pt}R
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}400\end{center}
+					& \begin{flushleft}\vspace{-25pt} Cardinalità (1,1) con Formaggio \end{flushleft}\\ 
+
+\hline
+con 				& \begin{center}
+\vspace{-25pt}R
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}7300000\end{center}
+					& \begin{flushleft}\vspace{-25pt} Cardinalità (1,1) con Mungitura \end{flushleft}\\ 
+
+\hline
+contengono scaffalature 				& \begin{center}
+\vspace{-25pt}R
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}1000\end{center}
+					& \begin{flushleft}\vspace{-25pt} Cardinalità (1,1) con Scaffalature \end{flushleft}\\ 
+
+\hline
+contengono scaffali 				& \begin{center}
+\vspace{-25pt}R
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}1000\end{center}
+					& \begin{flushleft}\vspace{-25pt} Cardinalità (1,1) con Scaffali \end{flushleft}\\ 
+
+\hline
+controllo fasi 				& \begin{center}
+\vspace{-25pt}R
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}1200000\end{center}
+					& \begin{flushleft}\vspace{-25pt} Combinazione tra tutti i lotti e tutte le fasi $400\times 3000=1200000$ \end{flushleft}\\ 
+
+\hline
+divisa in 				& \begin{center}
+\vspace{-25pt}R
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}900000\end{center}
+					& \begin{flushleft}\vspace{-25pt} Combinazione tra tutte le ricette e tutte le fasi $300\times 3000 = 900000$\end{flushleft}\\ 
+
+\hline
+prodotto con 				& \begin{center}
+\vspace{-25pt}R
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}160000\end{center}
+					& \begin{flushleft}\vspace{-25pt} Combinazione tra tutti i tipi di latte e tutti i lotti $400\times 400 = 160000$\end{flushleft}\\ 
+
+\hline
+produce 				& \begin{center}
+\vspace{-25pt}R
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}400\end{center}
+					& \begin{flushleft}\vspace{-25pt} Cardinalità (1,1) con Formaggio \end{flushleft}\\ 
+
+\hline
+produce 				& \begin{center}
+\vspace{-25pt}R
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}400\end{center}
+					& \begin{flushleft}\vspace{-25pt} Cardinalità (1,1) con Latte \end{flushleft}\\ 
+
+\hline
+rilievo parametri 				& \begin{center}
+\vspace{-25pt}R
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}36500\end{center}
+					& \begin{flushleft}\vspace{-25pt} Cardinalità (1,1) con Parametri \end{flushleft}\\ 
+
+\hline
+stoccaggio cantine 				& \begin{center}
+\vspace{-25pt}R
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}20000\end{center}
+					& \begin{flushleft}\vspace{-25pt} Combinazione tra tutte le cantine e tutti i lotti $100\times 400= 40000$ \end{flushleft}\\ 
+
+\hline
+stoccaggio magazzini 				& \begin{center}
+\vspace{-25pt}R
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}20000\end{center}
+					& \begin{flushleft}\vspace{-25pt} Combinazione tra tutti i magazzini e tutti i lotti $100\times 400= 40000$ \end{flushleft}\\ 
+
+\hline
+stoccato in 				& \begin{center}
+\vspace{-25pt}R
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}400\end{center}
+					& \begin{flushleft}\vspace{-25pt} Cardinalità (1,1) con Latte \end{flushleft}\\ 
+
+\hline
+utilizzando 				& \begin{center}
+\vspace{-25pt}R
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}400\end{center}
+					& \begin{flushleft}\vspace{-25pt} Cardinalità (1,1) con Formaggio \end{flushleft}\\ 
+
+\hline
+è munto durante 				& \begin{center}
+\vspace{-25pt}R
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}7300000\end{center}
+					& \begin{flushleft}\vspace{-25pt}  Cardinalità (1,1) con Mungitura\end{flushleft} \\
+
+\hline

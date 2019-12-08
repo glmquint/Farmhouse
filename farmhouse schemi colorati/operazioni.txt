@@ -1,0 +1,236 @@
+1)REGISTRAZIONE RIPRODUZIONE:
+All'inizio riproduzione 
+- scrittura riproduzione
+- - scrittura supervisione
+- - scrittura coinvolge
+Al termine di riproduzion
+se insuccesso
+- scrittura visita per animale partorente
+- - scrittura controlli effettuat
+- scrittura complicanze in riproduzione
+se successo
+- scrittura visita animale partorente
+- - scrittura controlli effettuat
+- scrittura visita animale partorito
+- - scrittura controlli effettuat
+- scrittura NULL complicanze in riproduzione
+- - scrittura determina
+- scrittura scheda gestazione
+- - scrittura scrive
+- scrittura animale  
+- - scrittura abita
+- scrittura GPS
+- - scrittura localizzato
+
+2 boh)ESTRAZIONE VISITE DI CONTROLLO
+ridondanza è possiede visita
+1 - senza ridondanza
+- lettura di Animale (id_madre, id_padre)
+- - lettura coinvolge
+- lettura Riproduzione (data)
+- lettura Visita
+2 - con ridondanza
+- lettura Riproduzione (data)
+- lettura Visita
+
+3old)PAGAMENTO STANZA
+Alla dataPartenza
+- lettura stanza
+- - lettura prenota stanza
+- lettura cliente (anticipo)
+- lettura servizio aggiuntivo
+- - lettura da accesso a
+- scrittura pagamenti
+
+3 OK)PAGAMENTO STANZA
+Alla dataPartenza
+- lettura Prenotazione Stanza
+- lettura Cliente (anticipo)
+- lettura Stanza
+- lettura Servizio per Stanza
+- lettura Servizio Aggiuntivo
+- scrittura Pagamenti
+
+4 boh)AGGIUNTA/MODIFICA ACCOUNT
+- lettura cliente
+se non registrato
+ - scrittura anticipo in cliente
+ - scrittura account
+ - - scrittura possiede
+se registrato
+ - lettura account (chiave)
+ - scrittura account
+
+5 OK)STOCCAGGIO LATTE MUNTO
+A mungitura animale
+- lettura mungitura (chiave animale, *)
+- lettura mungitrice (chiave)
+- - lettura che munge (per filtrare latti munti da quella mungitrice)
+- lettura latte (filtrato per che munge e chiave di animale)
+- lettura silos
+- scrittura Silos
+
+6 OK)Controllo dell'igiene dei locali
+A intervalli regolari
+- lettura visivi
+- lettura composti volatili
+- lettura locale (soglia tollerabilità)
+se illegal
+ - scrittura pulizia locale
+
+7 OK)Calcolo apporto calorico dei pasti
+Ad ogni pasto giornaliero
+- lettura foraggio (quantità)
+- scrittura foraggio (kcal/kg)
+
+8 OK)Processamento degli ordini
+A nuovo ordine
+- scrittura ordine prodotti(stato)
+- - lettura contenuto ordine
+- lettura formaggio prodotto
+se disponibili in stock
+- scrittura ordine prodotti(stto)
+- lettura account
+- lettura cliente
+- scrittura pagamenti
+- scrittura spedizione
+- - lettura processata da
+- scrittura stato in spedizione
+
+9)Prescrizione delle terapie
+A nuova terapia per animale
+(?)
+- lettura terapia
+- scrittura terapia
+(?)
+se da quarantena
+ - - leggi abita
+ - leggi locale (abitato)
+ - leggi locale (quarantena)
+ - - scrittura abita
+
+10)Controllo animali dispersi
+ridondanza è appartenenza agriturismo
+A intervalli regolari per ogni animale durante pascolo
+Senza ridondanza
+- lettura locale
+- lettura stalla
+- lettura agriturismo
+- lettura GPS
+- lettura zona pascolo
+- lettura area pascolo
+- lettura attività pascolo
+- lettura locale
+- lettura stalla
+- lettura agriturismo
+Con ridondanza
+- lettura locale
+- lettura stalla
+- lettura agriturismo
+- lettura GPS
+- lettura zona pascolo
+- lettura agriturismo
+
+------
+------
+1]
+ridondanza 1 tra "pasto per locale" e "indici di salute"
+per scoprire se una certa alimentazione è correlata ad un generale declino della salute degli animali in un locale, atto alla prescrizione du una visita nel caso in cui pochi animali abbiano riscontrato un peggioramento
+
+Senza ridondanza:
+- lettura pasto per locale
+- lettura locale
+- lettura animale
+- lettura indici di salute
+evenualmente
+- scrittura visita
+
+Con ridondanza:
+- lettura pasto per locale
+- lettura indici di salute (si conosce il codice dell'animale)
+eventualmente
+- scrittura visita
+
+2]
+ridondanza2 tra "recensione" e "Controllo Parametri Fase"
+per controllare se una recensione negativa è legata ad un discostamento eccessivo dei parametri effettivi durante le fasi di produzione del formaggio
+
+Senza ridondanza:
+- lettura recensione
+- lettura formaggio prodotto
+- lettura lotto
+- lettura controllo parametri
+- lettura fasi
+
+Con ridondanza:
+- lettura recensione
+- - lettura ridondanza2
+- lettura controllo parametri fase
+- lettura fasi
+
+------------------------
+------------------------
+
+A]: Controllo della qualità del pasto
+input:= giorno e orario del pasto per locale
+output:= indici di salute degli animali che hanno mangiato quel pasto
+
+ridondanza "qualità pasto" tra "Pasto per Locale" e "Indici di Salute"
+
+Senza ridondanza:
+- 1*lettura locale assegnato
+- 1*lettura locale
+- 40* lettura abita
+- 40*lettura animale
+- 44*lettura indici salute
+- tot=>126 operazioni fondamentali (o^T)
+frequenza annuale => 24 volte l'anno (f^T annuale)(f^T giornaliera 24/365 = 0,066)
+numero operazioni annuali : 126*24=3024 (n^T annuale)(n^T giornaliero 126*0.066=8.316)
+
+Con ridondanza:
+- 44*lettura qualità pasto
+- 44*lettura indici di salute
+- tot=>88 operazioni fondamentali (o^T)
+frequanza annuale => 24 volte l'anno (f^T_RID annuale)(f^T_RID giornaliera 24/365 = 0.066)
+numero operazioni annuali : 88*24=2112 (n^T_RID annuale)(n^T_RID giornaliera 88*0.066=5.808)
+
+Aggiornamento ridondanza:
+- 1*scrittura indici di salute
+- tot=>2 operazione fondamentale(o^A)
+frequenza annuale => 22000 volte l'anno(f^A annuale)(f^A giornaliera 22000/365 = 60.27)
+numero operazioni annuali annui : 2*22000=44000(n^A annuale)(n^A giornaliera 2*60.27=120.55)
+
+Non è conveniente mantenere la ridondanza in quanto n^A > n^T - n^T_RID
+
+------------------------
+
+B]: Controllo foraggio contenuto in una mangiatoia
+input:=codice della mangiatoia
+output:=contenuto del foraggio
+
+ridondanza "pasto per mangiatoia" tra "Mangiatoia" e "Pasto per Locale"
+
+Senza ridondanza:
+- 1*lettura divisione mangiatoie
+- 1*lettura locale
+- 40* lettura abita
+- 40*lettura animale
+- 44*lettura indici salute
+- tot=>126 operazioni fondamentali (o^T)
+frequenza annuale => 24 volte l'anno (f^T annuale)(f^T giornaliera 24/365 = 0,066)
+numero operazioni annuali : 126*24=3024 (n^T annuale)(n^T giornaliero 126*0.066=8.316)
+
+Con ridondanza:
+- 44*lettura qualità pasto
+- 44*lettura indici di salute
+- tot=>88 operazioni fondamentali (o^T)
+frequanza annuale => 24 volte l'anno (f^T_RID annuale)(f^T_RID giornaliera 24/365 = 0.066)
+numero operazioni annuali : 88*24=2112 (n^T_RID annuale)(n^T_RID giornaliera 88*0.066=5.808)
+
+Aggiornamento ridondanza:
+- 1*scrittura indici di salute
+- tot=>2 operazione fondamentale(o^A)
+frequenza annuale => 22000 volte l'anno(f^A annuale)(f^A giornaliera 22000/365 = 60.27)
+numero operazioni annuali annui : 2*22000=44000(n^A annuale)(n^A giornaliera 2*60.27=120.55)
+
+Non è conveniente mantenere la ridondanza in quanto n^A > n^T - n^T_RID

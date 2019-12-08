@@ -1,0 +1,182 @@
+
+    
+\hline
+appartenente a 				& \begin{flushleft}\vspace{-15pt}  \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item (1,1) con Formaggio prodotto: ogni formaggio viene prodotto da uno specifico lotto dell'agriturismo
+						\item (1,N) con Lotto: uno stesso lotto è adibito alla produzione di diversi formaggi
+					\end{itemize}\\ 
+
+\hline
+che munge 				& \begin{flushleft}\vspace{-15pt}  \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item (1,N) con Mungitrice: ogni mungitrice può mungere diverse quantità di latte
+						\item (1,N) con Latte: ogni quantità di latte può provenire da diverse mungitrici
+					\end{itemize}\\ 
+
+\hline
+composizione formaggio 				& \begin{flushleft}\vspace{-15pt}  \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item (1,1) con Formaggio: ogni tipo di formaggio è prodotto sempre con lo stesso tipo di latte
+						\item (1,N) con Latte: un tipo di latte può essere sfruttato per la produzione di più tipi di formaggio
+					\end{itemize}\\ 
+
+\hline
+con 				& \begin{flushleft}\vspace{-15pt}  \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item (1,1) con Mungitura: ogni mungitura viene effettuata con una sola mungitrice
+						\item (0,N) con Mungitrice: alcune mungitrici possono essere impiegate per diverse mungiture
+					\end{itemize}\\ 
+
+\hline
+contengono scaffalature 				& \begin{flushleft}\vspace{-15pt}  \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item (1,N) con Cantine: ogni cantina è suddivisa in più scaffalature
+						\item (1,1) con Scaffalature: ogni scaffalatura può appartenere ad una sola cantina					\end{itemize}\\ 
+
+\hline
+contengono scaffali 				& \begin{flushleft}\vspace{-15pt}  \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item (1,N) con Magazzini: ogni magazzino è suddiviso in più scaffali
+						\item (1,1) con Scaffali: ogni scaffale può appartenere ad un solo magazzino
+					\end{itemize}\\ 
+
+\hline
+controllo fasi 				& \begin{flushleft}\vspace{-25pt} \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item (1,1) con Controllo Parametri Fase: i parametri rilevati si riferiscono ad una fase specifica
+						\item (1,N) con Fasi: la stessa fase può essere controllata più volte
+					\end{itemize}\\ 
+
+\hline
+controllo lotti 				& \begin{flushleft}\vspace{-25pt} \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item (1,1) con Controllo Parametri Fase: ogni controllo possiede un set di parametri effettivi rilevati
+						\item (1,N) con Lotto: il controllo sulla stessa fase può essere effettuato più volte dallo stesso lotto
+					\end{itemize}\\ 
+
+\hline
+divisa in 				& \begin{flushleft}\vspace{-15pt}  \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item (1,N) con Ricetta: ogni ricetta è suddivisa in più fasi
+						\item (1,N) con Fasi: la stessa fase può essere impiegata in più ricette
+					\end{itemize}\\ 
+
+\hline
+prodotto con 				& \begin{flushleft}\vspace{-15pt}  \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item (1,N) con Lotto: uno stesso lotto può impiegare più tipi di latte
+						\item (1,N) con Latte: lo stesso tipo di latte può essere utilizzato da più lotti
+					\end{itemize}\\ 
+
+\hline
+produce 				& \begin{flushleft}\vspace{-15pt}  \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item (1,1) con Latte: una quantità di latte viene munta da un solo animale
+						\item (0,N) con Animale: ogni animale che può essere munto può produrre diverse quantità di latte
+					\end{itemize}\\ 
+
+\hline
+produce 				& \begin{flushleft}\vspace{-15pt}  \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item (1,N) con Agriturismo: ogni agriturismo produce i propri formaggi
+						\item (1,1) con Formaggio: ogni tipo di formaggio è univocamente legato all'agriturismo che lo produce
+					\end{itemize}\\ 
+
+\hline
+rilievo parametri 				& \begin{flushleft}\vspace{-15pt}  \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item (1,N) con Cantine: ad ogni cantina possono corrispondere diverse rilevazioni di parametri
+						\item (1,1) con Parametri: ogni rilevazione è relativa ad una sola cantina
+					\end{itemize}\\ 
+
+\hline
+stoccaggio cantine 				& \begin{flushleft}\vspace{-15pt}  \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item (1,N) con Lotto: ogni lotto è stoccato in più cantine
+						\item (1,N) con Cantine: in ogni cantina possono essere stoccati più lotti
+					\end{itemize}\\ 
+
+\hline
+stoccaggio magazzini 				& \begin{flushleft}\vspace{-15pt}  \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item (1,N) con Lotto: ogni lotto è stoccato in più magazzini
+						\item (1,N) con Magazzini: in ogni magazzino possono essere stoccati più lotti
+					\end{itemize}\\ 
+
+\hline
+stoccato in 				& \begin{flushleft}\vspace{-15pt}  \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item (1,1) con Latte: una quantità di latte munto deve essere stoccata in un solo silos
+						\item (1,N) con Silos: ogni silos accoglie diverse quantità di latte, purchè abbiano quantità di sostanze disciolte simili
+					\end{itemize}\\ 
+
+\hline
+utilizzando 				& \begin{flushleft}\vspace{-15pt}  \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item (1,1) con Formaggio: ogni formaggio ha una sola ricetta di produzione
+						\item (1,N) con Ricetta: la stessa ricetta può essere utilizzata per più formaggi di diversi agriturismi
+					\end{itemize}\\ 
+
+\hline
+è munto durante 				& \begin{flushleft}\vspace{-15pt}  \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item (0,N) con Animale: solo gli animali femmina e adulti possono essere munti
+						\item (1,1) con Mungitura: ogni mungitura è riferita ad un solo animale
+					\end{itemize}\\ 
+
+\hline

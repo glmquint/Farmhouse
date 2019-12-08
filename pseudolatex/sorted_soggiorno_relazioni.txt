@@ -1,0 +1,133 @@
+
+    
+\hline
+assegnazione cliente 				& \begin{flushleft}\vspace{-25pt} \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item (0,N) con Cliente: un cliente può prenotare o no più stanze
+						\item (1,1) con Prenotazione Stanza: ogni prenotazione è effettuata da un solo cliente
+					\end{itemize}\\ 
+
+\hline
+assegnazione stanza 				& \begin{flushleft}\vspace{-25pt}  \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item (1,1) con Prenotazione Stanza: ogni prenotazione si riferisce ad una sola stanza
+						\item (0,N) con Stanza: ogni stanza può essere prenotata o no più volte
+					\end{itemize}\\ 
+
+\hline
+composto da 				& \begin{flushleft}\vspace{-15pt}  \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item (1,N) con Itinerario: ogni itinerario è composto da più tappe
+						\item (1,N) con Tappe: ogni tappa può appartenere a più itinerari
+					\end{itemize}\\ 
+
+\hline
+divisione stanza 				& \begin{flushleft}\vspace{-15pt}  \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item (1,1) con Stanza: ogni stanza appartiene ad un solo agriturismo
+						\item (1,N) con Agriturismo: ad ogni agriturismo appartengono più stanze
+					\end{itemize}\\ 
+
+\hline
+effettua 				& \begin{flushleft}\vspace{-15pt}  \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item (1,N) con CLiente: ogni cliente può effettuare più pagamenti
+						\item (1,1) con Pagamenti: ogni pagamento viene effettuato da un solo cliente
+					\end{itemize}\\ 
+
+\hline
+effettuata da 				& \begin{flushleft}\vspace{-15pt}  \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item (1,1) con Escursione: ogni escursione è effettuata da una sola guida
+						\item (0,N) con Guida: ogni guida può effettuare o no più escursioni
+					\end{itemize}\\ 
+
+\hline
+legata a 				& \begin{flushleft}\vspace{-15pt}  \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item (1,N) con Escursione: ogni escursione può essere legata a più itinerari
+						\item (1,N) con Itinerario: ogni itinerario può comporre più escursioni
+					\end{itemize}\\ 
+
+\hline
+ospita 				& \begin{flushleft}\vspace{-15pt}  \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item (0,N) con Cliente: ogni cliente può non essere ospitato da nessun agriturismo (effettua solo acquisti), oppure risiedere in più agriturismi
+						\item (1,N) con Agriturismo: in ogni agriturismo risiedono più clienti
+					\end{itemize}\\ 
+
+\hline
+possiede 				& \begin{flushleft}\vspace{-15pt}  \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item (0,1) con Cliente: ogni cliente può essere registrato o no, e quindi possedere al massimo un account
+						\item (1,1) con Account: ogni account è associato ad un solo cliente
+					\end{itemize}\\ 
+
+\hline
+prenotazione cliente 				& \begin{flushleft}\vspace{-25pt}  \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item (0,N) con Cliente: un cliente può prenotare o no più escursioni
+						\item (1,1) con Prenotazione Escursione: ogni prenotazione si riferisce ad una sola escursione
+					\end{itemize}\\ 
+
+\hline
+prenotazione escursione 				& \begin{flushleft}\vspace{-25pt}  \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item (1,1) con Prenotazione Escursione: ogni prenotazione si riferisce ad una sola escursione
+						\item (0,N) con Escursione: ogni escursione può o no essere prenotata più volte
+					\end{itemize}\\ 
+
+\hline
+servizio associato 				& \begin{flushleft}\vspace{-25pt} \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item (1,1) con Servizio per Stanza: ogni servizio aggiunto ad una stanza comprende un solo set di servizi
+						\item (1,N) con Servizio Aggiuntivo: ogni servizio aggiuntivo può essere associato a più stanze prenotate
+					\end{itemize}\\ 
+
+\hline
+stanza associata 				& \begin{flushleft}\vspace{-25pt}  \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item (1,1) con Servizio per Stanza: ad ogni stanza prenotta con servizio corrisponde un solo set di servizi
+						\item (0,N) con Stanza: ogni servizio offerto può essere associato a più stanze prenotate
+					\end{itemize}\\ 
+
+\hline

@@ -1,0 +1,64 @@
+[
+ >!Account!E!2000!Ogni agriturismo gestisce  100 ordini al giorno si suppone che questi ordini vengano effettuati da 10 clienti diversi e tutti possedenti un account
+ >!scrive!R!1000!Cardinalita' (1,1) con Recensione
+ >!Recensione!E!1000!Si suppone che il 50\% dei clienti recensisca il proprio ordine in un anno dunque $2000\times0.5=1000$
+ >!valuta!R!1000!Cardinalita' (1,1) con Recensione
+ >! Formaggio Prodotto!E!100000!Si suppone che in un hanno tutte le varie produzioni generino 5000 prodotti appartenenti ad un determinato stock
+ >!contenuto ordine!R!14600000! Se si suppone che ogni ordine contenga 20 prodotti al massimo, si ottiene un numero totale di record pari a $20\times730000=14600000$
+ >!Ordine Prodotti!E!730000! Ogni agriturismo gestisce in media 100 ordini al giorno
+ >!effettua!R!730000!Cardinalita' (1,1) con Ordine Prodotti
+ >!consegnato da!R!730000!Cardinalita' (1,1) con Ordine Prodotti
+ >!Spedizione!E!14600!Ogni spedizione consegnera' circa 50 ordini collocati per area geografica simile
+ >!processata da!1460000!Tutte le possibili combinazioni tra le spedizioni e i centri di smistamento
+ >!Centri Smistamento!E!100!Si suppone che le spedizioni vengano processate da un totale di 100 centri di smistamento
+]
+
+
+
+
+
+[
+ >!Cliente!E!10000!Ogni agriturismo ha in media 500 clienti all'anno
+ >!possiede!R!2000!Cardinalita' (1,1) con Account
+ >!ospita!R!200000!Tutte le possibili combinazioni dei clienti registrati dalla rete e di tutti gli agriturismi
+ >!effettua!R!50000!Cardinalita' (1,1) con Pagamenti
+ >!Pagamenti!E!50000!Si considera una media di cinque pagamenti diversi per ogni utente
+ >!prenota stanza!R!2000000!Tutte le possibili combinazioni dei clienti e delle stanze
+ >!Stanza!E!200!Ogni agriturismo ha in media 10 stanze
+ >!divisione stanza!R!200!Cardinalita' (1,1) con Stanza
+ >!da accesso a!R!2000!Tutte le possibili combinazioni di stanze e servizi aggiuntivi associati
+ >!Servizio Aggiuntivo!E!10!Ogni agriturismo dispone massimo di 10 tipologie di servizi aggiuntivi
+ >!prenota escursione!R!1000000!Tutte le possibili combinazioni di escursioni con clienti
+ >!Escursione!E!100!Ogni agriturismo dispone di cinque escursioni all'anno
+ >!legata a!R!50000!Tutte le possibili combinazioni tra escursioni e itinerari
+ >!Itinerario!E!500!Ogni escursione puo' comprendere al massimo 5 itinerari
+ >!composto da!R!2500000!Tutte le possibili combinazioni di itinerari e tappe
+ >!Tappe!E!5000!Ogni itinerario ha al massimo dieci tappe
+ >!effettuata da!R!100!Cardinalita' (1,1) con escursione
+ >!Guida!E!60!Si suppone che ogni agriturismo disponga di tre guide
+]
+
+
+
+
+
+
+[
+ >!possiede!R!40000!Cardinalita' (1,1) con Scheda Medica
+ >!Scheda Medica!E!40000!Si suppone che in un anno siano registrate 40000 schede
+ >!compila!R!40000!Cardinalita' (1,1) con Scheda Medica
+ >!Veterinario!E!100!Si suppone che ogni agriturismo sia controllato da cinque veterinari
+ >!prescrive!R!2000!Cardinalita' (1,1) con Terapia
+ >!Terapia!E!2000!Si suppone che ogni anno vengano prescritte 100 terapie per ogni agriturismo
+ >!possiede terapia!R!2000!Cardinalita' (1,1) con Terapia
+ >!composta da!R!200000!Tutte le possibili combinazioni di terapie e farmaci
+ >!Farmaco!E!100!Si suppone che le malattie vengano curate con l'utilizzo di 100 farmaci diversi utilizzati in tutta la rete di \textit(Farmhouse)
+ >!prescrive esame!R!8000!Cardinalita' (1,1) con Esame
+ >!Esame!E!8000!Per ogni agriturismo vengono prescritti una media di 400 esami l'anno per un totale di 8000 esami
+ >!possiede esame!R!8000!Cardinalita' (1,1) con Esame
+ >!esegue!R!12000!Cardinalita' (1,1) con Visita
+ >!Visita!E!12000!Si suppone che per ogni agriturismo vengano eseguite 600 visite all'anno
+ >!controlli effettuati!R!6000!Si suppone che il 50\% delle visite effettuate sia dovuto a riproduzioni
+ >!stato salute!R!12000!Cardinalita' (1,1) con Indici Salute
+ >!Indici Salute!E!12000!Per ogni visita vengono rilevati nuovamente gli indici di salute
+]

@@ -1,0 +1,17 @@
+\begin{center}\setlength{\extrarowheight}{1.5pt}\begin{longtable}{|p{0.23\linewidth}|p{0.1\linewidth}|p{0.11\linewidth}|p{0.45\linewidth}|}\hline \textbf{Nome}   & \begin{center}\vspace{-15pt}\textbf{E/R}\end{center} & \textbf{Numero Istanze} & \textbf{Motivazione}\\ 
+\hline
+\multicolumn{1}{|c|}{Totale}
+ & 
+\multicolumn{3}{|r|}{9001}
+\\
+\hline
+1
+ & 
+\begin{center}\vspace{-25pt}2\end{center}
+ & 
+\begin{center}\vspace{-25pt}3\end{center}
+ & 
+\begin{flushleft}\vspace{-25pt}4\end{flushleft}
+\\
+\hline
+\end{longtable}\end{center}

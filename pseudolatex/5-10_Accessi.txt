@@ -1,0 +1,71 @@
+#**tabella bella**roba strana
+#[
+#> !Nome costrutto!Tipo costrutto(E/R)!Numero operazioni elementari(volume interessato)!Tipo!Descrizione
+#]
+
+
+**Operazione 5: Stoccaggio del latte**
+[
+>!Mungitura!E!$7300000$!L!Lettura dei dati relativi alla mungitura appena effettuata (quantità, animale munto e mungitrice impiegata)
+>!Mungitrice!E!$2000$!L!Lettura dei dati relativi alla mungitrice utilizzata
+>!che munge!R!$800000$!L!Vengono filtrati solo i latti munti da una specifica mungitrice
+>!
+]
+
+**Operazione 6: Controllo della pulizia dei locali**
+[
+>!Visivi!E!$500$!L!Lettura dei parametri di sporcizia rilevati dai sensori visivi nei locali
+>!Composti volatili!E!$500$!L!Lettura dei parametri rilevati dai sensori dei composti volatili presenti nei locali
+>!Locale!$500$!E!L!Lettura della soglia di tollerabilità per un determinato locale
+>!Pulizia locale!E!$580\tiems 2= 1160$!S!Nel caso i valori rilevati superino la soglia di tollerabilità per quel locale, viene registrata una nuova richiesta di intervento per la pulizia del locale
+]
+
+**Operazione 7: Calcolo apporto calorico dei pasti**
+[
+>!Foraggio!E!$50$!L!Lettura delle quantità di sostanze nutritive presenti nel foraggio
+>!Foraggio!E!$50\times 2= 100$!S!Aggiornamento delle kcal/kg apportate dal foraggio
+]
+
+**Operazione 8: Processamento degli ordini**
+[
+>!Ordine Prodotti!E!$146000\times 2 = 292000$!S!Scrittura di un nuovo ordine in stato "in processazione"
+>!contenuto ordine!R!$2920000\times 2= 5840000$!S!Aggiornamento dell'ordine con il contenuto scelto dal cliente#cambiato rispetto alle specifiche scelte!!
+>!Formaggio Prodotto!E!$3000000$!L!Controllo se è il prodotto richiesto è presente in stock
+>!Ordine Prodotti!E!$146000\times 2 = 292000$!S!Appena c'è disponibilità in stock, viene aggiornato l'ordine che passa allo stato "in preparazione"
+>!Account!E!7000!L!Lettura dell'account che ha effettuato l'ordine
+>!Cliente!E!10000!L!Lettura dei dati della carta con cui il cliente associato all'account effettua i pagamanti 
+>!Pagamenti!E!$166000\times 2 = 332000$!S!Registrazione del pagamento dell'ordine effettuato
+>!Spedizione!E!$2920\times 2 = 5840$!S!Registrazione della spedizione per la distribuzione degli ordini nello stato "spedita"
+>!Ordine Prodotti!E!$146000\times 2 = 292000$!S!Aggiornamento delle stato dell'ordine che passa allo stato "spedito"
+>!processata da!R!292000!L!Lettura dei centri di smistamento attraversati dalla spedizione, in attesa di attraversare l'ultimo hub di smistamento
+>!Spedizione!E!$2920\times 2 = 5840$!S!Aggiornamento della spedizione che passa allo stato "in transito"
+>!Spedizione!E!$2920\times 2 = 5840$!S!Quando la spedizione ha raggiunto l'ultimo hub, si può ritenere conclusa ed il suo stato passa a evaso
+>!Spedizione!E!$2920\times 2 = 5840$!S!Aggiornamento della spedizione che passa allo stato "consegna"
+>!Spedizione!E!$2920\times 2 = 5840$!S!Dopo 24h dalla consegna, se non è stato effettuato il reso, che passa allo stato "consegnata"
+]
+
+**Operazione 9: Prescrizione delle terapie**
+[
+>!Terapia!E!2000!L!Controllo della terapia precedente, in particolare se era già la seconda terapia consecutiva
+>!Terapia!E!$2000\times 2 = 4000$!S!Registrazione della nuova terapia
+>!abita!R!$20000\times 2 = 40000$!S!Nel caso venga registrata la terza terapia consecutiva, l'animale viene messo in quarantena, cambiandone il locale abitato
+]
+
+**Operazione 10: Controllo animali dispersi(Senza ridondanza su appartenenza agriturismo)**
+[
+>!GPS					!E!20000	!L!Lettura delle coordinate posizionali rilevate dai dispositivi GPS presenti su ogni animale
+>!Recinzione divisoria e zona di pascolo!E!180		!L!Confronto delle coordinate con la posizione delle varie zone di pascolo
+>!Area Pascolo				!E!60		!L!Confronto delle zone di pascolo con l'area di pascolo di appartenenza
+>!Attività Pascolo			!E!30000	!L!Controllo di quale attività di pascolo si sta svolgendo in una determinata area
+>!Locale				!E!500		!L!Lettura di quale locale sta effettuando una determinata attività di pascolo
+>!Stalla				!E!100		!L!Lettura della stalla di appartenenza di un determinato locale
+>!Agriturismo				!E!20		!L!Lettura dell'agriturismo di appartenenza di una determinata stanza
+>!\textbf{Totale}!?4r
+]
+
+**Operazione 10: Controllo animali dispersi(Con ridondanza su appartenenza agriturismo)**
+[
+>!GPS					!E!20000	!L!Lettura delle coordinate posizionali rilevate dai dispositivi GPS presenti su ogni animale
+>!Recinzione divisoria e zona di pascolo!E!180		!L!Confronto delle coordinate con la posizione delle varie zone di pascolo
+>!Agriturismo				!E!20		!L!Lettura dell'agriturismo di appartenenza di un determinato locale
+]

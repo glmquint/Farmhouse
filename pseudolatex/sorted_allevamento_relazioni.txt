@@ -1,0 +1,233 @@
+
+    
+\hline
+abita				& \begin{flushleft}\vspace{-15pt}  \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item (1,1) con Animale: ogni animale abita un solo locale dell'agriturismo
+						\item (1,N) con Locale: ogni locale può ospitare diversi animali
+					\end{itemize}\\ 
+
+\hline
+acqua contenuta 				& \begin{flushleft}\vspace{-15pt}  \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item (1,N) con Abbeveratoio: un abbeveratoio può essere impiegato per più pasti
+						\item (1,N) con Pasto: un pasto può essere distribuito su più abbeveratoi
+					\end{itemize}\\ 
+
+\hline
+acquisto animale 				& \begin{flushleft}\vspace{-15pt}  \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item (1,1) con Animale Acquisito: un animale, se acquistato, può provenire da un solo fornitore
+						\item (1,N) con Fornitore: un fornitore può vendere più di un animale
+					\end{itemize}\\ 
+
+\hline
+attività locale 				& \begin{flushleft}\vspace{-15pt}  \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item (1,N) con Locale: gli animali di un locale possono effettuare più attività di pascolo
+						\item (1,1) con Attività pascolo: ogni attività di pascolo coinvolge tutti gli animali di un solo locale
+					\end{itemize}\\ 
+
+\hline
+coinvolge				& \begin{flushleft}\vspace{-25pt} codicePadre \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item (0,N) con Animale: ogni coppia di animale può intraprendere o no più di una riproduzione
+						\item (1,1) con Riproduzione: ogni riproduzione richiede un animale madre e un animale padre
+					\end{itemize}\\ 
+
+\hline
+collocazione attività 				& \begin{flushleft}\vspace{-15pt}  \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item (1,1) con Attività pascolo: ogni attività di pascolo viene svolta in una sola area dedicata
+						\item (1,N) con Area pascolo: ogni area di pascolo di un agriturismo può essere impiegata per più attività di pascolo
+					\end{itemize}\\ 
+
+\hline
+composizione acqua 				& \begin{flushleft}\vspace{-15pt}  \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item (1,1) con Pasto: ad un pasto è associato un solo tipo di acqua
+						\item (1,N) con Acqua: un tipo di acqua può andare a comporre più pasti
+					\end{itemize}\\ 
+
+\hline
+composizione foraggio 				& \begin{flushleft}\vspace{-15pt}  \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item (1,1) con Pasto: ad un pasto è associato un solo tipo di foraggio
+						\item (1,N) con Foraggio: un tipo di foraggio può andare a comporre più pasti
+					\end{itemize}\\ 
+
+\hline
+determina				& \begin{flushleft}\vspace{-15pt}  \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item (1,1) con Scheda gestazione: ogni scheda di gestazione è associata ad una sola gravidanza che ha successo
+						\item (1,1) con Successo: per ogni gravidanza che ha successo si compila una sola scheda di gestazione
+					\end{itemize}\\ 
+
+\hline
+divisione allestimanti 				& \begin{flushleft}\vspace{-15pt}  \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item (1,N) con Locale: Ogni locale è dotato di uno o più allestimenti
+						\item (1,1) con Allestimento: un allestimento è associato ad un solo locale
+					\end{itemize}\\ 
+
+\hline
+divisione locale 				& \begin{flushleft}\vspace{-15pt}  \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item (1,N) con Stalla: ogni stalla è divisa in più locali
+						\item (1,1) con Locale: un Locale appartiene ad una sola stalla
+					\end{itemize}\\ 
+
+\hline
+divisione pascolo 				& \begin{flushleft}\vspace{-15pt}  \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item (1,N) con Area pascolo: ogni area di pascolo è divisa in più zone recintate
+						\item (1,1) con Recinzione divisoria e zona di pascolo: ogni zona recintata appartiene ad una sola area di pascolo
+					\end{itemize}\\ 
+
+\hline
+divisione stalle 				& \begin{flushleft}\vspace{-15pt}  \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item (1,N) con Agriturismo: un agriturismo è diviso in più stalle
+						\item (1,1) con Stalle: ogni stalla appartiene ad un solo Agriturismo
+					\end{itemize}\\ 
+
+\hline
+foraggio contenuto 				& \begin{flushleft}\vspace{-15pt}  \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item (1,N) con Mangiatoia: una mangiatoia può essere impiegata per più pasti
+						\item (1,N) con Pasto: un pasto può essere distribuito su più mangiatoie
+					\end{itemize}\\ 
+
+\hline
+locale assegnato 				& \begin{flushleft}\vspace{-25pt} \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item (1,N) con Locale: un locale può contenere più pasti
+						\item (1,1) con Pasto per Locale: uno specifico pasto deve essere distribuito su un solo locale
+					\end{itemize}\\ 
+
+\hline
+localizzato				& \begin{flushleft}\vspace{-15pt}  \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item (1,1) con Animale: ogni GPS localizza un solo animale
+						\item (1,1) con GPS: ogni animale viene localizzato da un solo GPS
+					\end{itemize}\\ 
+
+\hline
+madre				&\begin{flushleft}\vspace{-15pt}  \end{flushleft}
+					&\begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item (0,N) con Animale: ogni animale può o no essere madre di più figli
+						\item (0,1) con Animale: ogni animale è figlio di al massimo una madre: se è stato acquisito, la madre può non essere registrata
+					\end{itemize}\\ 
+
+\hline
+padre				&\begin{flushleft}\vspace{-15pt}  \end{flushleft}
+					&\begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item (0,N) con Animale: ogni animale può o no essere padre di più figli
+						\item (0,1) con Animale: ogni animale è figlio di al massimo un padre: se è stato acquisito, il padre può non essere registrato
+					\end{itemize}\\ 
+
+\hline
+pasto assegnato 				& \begin{flushleft}\vspace{-25pt} \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item (1,N) con Pasto: un Pasto può essere somministrato allo stesso locale in giorni differenti
+						\item (1,1) con Pasto per Locale: per ogni locale, ogni giorno viene somministrato uno specifico pasto
+					\end{itemize}\\ 
+
+\hline
+richiesta intervento 				& \begin{flushleft}\vspace{-15pt}  \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item (1,N) con Locale: alcuni locali possono richiedere più interventi di pulizia
+						\item (1,1) con Pulizia locale: ogni intervento di pulizia si riferisce ad un solo locale dell'agriturismo
+					\end{itemize}\\ 
+
+\hline
+rilievo parametri locale 				& \begin{flushleft}\vspace{-15pt}  \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item (1,N) con Locale: ogni locale è dotato di uno o più sensori
+						\item (1,1) con Sensori: ogni sensore monitora un solo locale
+					\end{itemize}\\ 
+
+\hline
+scrive				& \begin{flushleft}\vspace{-15pt}  \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item (0,N) con Veterinario: alcuni veterinari possono compilare più schede di gestazione
+						\item (1,1) con Scheda gestazione: ogni scheda viene compilata da un solo veterinario
+					\end{itemize}\\ 
+
+\hline
+supervisiona				& \begin{flushleft}\vspace{-15pt}  \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item (0,N) con Veterinario: alcuni veterinari possono supervisionare più gestazioni
+						\item (1,1) con Riproduzione: ogni riproduzione ha un solo veterinario supervisore
+					\end{itemize}\\ 
+
+\hline

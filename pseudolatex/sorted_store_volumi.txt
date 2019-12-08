@@ -1,0 +1,134 @@
+
+    
+\hline
+ Formaggio Prodotto
+ & 
+\begin{center}\vspace{-25pt}E\end{center}
+ & 
+\begin{center}\vspace{-25pt}3000000\end{center}
+ & 
+\begin{flushleft}\vspace{-25pt}Per far fronte alle richieste della clientela, si decide di mantenere una produzione lievemente superiore alle vendite stimate (circa 80000 prodotti)\end{flushleft}
+\\
+
+\hline
+Account
+ & 
+\begin{center}\vspace{-25pt}E\end{center}
+ & 
+\begin{center}\vspace{-25pt}7000\end{center}
+ & 
+\begin{flushleft}\vspace{-25pt}Si suppone che il 70\% degli utenti sia registrato, e possegga di conseguenza un account\end{flushleft}
+\\
+
+\hline
+Centri Smistamento
+ & 
+\begin{center}\vspace{-25pt}E\end{center}
+ & 
+\begin{center}\vspace{-25pt}100\end{center}
+ & 
+\begin{flushleft}\vspace{-25pt}Si suppone che le spedizioni vengano processate da un totale di 100 centri di smistamento\end{flushleft}
+\\
+
+\hline
+Ordine Prodotti
+ & 
+\begin{center}\vspace{-25pt}E\end{center}
+ & 
+\begin{center}\vspace{-25pt}146000\end{center}
+ & 
+\begin{flushleft}\vspace{-25pt} Ogni agriturismo gestisce in media 20 ordini al giorno $20\times 20\times 365 = 146000$\end{flushleft}
+\\
+
+\hline
+Recensione
+ & 
+\begin{center}\vspace{-25pt}E\end{center}
+ & 
+\begin{center}\vspace{-25pt}1460000\end{center}
+ & 
+\begin{flushleft}\vspace{-25pt}Si suppone che il 50\% dei clienti recensisca il proprio ordine, quindi, ogni anno, la metà dei formaggi venduti riceve una recensione $2920000\times0.5=1460000$\end{flushleft}
+\\
+
+\hline
+Spedizione
+ & 
+\begin{center}\vspace{-25pt}E\end{center}
+ & 
+\begin{center}\vspace{-25pt}2920\end{center}
+ & 
+\begin{flushleft}\vspace{-25pt}Ogni spedizione consegnerà circa 50 ordini collocati per area geografica simile ${146000\over 50}=2920$\end{flushleft}
+\\
+
+\hline
+consegnato da
+ & 
+\begin{center}\vspace{-25pt}R\end{center}
+ & 
+\begin{center}\vspace{-25pt}146000\end{center}
+ & 
+\begin{flushleft}\vspace{-25pt}Cardinalità (1,1) con Ordine Prodotti\end{flushleft}
+\\
+
+\hline
+contenuto ordine
+ & 
+\begin{center}\vspace{-25pt}R\end{center}
+ & 
+\begin{center}\vspace{-25pt}2920000\end{center}
+ & 
+\begin{flushleft}\vspace{-25pt} Se si suppone che ogni ordine contenga 20 prodotti al massimo, si ottiene un numero totale di record pari a $20\times146000=2920000$\end{flushleft}
+\\
+
+\hline
+esegue ordine
+ & 
+\begin{center}\vspace{-25pt}R\end{center}
+ & 
+\begin{center}\vspace{-25pt}146000\end{center}
+ & 
+\begin{flushleft}\vspace{-25pt}Cardinalità (1,1) con Ordine Prodotti\end{flushleft}
+\\
+
+\hline
+istanza formaggio
+ & 
+\begin{center}\vspace{-25pt}R\end{center}
+ & 
+\begin{center}\vspace{-25pt}3000000\end{center}
+ & 
+\begin{flushleft}\vspace{-25pt}Cardinalità (1,1) con Formaggio Prodotto\end{flushleft}
+\\
+
+\hline
+processata da
+ & 
+\begin{center}\vspace{-25pt}R\end{center}
+ & 
+\begin{center}\vspace{-25pt}292000\end{center}
+ & 
+\begin{flushleft}
+\vspace{-25pt}Tutte le possibili combinazioni tra le spedizioni e i centri di smistamento $2920\times 100= 292000$\end{flushleft}
+\\
+
+\hline
+scrive
+ & 
+\begin{center}\vspace{-25pt}R\end{center}
+ & 
+\begin{center}\vspace{-25pt}1460000\end{center}
+ & 
+\begin{flushleft}\vspace{-25pt}Cardinalità (1,1) con Recensione\end{flushleft}
+\\
+
+\hline
+valuta
+ & 
+\begin{center}\vspace{-25pt}R\end{center}
+ & 
+\begin{center}\vspace{-25pt}1460000\end{center}
+ & 
+\begin{flushleft}\vspace{-25pt}Cardinalità (1,1) con Recensione\end{flushleft}
+\\
+
+\hline

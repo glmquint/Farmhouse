@@ -1,0 +1,44 @@
+tutte le entità e relazioni in corsivo
+
+Pasto è univoco per tutti i locali di tutto il database (i.e. due locali non possono avere pasti differenti allo stesso momento)
+
+Cardinalità di composizione pasto incongruente con chiavi
+
+Cardinalità su coinvolge, proposta:
+Animale --(0,N)-- coinvolge(senza attributi) --(2,N) quindi (N,N)-- Riproduzione
+
+---
+
+in glossario togliere chiavi esterne, tranne le primarie, e togliere notszione su entità
+- ricontrollare chiavi esterne (se necessario mantenere nel'entità)
+
+aggiorna volume pasto per locale
+
+------
+
+Riguardare e controllare ordine di operazioni su operazione 1
+
+Riguardare cardinalità e legami di controlli effettuati per risolvere operazione 27
+
+Forse aggiunta/modifica di un account non è un'operazione fondamentale ma una semplice operazione di onCreate/onUpdate cascade
+
+------- 
+
+proposta di cambiare "possiede" con "possiede scheda medica" in Relazioni Healthcare
+in quanto genera conflitto con:
+proposta di cambiare "possiede" con "possiede account" in Relazioni Soggiorno
+
+proposta di cambiare "appartenente a" con "appartenenza lotto" in Relazioni Produzione
+in quanto non genera conflitto ma aumenta leggibilità
+
+proposta di cambiare "scrive" con "scrive scheda" in Relazioni Allevamento
+in quanto genera conflitto con:
+proposta di cambiare "scrive" con "scrive recensione" in Relazioni Store
+
+proposta di cambiare "produce" con "produzione" o "produce fomaggio" in Relazioni Produzione
+in quanto genera conflitto con:
+(se non si cambia produce formaggio)
+proposta di cambiare "produce" con "produce formaggio" in Relazioni Produzione
+
+appartenenza agriturismo forse non è (1,1) con agriturismo, nel qual caso deve diventare un'entità con chiave anche la fascia oraria, con vincolo d'integrità referenziale sulla fascia oraria dell' Attivitò Pascolo
+

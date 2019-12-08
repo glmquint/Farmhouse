@@ -1,0 +1,64 @@
+
+    
+\hline
+consegnato da 				& \begin{flushleft}\vspace{-15pt}  \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item (1,1) con Ordine Prodotti: ogni ordine è associato da una sola spedizione
+						\item (1,N) con Spedizione: ogni spedizione può consegnare più ordini
+					\end{itemize}\\ 
+
+\hline
+contenuto ordine 				& \begin{flushleft}\vspace{-25pt} quantità, reso \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item (0,N) con Formaggio Prodotto: ogni formaggio può appartenere o no a più ordini
+						\item (1,N) con Ordine Prodotti: ogni ordine è composto da uno o più formaggi
+					\end{itemize}\\ 
+
+\hline
+esegue ordine 				& \begin{flushleft}\vspace{-15pt} 
+ \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item (0,N) con Account: ogni account può può effettuare o no più ordini
+						\item (1,1) con Ordine Prodotti: ogni ordine è effettuato da un solo account
+					\end{itemize}\\ 
+
+\hline
+processata da 				& \begin{flushleft}\vspace{-15pt}  \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item (1,N) con Spedizioni: ogni spedizione può essere processata da più centri di smistamento
+						\item (1,N) con Centri Smistamento: ogni hub può processare più spedizioni
+					\end{itemize}\\ 
+
+\hline
+scrive 				& \begin{flushleft}\vspace{-15pt}  \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item (0,N) con Account: ogni account può scrivere o no una o più recensioni
+						\item (1,1) con Recensione: ogni recensione è stata scritta da un solo account
+					\end{itemize}\\ 
+
+\hline
+valuta 				& \begin{flushleft}\vspace{-15pt}  \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item (1,1) con Recensione: ogni recensione valuta un solo formaggio
+						\item (0,N) con Formaggio Prodotto: ogni formaggio può essere valutato o no da più recensioni
+					\end{itemize}\\ 
+
+\hline

@@ -1,0 +1,173 @@
+
+    
+\hline
+Esame
+ & 
+\begin{center}\vspace{-25pt}E\end{center}
+ & 
+\begin{center}\vspace{-25pt}8000\end{center}
+ & 
+\begin{flushleft}\vspace{-25pt}Per ogni agriturismo vengono prescritti una media di 400 esami l'anno per un totale di 8000 esami\end{flushleft}
+\\
+
+\hline
+Farmaco
+ & 
+\begin{center}\vspace{-25pt}E\end{center}
+ & 
+\begin{center}\vspace{-25pt}100\end{center}
+ & 
+\begin{flushleft}\vspace{-25pt}Si suppone che le malattie vengano curate con l'utilizzo di 100 farmaci diversi utilizzati in tutta la rete di \textit{Farmhouse 4.0}\end{flushleft}
+\\
+
+\hline
+Indici Salute
+ & 
+\begin{center}\vspace{-25pt}E\end{center}
+ & 
+\begin{center}\vspace{-25pt}15000\end{center}
+ & 
+\begin{flushleft}\vspace{-25pt}Per ogni visita vengono rilevati nuovamente gli indici di salute\end{flushleft}
+\\
+
+\hline
+Scheda Medica
+ & 
+\begin{center}\vspace{-25pt}E\end{center}
+ & 
+\begin{center}\vspace{-25pt}40000\end{center}
+ & 
+\begin{flushleft}\vspace{-25pt}Si suppone che in un anno siano registrate 40000 schede\end{flushleft}
+\\
+
+\hline
+Terapia
+ & 
+\begin{center}\vspace{-25pt}E\end{center}
+ & 
+\begin{center}\vspace{-25pt}2000\end{center}
+ & 
+\begin{flushleft}\vspace{-25pt}Si suppone che ogni anno vengano prescritte 100 terapie per ogni agriturismo $100\times 20= 2000$\end{flushleft}
+\\
+
+\hline
+Veterinario
+ & 
+\begin{center}\vspace{-25pt}E\end{center}
+ & 
+\begin{center}\vspace{-25pt}100\end{center}
+ & 
+\begin{flushleft}\vspace{-25pt}Si suppone che ogni agriturismo sia controllato da cinque veterinari $20\times 5= 100$\end{flushleft}
+\\
+
+\hline
+Visita
+ & 
+\begin{center}\vspace{-25pt}E\end{center}
+ & 
+\begin{center}\vspace{-25pt}15000\end{center}
+ & 
+\begin{flushleft}\vspace{-25pt}Si suppone che per ogni agriturismo vengano eseguite 750 visite all'anno $750\times 20= 15000$\end{flushleft}
+\\
+
+\hline
+compila
+ & 
+\begin{center}\vspace{-25pt}R\end{center}
+ & 
+\begin{center}\vspace{-25pt}40000\end{center}
+ & 
+\begin{flushleft}\vspace{-25pt}Cardinalità (1,1) con Scheda Medica\end{flushleft}
+\\
+
+\hline
+composta da
+ & 
+\begin{center}\vspace{-25pt}R\end{center}
+ & 
+\begin{center}\vspace{-25pt}200000\end{center}
+ & 
+\begin{flushleft}\vspace{-25pt}Tutte le possibili combinazioni di terapie e farmaci $2000\times 100= 200000$\end{flushleft}
+\\
+
+\hline
+controlli effettuati
+ & 
+\begin{center}\vspace{-25pt}R\end{center}
+ & 
+\begin{center}\vspace{-25pt}12900\end{center}
+ & 
+\begin{flushleft}\vspace{-25pt}Viene effettuata una visita di controllo per ogni riproduzione con successo o insuccesso  \end{flushleft}
+\\
+
+\hline
+esegue
+ & 
+\begin{center}\vspace{-25pt}R\end{center}
+ & 
+\begin{center}\vspace{-25pt}15000\end{center}
+ & 
+\begin{flushleft}\vspace{-25pt}Cardinalità (1,1) con Visita\end{flushleft}
+\\
+
+\hline
+possiede
+ & 
+\begin{center}\vspace{-25pt}R\end{center}
+ & 
+\begin{center}\vspace{-25pt}40000\end{center}
+ & 
+\begin{flushleft}\vspace{-25pt}Cardinalità (1,1) con Scheda Medica\end{flushleft}
+\\
+
+\hline
+possiede esame
+ & 
+\begin{center}\vspace{-25pt}R\end{center}
+ & 
+\begin{center}\vspace{-25pt}8000\end{center}
+ & 
+\begin{flushleft}\vspace{-25pt}Cardinalità (1,1) con Esame\end{flushleft}
+\\
+
+\hline
+possiede terapia
+ & 
+\begin{center}\vspace{-25pt}R\end{center}
+ & 
+\begin{center}\vspace{-25pt}2000\end{center}
+ & 
+\begin{flushleft}\vspace{-25pt}Cardinalità (1,1) con Terapia\end{flushleft}
+\\
+
+\hline
+prescrive
+ & 
+\begin{center}\vspace{-25pt}R\end{center}
+ & 
+\begin{center}\vspace{-25pt}2000\end{center}
+ & 
+\begin{flushleft}\vspace{-25pt}Cardinalità (1,1) con Terapia\end{flushleft}
+\\
+
+\hline
+prescrive esame
+ & 
+\begin{center}\vspace{-25pt}R\end{center}
+ & 
+\begin{center}\vspace{-25pt}8000\end{center}
+ & 
+\begin{flushleft}\vspace{-25pt}Cardinalità (1,1) con Esame\end{flushleft}
+\\
+
+\hline
+stato salute
+ & 
+\begin{center}\vspace{-25pt}R\end{center}
+ & 
+\begin{center}\vspace{-25pt}15000\end{center}
+ & 
+\begin{flushleft}\vspace{-25pt}Cardinalità (1,1) con Indici Salute\end{flushleft}
+\\
+
+\hline

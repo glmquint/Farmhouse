@@ -1,0 +1,108 @@
+
+\hline
+
+    
+\hline
+
+Account 				& \begin{flushleft}\vspace{-15pt} Identit‡ digitale legata ad un cliente: permette l'acquisto e la recensione sullo store online dei prodotti caseari  \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item \underline{utente}
+						\item \underline{password}
+						\item domandaRec
+						\item rispostaRec
+						\item numTelefono
+						\item codFiscale
+						\item dataIscrizione
+						\item tipoDoc
+						\item numDoc
+						\item codDoc
+						\item scadenzaDoc
+						\item enteRilascio
+						\item cognome
+						\item nome
+						\item indirizzo
+						\item codCarta*
+					\end{itemize}
+					& \begin{flushleft}\vspace{-25pt} Cliente, Recensione, Ordine Prodotti \end{flushleft} \\ 
+
+\hline
+Centri Smistamento 	& \begin{flushleft}\vspace{-25pt} La spedizione di un prodotto attraversa numerosi centri di smistamento prima di raggiungere la propria destinazione  \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item \underline{codice}
+						\item contatto
+						\item indirizzo
+						\item nome
+					\end{itemize}
+					& \begin{flushleft}\vspace{-25pt} Spedizione \end{flushleft} \\ 
+
+\hline
+Formaggio Prodotto 	& \begin{flushleft}\vspace{-25pt} L'effettivo formaggio prodotto in una certa data e con una determinata data di scadenza  \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item \underline{codiceProdotto}
+						\item peso
+						\item scadenza
+						\item prezzo
+						\item rimastiInStock
+						\item stockAppartenenza
+						\item codLotto*
+					\end{itemize}
+					& \begin{flushleft}\vspace{-25pt} Recensione, Formaggio, Ordine Prodotti, Lotto \end{flushleft} \\ 
+
+\hline
+Ordine Prodotti 		& \begin{flushleft}\vspace{-25pt} Lista dei prodotti ordinati sullo store online da un cliente  \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item \underline{codiceOrdine}
+						\item tipoConsegnaReso
+						\item stato
+						\item data
+						\item codSpedizione*
+						\item utente*
+						\item password*
+					\end{itemize}
+					& \begin{flushleft}\vspace{-25pt} Cliente, Formaggio Prodotto, Spedizione \end{flushleft} \\ 
+
+\hline
+Recensione 			& \begin{flushleft}\vspace{-25pt} Opinione dei clienti sulla qualit‡ di uno specifico prodotto acquistato  \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item \underline{codiceRecensione}
+						\item gradimentoGenerale
+						\item qualit‡Percepita
+						\item gusto
+						\item campoTestuale
+						\item conservazione
+						\item utente*
+						\item password*
+						\item codProdotto*
+					\end{itemize}
+					& \begin{flushleft}\vspace{-25pt} Account, Formaggio Prodotto \end{flushleft} \\ 
+
+\hline
+Spedizione 			& \begin{flushleft}\vspace{-25pt} Storico delle spedizioni effettuate per l'invio dei prodotti agli acquirenti  \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item \underline{codice}
+						\item dataConsegnaEffettiva
+						\item dataConsegnaPrevista
+						\item percorso
+						\item stato
+					\end{itemize}
+					& \begin{flushleft}\vspace{-25pt} Ordine Prodotti, Centri Smistamento \end{flushleft} \\ 
+
+\hline

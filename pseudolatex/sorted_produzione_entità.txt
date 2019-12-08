@@ -1,0 +1,173 @@
+
+    
+\hline
+Cantine				 	& \begin{flushleft}\vspace{-25pt} Spazio dell'agriturismo dedicato alla stagionatura dei formaggi prodotti da un lotto \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item \underline{codice}
+					\end{itemize}
+					& \begin{flushleft}\vspace{-25pt} Lotto, Scaffalature, Parametri \end{flushleft} \\ 
+
+\hline
+Controllo Parametri Fase				 	& \begin{flushleft}\vspace{-25pt} Controlla, per ogni lotto, i parametri effettivi relativi ad ogni singola fase di produzione del formaggio \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item parametri effettivi
+					\end{itemize}
+					& \begin{flushleft}\vspace{-25pt} Ricetta, Lotto \end{flushleft} \\ 
+
+\hline
+Fasi				 	& \begin{flushleft}\vspace{-25pt} Singola istruzione con informazioni da seguire per la produzione ottimale del formaggio da produrre \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item \underline{codiceFase}
+						\item nome
+						\item durata
+						\item parametriProcesso
+					\end{itemize}
+					& \begin{flushleft}\vspace{-25pt} Ricetta, Lotto \end{flushleft} \\ 
+
+\hline
+Formaggio				 	& \begin{flushleft}\vspace{-15pt} Nutrimento somministrato agli animali sotto forma di fieno o insilato \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item \underline{nome}
+						\item deperibilit‡
+						\item \underline{nomeAgriturismo*}
+						\item \underline{codLatte*}
+						\item \underline{codRicetta*}
+					\end{itemize}
+					& \begin{flushleft}\vspace{-25pt} Formaggio Prodotto, Agriturismo, Latte, Ricetta \end{flushleft} \\ 
+
+\hline
+Latte				 	& \begin{flushleft}\vspace{-25pt} Composto fondamentale per i prodotti lattiero caseari di ogni agriturismo, ottenuto durante le varie mungiture in vari momenti della giornata \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item \underline{codLatte}
+						\item quantit‡SostanzeDi\-sciolte
+					\end{itemize}
+					& \begin{flushleft}\vspace{-25pt} Mungitrice, Lotto, Silos, Formaggio \end{flushleft} \\ 
+
+\hline
+Lotto				 	& \begin{flushleft}\vspace{-25pt} Laboratorio di un agriturismo che produce formaggi con la stessa (o simile) composizione chimico-fisica \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item \underline{codLotto}
+						\item codDipendenti
+						\item dataProd
+						\item codLab
+						\item durata
+					\end{itemize}
+					& \begin{flushleft}\vspace{-25pt} Formaggio Prodotto, Fasi, Magazzini, Cantine, Latte \end{flushleft} \\ 
+
+\hline
+Magazzini				 	& \begin{flushleft}\vspace{-25pt} Spazio dell'agriturismo dedicato allo stoccaggio dei formaggi che non necessitano di stagionatura \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item \underline{codice}
+					\end{itemize}
+					& \begin{flushleft}\vspace{-25pt} Lotto, Scaffali \end{flushleft} \\ 
+
+\hline
+Mungitrice				 	& \begin{flushleft}\vspace{-25pt} Macchinario \textit{hi-tech} impiegato durante le mungiture, capace di rilevare l'animale a cui Ë associato oltre che la quantit‡ e la composizione del latte munto \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item \underline{codice}
+						\item marca
+						\item modello
+						\item posizione
+					\end{itemize}
+					& \begin{flushleft}\vspace{-25pt} Mungitura, Latte \end{flushleft} \\ 
+
+\hline
+Mungitura				 	& \begin{flushleft}\vspace{-25pt} Attivit‡ di mungitura quotidiana degli animali dopo il pascolo \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item \underline{data}
+						\item \underline{ora}
+						\item quantit‡
+						\item \underline{codAnimale*}
+						\item \underline{codMungitrice*}
+					\end{itemize}
+					& \begin{flushleft}\vspace{-25pt} Animale, Mungitrice \end{flushleft} \\ 
+
+\hline
+Parametri				 	& \begin{flushleft}\vspace{-25pt} Parametri ambientali rilevati nelle cantine per garantire una stagionatura ottimale del prodotto \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item \underline{idSensore}
+						\item \underline{data}
+						\item temperatura
+						\item umidit‡
+						\item codCantina*
+					\end{itemize}
+					& \begin{flushleft}\vspace{-25pt} Cantine \end{flushleft} \\ 
+
+\hline
+Ricetta				 	& \begin{flushleft}\vspace{-25pt} Insieme di fasi da seguire per la produzione di uno specifico tipo di formaggio  \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item \underline{codiceRicetta}
+						\item collocazioneGeografica
+						\item durataStagionatura
+						\item ricetta
+					\end{itemize}
+					& \begin{flushleft}\vspace{-25pt} Formaggio, Fasi \end{flushleft} \\ 
+
+\hline
+Scaffalature				 	& \begin{flushleft}\vspace{-25pt} Ripiani di un magazzino su cui sono fisicamente tenuti i prodotti \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item \underline{codice}
+						\item \underline{codCantina*}
+					\end{itemize}
+					& \begin{flushleft}\vspace{-25pt} Cantine \end{flushleft} \\ 
+
+\hline
+Scaffali				 	& \begin{flushleft}\vspace{-25pt} Ripiani di una cantina su cui sono fisicamente tenuti i formaggi durante la stagionatura \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item \underline{codice}
+						\item \underline{codMagazzino}
+					\end{itemize}
+					& \begin{flushleft}\vspace{-25pt} Magazzini \end{flushleft} \\ 
+
+\hline
+Silos				 	& \begin{flushleft}\vspace{-25pt} Profondi recipienti destinati alla raccolta di latte con composizione chimico-fisica simile \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item \underline{codice}
+						\item capacit‡
+						\item livello
+					\end{itemize}
+					& \begin{flushleft}\vspace{-25pt} Latte \end{flushleft} \\ 
+
+\hline

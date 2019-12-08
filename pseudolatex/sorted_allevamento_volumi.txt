@@ -1,0 +1,332 @@
+
+    
+\hline
+Acqua 				& \begin{center}
+\vspace{-25pt}E
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}20\end{center}
+					& \begin{flushleft}\vspace{-25pt} Si considerano circa 20 tipologie uniche di acqua \end{flushleft}\\ 
+
+\hline
+Agriturismo 				& \begin{center}
+\vspace{-25pt}E
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}20
+					\end{center}
+					& \begin{flushleft}\vspace{-25pt} Ipotesi iniziale \end{flushleft}\\ 
+
+\hline
+Allestimento 				& \begin{center}
+\vspace{-25pt}E
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}2000\end{center}
+					& \begin{flushleft}\vspace{-25pt} Ogni locale è provvisto di quattro allestimenti: una mangiatoia, un abbeveratoio, un dispositivo per il condizionamento dell'aria e un sistema di illuminazione $4\times 500 = 2000$\end{flushleft}\\ 
+
+\hline
+Ambientali 				& \begin{center}
+\vspace{-25pt}E
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}500\end{center}
+					& \begin{flushleft}\vspace{-25pt} Ogni locale è dotato di un sensore per i parametri ambientali \end{flushleft}\\ 
+
+\hline
+Animale 				& \begin{center}
+\vspace{-25pt}E
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}20000\end{center}
+					& \begin{flushleft}\vspace{-25pt} Ogni agriturismo ospita 1000 animali $20\times 1000=20000$ \end{flushleft}\\ 
+
+\hline
+Area pascolo 				& \begin{center}
+\vspace{-25pt}E
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}60\end{center}
+					& \begin{flushleft}\vspace{-25pt} Ogni agriturismo dispone di 3 aree di pascolo $3\times 20= 60$\end{flushleft}\\ 
+
+\hline
+Attività pascolo 				& \begin{center}
+\vspace{-25pt}E
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}30000\end{center}
+					& \begin{flushleft}\vspace{-25pt} Combinazione tra tutti i locali e le varie aree di pascolo $500\times 60=30000$\end{flushleft}\\ 
+
+\hline
+Composti volatili 				& \begin{center}
+\vspace{-25pt}E
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}500\end{center}
+					& \begin{flushleft}\vspace{-25pt} Ogni locale è dotato di un sensore per i composti volatili \end{flushleft}\\ 
+
+\hline
+Foraggio 				& \begin{center}
+\vspace{-25pt}E
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}50\end{center}
+					& \begin{flushleft}\vspace{-25pt} Si considerano circa 50 tipologie uniche di foraggio \end{flushleft}\\ 
+
+\hline
+Fornitore 				& \begin{center}
+\vspace{-25pt}E
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}20\end{center}
+					& \begin{flushleft}\vspace{-25pt} Si assume una media di un fornitore per agriturismo \end{flushleft}\\ 
+
+\hline
+GPS 				& \begin{center}
+\vspace{-25pt}E
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}20000\end{center}
+					& \begin{flushleft}\vspace{-25pt} Ogni animale è dotato di un dispositivo GPS \end{flushleft}\\ 
+
+\hline
+Locale 				& \begin{center}
+\vspace{-25pt}E
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}500\end{center}
+					& \begin{flushleft}\vspace{-25pt} Ogni stalla ha in media 5 locali \end{flushleft}\\ 
+
+\hline
+Pasto 				& \begin{center}
+\vspace{-25pt}E
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}1000\end{center}
+					& \begin{flushleft}\vspace{-25pt} Combinazione tra tutti i tipi di acqua e di foraggio $20\times 50= 1000$ \end{flushleft}\\ 
+
+\hline
+Pulizia locale 				& \begin{center}
+\vspace{-25pt}E
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}580\end{center}
+					& \begin{flushleft}\vspace{-25pt} Ogni agriturismo effettua due richieste al giorno, per un totale di $2\times 365=730$ richieste annue. In questo modo, ognuno dei 25 locali viene pulito ${730\over 25}=29$ volte l'anno. Quindi i 20 agriturismi compilano $29\times 20=580$ record all'anno. \end{flushleft}\\ 
+
+\hline
+Recinzione divisoria e zona di pascolo 				& \begin{center}
+\vspace{-25pt}E
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}180\end{center}
+					& \begin{flushleft}\vspace{-25pt} Ogni area di pascolo è divisa in 3 recinsioni $60\times 3= 180$\end{flushleft}\\ 
+
+\hline
+Riproduzione 				& \begin{center}
+\vspace{-25pt}E
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}12900\end{center}
+					& \begin{flushleft}\vspace{-25pt} Secondo l'Istat circa il $75\%$ degli animali è femmina, nel nostro caso $20000\times0.75=15000$. Di queste, il $14\%$ non è destinato all'allevamento, quindi in un anno il restante $86\%$ si riproduce $15000\times 0.86=12900$ \end{flushleft}\\ 
+
+\hline
+Scheda gestazione 				& \begin{center}
+\vspace{-25pt}E
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}11610\end{center}
+					& \begin{flushleft}\vspace{-25pt} Viene generata una nuova scheda di gestazione per ogni riproduzione andata a buon fine, ossia il $90\%$ delle riproduzioni $12900\times 0.9= 11610$\end{flushleft}\\ 
+
+\hline
+Stalla 				& \begin{center}
+\vspace{-25pt}E
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}100\end{center}
+					& \begin{flushleft}\vspace{-25pt} Ogni agriturismo possiede in media 5 stalle \end{flushleft}\\ 
+
+\hline
+Visivi 				& \begin{center}
+\vspace{-25pt}E
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}500\end{center}
+					& \begin{flushleft}\vspace{-25pt} Ogni locale è dotato di un sensore per i parametri visivi \end{flushleft}\\ 
+
+\hline
+abita 				& \begin{center}
+\vspace{-25pt}R
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}20000\end{center}
+					& \begin{flushleft}\vspace{-25pt} Cardinalità (1,1) con Animale \end{flushleft}\\ 
+
+\hline
+acquisto animale 				& \begin{center}
+\vspace{-25pt}R
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}10000\end{center}
+					& \begin{flushleft}\vspace{-25pt} Cardinalità (1,1) con ogni animale acquisito, ossia con il $50\%$ del voume di Animali \end{flushleft}\\ 
+
+\hline
+appartenenza agriturismo 				& \begin{center}
+\vspace{-25pt}R
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}180\end{center}
+					& \begin{flushleft}\vspace{-25pt} Cardinalità (1,1) con Recinsione divosoria e zona di pascolo \end{flushleft}\\ 
+
+\hline
+attività locale 				& \begin{center}
+\vspace{-25pt}R
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}30000\end{center}
+					& \begin{flushleft}\vspace{-25pt} Cardinalità (1,1) con Attività pascolo \end{flushleft}\\ 
+
+\hline
+coinvolge 				& \begin{center}
+\vspace{-25pt}R
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}12900\end{center}
+					& \begin{flushleft}\vspace{-25pt} Cardinalità (1,1) con Riproduzione \end{flushleft}\\ 
+
+\hline
+collocazione attività 				& \begin{center}
+\vspace{-25pt}R
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}30000\end{center}
+					& \begin{flushleft}\vspace{-25pt} Cardinalità (1,1) con Attività pascolo \end{flushleft}\\ 
+
+\hline
+composizione acqua 				& \begin{center}
+\vspace{-25pt}R
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}1000\end{center}
+					& \begin{flushleft}\vspace{-25pt} Cardinalità (1,1) con Pasto \end{flushleft}\\ 
+
+\hline
+composizione foraggio 				& \begin{center}
+\vspace{-25pt}R
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}1000\end{center}
+					& \begin{flushleft}\vspace{-25pt} Cardinalità (1,1) con Pasto \end{flushleft}\\ 
+
+\hline
+composizione pasto 				& \begin{center}
+\vspace{-25pt}R
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}500000\end{center}
+					& \begin{flushleft}\vspace{-25pt} Combinazione tra tutti i locali e tutti i pasti $500\times 1000= 500000$ \end{flushleft}\\ 
+
+\hline
+determina 				& \begin{center}
+\vspace{-25pt}R
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}11610\end{center}
+					& \begin{flushleft}\vspace{-25pt} Cardinalità (1,1) con Scheda gestazione \end{flushleft}\\ 
+
+\hline
+divisione allestimento 				& \begin{center}
+\vspace{-25pt}R
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}2000\end{center}
+					& \begin{flushleft}\vspace{-25pt} Cardinalità (1,1) con Allestimento \end{flushleft}\\ 
+
+\hline
+divisione locale 				& \begin{center}
+\vspace{-25pt}R
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}500\end{center}
+					& \begin{flushleft}\vspace{-25pt} Cardinalità (1,1) con Locale \end{flushleft}\\ 
+
+\hline
+divisione pascolo 				& \begin{center}
+\vspace{-25pt}R
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}180\end{center}
+					& \begin{flushleft}\vspace{-25pt} Cardinalità (1,1) con Recinsione divisoria e zona di pascolo \end{flushleft}\\ 
+
+\hline
+divisione stalle 				& \begin{center}
+\vspace{-25pt}R
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}100\end{center}
+					& \begin{flushleft}\vspace{-25pt} Cardinalità (1,1) con Stalla \end{flushleft}\\ 
+
+\hline
+localizzato 				& \begin{center}
+\vspace{-25pt}R
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}20000\end{center}
+					& \begin{flushleft}\vspace{-25pt} Cardinalità (1,1) con Animale e con GPS \end{flushleft}\\ 
+
+\hline
+pasto contenuto 				& \begin{center}
+\vspace{-25pt}R
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}1000000\end{center}
+					& \begin{flushleft}\vspace{-25pt} Combinazione tra le mangiatoie e gli abbeveratoi, ossia la metà degli allestimenti, con i pasti che contengono ${2000\over 2}\times 1000 = 1000000$ \end{flushleft}\\ 
+
+\hline
+richiesta intervento 				& \begin{center}
+\vspace{-25pt}R
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}580\end{center}
+					& \begin{flushleft}\vspace{-25pt} Cardinalità (1,1) con Pulizia locale \end{flushleft}\\ 
+
+\hline
+rilievo composti volatili 				& \begin{center}
+\vspace{-25pt}R
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}500\end{center}
+					& \begin{flushleft}\vspace{-25pt} Cardinalità (1,1) con Composti volatili \end{flushleft}\\ 
+
+\hline
+rilievo parametri ambientali 				& \begin{center}
+\vspace{-25pt}R
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}500\end{center}
+					& \begin{flushleft}\vspace{-25pt} Cardinalità (1,1) con rilievo parametri ambientali \end{flushleft}\\ 
+
+\hline
+rilievo parametri visivi 				& \begin{center}
+\vspace{-25pt}R
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}500\end{center}
+					& \begin{flushleft}\vspace{-25pt} Cardinalità (1,1) con Visivi \end{flushleft}\\ 
+
+\hline
+scrive 				& \begin{center}
+\vspace{-25pt}R
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}11610\end{center}
+					& \begin{flushleft}\vspace{-25pt} Cardinalità (1,1) con Scheda gestazione \end{flushleft}\\ 
+
+\hline
+supervisiona 				& \begin{center}
+\vspace{-25pt}R
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}12900\end{center}
+					& \begin{flushleft}\vspace{-25pt} Cardinalità (1,1) con Riproduzione \end{flushleft}\\ 
+
+\hline

@@ -1,0 +1,145 @@
+
+\hline
+
+    
+\hline
+Cliente				 	& \begin{flushleft}\vspace{-15pt} Acquirente di prodotti o servizi proposti da un agriturismo: può essere registrato o meno \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item \underline{codCarta}
+					\end{itemize}
+					& \begin{flushleft}\vspace{-25pt} Account, Agriturismo, Pagamenti, Stanza, Escursione \end{flushleft} \\ 
+
+\hline
+Escursione				 	& \begin{flushleft}\vspace{-25pt} Ulteriore servizio offerto ai clienti, prevede un itinerario composto dalla visita di una serie di aree della tenuta dell'agriturismo \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item \underline{codice}
+						\item giorno
+						\item orario
+						\item codFiscGuida*
+					\end{itemize}
+					& \begin{flushleft}\vspace{-25pt} Cliente, Itinerario, Guida \end{flushleft} \\ 
+
+\hline
+Guida				 	& \begin{flushleft}\vspace{-25pt} Accompagna\-tore degli escursionisti lungo l'itinerario previsto \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item \underline{codFisc}
+						\item nome
+						\item cognome
+						\item contatto
+					\end{itemize}
+					& \begin{flushleft}\vspace{-25pt} Escursione \end{flushleft} \\ 
+
+\hline
+Itinerario				 	& \begin{flushleft}\vspace{-25pt} Percorso di un'escursione, prevede la sosta lungo più tappe \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item \underline{codice}
+						\item numSentieri
+					\end{itemize}
+					& \begin{flushleft}\vspace{-25pt} Escursione, Tappe \end{flushleft} \\ 
+
+\hline
+Non registrato				 	& \begin{flushleft}\vspace{-25pt} Insieme dei clienti che non hanno un account registrato nel sito \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item anticipo
+					\end{itemize}
+					& \begin{flushleft}\vspace{-25pt} Account, Agriturismo, Pagamenti, Stanza, Escursione \end{flushleft} \\ 
+
+\hline
+Pagamenti				 	& \begin{flushleft}\vspace{-25pt} Storico dei pagamenti effettuati dai clienti per l'acquisto di prodotti o servizi \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item \underline{codPagamento}
+						\item tipoPagamento
+						\item totaleCosto
+						\item data
+						\item ora
+						\item codCarta
+					\end{itemize}
+					& \begin{flushleft}\vspace{-25pt} Cliente \end{flushleft} \\ 
+
+\hline
+Pre\-no\-ta\-zio\-ne Escursione				 	& \begin{flushleft}\vspace{-25pt} Effettiva prenotazione di un escursione da parte di un cliente \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item dataPrenotazione
+					\end{itemize}
+					& \begin{flushleft}\vspace{-25pt} Account, Agriturismo, Pagamenti, Stanza, Escursione \end{flushleft} \\ 
+
+\hline
+Pre\-no\-ta\-zio\-ne Stanza				 	& \begin{flushleft}\vspace{-25pt} Effettiva prenotazione di una stanza da parte di un cliente \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item dataPartenza
+						\item dataArivo
+					\end{itemize}
+					& \begin{flushleft}\vspace{-25pt} Account, Agriturismo, Pagamenti, Stanza, Escursione \end{flushleft} \\ 
+
+\hline
+Servizio Aggiuntivo				 	& \begin{flushleft}\vspace{-25pt} Ogni cliente che soggiorna in una stanza può usufruire di servizi aggiuntivi quali idromassaggio, accesso al centro benessere, accesso piscina etc. \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item \underline{tipoServizio}
+						\item costo
+					\end{itemize}
+					& \begin{flushleft}\vspace{-25pt} Stanza \end{flushleft} \\ 
+
+\hline
+Servizio per Stanza				 	& \begin{flushleft}\vspace{-25pt} Servizio effettivamente aggiunto alla prenotazione della stanza di un cliente \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item dataInizioUtilizzo
+						\item dataFineUtilizzo
+					\end{itemize}
+					& \begin{flushleft}\vspace{-25pt} Account, Agriturismo, Pagamenti, Stanza, Escursione \end{flushleft} \\ 
+
+\hline
+Stanza				 	& \begin{flushleft}\vspace{-25pt} Una camera singola o suite che può essere prenotata per il soggiorno dei clienti \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item \underline{numStanza}
+						\item costoGiornaliero
+						\item numLetti
+						\item tipoLetti
+						\item suite
+					\end{itemize}
+					& \begin{flushleft}\vspace{-25pt} Cliente, Agriturismo, Servizio Aggiuntivo \end{flushleft} \\ 
+
+\hline
+Tappe				 	& \begin{flushleft}\vspace{-25pt} Area dell'agriturismo dedicata alla visita e al riposo durante le escursioni \end{flushleft}
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item \underline{nome}
+						\item tempoPermanenza
+					\end{itemize}
+					& \begin{flushleft}\vspace{-25pt} Itinerario \end{flushleft} \\ 
+
+\hline

@@ -1,0 +1,42 @@
+[X] tabelle con attributi di entità
+[X]tabelle per cardinalità relazioni
+[vedi pg 71]
+
+[X]finire tabelle area produzione
+
+poi 
+[X]tradurre generalizzazioni
+studiare ridondanze
+[X]tabelle associazioni
+tavole volum
+tavole accessi
+operazioni
+trigger
+data analitycs
+
+TRUE:
+[X]Analisi specifiche
+[X]Progettazione concettuale
+[X]Ristrutturazione ER
+[Operazioni
+trafiletto introduttivo
+- descrizione
+- frequenza
+Analisi prestazioni operazioni
+- tavola volumi
+- tavola degli accessi
+- - #operazioni elementari eseguite
+- - lettura/scrittura
+- - E/R
+- - nome costrutto
+- - descrizione
+   Introduzione ridondanze
+   - calcolo costo/beneficio
+Progettazione logica
+Dipendenze funzionali/Normalizzazione (dopo le ridondanze boh)
+Implementazione
+
+Parlare della strategia mista per lo sviluppo della BD
+colorare relazioni non ristrutturato
+aggiungere pasto per locale in volumi (e rimuovere vecchie relazioni "pasto contenuto")
+--- ---

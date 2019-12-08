@@ -1,0 +1,107 @@
+Abbeveratoio
+Acqua
+Agriturismo
+Allestimento
+Ambientali
+Animale
+Animale Acquisito
+Area Pascolo
+Arricchita
+Attività Pascolo
+Composti Volatili
+Foraggio
+Fornitore
+GPS
+Insuccesso
+Locale
+Mangiatoia
+Pasto
+Pasto per Locale
+Pulizia Locale
+Recinsione Divisoria e Zona Pascolo
+Riproduzione
+Scheda Gestazione
+Sensori
+Stalla
+Successo
+Visivi
+abita
+acqua contenuta
+accquisto animale
+attività locale
+coinvolge
+collocazione attività
+composizione acqua
+composizione foraggio
+determina
+divisione allestimenti
+divisione locale
+divisione pascolo
+divisione stalle
+foraggio contenuto
+locale assegnato
+localizzato
+madre
+padre
+pasto assegnato
+richiesta intervento
+rilievo parametri locale
+scrive
+supervisiona
+Disturbi Coportamentali
+Esame
+Farmaco
+Indici Salute
+Lesioni
+Scheda Medica
+Terapia
+Veterinario
+Visita
+compila
+composta da
+controlli effettuati
+esegue
+possiede
+possiede esame
+possiede terapia
+prescrive esame
+prescrive terapia
+stato salute
+Cantine
+Controllo Parametri Fase
+Fasi
+Formaggio
+Latte
+Lotto
+Magazzini
+Mungitrice
+Mungitura
+Parametri
+Ricetta
+Scaffalature
+Scaffali
+Silos
+appartenente a
+che munge
+composizione formaggio
+con
+contengono scaffalature
+contengono scaffali
+controllo fasi
+controllo lotti
+divisa in
+prodotto con
+produce
+produce
+rilievo parametri
+stoccaggio cantine
+stoccaggio magazzini
+staoccato in
+utilizzando
+è munto dutante
+Cliente
+Escursione
+Guida
+Itinerario
+Non registrato
+Pagamenti
