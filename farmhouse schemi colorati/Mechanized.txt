@@ -42,3 +42,4 @@ proposta di cambiare "produce" con "produce formaggio" in Relazioni Produzione
 
 appartenenza agriturismo forse non è (1,1) con agriturismo, nel qual caso deve diventare un'entità con chiave anche la fascia oraria, con vincolo d'integrità referenziale sulla fascia oraria dell' Attivitò Pascolo
 
+--- ---
