@@ -2,7 +2,7 @@
 \hline
 \multicolumn{1}{|c|}{Totale}
  & 
-\multicolumn{3}{|r|}{9001}
+\multicolumn{3}{|r|}{ 9001}
 \\
 \hline
 1
