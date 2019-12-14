@@ -10,6 +10,7 @@ from sys import *
 #notazione:
 #
 #   ***YOUR TITLE***
+#   $$\raw_latex{text}$$
 #   #COMMENT
 #   [
 #   > !ELEMENT!E!{{-ENUMERATED ELEMENT-due-tre-quattro}}!400#INLINE COMMENT con ! caratteri [ speciali
@@ -64,16 +65,24 @@ for line in f:
     # viene considerato solo ciò che sta alla sinistra del primo '#' di ogni riga
     if '#' in line:
         line = line.split('#')[0]
+        continue
 
     # Per il titolo di ogni tabella:
     # ciò che è racchiuso dalla sequenza '***' viene considerato come il titolo della tabella
     if '***' in line:
         mio_latex.append(prologo_titolo + line.split('***')[1] + epilogo_titolo)
+        continue
+    
+    # Per il raw latex
+    if '$$' in line:
+        mio_latex.append(line.split('$$')[1])
+        continue
 
     # Per l'inizio di una tabella:
     # permette di inserire l'intenstazione definita nel prologo tabella
     if '[' in line:
         mio_latex.append(prologo_tabella)
+        continue
 
     # Per l'inizio di una nuova riga
     # le colonne di ogni riga vengono identificate dal separatore '!'
