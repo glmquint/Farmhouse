@@ -25,11 +25,11 @@ from sys import *
 
 
 # VARIABILI DI FORMATTAZIONE #
-column_width = ["0.23","0.1","0.11","0.45"]
+column_width = ["0.2","0.1","0.175","0.1","0.3"]
 
-prologo_tabella = "\\begin{center}\setlength{\extrarowheight}{1.5pt}\\begin{longtable}{|p{" + column_width[0] + "\linewidth}|p{" + column_width[1] + "\linewidth}|p{" + column_width[2] + "\linewidth}|p{" + column_width[3] + "\linewidth}|}\hline \\textbf{Nome}   & \\begin{center}\\vspace{-15pt}\\textbf{E/R}\end{center} & \\textbf{Numero Istanze} & \\textbf{Motivazione}\\\\ "
+prologo_tabella = "\\begin{center}\setlength{\extrarowheight}{1.5pt}\\begin{longtable}{|p{" + column_width[0] + "\linewidth}|p{" + column_width[1] + "\linewidth}|p{" + column_width[2] + "\linewidth}|p{" + column_width[3] + "\linewidth}|p{" + column_width[4] + "\linewidth}|}\hline \\textbf{Nome costrutto}   & \\begin{center}\\vspace{-15pt}\\textbf{E/R}\end{center} & \\textbf{Numero operazioni elementari} & \\begin{center}\\vspace{-25pt}\\textbf{Tipo}\end{center} & \\textbf{Descrizione}\\\\ "
 prologo_itemize = " \\begin{itemize}\\setlength{\\itemindent}{-1em}\\vspace{-25pt}\\setlength\\itemsep{-0.25em}"
-prologo_titolo = "\\subsubsection{"
+prologo_titolo = "\\subsubsection*{" #AGGIUNGERE O TOGLIERE '*' per numerare la sottosezione
 prologo_multi_col = "\\multicolumn{"
 
 first_multi_col = "}{|"
@@ -43,9 +43,9 @@ epilogo_multi_col = "}"
 nuova_riga = "\hline"
 fine_riga = "\\\\"
 
-before_content = ["", "\\begin{center}\\vspace{-25pt}", "\\begin{center}\\vspace{-25pt}", "\\begin{flushleft}\\vspace{-25pt}" ]
+before_content = ["", "\\begin{center}\\vspace{-25pt}", "\\begin{center}\\vspace{-25pt}", "\\begin{flushleft}\\vspace{-25pt}", "" ]
 before_item = "\\item "
-after_content = ["", "\end{center}", "\end{center}", "\end{flushleft}"]
+after_content = ["", "\end{center}", "\end{center}", "\end{flushleft}", ""]
 after_item = ""
 
 # CODICE #
@@ -75,7 +75,7 @@ for line in f:
     
     # Per il raw latex
     if '$$' in line:
-        mio_latex.append(line.split('$$')[1])
+        mio_latex.append(line.split('$$')[1]) #[:-1]) aggiungi questo per non creare una newline ad ogni raw latex
         continue
 
     # Per l'inizio di una tabella:

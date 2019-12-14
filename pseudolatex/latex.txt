@@ -1,4 +1,4 @@
-\begin{center}\setlength{\extrarowheight}{1.5pt}\begin{longtable}{|p{0.23\linewidth}|p{0.1\linewidth}|p{0.11\linewidth}|p{0.45\linewidth}|}\hline \textbf{Nome}   & \begin{center}\vspace{-15pt}\textbf{E/R}\end{center} & \textbf{Numero Istanze} & \textbf{Motivazione}\\ 
+\textbf{Descrizione:} Questa è una \textit{descrizione}!
 \hline
 \multicolumn{1}{|c|}{\textbf{Totale}}
  & 

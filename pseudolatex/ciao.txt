@@ -3,6 +3,7 @@
 #> !Nome costrutto!Tipo costrutto(E/R)!Numero operazioni elementari(volume interessato)!Tipo!Descrizione
 #]
 
+$$\textbf{Descrizione:} Questa è una \textit{descrizione}!$$
 [
 >!?1c\textbf{Totale}!?3r 9001
 >!1!2!{{-uno-\textit{dos}-tres}}!4
