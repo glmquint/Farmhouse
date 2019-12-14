@@ -4,6 +4,6 @@
 #]
 
 [
->!?1cTotale!?3r 9001
->!1!2!3!4
+>!?1c\textbf{Totale}!?3r 9001
+>!1!2!{{-uno-\textit{dos}-tres}}!4
 ]

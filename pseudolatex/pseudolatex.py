@@ -12,8 +12,8 @@ from sys import *
 #   ***YOUR TITLE***
 #   #COMMENT
 #   [
-#   > !ELEMENT!E!{-ENUMERATED ELEMENT-due-tre-quattro}!400#INLINE COMMENT con ! caratteri [ speciali
-#   > !{-uno-due-tre-quattro}!{-uno-due-tree-quattro}!{-uno-duue-tre-quattro}!bello
+#   > !ELEMENT!E!{{-ENUMERATED ELEMENT-due-tre-quattro}}!400#INLINE COMMENT con ! caratteri [ speciali
+#   > !{{-uno-due-tre-quattro}}!{{-uno-\textit{due}-tree-quattro}}!{{-uno-duue-tre-quattro}}!bello
 #   > !\textbf{Totale}!?3r9001#INJECTED LATEX & MULTICOLUMN ROW
 #   ]
 
@@ -86,13 +86,14 @@ for line in f:
                 mio_latex.append(" & ")
             # Per le liste innerstate in una tabella
             # introduce una nuova lista i cui elementi sono separati da '-'
-            if '{' in c:
+            if '{{' in c:
                 items = c.split('-')[1:]
-                items[-1] = items[-1][:-1]
+                items[-1] = items[-1][:-2]
                 mio_latex.append(prologo_itemize)
                 for i in items:
                     mio_latex.append(before_item + i + after_item)
                 mio_latex.append(epilogo_itemize)
+                continue
             # Per le multicolums rows:
             # se una colonna viene introdotta da '?n[l|c|r]' con n nel range [1-9], essa occuperà lo spazio di n colonne
             # ed il suo contenuto sarà allineato (l)eft, (c)enter o (r)ight
