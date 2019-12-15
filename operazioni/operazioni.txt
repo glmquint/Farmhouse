@@ -205,10 +205,43 @@ Non è conveniente mantenere la ridondanza in quanto n^A > n^T - n^T_RID
 ------------------------
 
 B]: Controllo foraggio contenuto in una mangiatoia
-input:=codice della mangiatoia
+input:=codice della mangiatoia, giorno, orario
 output:=contenuto del foraggio
 
 ridondanza "pasto per mangiatoia" tra "Mangiatoia" e "Pasto per Locale"
+
+Senza ridondanza:
+- 1*lettura divisione mangiatoie
+- 1*lettura locale
+- 1095*lettura locale assegnato
+- 1095*lettura Pasto per Locale (volume PpL/volume locale)
+- 1*lettura Pasto
+- tot=>2193 operazioni fondamentali (o^T)
+frequenza annuale => 24 volte l'anno (f^T annuale)(f^T giornaliera 24/365 = 0,066)
+numero operazioni annuali : 126*24=3024 (n^T annuale)(n^T giornaliero 126*0.066=8.316)
+
+Con ridondanza:
+- 44*lettura qualità pasto
+- 44*lettura indici di salute
+- tot=>88 operazioni fondamentali (o^T)
+frequanza annuale => 24 volte l'anno (f^T_RID annuale)(f^T_RID giornaliera 24/365 = 0.066)
+numero operazioni annuali : 88*24=2112 (n^T_RID annuale)(n^T_RID giornaliera 88*0.066=5.808)
+
+Aggiornamento ridondanza:
+- 1*scrittura indici di salute
+- tot=>2 operazione fondamentale(o^A)
+frequenza annuale => 22000 volte l'anno(f^A annuale)(f^A giornaliera 22000/365 = 60.27)
+numero operazioni annuali annui : 2*22000=44000(n^A annuale)(n^A giornaliera 2*60.27=120.55)
+
+Non è conveniente mantenere la ridondanza in quanto n^A > n^T - n^T_RID
+
+----------------------
+
+C]: Controllo acqua contenuta in una mangiatoia
+input:=codice della mangiatoia
+output:=contenuto dell'acqua
+
+ridondanza "pasto per abbeveratoio" tra "Abbeveratoio" e "Pasto per Locale"
 
 Senza ridondanza:
 - 1*lettura divisione mangiatoie
@@ -234,3 +267,18 @@ frequenza annuale => 22000 volte l'anno(f^A annuale)(f^A giornaliera 22000/365 =
 numero operazioni annuali annui : 2*22000=44000(n^A annuale)(n^A giornaliera 2*60.27=120.55)
 
 Non è conveniente mantenere la ridondanza in quanto n^A > n^T - n^T_RID
+
+-------------------------
+Operazioni finali
+-------------------------
+
+- controllo qualità pasto
+- controllo qualità prodotto
+- registrazioni riproduzione
+- pagamento stanza
+- stoccaggio latte munto
+- controllo igiene locali
+- processamento ordini
+- prescrizione terapie
+- controllo animali dispersi
+- aggiornamento recinzioni zone di pascolo
