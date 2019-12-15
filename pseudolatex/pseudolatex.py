@@ -27,7 +27,7 @@ from sys import *
 # VARIABILI DI FORMATTAZIONE #
 column_width = ["0.2","0.1","0.175","0.1","0.3"]
 
-prologo_tabella = "\\begin{center}\setlength{\extrarowheight}{1.5pt}\\begin{longtable}{|p{" + column_width[0] + "\linewidth}|p{" + column_width[1] + "\linewidth}|p{" + column_width[2] + "\linewidth}|p{" + column_width[3] + "\linewidth}|p{" + column_width[4] + "\linewidth}|}\hline \\textbf{Nome costrutto}   & \\begin{center}\\vspace{-15pt}\\textbf{E/R}\end{center} & \\textbf{Numero operazioni elementari} & \\begin{center}\\vspace{-25pt}\\textbf{Tipo}\end{center} & \\textbf{Descrizione}\\\\ "
+prologo_tabella = "\\begin{center}\setlength{\extrarowheight}{1.5pt}\\begin{longtable}{|p{" + column_width[0] + "\linewidth}|p{" + column_width[1] + "\linewidth}|p{" + column_width[2] + "\linewidth}|p{" + column_width[3] + "\linewidth}|p{" + column_width[4] + "\linewidth}|}\hline \\textbf{Nome costrutto}   & \\multicolumn{1}{|c|}{\\textbf{E/R}} & \\textbf{Numero operazioni elementari} & \\multicolumn{1}{|c|}{\\textbf{Tipo}} & \\textbf{Descrizione}\\\\ "
 prologo_itemize = " \\begin{itemize}\\setlength{\\itemindent}{-1em}\\vspace{-25pt}\\setlength\\itemsep{-0.25em}"
 prologo_titolo = "\\subsubsection*{" #AGGIUNGERE O TOGLIERE '*' per numerare la sottosezione
 prologo_multi_col = "\\multicolumn{"
@@ -43,9 +43,9 @@ epilogo_multi_col = "}"
 nuova_riga = "\hline"
 fine_riga = "\\\\"
 
-before_content = ["", "\\begin{center}\\vspace{-25pt}", "\\begin{center}\\vspace{-25pt}", "\\begin{flushleft}\\vspace{-25pt}", "" ]
+before_content = ["", "\\multicolumn{1}{|c|}{", "\\multicolumn{1}{|c|}{", "\\multicolumn{1}{|c|}{", "" ]
 before_item = "\\item "
-after_content = ["", "\end{center}", "\end{center}", "\end{flushleft}", ""]
+after_content = ["", "}", "}", "}", ""]
 after_item = ""
 
 # CODICE #
@@ -65,7 +65,6 @@ for line in f:
     # viene considerato solo ciò che sta alla sinistra del primo '#' di ogni riga
     if '#' in line:
         line = line.split('#')[0]
-        continue
 
     # Per il titolo di ogni tabella:
     # ciò che è racchiuso dalla sequenza '***' viene considerato come il titolo della tabella
