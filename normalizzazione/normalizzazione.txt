@@ -1,0 +1,1 @@
+- è stata rimossa la chiave codicePasto da Pasto in quanto dipendente dal contenuto del pasto che è chiave, in questo modo si evita che due pasti siano uguali ma chiamati diversamente
