@@ -40,3 +40,4 @@ Parlare della strategia mista per lo sviluppo della BD
 colorare relazioni non ristrutturato
 aggiungere pasto per locale in volumi (e rimuovere vecchie relazioni "pasto contenuto")
 --- ---
+Aggiornare tutte le note e i conti affinchè siano tutti footnotes

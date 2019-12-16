@@ -207,7 +207,7 @@ Aggiornamento della relazione tra il nuovo indice di salute e il pasto precedent
 \hline
 \multicolumn{4}{|l|}{\textbf{Totale}}
  & 
-\multicolumn{1}{|c|}{\textbf{170}}
+\multicolumn{1}{|c|}{\textbf{258}}
 \\
 \hline
 \end{longtable}\end{center}
@@ -317,6 +317,11 @@ Fasi
 Si leggono i parametri di processo della specifica fase della ricetta
 \\
 \hline
+\multicolumn{4}{|l|}{\textbf{Totale}}
+ & 
+\multicolumn{1}{|c|}{\textbf{44}}
+\\
+\hline
 \end{longtable}\end{center}
 \begin{center}\setlength{\extrarowheight}{1.5pt}\begin{longtable}{|p{0.2\linewidth}|p{0.1\linewidth}|p{0.175\linewidth}|p{0.1\linewidth}|p{0.3\linewidth}|}\hline \textbf{Nome costrutto}   & \multicolumn{1}{|c|}{\textbf{E/R}} & \textbf{Numero operazioni elementari} & \multicolumn{1}{|c|}{\textbf{Tipo}} & \textbf{Descrizione}\\ 
 \hline
@@ -365,6 +370,11 @@ Fasi
 \multicolumn{1}{|c|}{L}
  & 
 Si leggono i parametri di processo della specifica fase della ricetta
+\\
+\hline
+\multicolumn{4}{|l|}{\textbf{Totale}}
+ & 
+\multicolumn{1}{|c|}{\textbf{40}}
 \\
 \hline
 \end{longtable}\end{center}
@@ -437,6 +447,22 @@ Controllo Parametri Fase
 \multicolumn{1}{|c|}{L}
  & 
 Si ricavano i dati relativi ai parametri effettivi rilevati durante il controllo delle fasi
+\\
+\hline
+controllo qualità
+ & 
+\multicolumn{1}{|c|}{R}
+ & 
+\multicolumn{1}{|c|}{10}
+ & 
+\multicolumn{1}{|c|}{S}
+ & 
+Aggiornamento della relazione
+\\
+\hline
+\multicolumn{4}{|l|}{\textbf{Totale}}
+ & 
+\multicolumn{1}{|c|}{\textbf{44}}
 \\
 \hline
 \end{longtable}\end{center}
@@ -595,6 +621,11 @@ effettua
 Aggiornamento della relazione tra il cliente ed il pagamento
 \\
 \hline
+\multicolumn{4}{|l|}{\textbf{Totale}}
+ & 
+\multicolumn{1}{|c|}{\textbf{420}}
+\\
+\hline
 \end{longtable}\end{center}
 \stepcounter{counterAccessi}
 
@@ -651,6 +682,11 @@ stoccato in
 \multicolumn{1}{|c|}{S}
  & 
 Aggiornamento della relazione tra il latte ed il silos nel quale è stoccato
+\\
+\hline
+\multicolumn{4}{|l|}{\textbf{Totale}}
+ & 
+\multicolumn{1}{|c|}{\textbf{6}}
 \\
 \hline
 \end{longtable}\end{center}
@@ -775,6 +811,11 @@ richiesta intervento
 \multicolumn{1}{|c|}{S}
  & 
 Aggiornamento della relazione tra il locale e l'intervento di pulizia
+\\
+\hline
+\multicolumn{4}{|l|}{\textbf{Totale}}
+ & 
+\multicolumn{1}{|c|}{\textbf{21}}
 \\
 \hline
 \end{longtable}\end{center}
@@ -927,7 +968,7 @@ processata da
  & 
 \multicolumn{1}{|c|}{R}
  & 
-\multicolumn{1}{|c|}{<Volume processata da>/<Volume Spedizioni>}
+\multicolumn{1}{|c|}{x\footnote{<Volume processata da>/<Volume Spedizioni>}}
  & 
 \multicolumn{1}{|c|}{S}
  & 
@@ -967,6 +1008,11 @@ Ordine Prodotti
 Aggiornamento dello stato dell'ordine a \texttt{evaso}
 \\
 \hline
+\multicolumn{4}{|l|}{\textbf{Totale}}
+ & 
+\multicolumn{1}{|c|}{\textbf{62+2x}}
+\\
+\hline
 \end{longtable}\end{center}
 \stepcounter{counterAccessi}
 
@@ -987,7 +1033,7 @@ Terapia
  & 
 \multicolumn{1}{|c|}{5\footnote{Stima di quante terapie sono già state assegnate in precedenza a questo animale}}
  & 
-\multicolumn{1}{|c|}{S}
+\multicolumn{1}{|c|}{L}
  & 
 Controllo se l'ultima terapia che non si è conclusa è marcata come la seconda consecutiva
 \\
@@ -1001,6 +1047,11 @@ abita
 \multicolumn{1}{|c|}{S}
  & 
 Ricollocamento del locale abitato dall'animale tramite l'aggiornamento della relazione con un locale di quarantena
+\\
+\hline
+\multicolumn{4}{|l|}{\textbf{Totale}}
+ & 
+\multicolumn{1}{|c|}{\textbf{7}}
 \\
 \hline
 \end{longtable}\end{center}

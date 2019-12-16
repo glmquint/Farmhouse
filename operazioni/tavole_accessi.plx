@@ -22,8 +22,8 @@ $$\stepcounter{counterAccessi}
 $$\noindent\textit{Descrizione:} Viene controllato che il pasto che viene somministrato agli animali non abbia ripercussioni sul loro stato di salute: in particolare vengono controllati gli indici di salute di tutti gli animali appartenenti ai locali nei quali è stato somministrato il pasto in esame
 $$\noindent\textit{Input:} codice del pasto da controllare e giorno e orario di somministrazione
 $$\noindent\textit{Output:} media degli indici di salute
-$$\noindent\textit{Frequenza giornaliera:} 0.066\footnote{Frequenza annuale: 24. $\frac{24}{365}=0.066$}
-$$E' presente la ridondanza "qualità pasto" tra Pasto per Locale e Indici Salute che influenza la tavola degli accessi
+$$\noindent\textit{Frequenza giornaliera:} 0.066\footnote{Frequenza annuale: 24. Frequenza giornaliera: $\frac{24}{365}=0.066$}
+$$E' presente la ridondanza \textit{qualità pasto} tra Pasto per Locale e Indici Salute che influenza la tavola degli accessi
 
 [
 >!?5cSenza ridondanza
@@ -52,7 +52,7 @@ $$E' presente la ridondanza "qualità pasto" tra Pasto per Locale e Indici Salut
 >!stato salute!R!44!L!Si passa dalla relazione per ricavare gli indici di salute degli animali
 >!Indici salute!E!44!L!Lettura dei dati relativi alla salute degli animali
 >!Indici salute!R!44!S!Aggiornamento della relazione tra il nuovo indice di salute e il pasto precedentenente somministrato
->!?4l\textbf{Totale}!\textbf{170}
+>!?4l\textbf{Totale}!\textbf{258}
 ]
 
 ##############################
@@ -75,6 +75,7 @@ $$E' presente la ridondanza "controllo qualità" tra Recensione e Controllo Para
 >!Controllo Parametri Fase!E!10!L!Si ricavano i dati relativi ai parametri effettivi rilevati durante il controllo delle fasi
 >!controllo fasi!R!10!L!Si passa dalla relazione per ottenere i parametri idelai della determinata fase
 >!Fasi!E!10!L!Si leggono i parametri di processo della specifica fase della ricetta
+>!?4l\textbf{Totale}!\textbf{44}
 ]
 
 [
@@ -83,6 +84,7 @@ $$E' presente la ridondanza "controllo qualità" tra Recensione e Controllo Para
 >!Controllo Parametri Fase!E!10!L!Si ricavano i dati relativi ai parametri effettivi rilevati durante il controllo delle fasi
 >!controllo fasi!R!10!L!Si passa dalla relazione per ottenere i parametri idelai della determinata fase
 >!Fasi!E!10!L!Si leggono i parametri di processo della specifica fase della ricetta
+>!?4l\textbf{Totale}!\textbf{40}
 ]
 
 [
@@ -93,7 +95,8 @@ $$E' presente la ridondanza "controllo qualità" tra Recensione e Controllo Para
 >!Lotto!E!1!L!Si ricavano le informazioni del lotto di produzione
 >!controllo lotti!R!10!L!Si passa dalla relazione per ottenere i parametri di produzione del formaggio
 >!Controllo Parametri Fase!E!10!L!Si ricavano i dati relativi ai parametri effettivi rilevati durante il controllo delle fasi
-!controllo qualità!R!10!S!Aggiornamento della relazione
+>!controllo qualità!R!10!S!Aggiornamento della relazione
+>!?4l\textbf{Totale}!\textbf{44}
 ]
 
 ##############################
@@ -130,6 +133,7 @@ $$\noindent\textit{Frequenza giornaliera:} 1
 >!Cliente!E!28!E!Lettura dei dati relativi al cliente, ivi compreso il codice della carta e se è già stato pagato un anticipo
 >!Pagamenti!E!28!S!Inserimento di un nuovo pagamento
 >!effettua!28!R!S!Aggiornamento della relazione tra il cliente ed il pagamento
+>!?4l\textbf{Totale}!\textbf{420}
 ]
 
 ##############################
@@ -146,6 +150,7 @@ $$\noindent\textit{Frequenza giornaliera:} (<Volume Mungitura>/365)
 >!Latte!E!1!L!Lettura delle quantità di sostanze disciolte nel latte
 >!Silos!E!1!S!Aggiornamento del livello presente nel silos di destinazione
 >!stoccato in!R!1!S!Aggiornamento della relazione tra il latte ed il silos nel quale è stoccato
+>!?4l\textbf{Totale}!\textbf{6}
 ]
 
 ##############################
@@ -168,6 +173,7 @@ $$\noindent\textit{Frequenza giornaliera:} 40\footnote{Ognuno dei 20 agriturismi
 >!Locale!E!1!L!Lettura delle soglie di tollerabilità per il locale
 >!Pulizia locale!E!1!S!Scrittura di una nuova richiesta d'intervento di pulizia
 >!richiesta intervento!R!1!S!Aggiornamento della relazione tra il locale e l'intervento di pulizia
+>!?4l\textbf{Totale}!\textbf{21}
 ]
 
 ##############################
@@ -196,6 +202,7 @@ $$\noindent\textit{Frequenza giornaliera:} 400\footnote{Ogni agriturismo gestisc
 >!Spedizione!E!1!S!Aggiornamento dello stato della spedizione a \texttt{in consegna}
 >!Spedizione!E!1!S!Aggiornamento dello stato della spedizione a \texttt{consegnata}
 >!Ordine Prodotti!E!1!S!Aggiornamento dello stato dell'ordine a \texttt{evaso}
+>!?4l\textbf{Totale}!\textbf{62+2x}
 ]
 
 ##############################
@@ -208,8 +215,9 @@ $$\noindent\textit{Output:} Trasferimanto dell'animale in un nuovo locale di qua
 $$\noindent\textit{Frequenza giornaliera:} 0.3\footnote{100 terapie in un anno corrispondono a circa una nuova terapia ogni 3 giorni}
 
 [
->!Terapia!E!5\footnote{Stima di quante terapie sono già state assegnate in precedenza a questo animale}!S!Controllo se l'ultima terapia che non si è conclusa è marcata come la seconda consecutiva
+>!Terapia!E!5\footnote{Stima di quante terapie sono già state assegnate in precedenza a questo animale}!L!Controllo se l'ultima terapia che non si è conclusa è marcata come la seconda consecutiva
 >!abita!R!1!S!Ricollocamento del locale abitato dall'animale tramite l'aggiornamento della relazione con un locale di quarantena
+>!?4l\textbf{Totale}!\textbf{7}
 ]
 
 ##############################

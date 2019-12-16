@@ -44,19 +44,19 @@ appartenenza agriturismo forse non è (1,1) con agriturismo, nel qual caso deve 
 
 ---------
 
-Operazione di controllo di foraggio e acqua e allestimenti non ha molto senso perchè ci si basa sulla base dati per fare controlli sull'integrità della base dati (è semplicemente un vincolo d'integrità referenziale che ogni allestimento abbia il giusto contenuto definito dal Pasto per Locale)
+OK: Operazione di controllo di foraggio e acqua e allestimenti non ha molto senso perchè ci si basa sulla base dati per fare controlli sull'integrità della base dati (è semplicemente un vincolo d'integrità referenziale che ogni allestimento abbia il giusto contenuto definito dal Pasto per Locale)
 
-Nei volumi di allevamento è presente il volume di allestimento e non di abbeveratoio e mangiatoia
+OK: Nei volumi di allevamento è presente il volume di allestimento e non di abbeveratoio e mangiatoia
 
-Proposta di inserire nuova ridondanza "animali in zona pascolo" con attributo dell'attività di pascolo relativa, così da ricavare tutti gli animali che hanno effettuato un'attività di pascolo in una determinata zona. Questo dovrebbe ottimizzare l'operazione di aggiornamento dei confini delle zone di pascolo, che prende in input la media delle posizioni GPS di tutti gli animali che hanno pascolato in quella zona.
+OK: Proposta di inserire nuova ridondanza "animali in zona pascolo" con attributo dell'attività di pascolo relativa, così da ricavare tutti gli animali che hanno effettuato un'attività di pascolo in una determinata zona. Questo dovrebbe ottimizzare l'operazione di aggiornamento dei confini delle zone di pascolo, che prende in input la media delle posizioni GPS di tutti gli animali che hanno pascolato in quella zona.
 Il processo di aggiornamento della ridondanza deve essere effettuato ad ogni registrazione di una nuova attività di pascolo
 
-Servizio per Stanza NON PUO' ESSERE COLLEGATO a Stanza per chè si perde l'informazione della prenotazione a cui i servizi sono associati. INVECE dovrebbe essere attaccato a Prenotazione Stanza
+OK: Servizio per Stanza NON PUO' ESSERE COLLEGATO a Stanza per chè si perde l'informazione della prenotazione a cui i servizi sono associati. INVECE dovrebbe essere attaccato a Prenotazione Stanza
 
-Il volume di mungitura considera che tutti gli animali di un agriturismo vengono munti quando in realtà devono essere considerati solo gli esemplari femminili. Benchè siano la maggioranza, il volume deve comunque essere corretto
+OK: Il volume di mungitura considera che tutti gli animali di un agriturismo vengono munti quando in realtà devono essere considerati solo gli esemplari femminili. Benchè siano la maggioranza, il volume deve comunque essere corretto
 
-Un lotto è conservato in una sola cantina e/o in un solo magazzino. Se così non fosse ci sarebbe ripetizione di chiave! Ad ogni modo possono trovarsi su più scaffali/scaffalature
+NO: Un lotto è conservato in una sola cantina e/o in un solo magazzino. Se così non fosse ci sarebbe ripetizione di chiave! Ad ogni modo possono trovarsi su più scaffali/scaffalature
 
-Il volume della pulizia locale non è corretto: si considerano le 29 pulizie annue di un solo locale per i 20 agriturismo quando bisognerebbe considerare le 730 richieste annue di un agriturismo per 20 agriturismi: 730x20=14.640
+OK: Il volume della pulizia locale non è corretto: si considerano le 29 pulizie annue di un solo locale per i 20 agriturismo quando bisognerebbe considerare le 730 richieste annue di un agriturismo per 20 agriturismi: 730x20=14.640
 
-Il volume di processata da è forse un po' elevato: possiamo supporre che ogni spedizione attraversi circa 5 centri di smistamento sui 100 disponibili
+OK: Il volume di processata da è forse un po' elevato: possiamo supporre che ogni spedizione attraversi circa 5 centri di smistamento sui 100 disponibili

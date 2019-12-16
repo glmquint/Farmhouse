@@ -295,7 +295,10 @@ Pasto 				&  Alimentazione somministrata automaticamente nelle mangiatoie e negl
 						\setlength{\itemindent}{-1em}
 						\vspace{-25pt}
 						\setlength\itemsep{-0.25em}
-						\item codicePasto
+						\item fibre
+						\item proteine
+						\item glucidi
+						\item codAcqua
 						
 						
 						
@@ -956,6 +959,8 @@ Controllo Parametri Fase				 	&  Controlla, per ogni lotto, i parametri effettiv
 						\vspace{-25pt}
 						\setlength\itemsep{-0.25em}
 						\item parametri effettivi
+						\item codiceLotto
+						\item codiceFase
 					\end{itemize}
 					&  Ricetta, Lotto  \\ 
 
@@ -1412,7 +1417,7 @@ Pre\-no\-ta\-zio\-ne Stanza				 	&  Effettiva prenotazione di una stanza da part
 						\item dataPartenza
 						\item dataArivo
 					\end{itemize}
-					&  Account, Agriturismo, Pagamenti, Stanza, Escursione  \\ 
+					&  Account, Agriturismo, Pagamenti, Stanza, Escursione, Servizio per Stanza  \\ 
 
 \hline
 Servizio Aggiuntivo				 	&  Ogni cliente che soggiorna in una stanza può usufruire di servizi aggiuntivi quali idromassaggio, accesso al centro benessere, accesso piscina etc. 
@@ -1434,7 +1439,7 @@ Servizio per Stanza				 	&  Servizio effettivamente aggiunto alla prenotazione d
 						\item dataInizioUtilizzo
 						\item dataFineUtilizzo
 					\end{itemize}
-					&  Account, Agriturismo, Pagamenti, Stanza, Escursione  \\ 
+					&  Account, Agriturismo, Pagamenti, Prenotazione Stanza, Escursione  \\ 
 
 \hline
 Stanza				 	&  Una camera singola o suite che può essere prenotata per il soggiorno dei clienti 
@@ -1605,7 +1610,7 @@ stanza associata 				&
 						\vspace{-25pt}
 						\setlength\itemsep{-0.25em}
 						\item (1,1) con Servizio per Stanza: ad ogni stanza prenotta con servizio corrisponde un solo set di servizi
-						\item (0,N) con Stanza: ogni servizio offerto può essere associato a più stanze prenotate
+						\item (0,N) con Prenotazione Stanza: ogni servizio offerto può essere associato a più stanze prenotate
 					\end{itemize}\\ 
 
 \hline
@@ -1976,6 +1981,13 @@ Questo permetterà, assieme ai volumi stimati per ogni entità e relazione nel s
 
     
 \hline
+Abbeveratoio			& \begin{center}
+\vspace{-25pt}E
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}1000\end{center}
+					& Un quarto degli allestimenti sono abbeveratoi \\
+\hline
 Acqua 				& \begin{center}
 \vspace{-25pt}E
 \end{center}
@@ -2073,6 +2085,13 @@ Locale 				& \begin{center}
 					&  Ogni stalla ha in media 5 locali \\ 
 
 \hline
+Mangiatoia			& \begin{center}
+\vspace{-25pt}E
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}1000\end{center}
+					& Un quarto degli allestimenti sono mangiatoie \\
+\hline
 Pasto 				& \begin{center}
 \vspace{-25pt}E
 \end{center}
@@ -2094,7 +2113,7 @@ Pulizia locale 				& \begin{center}
 \end{center}
 					& \begin{center}
 					\vspace{-25pt}580\end{center}
-					&  Ogni agriturismo effettua due richieste al giorno, per un totale di $2\times 365=730$ richieste annue. In questo modo, ognuno dei 25 locali viene pulito ${730\over 25}=29$ volte l'anno. Quindi i 20 agriturismi compilano $29\times 20=580$ record all'anno. \\ 
+					&  Ogni agriturismo effettua due richieste al giorno, per un totale di $2\times 365=730$ richieste annue\footnote{In questo modo, ognuno dei 25 locali viene pulito ${730\over 25}=29$ volte l'anno}. Quindi i 20 agriturismi compilano $730\times 20=14600$ record all'anno. \\ 
 
 \hline
 Recinzione divisoria e zona di pascolo 				& \begin{center}
@@ -2573,8 +2592,8 @@ Mungitura 				& \begin{center}
 \vspace{-25pt}E
 \end{center}
 					& \begin{center}
-					\vspace{-25pt}7300000\end{center}
-					&  Si suppone che ogni giorno dell'anno ogni animale di un agriturismo venga munto una volta $20000\times 365 = 7300000$ \\ 
+					\vspace{-25pt}5475000\end{center}
+					&  Si suppone che ogni giorno dell'anno ogni animale femmina di un agriturismo venga munto una volta $20000\times 0.75 \times 365 = 5475000$ \\ 
 
 \hline
 Parametri 				& \begin{center}
@@ -2645,7 +2664,7 @@ con 				& \begin{center}
 \vspace{-25pt}R
 \end{center}
 					& \begin{center}
-					\vspace{-25pt}7300000\end{center}
+					\vspace{-25pt}5475000\end{center}
 					&  Cardinalità (1,1) con Mungitura \\ 
 
 \hline
@@ -2749,7 +2768,7 @@ utilizzando 				& \begin{center}
 \vspace{-25pt}R
 \end{center}
 					& \begin{center}
-					\vspace{-25pt}7300000\end{center}
+					\vspace{-25pt}5475000\end{center}
 					&   Cardinalità (1,1) con Mungitura \\
 
 \hline
@@ -3107,9 +3126,9 @@ processata da
  & 
 \multicolumn{1}{|c|}{R}
  & 
-\multicolumn{1}{|c|}{292000}
+\multicolumn{1}{|c|}{14600}
  & 
-Tutte le possibili combinazioni tra le spedizioni e i centri di smistamento $2920\times 100= 292000$
+Si suppone che ogni spedizione sia processata da circa 7 centri di smistamento $2920\times 5=14600$
 \\
 
 \hline
@@ -3359,7 +3378,7 @@ Aggiornamento della relazione tra il nuovo indice di salute e il pasto precedent
 \hline
 \multicolumn{4}{|l|}{\textbf{Totale}}
  & 
-\multicolumn{1}{|c|}{\textbf{170}}
+\multicolumn{1}{|c|}{\textbf{258}}
 \\
 \hline
 \end{longtable}\end{center}
@@ -3469,6 +3488,11 @@ Fasi
 Si leggono i parametri di processo della specifica fase della ricetta
 \\
 \hline
+\multicolumn{4}{|l|}{\textbf{Totale}}
+ & 
+\multicolumn{1}{|c|}{\textbf{44}}
+\\
+\hline
 \end{longtable}\end{center}
 \begin{center}\setlength{\extrarowheight}{1.5pt}\begin{longtable}{|p{0.2\linewidth}|p{0.1\linewidth}|p{0.175\linewidth}|p{0.1\linewidth}|p{0.3\linewidth}|}\hline \textbf{Nome costrutto}   & \multicolumn{1}{|c|}{\textbf{E/R}} & \textbf{Numero operazioni elementari} & \multicolumn{1}{|c|}{\textbf{Tipo}} & \textbf{Descrizione}\\ 
 \hline
@@ -3517,6 +3541,11 @@ Fasi
 \multicolumn{1}{|c|}{L}
  & 
 Si leggono i parametri di processo della specifica fase della ricetta
+\\
+\hline
+\multicolumn{4}{|l|}{\textbf{Totale}}
+ & 
+\multicolumn{1}{|c|}{\textbf{40}}
 \\
 \hline
 \end{longtable}\end{center}
@@ -3589,6 +3618,22 @@ Controllo Parametri Fase
 \multicolumn{1}{|c|}{L}
  & 
 Si ricavano i dati relativi ai parametri effettivi rilevati durante il controllo delle fasi
+\\
+\hline
+controllo qualità
+ & 
+\multicolumn{1}{|c|}{R}
+ & 
+\multicolumn{1}{|c|}{10}
+ & 
+\multicolumn{1}{|c|}{S}
+ & 
+Aggiornamento della relazione
+\\
+\hline
+\multicolumn{4}{|l|}{\textbf{Totale}}
+ & 
+\multicolumn{1}{|c|}{\textbf{44}}
 \\
 \hline
 \end{longtable}\end{center}
@@ -3747,6 +3792,11 @@ effettua
 Aggiornamento della relazione tra il cliente ed il pagamento
 \\
 \hline
+\multicolumn{4}{|l|}{\textbf{Totale}}
+ & 
+\multicolumn{1}{|c|}{\textbf{420}}
+\\
+\hline
 \end{longtable}\end{center}
 \stepcounter{counterAccessi}
 
@@ -3803,6 +3853,11 @@ stoccato in
 \multicolumn{1}{|c|}{S}
  & 
 Aggiornamento della relazione tra il latte ed il silos nel quale è stoccato
+\\
+\hline
+\multicolumn{4}{|l|}{\textbf{Totale}}
+ & 
+\multicolumn{1}{|c|}{\textbf{6}}
 \\
 \hline
 \end{longtable}\end{center}
@@ -3927,6 +3982,11 @@ richiesta intervento
 \multicolumn{1}{|c|}{S}
  & 
 Aggiornamento della relazione tra il locale e l'intervento di pulizia
+\\
+\hline
+\multicolumn{4}{|l|}{\textbf{Totale}}
+ & 
+\multicolumn{1}{|c|}{\textbf{21}}
 \\
 \hline
 \end{longtable}\end{center}
@@ -4119,6 +4179,11 @@ Ordine Prodotti
 Aggiornamento dello stato dell'ordine a \texttt{evaso}
 \\
 \hline
+\multicolumn{4}{|l|}{\textbf{Totale}}
+ & 
+\multicolumn{1}{|c|}{\textbf{62+2x}}
+\\
+\hline
 \end{longtable}\end{center}
 \stepcounter{counterAccessi}
 
@@ -4139,7 +4204,7 @@ Terapia
  & 
 \multicolumn{1}{|c|}{5\footnote{Stima di quante terapie sono già state assegnate in precedenza a questo animale}}
  & 
-\multicolumn{1}{|c|}{S}
+\multicolumn{1}{|c|}{L}
  & 
 Controllo se l'ultima terapia che non si è conclusa è marcata come la seconda consecutiva
 \\
@@ -4153,6 +4218,11 @@ abita
 \multicolumn{1}{|c|}{S}
  & 
 Ricollocamento del locale abitato dall'animale tramite l'aggiornamento della relazione con un locale di quarantena
+\\
+\hline
+\multicolumn{4}{|l|}{\textbf{Totale}}
+ & 
+\multicolumn{1}{|c|}{\textbf{7}}
 \\
 \hline
 \end{longtable}\end{center}
@@ -4203,7 +4273,83 @@ Ricollocamento del locale abitato dall'animale tramite l'aggiornamento della rel
 
 
 
+\subsection{Progettazione logica}
 
+\begin{itemize}
+
+\item Animale(\underline{\smash{codice}}, sesso, specie, famiglia, idMadre, idPadre, dataDiNascita, altezza, peso, razza, posizione, orario,  codiceGps,  codLocale)
+\item acquistoanimale(\underline{\smash{codiceAnimale}},  \underline{\smash{ragioneSocialeFornitore}},  dataAcquisto,  dataArrivo)
+\item Fornitore(\underline{\smash{ragioneSociale}}, indirizzo, partitaIva)
+\item coinvolge(\underline{\smash{codiceAnimale}},\underline{\smash{ codRiproduzione}}, codicePadre)
+\item Riproduzione(\underline{\smash{codiceRiproduzione}}, complicanza, orario, data, stato,  codVeterinario)
+\item SchedaGestazione(\underline{\smash{codiceGestazione}},  codRiproduzione,  codVeterinario)
+\item Agriturismo(Nome)
+\item Stalla(\underline{\smash{numProgressivo}},\underline{\smash{ nomeAgriturismo}})
+\item Locale(\underline{\smash{codiceLocale}}, pavimentazione, capienzaMax, temperatura, umidità, orientazioneFinestre, specieOspitata, altezza, lunghezza, larghezza, tollerabilitaAzoto, tollerabilitaSporcizia, tollerabilitaMetano,  numProgressivo,  nomeAgriturismo)
+\item Visivi(\underline{\smash{codiceVisivo}}, livelloSporcizia,  orarioRilevazione,  codLocale)
+\item Ambientali(\underline{\smash{codiceAmbientale}}, temperatura, umidità,  orarioRilevazione,  codLocale)
+\item CompostiVolatili(\underline{\smash{codiceVolatili}}, concentrazioneMetano, concentrazioneAzoto,  codLocale)
+\item PuliziaLocale(\underline{\smash{codLocale}}, \underline{\smash{orarioRilevazione}}, \underline{\smash{dataRilevazione}}, stato, personale)
+\item PastoPerLocale(\underline{\smash{giorno}}, \underline{\smash{orario}},  codLocale,  fibre,  proteine,  glucidi,  concentrazioneSali,  concentrazioneVitamine)
+\item Pasto(\underline{\smash{fibre}},\underline{\smash{ proteine}},\underline{\smash{ glucidi}}, \underline{\smash{concentrazioneSali}},\underline{\smash{ concentrazioneVitamine}})
+\item Foraggio(\underline{\smash{fibre}}, \underline{\smash{proteine}},\underline{\smash{ glucidi}})
+\item Acqua(\underline{\smash{concentrazioneSali}}, \underline{\smash{concentrazioneVitamine}})
+\item Mangiatoia(\underline{\smash{codice}}, quantitàRestante,  codLocale)
+\item Abberveratoio(\underline{\smash{codice}}, quantitàRestante,  codLocale)
+\item AttivitàPascolo(\underline{\smash{codiceAttivita}}, fasciaOraria,  codLocale,  codArea)
+\item AreaPascolo(\underline{\smash{codiceArea}})
+\item RecinsioneDivisoriaeZoneDiPascolo(\underline{\smash{codiceZona}},\underline{\smash{ codArea}}, posizione)
+\item Mungitura(\underline{\smash{codAnimale}}, \underline{\smash{codMungitrice}},\underline{\smash{data}}, \underline{\smash{ora}}, quantità)
+\item Mungitrice(\underline{\smash{codice}}, posizione, marca, modello)
+\item Chemunge(\underline{\smash{codLatte}}, \underline{\smash{codMungitrice}})
+\item Latte(\underline{\smash{codiceLatte}}, quantitàSostanzeDisciolte,  codAnimale,  codSilos)
+\item Silos(\underline{\smash{codice}}, capacità, livello)
+\item prodottocon(\underline{\smash{codLatte}}, \underline{\smash{codLotto}})
+\item Lotto(\underline{\smash{codiceLotto}}, codDipendenti, dataProd, codLab, durata)
+\item stoccaggiocantine(\underline{\smash{codLotto}}, \underline{\smash{codCantina}})
+\item stoccaggiomagazzini(\underline{\smash{codLotto}}, \underline{\smash{codMagazzino}})
+\item Cantine(\underline{\smash{codice}})
+\item Magazzini(\underline{\smash{codice}})
+\item Scaffalature(\underline{\smash{codCantina}}, \underline{\smash{codice}})
+\item Parametri(\underline{\smash{data}}, \underline{\smash{idSensore}}, temperatura, umidità,  codCantina)
+\item Scaffali(\underline{\smash{codice}}, \underline{\smash{codMagazzino}})
+\item ControlloParametriFase(\underline{\smash{parametriEffettivi}}, \underline{\smash{codLotto}}, \underline{\smash{codFase}})
+\item Fasi(\underline{\smash{codiceFase}}, nome, parametriProcesso, durata)
+\item divisain(\underline{\smash{codRicetta}}, \underline{\smash{codFase}})
+\item Ricetta(\underline{\smash{codiceRicetta}}, collocazioneGeografica, ricetta, durataStagionatura)
+\item Formaggio(\underline{\smash{nome}}, \underline{\smash{nomeAgriturismo}}, deperibilita,  codRicetta,  codLatte)
+\item Indicisalute(\underline{\smash{codAnimale}}, \underline{\smash{dataRilevazione}}, tipologiaRespirazione, lucentezzaPelo, vigilanza, idratazione, deambulazione)
+\item Visita(\underline{\smash{codiceVisita}}, esito, descrizione, dataEffettiva, dataProgrammata,  codAnimale,  codVeterinario)
+\item Esame(\underline{\smash{codiceEsame}},  descrizione, data, macchinario, nome,  codAnimale,  codVeterinario)
+\item Veterinario(\underline{\smash{codiceFiscale}}, nome, cognome, contatto)
+\item Terapia(\underline{\smash{codiceTerapia}}, dataInizio, durata, secondaTerapiaConsecutiva,  codAnimale)
+\item compostada(\underline{\smash{codTerapia}}, \underline{\smash{nomeFarmaco}}, posologia)
+\item Farmaco(\underline{\smash{nome}}, principioAttivo, dosaggio)
+\item SchedaMedica(\underline{\smash{codiceScheda}}, massaMagra, carenze, patologie, data, rispostaOculare, emocromo, spessoreZoccolo, fegato, cuore, pancreas, massaMagra,  codAnimale,  codVeterinario)
+\item DisturbiComportamentali(\underline{\smash{entit}}à, \underline{\smash{nome}}, \underline{\smash{codScheda}})
+\item Lesioni(\underline{\smash{tipologia}}, \underline{\smash{parteDelCorpo}}, \underline{\smash{entit}}à, \underline{\smash{codScheda}})
+\item Cliente(\underline{\smash{codCarta}}, anticipo)
+\item Pagamenti(\underline{\smash{codPagamento}}, tipoPagamento, totaleCosto, data, ora,  codCliente)
+\item PrenotazioneStanza(\underline{\smash{dataArrivo}}, \underline{\smash{dataPartenza}},  codCliente,  numStanza)
+\item Stanza(\underline{\smash{numStanza}}, costoGiornaliero, suite, numLetti, tipoLetti,  codAgriturismo)
+\item ServizioperStanza(\underline{\smash{dataInizioUtilizzo}}, \underline{\smash{dataFineUtilizzo}},  dataArrivo, dataPartenza,  codServizio)
+\item ServizioAggiuntivo(\underline{\smash{tipoServizio}}, costo)
+\item PrenotazioneEscursione(\underline{\smash{dataPrenotazione}},  codEscursione)
+\item Escursione(\underline{\smash{codice}}, giorno, orario,  codGuida)
+\item Guida(\underline{\smash{codfisc}}, nome, cognome, contatto)
+\item legataa(\underline{\smash{codEscursione}},\underline{\smash{ codItinerario}}, numSentieri,  codAgriturismo)
+\item compostoda( codItinerario,  nomeTappa)
+\item Tappe(\underline{\smash{nome}}, tempoPermanenza) 
+\item Account(\underline{\smash{utente}}, \underline{\smash{password}}, domandaRec, rispostaRec, numTelefono, codFiscale, scadenzaDoc, numDoc, dataIscrizione, codDoc, cognome, nome, enteRilascio, tipoDoc, indirizzo, codiceCarta)
+\item Recensione(\underline{\smash{codiceRecensione}}, gradimentoGenerale, qualitaPercepita, conservazione, campoTestuale, gusto, gradimentoGenerale,  utente,  password,  codProdotto)
+\item FormaggioProdotto(\underline{\smash{codiceProdotto}}, prezzo, peso, stockAppartenenza, rimastiInStock, scadenza,  codiceProdotto,  nome,  nomeAgriturismo)
+\item contenutoordine(\underline{\smash{codOrdine}}, \underline{\smash{codFormaggioprodotto}}, quantità, reso)
+\item OrdineProdotti(\underline{\smash{codiceOrdine}}, stato, data, tipoConsegnaReso,  utente,  password,  codSpedizione)
+\item Spedizione(\underline{\smash{codice}}, dataConsegnaEffettiva, dataConsegnaPrevista, percorso, stato)
+\item processatada(\underline{\smash{codSpedizione}}, \underline{\smash{codcentro}})
+\item CentridiSmistamento(\underline{\smash{codice}}, nome, indirizzo, contatto)
+
+\end{itemize}
 
 
 
