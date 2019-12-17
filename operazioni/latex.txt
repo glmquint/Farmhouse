@@ -9,9 +9,9 @@
 
 \noindent\textit{Output:} media degli indici di salute
 
-\noindent\textit{Frequenza giornaliera:} 0.066\footnote{Frequenza annuale: 24. $\frac{24}{365}=0.066$}
+\noindent\textit{Frequenza giornaliera:} 0.066\footnote{Frequenza annuale: 24. Frequenza giornaliera: $\frac{24}{365}=0.066$}
 
-E' presente la ridondanza "qualità pasto" tra Pasto per Locale e Indici Salute che influenza la tavola degli accessi
+E' presente la ridondanza \textit{qualità pasto} tra Pasto per Locale e Indici Salute che influenza la tavola degli accessi
 
 \begin{center}\setlength{\extrarowheight}{1.5pt}\begin{longtable}{|p{0.2\linewidth}|p{0.1\linewidth}|p{0.175\linewidth}|p{0.1\linewidth}|p{0.3\linewidth}|}\hline \textbf{Nome costrutto}   & \multicolumn{1}{|c|}{\textbf{E/R}} & \textbf{Numero operazioni elementari} & \multicolumn{1}{|c|}{\textbf{Tipo}} & \textbf{Descrizione}\\ 
 \hline
