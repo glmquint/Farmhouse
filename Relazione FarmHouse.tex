@@ -2041,8 +2041,8 @@ Attività pascolo 				& \begin{center}
 \vspace{-25pt}E
 \end{center}
 					& \begin{center}
-					\vspace{-25pt}4500\end{center}
-					&  Mediamente, ogni agriturismo dispone delle proprie 3 aree di pascolo e altre 6 degli agriturismi limitrofi $500\times 9 = 4500$\\ 
+					\vspace{-25pt}90000\end{center}
+					&  Mediamente, ogni agriturismo dispone delle proprie 3 aree di pascolo e altre 6 degli agriturismi limitrofi $500\times 9 \times 20 = 90000$\\ 
 
 \hline
 Composti volatili 				& \begin{center}
@@ -2184,7 +2184,7 @@ attività locale 				& \begin{center}
 \vspace{-25pt}R
 \end{center}
 					& \begin{center}
-					\vspace{-25pt}30000\end{center}
+					\vspace{-25pt}90000\end{center}
 					&  Cardinalità (1,1) con Attività pascolo \\ 
 
 \hline
@@ -2200,7 +2200,7 @@ collocazione attività 				& \begin{center}
 \vspace{-25pt}R
 \end{center}
 					& \begin{center}
-					\vspace{-25pt}4500\end{center}
+					\vspace{-25pt}90000\end{center}
 					&  Cardinalità (1,1) con Attività pascolo \\ 
 
 \hline
@@ -2219,13 +2219,13 @@ composizione foraggio 				& \begin{center}
 					\vspace{-25pt}1000\end{center}
 					&  Cardinalità (1,1) con Pasto \\ 
 
-\hline
-composizione pasto 				& \begin{center}
-\vspace{-25pt}R
-\end{center}
-					& \begin{center}
-					\vspace{-25pt}12000\end{center}
-					&  Ogni locale cambia pasto circa 24 volte l'anno $500\times 24= 12000$ \\ 
+%\hline
+%composizione pasto 				& \begin{center}
+%\vspace{-25pt}R
+%\end{center}
+%					& \begin{center}
+%					\vspace{-25pt}12000\end{center}
+%					&  Ogni locale cambia pasto circa 24 volte l'anno $500\times 24= 12000$ \\ 
 
 \hline
 determina 				& \begin{center}
@@ -2394,9 +2394,9 @@ Terapia
  & 
 \multicolumn{1}{|c|}{E}
  & 
-\multicolumn{1}{|c|}{2000}
+\multicolumn{1}{|c|}{40000}
  & 
-Si suppone che ogni anno vengano prescritte 100 terapie per ogni agriturismo $100\times 20= 2000$
+Si suppone che ogni anno vengano prescritte 2 terapie per ogni animale $2\times 20000= 40000$
 \\
 
 \hline
@@ -2484,7 +2484,7 @@ possiede terapia
  & 
 \multicolumn{1}{|c|}{R}
  & 
-\multicolumn{1}{|c|}{2000}
+\multicolumn{1}{|c|}{40000}
  & 
 Cardinalità (1,1) con Terapia
 \\
@@ -2494,7 +2494,7 @@ prescrive
  & 
 \multicolumn{1}{|c|}{R}
  & 
-\multicolumn{1}{|c|}{2000}
+\multicolumn{1}{|c|}{40000}
  & 
 Cardinalità (1,1) con Terapia
 \\
@@ -3128,7 +3128,7 @@ processata da
  & 
 \multicolumn{1}{|c|}{14600}
  & 
-Si suppone che ogni spedizione sia processata da circa 7 centri di smistamento $2920\times 5=14600$
+Si suppone che ogni spedizione sia processata da circa 5 centri di smistamento $2920\times 5=14600$
 \\
 
 \hline
@@ -3180,9 +3180,9 @@ valuta
 
 \noindent\textit{Output:} media degli indici di salute
 
-\noindent\textit{Frequenza giornaliera:} 0.066\footnote{Frequenza annuale: 24. $\frac{24}{365}=0.066$}
+\noindent\textit{Frequenza giornaliera:} 0.066\footnote{Frequenza annuale: 24. Frequenza giornaliera: $\frac{24}{365}=0.066$}
 
-E' presente la ridondanza "qualità pasto" tra Pasto per Locale e Indici Salute che influenza la tavola degli accessi
+E' presente la ridondanza \textit{qualità pasto} tra Pasto per Locale e Indici Salute che influenza la tavola degli accessi
 
 \begin{center}\setlength{\extrarowheight}{1.5pt}\begin{longtable}{|p{0.2\linewidth}|p{0.1\linewidth}|p{0.175\linewidth}|p{0.1\linewidth}|p{0.3\linewidth}|}\hline \textbf{Nome costrutto}   & \multicolumn{1}{|c|}{\textbf{E/R}} & \textbf{Numero operazioni elementari} & \multicolumn{1}{|c|}{\textbf{Tipo}} & \textbf{Descrizione}\\ 
 \hline
@@ -4267,6 +4267,7 @@ Ricollocamento del locale abitato dall'animale tramite l'aggiornamento della rel
 \\
 \hline
 \end{longtable}\end{center}
+
 
 
 
