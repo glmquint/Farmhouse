@@ -164,7 +164,7 @@ $$\noindent\textit{Frequenza giornaliera:} 1
 >!assegnazione cliente!R!28!L!Si passa dalla relazione per ottenere i dati relativi al cliente
 >!Cliente!E!28!E!Lettura dei dati relativi al cliente, ivi compreso il codice della carta e se è già stato pagato un anticipo
 >!Pagamenti!E!28!S!Inserimento di un nuovo pagamento
->!effettua!28!R!S!Aggiornamento della relazione tra il cliente ed il pagamento
+>!effettua!R!28!S!Aggiornamento della relazione tra il cliente ed il pagamento
 >!?4l\textbf{Totale}!\textbf{420}
 ]
 
@@ -175,7 +175,7 @@ $$\stepcounter{counterAccessi}
 $$\noindent\textit{Descrizione:} Il latte munto viene conservato in appositi silos contenenti tutti latte con composizione chimico-fisica simile
 $$\noindent\textit{Input:} data e ora della mungitura, oltre che il codice del latte munto
 $$\noindent\textit{Output:} Aggiornamento della quntità stoccata nel corretto silos
-$$\noindent\textit{Frequenza giornaliera:} 15000 \footnote{Le mungiture annuali sono 5475000. Ogni giorno ne vengono eseguite $\frac{5475000}{365}=15000}$
+$$\noindent\textit{Frequenza giornaliera:} 15000 \footnote{Le mungiture annuali sono 5475000. Ogni giorno ne vengono eseguite $\frac{5475000}{365}=15000$}
 [
 >!Mungitura!E!1!L!Lettura della quantità di latte munto
 >!Latte!E!1!L!Lettura delle quantità di sostanze disciolte nel latte
@@ -266,9 +266,10 @@ $$\noindent\textit{Frequenza giornaliera:} 3968\footnote{Viene eseguito un contr
 >!abita!R!40!L!Si passa dalla relazione per ottenere i codici degli animali che abitano il locale
 >!localizzato!R!40!L!Si passa dalla relazione per ottenere il codice del GPS associato agli animali
 >!GPS!E!40!L!Lettura delle coordinate posizionali dei GPS
->!collocazione attività!R!L!Si passa dalla relazione per ottenere la collocazione dell'attività di pascolo
+>!collocazione attività!R!1!L!Si passa dalla relazione per ottenere la collocazione dell'attività di pascolo
 >!divisione pascolo!R!3!L!Si passa dalla relazione per ottenere le zone appartenenti all'area di pascolo
 >!Recinzione divisoria e zona di pascolo!E!3!L!Lettura della posizione delle recinzioni delle zone di pascolo
+>!?4l\textbf{Totale}!\textbf{128}
 ]
 
 [
@@ -276,9 +277,10 @@ $$\noindent\textit{Frequenza giornaliera:} 3968\footnote{Viene eseguito un contr
 >!partecipazioine attività!R!40!L!Si passa dalla relazione per ottenere i codici degli animali che partecipano all'attività
 >!localizzato!R!40!L!Si passa dalla relazione per ottenere il codice del GPS associato agli animali
 >!GPS!E!40!L!Lettura delle coordinate posizionali dei GPS
->!collocazione attività!R!L!Si passa dalla relazione per ottenere la collocazione dell'attività di pascolo
+>!collocazione attività!R!1!L!Si passa dalla relazione per ottenere la collocazione dell'attività di pascolo
 >!divisione pascolo!R!3!L!Si passa dalla relazione per ottenere le zone appartenenti all'area di pascolo
 >!Recinzione divisoria e zona di pascolo!E!3!L!Lettura della posizione delle recinzioni delle zone di pascolo
+>!?4l\textbf{Totale}!\textbf{127}
 ]
 
 [
@@ -286,6 +288,7 @@ $$\noindent\textit{Frequenza giornaliera:} 3968\footnote{Viene eseguito un contr
 >!attività locale!R!1!L!Si passa dalla relazione per ottenere il codice del locale che svolge l'attività di pascolo
 >!abita!R!40!L!Si passa dalla relazione per ottenere i codici degli animali che abitano il locale
 >!partecipazione attività!R!1!S!Aggiornamento della relazione tra l'animale e l'attività di pascolo a cui partecipa
+>!?4l\textbf{Totale}!\textbf{42}
 ]
 
 ##############################

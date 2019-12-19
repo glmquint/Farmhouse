@@ -3168,7 +3168,6 @@ valuta
 
 
 
-
 \newcounter{counterAccessi}
 
 \stepcounter{counterAccessi}
@@ -3176,101 +3175,104 @@ valuta
 \subsubsection*{Operazione \thecounterAccessi{}: Controllo qualità del pasto}
 \noindent\textit{Descrizione:} Viene controllato che il pasto che viene somministrato agli animali non abbia ripercussioni sul loro stato di salute: in particolare vengono controllati gli indici di salute di tutti gli animali appartenenti ai locali nei quali è stato somministrato il pasto in esame
 
-\noindent\textit{Input:} codice del pasto da controllare e giorno e orario di somministrazione
+\noindent\textit{Input:} composizione del pasto
 
 \noindent\textit{Output:} media degli indici di salute
 
-\noindent\textit{Frequenza giornaliera:} 0.066\footnote{Frequenza annuale: 24. Frequenza giornaliera: $\frac{24}{365}=0.066$}
+\noindent\textit{Frequenza giornaliera:} 33\footnote{In ogni locale viene cambiato pasto 24 volte all'anno(circa ogni 2 settimane) per un totale di $24\times 500 = 12000$ cambiamenti annui.Dunque la frequenza giornaliera è di $\frac{12000}{365}\approx 33$}
 
-E' presente la ridondanza \textit{qualità pasto} tra Pasto per Locale e Indici Salute che influenza la tavola degli accessi
+E' presente la ridondanza \textit{qualità pasto} tra Pasto e Indici Salute che influenza la tavola degli accessi
 
-\begin{center}\setlength{\extrarowheight}{1.5pt}\begin{longtable}{|p{0.2\linewidth}|p{0.1\linewidth}|p{0.175\linewidth}|p{0.1\linewidth}|p{0.3\linewidth}|}\hline \textbf{Nome costrutto}   & \multicolumn{1}{|c|}{\textbf{E/R}} & \textbf{Numero operazioni elementari} & \multicolumn{1}{|c|}{\textbf{Tipo}} & \textbf{Descrizione}\\ 
+\begin{center}\setlength{\extrarowheight}{1.5pt}\begin{longtable}{|p{0.2\linewidth}|p{0.1\linewidth}|p{0.175\linewidth}|p{0.1\linewidth}|p{0.3\linewidth}|}
 \hline
 \multicolumn{5}{|c|}{Senza ridondanza}
+\\
+\hline \textbf{Nome costrutto}   & \multicolumn{1}{|c|}{\textbf{E/R}} & \textbf{Numero operazioni elementari} & \multicolumn{1}{|c|}{\textbf{Tipo}} & \textbf{Descrizione}\\ 
+\hline
+pasto assegnato
+ & 
+\multicolumn{1}{|c|}{R}
+ & 
+\multicolumn{1}{|c|}{21}
+ & 
+\multicolumn{1}{|c|}{L}
+ & 
+Sui 3 pasti giornalieri nelle ultime 2 settimane dei 500 locali ($3\times 14 \times 500= 21000$) si vogliono distribuire i 1000 possibili pasti: quindi ogni pasto compare su $\frac{21000}{1000}=21$ pasti per locale
+\\
+\hline
+Pasto per Locale
+ & 
+\multicolumn{1}{|c|}{E}
+ & 
+\multicolumn{1}{|c|}{21}
+ & 
+\multicolumn{1}{|c|}{L}
+ & 
+Si ricavano data e orario dell'ultima somministrazione del pasto
 \\
 \hline
 locale assegnato
  & 
 \multicolumn{1}{|c|}{R}
  & 
-\multicolumn{1}{|c|}{1}
+\multicolumn{1}{|c|}{12}
  & 
 \multicolumn{1}{|c|}{L}
  & 
-Si passa dalla relazione per ricavare in quale locale è distribuito il pasto
-\\
-\hline
-Locale
- & 
-\multicolumn{1}{|c|}{E}
- & 
-\multicolumn{1}{|c|}{1}
- & 
-\multicolumn{1}{|c|}{L}
- & 
-Si ricavano i dati del locale
+I 21 pasti per locale possono appartenere a minimo 2, massimo 21 locali: quindi mediamente si devono controllare 12 locali
 \\
 \hline
 abita
  & 
 \multicolumn{1}{|c|}{R}
  & 
-\multicolumn{1}{|c|}{40}
+\multicolumn{1}{|c|}{480}
  & 
 \multicolumn{1}{|c|}{L}
  & 
-Si passa dalla relazione per ottenere gli animali che abitano il locale
-\\
-\hline
-Animale
- & 
-\multicolumn{1}{|c|}{E}
- & 
-\multicolumn{1}{|c|}{40}
- & 
-\multicolumn{1}{|c|}{L}
- & 
-Si ricavano i dati relativi ai singoli animali
+Si leggono le chiavi di 40 animali per ognuno dei 12 locali
 \\
 \hline
 stato salute
  & 
 \multicolumn{1}{|c|}{R}
  & 
-\multicolumn{1}{|c|}{44}
+\multicolumn{1}{|c|}{528}
  & 
 \multicolumn{1}{|c|}{L}
  & 
-Si passa dalla relazione per ricavare gli indici di salute degli animali
+Sono registrati 11 indici di salute ogni 10 animali ($480\times 1.1 = 528$)
 \\
 \hline
 Indici salute
  & 
 \multicolumn{1}{|c|}{E}
  & 
-\multicolumn{1}{|c|}{44}
+\multicolumn{1}{|c|}{528}
  & 
 \multicolumn{1}{|c|}{L}
  & 
-Lettura dei dati relativi alla salute degli animali
+Lettura dei dati relativi agli indici di salute degli animali
 \\
 \hline
 \multicolumn{4}{|l|}{\textbf{Totale}}
  & 
-\multicolumn{1}{|c|}{\textbf{170}}
+\multicolumn{1}{|c|}{\textbf{1590}}
 \\
 \hline
 \end{longtable}\end{center}
-\begin{center}\setlength{\extrarowheight}{1.5pt}\begin{longtable}{|p{0.2\linewidth}|p{0.1\linewidth}|p{0.175\linewidth}|p{0.1\linewidth}|p{0.3\linewidth}|}\hline \textbf{Nome costrutto}   & \multicolumn{1}{|c|}{\textbf{E/R}} & \textbf{Numero operazioni elementari} & \multicolumn{1}{|c|}{\textbf{Tipo}} & \textbf{Descrizione}\\ 
+\begin{center}\setlength{\extrarowheight}{1.5pt}\begin{longtable}{|p{0.2\linewidth}|p{0.1\linewidth}|p{0.175\linewidth}|p{0.1\linewidth}|p{0.3\linewidth}|}
 \hline
 \multicolumn{5}{|c|}{Con ridondanza}
 \\
+\hline \textbf{Nome costrutto}   & \multicolumn{1}{|c|}{\textbf{E/R}} & \textbf{Numero operazioni elementari} & \multicolumn{1}{|c|}{\textbf{Tipo}} & \textbf{Descrizione}\\ 
+
 \hline
 qualità pasto
  & 
 \multicolumn{1}{|c|}{R}
  & 
-\multicolumn{1}{|c|}{44}
+\multicolumn{1}{|c|}{528}
  & 
 \multicolumn{1}{|c|}{L}
  & 
@@ -3281,7 +3283,7 @@ Indici salute
  & 
 \multicolumn{1}{|c|}{E}
  & 
-\multicolumn{1}{|c|}{44}
+\multicolumn{1}{|c|}{528}
  & 
 \multicolumn{1}{|c|}{L}
  & 
@@ -3290,16 +3292,18 @@ Lettura dei dati relativi alla salute degli animali
 \hline
 \multicolumn{4}{|l|}{\textbf{Totale}}
  & 
-\multicolumn{1}{|c|}{\textbf{88}}
+\multicolumn{1}{|c|}{\textbf{1056}}
 \\
 \hline
 \end{longtable}\end{center}
-\begin{center}\setlength{\extrarowheight}{1.5pt}\begin{longtable}{|p{0.2\linewidth}|p{0.1\linewidth}|p{0.175\linewidth}|p{0.1\linewidth}|p{0.3\linewidth}|}\hline \textbf{Nome costrutto}   & \multicolumn{1}{|c|}{\textbf{E/R}} & \textbf{Numero operazioni elementari} & \multicolumn{1}{|c|}{\textbf{Tipo}} & \textbf{Descrizione}\\ 
+\begin{center}\setlength{\extrarowheight}{1.5pt}\begin{longtable}{|p{0.2\linewidth}|p{0.1\linewidth}|p{0.175\linewidth}|p{0.1\linewidth}|p{0.3\linewidth}|}
 \hline
-\multicolumn{5}{|c|}{Aggiornamento ridondanza (ad ogni nuovo indice di salute)}
+\multicolumn{5}{|c|}{Aggiornamento ridondanza (ad ogni nuovo indice di salute\footnote{Frequenza giornaliera: $\frac{22000}{365}\approx 60$})}
 \\
+\hline \textbf{Nome costrutto}   & \multicolumn{1}{|c|}{\textbf{E/R}} & \textbf{Numero operazioni elementari} & \multicolumn{1}{|c|}{\textbf{Tipo}} & \textbf{Descrizione}\\ 
+
 \hline
-locale assegnato
+stato salute
  & 
 \multicolumn{1}{|c|}{R}
  & 
@@ -3307,354 +3311,141 @@ locale assegnato
  & 
 \multicolumn{1}{|c|}{L}
  & 
-Si passa dalla relazione per ricavare in quale locale è distribuito il pasto
-\\
-\hline
-Locale
- & 
-\multicolumn{1}{|c|}{E}
- & 
-\multicolumn{1}{|c|}{1}
- & 
-\multicolumn{1}{|c|}{L}
- & 
-Si ricavano i dati del locale
+Lettura del codice dell'animale associato alla visita
 \\
 \hline
 abita
  & 
 \multicolumn{1}{|c|}{R}
  & 
-\multicolumn{1}{|c|}{40}
+\multicolumn{1}{|c|}{1}
  & 
 \multicolumn{1}{|c|}{L}
  & 
-Si passa dalla relazione per ottenere gli animali che abitano il locale
+Lettura del locale abitato dall'animale
+\\
+\hline
+locale assegnato
+ & 
+\multicolumn{1}{|c|}{R}
+ & 
+\multicolumn{1}{|c|}{21}
+ & 
+\multicolumn{1}{|c|}{L}
+ & 
+Si ricavano i pasti assegnati al locale nelle ultime 2 settimane
+\\
+\hline
+pasto assegnato
+ & 
+\multicolumn{1}{|c|}{R}
+ & 
+\multicolumn{1}{|c|}{1}
+ & 
+\multicolumn{1}{|c|}{L}
+ & 
+Si ricavano i dati del pasto somministrato in quel locale
+\\
+\hline
+qualità pasto
+ & 
+\multicolumn{1}{|c|}{R}
+ & 
+\multicolumn{1}{|c|}{1}
+ & 
+\multicolumn{1}{|c|}{S}
+ & 
+Aggiornamento della ridondanza
+\\
+\hline
+\multicolumn{4}{|l|}{\textbf{Totale}}
+ & 
+\multicolumn{1}{|c|}{\textbf{26}}
+\\
+\hline
+\end{longtable}\end{center}
+\stepcounter{counterAccessi}
+
+\subsubsection*{Operazione \thecounterAccessi{}: Registrazione di una ripoduzione con successo}
+\noindent\textit{Descrizione:} Al completamento di una riproduzione terminata con succeso, viene compilata l'anagrafica del neonato, viene aggiornato lo stato della riproduzione e viene programmata una visita per il nuovo nato
+
+\noindent\textit{Input:} codice della riproduzione avvenuta con successo e dati appartenenti al neonato (sesso, specie, famiglia, razza, peso, altezza)
+
+\noindent\textit{Output:} registrazione del neonato con programmazione di una nuova visita
+
+\noindent\textit{Frequenza giornaliera:} 32\footnote{Il numero delle riproduzioni con successo in un anno è 11610. Ogni giorno ne vengono effettuate $\frac{11610}{365}\approx 32$}
+
+\begin{center}\setlength{\extrarowheight}{1.5pt}\begin{longtable}{|p{0.2\linewidth}|p{0.1\linewidth}|p{0.175\linewidth}|p{0.1\linewidth}|p{0.3\linewidth}|}\hline \textbf{Nome costrutto}   & \multicolumn{1}{|c|}{\textbf{E/R}} & \textbf{Numero operazioni elementari} & \multicolumn{1}{|c|}{\textbf{Tipo}} & \textbf{Descrizione}\\ 
+\hline
+Riproduzione
+ & 
+\multicolumn{1}{|c|}{E}
+ & 
+\multicolumn{1}{|c|}{1}
+ & 
+\multicolumn{1}{|c|}{L}
+ & 
+Si ricavano i dati relativi alla riproduzione, in particolare viene letta la data di nascita
+\\
+\hline
+coinvolge
+ & 
+\multicolumn{1}{|c|}{R}
+ & 
+\multicolumn{1}{|c|}{1}
+ & 
+\multicolumn{1}{|c|}{L}
+ & 
+Si ricavano il codice della madre e del padre del neonato
+\\
+\hline
+Riproduzione
+ & 
+\multicolumn{1}{|c|}{E}
+ & 
+\multicolumn{1}{|c|}{1}
+ & 
+\multicolumn{1}{|c|}{S}
+ & 
+Aggiornamento dello stato della riproduzione a \texttt{sucesso}
 \\
 \hline
 Animale
  & 
 \multicolumn{1}{|c|}{E}
  & 
-\multicolumn{1}{|c|}{40}
- & 
-\multicolumn{1}{|c|}{L}
- & 
-Si ricavano i dati relativi ai singoli animali
-\\
-\hline
-stato salute
- & 
-\multicolumn{1}{|c|}{R}
- & 
-\multicolumn{1}{|c|}{44}
- & 
-\multicolumn{1}{|c|}{L}
- & 
-Si passa dalla relazione per ricavare gli indici di salute degli animali
-\\
-\hline
-Indici salute
- & 
-\multicolumn{1}{|c|}{E}
- & 
-\multicolumn{1}{|c|}{44}
- & 
-\multicolumn{1}{|c|}{L}
- & 
-Lettura dei dati relativi alla salute degli animali
-\\
-\hline
-Indici salute
- & 
-\multicolumn{1}{|c|}{R}
- & 
-\multicolumn{1}{|c|}{44}
+\multicolumn{1}{|c|}{1}
  & 
 \multicolumn{1}{|c|}{S}
  & 
-Aggiornamento della relazione tra il nuovo indice di salute e il pasto precedentenente somministrato
+Registrazione del nuovo nato con i dati a disposizione
 \\
 \hline
-\multicolumn{4}{|l|}{\textbf{Totale}}
- & 
-\multicolumn{1}{|c|}{\textbf{258}}
-\\
-\hline
-\end{longtable}\end{center}
-\stepcounter{counterAccessi}
-
-\subsubsection*{Operazione \thecounterAccessi{}: Controllo qualità del prodotto}
-\noindent\textit{Descrizione:} La qualità percepita del prodotto venduto viene regolarmente controllata tramite le recensioni lasciate dai clienti sullo store online. In particolare si evidenzia quanto il feedback degli utenti venga influenzato dal discostamento dei processi produttivi rispetto ai parametri ideali specificati dalle ricette
-
-\noindent\textit{Input:} recensione degli utenti su un prodotto
-
-\noindent\textit{Output:} differenza tra i parametri ideali di produzione e e quelli effettivamente registrati
-
-\noindent\textit{Frequenza giornaliera:} <++>
-
-E' presente la ridondanza "controllo qualità" tra Recensione e Controllo Parametri Fase che influisce sulla tavola degli accessi
-
-\begin{center}\setlength{\extrarowheight}{1.5pt}\begin{longtable}{|p{0.2\linewidth}|p{0.1\linewidth}|p{0.175\linewidth}|p{0.1\linewidth}|p{0.3\linewidth}|}\hline \textbf{Nome costrutto}   & \multicolumn{1}{|c|}{\textbf{E/R}} & \textbf{Numero operazioni elementari} & \multicolumn{1}{|c|}{\textbf{Tipo}} & \textbf{Descrizione}\\ 
-\hline
-\multicolumn{5}{|c|}{Senza ridondanza}
-\\
-\hline
-valuta
- & 
-\multicolumn{1}{|c|}{R}
- & 
-\multicolumn{1}{|c|}{1}
- & 
-\multicolumn{1}{|c|}{L}
- & 
-Si passa dalla relazione per ricavare il prodotto relativo alla recensione
-\\
-\hline
-Formaggio Prodotto
+Visita
  & 
 \multicolumn{1}{|c|}{E}
  & 
 \multicolumn{1}{|c|}{1}
- & 
-\multicolumn{1}{|c|}{L}
- & 
-Si ricavano le informazioni relative al prdotto valutato
-\\
-\hline
-appartenente a
- & 
-\multicolumn{1}{|c|}{R}
- & 
-\multicolumn{1}{|c|}{1}
- & 
-\multicolumn{1}{|c|}{L}
- & 
-Si passa dalla relazione per ottenere il lotto di appartenenza del prodotto
-\\
-\hline
-Lotto
- & 
-\multicolumn{1}{|c|}{E}
- & 
-\multicolumn{1}{|c|}{1}
- & 
-\multicolumn{1}{|c|}{L}
- & 
-Si ricavano le informazioni del lotto di produzione
-\\
-\hline
-controllo lotti
- & 
-\multicolumn{1}{|c|}{R}
- & 
-\multicolumn{1}{|c|}{10}
- & 
-\multicolumn{1}{|c|}{L}
- & 
-Si passa dalla relazione per ottenere i parametri di produzione del formaggio
-\\
-\hline
-Controllo Parametri Fase
- & 
-\multicolumn{1}{|c|}{E}
- & 
-\multicolumn{1}{|c|}{10}
- & 
-\multicolumn{1}{|c|}{L}
- & 
-Si ricavano i dati relativi ai parametri effettivi rilevati durante il controllo delle fasi
-\\
-\hline
-controllo fasi
- & 
-\multicolumn{1}{|c|}{R}
- & 
-\multicolumn{1}{|c|}{10}
- & 
-\multicolumn{1}{|c|}{L}
- & 
-Si passa dalla relazione per ottenere i parametri idelai della determinata fase
-\\
-\hline
-Fasi
- & 
-\multicolumn{1}{|c|}{E}
- & 
-\multicolumn{1}{|c|}{10}
- & 
-\multicolumn{1}{|c|}{L}
- & 
-Si leggono i parametri di processo della specifica fase della ricetta
-\\
-\hline
-\multicolumn{4}{|l|}{\textbf{Totale}}
- & 
-\multicolumn{1}{|c|}{\textbf{44}}
-\\
-\hline
-\end{longtable}\end{center}
-\begin{center}\setlength{\extrarowheight}{1.5pt}\begin{longtable}{|p{0.2\linewidth}|p{0.1\linewidth}|p{0.175\linewidth}|p{0.1\linewidth}|p{0.3\linewidth}|}\hline \textbf{Nome costrutto}   & \multicolumn{1}{|c|}{\textbf{E/R}} & \textbf{Numero operazioni elementari} & \multicolumn{1}{|c|}{\textbf{Tipo}} & \textbf{Descrizione}\\ 
-\hline
-\multicolumn{5}{|c|}{Con ridondanza}
-\\
-\hline
-controllo qualità
- & 
-\multicolumn{1}{|c|}{R}
- & 
-\multicolumn{1}{|c|}{10}
- & 
-\multicolumn{1}{|c|}{L}
- & 
-Si passa dalla relazione per ottenere i parametri di produzione relativi al formaggio valutato
-\\
-\hline
-Controllo Parametri Fase
- & 
-\multicolumn{1}{|c|}{E}
- & 
-\multicolumn{1}{|c|}{10}
- & 
-\multicolumn{1}{|c|}{L}
- & 
-Si ricavano i dati relativi ai parametri effettivi rilevati durante il controllo delle fasi
-\\
-\hline
-controllo fasi
- & 
-\multicolumn{1}{|c|}{R}
- & 
-\multicolumn{1}{|c|}{10}
- & 
-\multicolumn{1}{|c|}{L}
- & 
-Si passa dalla relazione per ottenere i parametri idelai della determinata fase
-\\
-\hline
-Fasi
- & 
-\multicolumn{1}{|c|}{E}
- & 
-\multicolumn{1}{|c|}{10}
- & 
-\multicolumn{1}{|c|}{L}
- & 
-Si leggono i parametri di processo della specifica fase della ricetta
-\\
-\hline
-\multicolumn{4}{|l|}{\textbf{Totale}}
- & 
-\multicolumn{1}{|c|}{\textbf{40}}
-\\
-\hline
-\end{longtable}\end{center}
-\begin{center}\setlength{\extrarowheight}{1.5pt}\begin{longtable}{|p{0.2\linewidth}|p{0.1\linewidth}|p{0.175\linewidth}|p{0.1\linewidth}|p{0.3\linewidth}|}\hline \textbf{Nome costrutto}   & \multicolumn{1}{|c|}{\textbf{E/R}} & \textbf{Numero operazioni elementari} & \multicolumn{1}{|c|}{\textbf{Tipo}} & \textbf{Descrizione}\\ 
-\hline
-\multicolumn{5}{|c|}{Aggiornamento ridondanza (ad ogni nuova recensione)}
-\\
-\hline
-valuta
- & 
-\multicolumn{1}{|c|}{R}
- & 
-\multicolumn{1}{|c|}{1}
- & 
-\multicolumn{1}{|c|}{L}
- & 
-Si passa dalla relazione per ricavare il prodotto relativo alla recensione
-\\
-\hline
-Formaggio Prodotto
- & 
-\multicolumn{1}{|c|}{E}
- & 
-\multicolumn{1}{|c|}{1}
- & 
-\multicolumn{1}{|c|}{L}
- & 
-Si ricavano le informazioni relative al prdotto valutato
-\\
-\hline
-appartenente a
- & 
-\multicolumn{1}{|c|}{R}
- & 
-\multicolumn{1}{|c|}{1}
- & 
-\multicolumn{1}{|c|}{L}
- & 
-Si passa dalla relazione per ottenere il lotto di appartenenza del prodotto
-\\
-\hline
-Lotto
- & 
-\multicolumn{1}{|c|}{E}
- & 
-\multicolumn{1}{|c|}{1}
- & 
-\multicolumn{1}{|c|}{L}
- & 
-Si ricavano le informazioni del lotto di produzione
-\\
-\hline
-controllo lotti
- & 
-\multicolumn{1}{|c|}{R}
- & 
-\multicolumn{1}{|c|}{10}
- & 
-\multicolumn{1}{|c|}{L}
- & 
-Si passa dalla relazione per ottenere i parametri di produzione del formaggio
-\\
-\hline
-Controllo Parametri Fase
- & 
-\multicolumn{1}{|c|}{E}
- & 
-\multicolumn{1}{|c|}{10}
- & 
-\multicolumn{1}{|c|}{L}
- & 
-Si ricavano i dati relativi ai parametri effettivi rilevati durante il controllo delle fasi
-\\
-\hline
-controllo qualità
- & 
-\multicolumn{1}{|c|}{R}
- & 
-\multicolumn{1}{|c|}{10}
  & 
 \multicolumn{1}{|c|}{S}
  & 
-Aggiornamento della relazione
+Programmazione di una nuova visita per il neonato
+\\
+\hline
+possiede visita
+ & 
+\multicolumn{1}{|c|}{R}
+ & 
+\multicolumn{1}{|c|}{1}
+ & 
+\multicolumn{1}{|c|}{S}
+ & 
+Aggiornamento della relazione tra l'animale neonato e la visita programmata
 \\
 \hline
 \multicolumn{4}{|l|}{\textbf{Totale}}
  & 
-\multicolumn{1}{|c|}{\textbf{44}}
-\\
-\hline
-\end{longtable}\end{center}
-\stepcounter{counterAccessi}
-
-\subsubsection*{Operazione \thecounterAccessi{}: Registrazione delle riproduzioni}
-\noindent\textit{Descrizione:} <++>
-
-\noindent\textit{Input:} <++>
-
-\noindent\textit{Output:} <++>
-
-\noindent\textit{Frequenza giornaliera:} <++>
-
-\begin{center}\setlength{\extrarowheight}{1.5pt}\begin{longtable}{|p{0.2\linewidth}|p{0.1\linewidth}|p{0.175\linewidth}|p{0.1\linewidth}|p{0.3\linewidth}|}\hline \textbf{Nome costrutto}   & \multicolumn{1}{|c|}{\textbf{E/R}} & \textbf{Numero operazioni elementari} & \multicolumn{1}{|c|}{\textbf{Tipo}} & \textbf{Descrizione}\\ 
-\hline
-<++>
-<++>
-<++>
-<++>
-<++>
+\multicolumn{1}{|c|}{\textbf{10}}
 \\
 \hline
 \end{longtable}\end{center}
@@ -3663,7 +3454,7 @@ Aggiornamento della relazione
 \subsubsection*{Operazione \thecounterAccessi{}: Pagamento delle stanze}
 \noindent\textit{Descrizione:} Ogni giorno viene registrato il pagamento cumulativo di ogni cliente per ogni stanza prenotata e per ogni eventuale servizio aggiuntivo utilizzato
 
-\noindent\textit{Input:} la data di partenza dei clienti
+\noindent\textit{Input:} la data odierna
 
 \noindent\textit{Output:} i pagamenti da effettuare
 
@@ -3675,7 +3466,7 @@ Prenotazione Stanza
  & 
 \multicolumn{1}{|c|}{E}
  & 
-\multicolumn{1}{|c|}{28\footnote{Considerate 10000 prenotazioni annuali: $\frac{10000}{365}=27.4$}}
+\multicolumn{1}{|c|}{28\footnote{Considerate 10000 prenotazioni annuali: $\frac{10000}{365}\approx 28$}}
  & 
 \multicolumn{1}{|c|}{L}
  & 
@@ -3745,7 +3536,7 @@ Servizio Aggiuntivo
  & 
 \multicolumn{1}{|c|}{L}
  & 
-Lettur dei dati relativi al servizio utilizzato, ivi compreso il prezzo
+Lettura dei dati relativi al servizio utilizzato, ivi compreso il prezzo
 \\
 \hline
 assegnazione cliente
@@ -3783,9 +3574,9 @@ Inserimento di un nuovo pagamento
 \hline
 effettua
  & 
-\multicolumn{1}{|c|}{28}
- & 
 \multicolumn{1}{|c|}{R}
+ & 
+\multicolumn{1}{|c|}{28}
  & 
 \multicolumn{1}{|c|}{S}
  & 
@@ -3807,7 +3598,7 @@ Aggiornamento della relazione tra il cliente ed il pagamento
 
 \noindent\textit{Output:} Aggiornamento della quntità stoccata nel corretto silos
 
-\noindent\textit{Frequenza giornaliera:} (<Volume Mungitura>/365)
+\noindent\textit{Frequenza giornaliera:} 15000 \footnote{Le mungiture annuali sono 5475000. Ogni giorno ne vengono eseguite $\frac{5475000}{365}=15000$}
 
 \begin{center}\setlength{\extrarowheight}{1.5pt}\begin{longtable}{|p{0.2\linewidth}|p{0.1\linewidth}|p{0.175\linewidth}|p{0.1\linewidth}|p{0.3\linewidth}|}\hline \textbf{Nome costrutto}   & \multicolumn{1}{|c|}{\textbf{E/R}} & \textbf{Numero operazioni elementari} & \multicolumn{1}{|c|}{\textbf{Tipo}} & \textbf{Descrizione}\\ 
 \hline
@@ -3819,7 +3610,7 @@ Mungitura
  & 
 \multicolumn{1}{|c|}{L}
  & 
-Lettura della quantità di latte munta
+Lettura della quantità di latte munto
 \\
 \hline
 Latte
@@ -3864,9 +3655,9 @@ Aggiornamento della relazione tra il latte ed il silos nel quale è stoccato
 \stepcounter{counterAccessi}
 
 \subsubsection*{Operazione \thecounterAccessi{}: Controllo igiene dei locali}
-\noindent\textit{Descrizione:} Per garantire il rispetto delle condizioni di benessere degli animali all'interno dei locali, viene frequentemente controllato che i parametri rilevati rientrino nelle soglie di tollerabilità, ed eventualmente viene inviata una richiesta di intervento di pulizia
+\noindent\textit{Descrizione:} Per garantire il rispetto delle condizioni di benessere degli animali all'interno dei locali, viene frequentemente controllato che i parametri rilevati rientrino nelle soglie di tollerabilità, ed eventualmente viene inviata una richiesta di intervento di pulizia, insieme all'aggiornamento dei parametri del locale con i valori più recenti raccolti
 
-\noindent\textit{Input:} Il locale da controllare
+\noindent\textit{Input:} Il codice del locale da controllare
 
 \noindent\textit{Output:} Richiesta d'intervento di pulizia
 
@@ -3995,7 +3786,7 @@ Aggiornamento della relazione tra il locale e l'intervento di pulizia
 \subsubsection*{Operazione \thecounterAccessi{}: Processamento degli ordini}
 \noindent\textit{Descrizione:} Gli utenti che si sono registrati nello store online possono acquistare i prodotti caseari e ricevere il proprio ordine tramite le spedizioni gestite dal database
 
-\noindent\textit{Input:} Il nuovo ordine effettuato dal cliente sullo store online
+\noindent\textit{Input:} Il codice del nuovo ordine effettuato dal cliente sullo store online
 
 \noindent\textit{Output:} Processamento ed invio dell'ordine
 
@@ -4022,7 +3813,7 @@ contenuto ordine
  & 
 \multicolumn{1}{|c|}{L}
  & 
-Si passa dalla relazione per conoscere il contenuto dell'ordine oltre che la quantità dei prodotti acquistati
+Si passa dalla relazione per conoscere il contenuto dell'ordine oltre che la quantità dei prodotti acquistati\footnote{Per ipotesi, ogni ordine è composto da 20 prodotti}
 \\
 \hline
 Formaggio prodotto
@@ -4139,7 +3930,7 @@ processata da
  & 
 \multicolumn{1}{|c|}{R}
  & 
-\multicolumn{1}{|c|}{x\footnote{<Volume processata da>/<Volume Spedizioni>}}
+\multicolumn{1}{|c|}{5\footnote{Per ipotesi, ogni spedizione attraversa circa 5 centri di smistmento}}
  & 
 \multicolumn{1}{|c|}{S}
  & 
@@ -4181,7 +3972,7 @@ Aggiornamento dello stato dell'ordine a \texttt{evaso}
 \hline
 \multicolumn{4}{|l|}{\textbf{Totale}}
  & 
-\multicolumn{1}{|c|}{\textbf{62+2x}}
+\multicolumn{1}{|c|}{\textbf{72}}
 \\
 \hline
 \end{longtable}\end{center}
@@ -4194,7 +3985,7 @@ Aggiornamento dello stato dell'ordine a \texttt{evaso}
 
 \noindent\textit{Output:} Trasferimanto dell'animale in un nuovo locale di quarantena
 
-\noindent\textit{Frequenza giornaliera:} 0.3\footnote{100 terapie in un anno corrispondono a circa una nuova terapia ogni 3 giorni}
+\noindent\textit{Frequenza giornaliera:} 110\footnote{40000 terapie in un anno corrispondono a circa $\frac{40000}{365}\approx 110$ nuove terapie ogni giorno}
 
 \begin{center}\setlength{\extrarowheight}{1.5pt}\begin{longtable}{|p{0.2\linewidth}|p{0.1\linewidth}|p{0.175\linewidth}|p{0.1\linewidth}|p{0.3\linewidth}|}\hline \textbf{Nome costrutto}   & \multicolumn{1}{|c|}{\textbf{E/R}} & \textbf{Numero operazioni elementari} & \multicolumn{1}{|c|}{\textbf{Tipo}} & \textbf{Descrizione}\\ 
 \hline
@@ -4202,7 +3993,7 @@ Terapia
  & 
 \multicolumn{1}{|c|}{E}
  & 
-\multicolumn{1}{|c|}{5\footnote{Stima di quante terapie sono già state assegnate in precedenza a questo animale}}
+\multicolumn{1}{|c|}{2\footnote{Stima di quante terapie sono già state assegnate in precedenza a questo animale}}
  & 
 \multicolumn{1}{|c|}{L}
  & 
@@ -4222,7 +4013,7 @@ Ricollocamento del locale abitato dall'animale tramite l'aggiornamento della rel
 \hline
 \multicolumn{4}{|l|}{\textbf{Totale}}
  & 
-\multicolumn{1}{|c|}{\textbf{7}}
+\multicolumn{1}{|c|}{\textbf{4}}
 \\
 \hline
 \end{longtable}\end{center}
@@ -4231,39 +4022,224 @@ Ricollocamento del locale abitato dall'animale tramite l'aggiornamento della rel
 \subsubsection*{Operazione \thecounterAccessi{}: Controllo degli animali dispersi}
 \noindent\textit{Descrizione:} Durante le attività di pascolo viene monitorato ad intervalli regolari il segnale GPS di ogni singolo animale affinchè ci si assicuri che rientri negli spazi delimitati dalle recinzioni per le zone dedicate al pascolo
 
-\noindent\textit{Input:} codice del GPS e orario di rilevazione
+\noindent\textit{Input:} codice dell'attività di pascolo
 
 \noindent\textit{Output:} segnalazione se l'animale è disperso
 
-\noindent\textit{Frequenza giornaliera:} (<Volume Attività pascolo>/365 * <Volume Animali>/<Volume Locale>)
+\noindent\textit{Frequenza giornaliera:} 3968\footnote{Viene eseguito un controllo ogni 15 minuti durante le 8 ore dell'attività, quindi 32 controlli per ognuna delle $\frac{90000}{365}\approx 247$ attività giornaliere. Allora vengono eseguiti $247\times 32 = 7904$ controlli}
 
-\begin{center}\setlength{\extrarowheight}{1.5pt}\begin{longtable}{|p{0.2\linewidth}|p{0.1\linewidth}|p{0.175\linewidth}|p{0.1\linewidth}|p{0.3\linewidth}|}\hline \textbf{Nome costrutto}   & \multicolumn{1}{|c|}{\textbf{E/R}} & \textbf{Numero operazioni elementari} & \multicolumn{1}{|c|}{\textbf{Tipo}} & \textbf{Descrizione}\\ 
+\begin{center}\setlength{\extrarowheight}{1.5pt}\begin{longtable}{|p{0.2\linewidth}|p{0.1\linewidth}|p{0.175\linewidth}|p{0.1\linewidth}|p{0.3\linewidth}|}
 \hline
-<++>
-<++>
-<++>
-<++>
-<++>
+\multicolumn{5}{|c|}{Senza ridondanza}
+\\
+\hline \textbf{Nome costrutto}   & \multicolumn{1}{|c|}{\textbf{E/R}} & \textbf{Numero operazioni elementari} & \multicolumn{1}{|c|}{\textbf{Tipo}} & \textbf{Descrizione}\\ 
+
+\hline
+attività locale
+ & 
+\multicolumn{1}{|c|}{R}
+ & 
+\multicolumn{1}{|c|}{1}
+ & 
+\multicolumn{1}{|c|}{L}
+ & 
+Si passa dalla relazione per ottenere il codice del locale che svolge l'attività di pascolo
+\\
+\hline
+abita
+ & 
+\multicolumn{1}{|c|}{R}
+ & 
+\multicolumn{1}{|c|}{40}
+ & 
+\multicolumn{1}{|c|}{L}
+ & 
+Si passa dalla relazione per ottenere i codici degli animali che abitano il locale
+\\
+\hline
+localizzato
+ & 
+\multicolumn{1}{|c|}{R}
+ & 
+\multicolumn{1}{|c|}{40}
+ & 
+\multicolumn{1}{|c|}{L}
+ & 
+Si passa dalla relazione per ottenere il codice del GPS associato agli animali
+\\
+\hline
+GPS
+ & 
+\multicolumn{1}{|c|}{E}
+ & 
+\multicolumn{1}{|c|}{40}
+ & 
+\multicolumn{1}{|c|}{L}
+ & 
+Lettura delle coordinate posizionali dei GPS
+\\
+\hline
+collocazione attività
+ & 
+\multicolumn{1}{|c|}{R}
+ & 
+\multicolumn{1}{|c|}{1}
+ & 
+\multicolumn{1}{|c|}{L}
+ & 
+Si passa dalla relazione per ottenere la collocazione dell'attività di pascolo
+\\
+\hline
+divisione pascolo
+ & 
+\multicolumn{1}{|c|}{R}
+ & 
+\multicolumn{1}{|c|}{3}
+ & 
+\multicolumn{1}{|c|}{L}
+ & 
+Si passa dalla relazione per ottenere le zone appartenenti all'area di pascolo
+\\
+\hline
+Recinzione divisoria e zona di pascolo
+ & 
+\multicolumn{1}{|c|}{E}
+ & 
+\multicolumn{1}{|c|}{3}
+ & 
+\multicolumn{1}{|c|}{L}
+ & 
+Lettura della posizione delle recinzioni delle zone di pascolo
+\\
+\hline
+\multicolumn{4}{|l|}{\textbf{Totale}}
+ & 
+\multicolumn{1}{|c|}{\textbf{128}}
 \\
 \hline
 \end{longtable}\end{center}
-\stepcounter{counterAccessi}
-
-\subsubsection*{Operazione \thecounterAccessi{}: Aggiornamento delle recinzioni delle zone di pascolo}
-\noindent\textit{Descrizione:} Seguendo le abitudini degli animali durante il pascolo, è possibile modificare la posizione delle recinzioni affinchè "seguano" le aree di maggior interesse per gli animali
-
-\noindent\textit{Input:} codice dell'attività di pascolo 
-\noindent\textit{Output:} aggiornamento della posizione delle recinzioni rispetto alle aree mediamente più visitate dagli animali
-
-\noindent\textit{Frequenza giornaliera:} <Volume Attività pascolo>/365
-
-\begin{center}\setlength{\extrarowheight}{1.5pt}\begin{longtable}{|p{0.2\linewidth}|p{0.1\linewidth}|p{0.175\linewidth}|p{0.1\linewidth}|p{0.3\linewidth}|}\hline \textbf{Nome costrutto}   & \multicolumn{1}{|c|}{\textbf{E/R}} & \textbf{Numero operazioni elementari} & \multicolumn{1}{|c|}{\textbf{Tipo}} & \textbf{Descrizione}\\ 
+\begin{center}\setlength{\extrarowheight}{1.5pt}\begin{longtable}{|p{0.2\linewidth}|p{0.1\linewidth}|p{0.175\linewidth}|p{0.1\linewidth}|p{0.3\linewidth}|}
 \hline
-<++>
-<++>
-<++>
-<++>
-<++>
+\multicolumn{5}{|c|}{Con ridondanza}
+\\
+\hline \textbf{Nome costrutto}   & \multicolumn{1}{|c|}{\textbf{E/R}} & \textbf{Numero operazioni elementari} & \multicolumn{1}{|c|}{\textbf{Tipo}} & \textbf{Descrizione}\\ 
+
+\hline
+partecipazioine attività
+ & 
+\multicolumn{1}{|c|}{R}
+ & 
+\multicolumn{1}{|c|}{40}
+ & 
+\multicolumn{1}{|c|}{L}
+ & 
+Si passa dalla relazione per ottenere i codici degli animali che partecipano all'attività
+\\
+\hline
+localizzato
+ & 
+\multicolumn{1}{|c|}{R}
+ & 
+\multicolumn{1}{|c|}{40}
+ & 
+\multicolumn{1}{|c|}{L}
+ & 
+Si passa dalla relazione per ottenere il codice del GPS associato agli animali
+\\
+\hline
+GPS
+ & 
+\multicolumn{1}{|c|}{E}
+ & 
+\multicolumn{1}{|c|}{40}
+ & 
+\multicolumn{1}{|c|}{L}
+ & 
+Lettura delle coordinate posizionali dei GPS
+\\
+\hline
+collocazione attività
+ & 
+\multicolumn{1}{|c|}{R}
+ & 
+\multicolumn{1}{|c|}{1}
+ & 
+\multicolumn{1}{|c|}{L}
+ & 
+Si passa dalla relazione per ottenere la collocazione dell'attività di pascolo
+\\
+\hline
+divisione pascolo
+ & 
+\multicolumn{1}{|c|}{R}
+ & 
+\multicolumn{1}{|c|}{3}
+ & 
+\multicolumn{1}{|c|}{L}
+ & 
+Si passa dalla relazione per ottenere le zone appartenenti all'area di pascolo
+\\
+\hline
+Recinzione divisoria e zona di pascolo
+ & 
+\multicolumn{1}{|c|}{E}
+ & 
+\multicolumn{1}{|c|}{3}
+ & 
+\multicolumn{1}{|c|}{L}
+ & 
+Lettura della posizione delle recinzioni delle zone di pascolo
+\\
+\hline
+\multicolumn{4}{|l|}{\textbf{Totale}}
+ & 
+\multicolumn{1}{|c|}{\textbf{127}}
+\\
+\hline
+\end{longtable}\end{center}
+\begin{center}\setlength{\extrarowheight}{1.5pt}\begin{longtable}{|p{0.2\linewidth}|p{0.1\linewidth}|p{0.175\linewidth}|p{0.1\linewidth}|p{0.3\linewidth}|}
+\hline
+\multicolumn{5}{|c|}{Aggiornamento ridondanza (ad ogni nuova attività di pascolo\footnote{Frequenza annuale delle attività di pascolo è 90000. Quindi ogni giorno vengono eseguite $\frac{90000}{365}\approx 247$ attività})}
+\\
+\hline \textbf{Nome costrutto}   & \multicolumn{1}{|c|}{\textbf{E/R}} & \textbf{Numero operazioni elementari} & \multicolumn{1}{|c|}{\textbf{Tipo}} & \textbf{Descrizione}\\ 
+
+\hline
+attività locale
+ & 
+\multicolumn{1}{|c|}{R}
+ & 
+\multicolumn{1}{|c|}{1}
+ & 
+\multicolumn{1}{|c|}{L}
+ & 
+Si passa dalla relazione per ottenere il codice del locale che svolge l'attività di pascolo
+\\
+\hline
+abita
+ & 
+\multicolumn{1}{|c|}{R}
+ & 
+\multicolumn{1}{|c|}{40}
+ & 
+\multicolumn{1}{|c|}{L}
+ & 
+Si passa dalla relazione per ottenere i codici degli animali che abitano il locale
+\\
+\hline
+partecipazione attività
+ & 
+\multicolumn{1}{|c|}{R}
+ & 
+\multicolumn{1}{|c|}{1}
+ & 
+\multicolumn{1}{|c|}{S}
+ & 
+Aggiornamento della relazione tra l'animale e l'attività di pascolo a cui partecipa
+\\
+\hline
+\multicolumn{4}{|l|}{\textbf{Totale}}
+ & 
+\multicolumn{1}{|c|}{\textbf{42}}
 \\
 \hline
 \end{longtable}\end{center}
