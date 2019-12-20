@@ -1899,81 +1899,22 @@ In questo capitolo vengono prese in esame tutte le informazioni ridondanti inter
 
 \begin{enumerate}
 
-\item \`E stata introdotta la ridondanza \textit{pasto per mangiatoia}
-\item \`E stata introdotta la ridondanza \textit{pasto per abbeveratoio}
-\item \`E stata introdotta la ridondanza \textit{qualità pasto}
-\item \`E stata introdotta la ridondanza \textit{controllo qualità}
-%\item è stata rimossa la relazione \textit{controlli effettuati} tra Riproduzione e Visita, in quanto si introduceva una ridondanza su una parte più ristretta dei record di Visita, in particolare si potevano ricavare solo le visite conseguenti una riproduzione.
+\item \`E stata introdotta la ridondanza \textit{qualità pasto} tra \textit{Pasto} e \textit{Indici salute}: questo permette di controllare se esiste una correlazione tra lo stato di salute di un animale e la sua nutrizione. Si sarebbe potuto ricavare la stessa informazione considerando i locali abitati dagli animali ed i pasti somministrati in ognuno di essi, precedentemente alla rilevazione dei nuovi indici di salute.
+\item \`E stata introdotta la ridondanza \textit{controllo qualità} tra \textit{Recensione} e \textit{Controllo Parametri Fase}: questo permette di trovare relazioni tra la qualità percepita del prodotto venduto con l'effettiva integrità del processo produttivo. Si sarebbe potuto ricavare la stessa informazione considerando il formaggio recensito ed il lotto che lo ha prodotto, da questo si ricava il controllo dei parametri effettivi durante ogni fase della produzione.1
+\item \`E stata introdotta la ridondanza \textit{partecipazione attività} tra \textit{Animale} e \textit{Attività pascolo}: questo permette di ricavare velocemente a quale attività di pascolo stia partecipando uno specifico animale e permette di rilevare immediatamente quando un animale non rientra nell'area destinata alla sua attività. La stessa informazione è ricavabile controllando il locale abitato dall'animale e l'attività ad esso assegnata.
+%\item \`E stata rimossa la relazione \textit{controlli effettuati} tra Riproduzione e Visita, in quanto si introduceva una ridondanza su una parte più ristretta dei record di Visita, in particolare si potevano ricavare solo le visite conseguenti una riproduzione.
 %\item è stata introdotta la relazione \textit{appartenenza agriturismo} tra Zona pascolo e Agriturismo al fine di ricavare in che agriturismo si trova ogni animale che sta pascolando, sfruttando i dati del GPS, ed eventualmente riconoscere possibili animali "sperduti". Questo aumenta anche l'efficienza dell'operazione in quanto diminuisce il numero di accessi dovuti alle letture e scritture di tabelle intermedie (Locale, stalla, Attività pascolo, etc.) tra Agriturismo e Zona di Pascolo 
 
 \end{enumerate}
 
 \newpage
-\section{Analisi delle Operazioni}
-\label{sec:operazioni}
-Sono qui illustrate le principali operazioni significative capaci di apportare un forte contributo al carico applicativo della base di dati.
-Di ciascuna viene data una breve descrizione, assieme ad una stima della frequenza giornaliera con cui verranno svolte.
-Questo permetterà, assieme ai volumi stimati per ogni entità e relazione nel sistema (riportati a partire da pag. \pageref{sec:volumi}), di derivare il carico effettivo che il database dovrà gestire in termini di operazioni elementari, quali scritture e letture.
-\subsection{Operazioni}
-\begin{enumerate}
-\item \textbf{Aggiornamento riproduzione}
-	\begin{itemize}
-	\item \textit{Descrizione: }L'operazione produce due aggiornamenti, all'inserimento di una nuova riproduzione e al suo completamento. Il primo compila un nuovo record di Riproduzione assieme ai dati del veterinario supervisore. Il secondo aggiorna lo stato della riproduzione e compila una scheda di gestazione con le relative visite di controllo programmate. Infine, in caso di successo, vengono registrati i dati anagrafici del nuovo animale, il gps a cui è associato e le informazioni riguardanti il locale abitato.
-	\item \textit{Frequenza: } 1 volta al giorno
-	\end{itemize}
-\item \textbf{Recupero delle visite di controllo programmate}
-	\begin{itemize}
-	\item \textit{Descrizione: }Permette di estrarre tutte le visite di controllo programmate per un determinato animale
-	\item \textit{Frequenza: }55 volte al giorno (per controllare tutti gli animali della rete in un anno)
-	\end{itemize}
-\item \textbf{Gestione dei pagamenti}
-	\begin{itemize}
-	\item \textit{Descrizione: }Ogni giorno, ogni agriturismo gestisce i pagamenti di tre clienti che hanno usufruito delle escursioni o delle camere con servizi aggiuntivi disponibili.
-	\item \textit{Frequenza: }60 volte al giorno
-	\end{itemize}
-\item \textbf{Inserimento e modifica degli account}
-	\begin{itemize}
-	\item \textit{Descrizione: }La rete gestisce mediamente l'inserimento o la modifica di venti account ogni giorno
-	\item \textit{Frequenza: }20 volte al giorno
-	\end{itemize}
-\item \textbf{Stoccaggio del latte}
-	\begin{itemize}
-	\item \textit{Descrizione: }Ogni giorno, ogni agriturismo gestisce la mungitura e il corretto stoccaggio di circa dieci tipologie diverse di latte
-	\item \textit{Frequenza: }200 volte al giorno
-	\end{itemize}
-\item \textbf{Controlli dell'igiene dei locali}
-	\begin{itemize}
-	\item \textit{Descrizione: }Ogni giorno vengono controllati tutti i parametri di due locali di ogni agriturismo affinché rientrino nelle soglie di tollerabilità; in caso contrario viene effettuata una richiesta d'intervento di pulizia
-	\item \textit{Frequenza: }40 volte al giorno
-	\end{itemize}
-\item \textbf{Calcolo apporto calorico dei pasti}
-	\begin{itemize}
-	\item \textit{Descrizione: }Ogni giorno vengono controllati tutti e tre i pasti di ogni locale di ogni agriturismo affinché si conoscano i corretti valori di apporto calorico somministrati agli animali
-	\item \textit{Frequenza: }1500 volte al giorno
-	\end{itemize}
-\item \textbf{Processamento degli ordini}
-	\begin{itemize}
-	\item \textit{Descrizione: }Ogni giorno ogni agriturismo gestisce mediamente cento ordini effettuati dai clienti registrati nello store online
-	\item \textit{Frequenza: }2000 volte al giorno
-	\end{itemize}
-\item \textbf{Prescrizione delle terapie}
-	\begin{itemize}
-	\item \textit{Descrizione: }Ogni giorno, ogni agriturismo riceve mediamente tre nuove terapie per i propri animali da parte dei veterinari addetti
-	\item \textit{Frequenza: }60 volte al giorno
-	\end{itemize}
-\item \textbf{Controllo animali dispersi}
-	\begin{itemize}
-	\item \textit{Descrizione: }Durante le otto ore disponibili per il pascolo, ogni animale viene controllato ogni venti minuti affinché la sua posizione non sconfini in una zona di pascolo di un altro agriturismo.
-	\item \textit{Frequenza: }24 volte al giorno
-	\end{itemize}
 
-\end{enumerate}
 
-\subsection{Tavole dei Volumi}
+\section{Tavole dei Volumi}
 \label{sec:volumi}
 
 
-\subsubsection{Area Allevamento}
+\subsection{Area Allevamento}
 \begin{center}
 \setlength{\extrarowheight}{1.5pt}
 \begin{longtable}{|p{0.23\linewidth}|p{0.1\linewidth}|p{0.11\linewidth}|p{0.45\linewidth}|}
@@ -2344,7 +2285,7 @@ supervisiona 				& \begin{center}
 \end{longtable}\end{center}
 
 
-\subsubsection{Area Healthcare}
+\subsection{Area Healthcare}
 \begin{center}\setlength{\extrarowheight}{1.5pt}\begin{longtable}{|p{0.23\linewidth}|p{0.1\linewidth}|p{0.11\linewidth}|p{0.45\linewidth}|}
 \hline \textbf{Nome}   & \begin{center}\vspace{-15pt}\textbf{E/R}\end{center} & \textbf{Numero Istanze} & \textbf{Motivazione}\\ 
 
@@ -2524,7 +2465,7 @@ Cardinalità (1,1) con Indici Salute
 \end{longtable}\end{center}
 
 
-\subsubsection{Area Produzione}
+\subsection{Area Produzione}
 \begin{center}
 \setlength{\extrarowheight}{1.5pt}
 \begin{longtable}{|p{0.23\linewidth}|p{0.1\linewidth}|p{0.11\linewidth}|p{0.45\linewidth}|}
@@ -2776,7 +2717,7 @@ utilizzando 				& \begin{center}
 \end{longtable}\end{center}
 
 
-\subsubsection{Area Soggiorno}
+\subsection{Area Soggiorno}
 \begin{center}\setlength{\extrarowheight}{1.5pt}\begin{longtable}{|p{0.23\linewidth}|p{0.1\linewidth}|p{0.11\linewidth}|p{0.45\linewidth}|}
 \hline \textbf{Nome}   & \begin{center}\vspace{-15pt}\textbf{E/R}\end{center} & \textbf{Numero Istanze} & \textbf{Motivazione}\\ 
 
@@ -3016,7 +2957,7 @@ Cardinalità (1,1) con Servizio per Stanza
 \end{longtable}\end{center}
 
 
-\subsubsection{Area Store}
+\subsection{Area Store}
 \begin{center}\setlength{\extrarowheight}{1.5pt}\begin{longtable}{|p{0.23\linewidth}|p{0.1\linewidth}|p{0.11\linewidth}|p{0.45\linewidth}|}
 \hline \textbf{Nome}   & \begin{center}\vspace{-15pt}\textbf{E/R}\end{center} & \textbf{Numero Istanze} & \textbf{Motivazione}\\ 
 
@@ -3155,12 +3096,17 @@ valuta
 
 \end{longtable}\end{center}
 
+\newpage
+\section{Analisi delle Operazioni}
+\label{sec:operazioni}
+Sono qui illustrate le principali operazioni significative capaci di apportare un forte contributo al carico applicativo della base di dati.
+Di ciascuna viene data una breve descrizione, assieme ad una stima della frequenza giornaliera con cui verranno svolte.
+Questo permetterà, assieme ai volumi stimati per ogni entità e relazione nel sistema (riportati a partire da pag. \pageref{sec:volumi}), di derivare il carico effettivo che il database dovrà gestire in termini di operazioni elementari, quali scritture e letture.
 
 
 
 \subsection{Tavole degli accessi}
 \label{sec:accessi}
-
 
 
 
@@ -4250,7 +4196,9 @@ Aggiornamento della relazione tra l'animale e l'attività di pascolo a cui parte
 
 
 
-\subsection{Progettazione logica}
+\section{Progettazione logica}
+
+\subsection{Schema logico}
 
 \begin{itemize}
 
@@ -4303,8 +4251,8 @@ Aggiornamento della relazione tra l'animale e l'attività di pascolo a cui parte
 \item compostada(\underline{\smash{codTerapia}}, \underline{\smash{nomeFarmaco}}, posologia)
 \item Farmaco(\underline{\smash{nome}}, principioAttivo, dosaggio)
 \item SchedaMedica(\underline{\smash{codiceScheda}}, massaMagra, carenze, patologie, data, rispostaOculare, emocromo, spessoreZoccolo, fegato, cuore, pancreas, massaMagra,  codAnimale,  codVeterinario)
-\item DisturbiComportamentali(\underline{\smash{entit}}à, \underline{\smash{nome}}, \underline{\smash{codScheda}})
-\item Lesioni(\underline{\smash{tipologia}}, \underline{\smash{parteDelCorpo}}, \underline{\smash{entit}}à, \underline{\smash{codScheda}})
+\item DisturbiComportamentali(\underline{\smash{entità}}, \underline{\smash{nome}}, \underline{\smash{codScheda}})
+\item Lesioni(\underline{\smash{tipologia}}, \underline{\smash{parteDelCorpo}}, \underline{\smash{entità}}, \underline{\smash{codScheda}})
 \item Cliente(\underline{\smash{codCarta}}, anticipo)
 \item Pagamenti(\underline{\smash{codPagamento}}, tipoPagamento, totaleCosto, data, ora,  codCliente)
 \item PrenotazioneStanza(\underline{\smash{dataArrivo}}, \underline{\smash{dataPartenza}},  codCliente,  numStanza)
@@ -4328,7 +4276,13 @@ Aggiornamento della relazione tra l'animale e l'attività di pascolo a cui parte
 
 \end{itemize}
 
+\subsection{Vincoli d'integrità referenziale}
 
+\subsection{Normalizzazione}
+
+\section{Implementazione MySQL}
+\subsection{Triggers}
+\subsection{Data Analytics}
 
 \end{document}
 

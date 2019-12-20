@@ -169,7 +169,6 @@ $$\noindent\textit{Frequenza giornaliera:} 1
 ]
 
 ##############################
-
 $$\stepcounter{counterAccessi}
 ***Operazione \thecounterAccessi{}: Stoccaggio del latte munto***
 $$\noindent\textit{Descrizione:} Il latte munto viene conservato in appositi silos contenenti tutti latte con composizione chimico-fisica simile
