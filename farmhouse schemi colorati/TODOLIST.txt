@@ -41,3 +41,5 @@ colorare relazioni non ristrutturato
 aggiungere pasto per locale in volumi (e rimuovere vecchie relazioni "pasto contenuto")
 --- ---
 Aggiornare tutte le note e i conti affinchè siano tutti footnotes
+-------
+Aggiungere vincolo d'integrità generico sulla partita IVA dei fornitori, in quanto devono essere unici con ragione Sociale pur non essendo chiave dell'entità

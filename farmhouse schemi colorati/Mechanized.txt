@@ -60,3 +60,7 @@ NO: Un lotto è conservato in una sola cantina e/o in un solo magazzino. Se cos�
 OK: Il volume della pulizia locale non è corretto: si considerano le 29 pulizie annue di un solo locale per i 20 agriturismo quando bisognerebbe considerare le 730 richieste annue di un agriturismo per 20 agriturismi: 730x20=14.640
 
 OK: Il volume di processata da è forse un po' elevato: possiamo supporre che ogni spedizione attraversi circa 5 centri di smistamento sui 100 disponibili
+
+-----------------
+
+modifica operazioni affinchè ci sia, per ciascuna, la porzione di grafico interessata e la porzione della tavola dei volumi necesaria alla stima degli accessi

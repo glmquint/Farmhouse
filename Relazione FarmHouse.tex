@@ -1825,7 +1825,7 @@ valuta 				&
 \includegraphics[scale=2, width=1.15\textwidth]{ridondanze/animale.png}
 \caption{ge\-ne\-ra\-liz\-za\-zio\-ne dell'entità Animale Acquisito}
 \end{figure}
-La ge\-ne\-ra\-liz\-za\-zio\-ne dell'entità Animale Acquisito viene risolta sostituendo l'entità stessa con una relazione che mantiene gli stessi attributi ad eccezione del codice di acquisizione; essendo questa un' associazione con cardinalità (0,1)-(1,N), vengono utilizzati come chiave sia l'identificatore di animale che quello del fornitore. Ciò consente di eliminare i valori NULL per tutti i record di Animale relativi ad animali che non sono stati acquistati. Inoltre, vengono eliminate le relazioni ricorsive padre e madre tramite l'inserimento degli attributi \textit{idMadre} e \textit{idPadre} con vincoli di integrità referenziale.
+La ge\-ne\-ra\-liz\-za\-zio\-ne dell'entità Animale Acquisito viene risolta sostituendo l'entità stessa con una relazione che mantiene gli stessi attributi ad eccezione del codice di acquisizione; essendo questa un' associazione con cardinalità (0,1)-(1,N), viene usata come chiave l'identificatore di animale. Inoltre, vengono eliminate le relazioni ricorsive padre e madre tramite l'inserimento degli attributi \textit{idMadre} e \textit{idPadre} con vincoli di integrità generici.
 \subsection{sensori}
 \begin{figure}[H]
 \centering
@@ -4203,14 +4203,14 @@ Aggiornamento della relazione tra l'animale e l'attività di pascolo a cui parte
 \begin{itemize}
 
 \item Animale(\underline{\smash{codice}}, sesso, specie, famiglia, idMadre, idPadre, dataDiNascita, altezza, peso, razza, posizione, orario,  codiceGps,  codLocale)
-\item acquistoanimale(\underline{\smash{codiceAnimale}},  \underline{\smash{ragioneSocialeFornitore}},  dataAcquisto,  dataArrivo)
+\item acquistoanimale(\underline{\smash{codiceAnimale}}, ragioneSocialeFornitore,  dataAcquisto,  dataArrivo)
 \item Fornitore(\underline{\smash{ragioneSociale}}, indirizzo, partitaIva)
-\item coinvolge(\underline{\smash{codiceAnimale}},\underline{\smash{ codRiproduzione}}, codicePadre)
-\item Riproduzione(\underline{\smash{codiceRiproduzione}}, complicanza, orario, data, stato,  codVeterinario)
+%\item coinvolge(\underline{\smash{codiceAnimale}},\underline{\smash{ codRiproduzione}}, codicePadre)
+\item Riproduzione(\underline{\smash{codiceRiproduzione}}, complicanza, orario, data, stato,  codVeterinario, codiceMadre, codicePadre)
 \item SchedaGestazione(\underline{\smash{codiceGestazione}},  codRiproduzione,  codVeterinario)
-\item Agriturismo(Nome)
+\item Agriturismo(\underline{\smash{Nome}})
 \item Stalla(\underline{\smash{numProgressivo}},\underline{\smash{ nomeAgriturismo}})
-\item Locale(\underline{\smash{codiceLocale}}, pavimentazione, capienzaMax, temperatura, umidità, orientazioneFinestre, specieOspitata, altezza, lunghezza, larghezza, tollerabilitaAzoto, tollerabilitaSporcizia, tollerabilitaMetano,  numProgressivo,  nomeAgriturismo)
+\item Locale(\underline{\smash{codiceLocale}}, pavimentazione, capienzaMax, temperatura, umidità, orientazioneFinestre, specieOspitata, altezza, lunghezza, larghezza, tollerabilitaAzoto, tollerabilitaSporcizia, tollerabilitaMetano, nomeAgriturismo)
 \item Visivi(\underline{\smash{codiceVisivo}}, livelloSporcizia,  orarioRilevazione,  codLocale)
 \item Ambientali(\underline{\smash{codiceAmbientale}}, temperatura, umidità,  orarioRilevazione,  codLocale)
 \item CompostiVolatili(\underline{\smash{codiceVolatili}}, concentrazioneMetano, concentrazioneAzoto,  codLocale)
@@ -4223,10 +4223,10 @@ Aggiornamento della relazione tra l'animale e l'attività di pascolo a cui parte
 \item Abberveratoio(\underline{\smash{codice}}, quantitàRestante,  codLocale)
 \item AttivitàPascolo(\underline{\smash{codiceAttivita}}, fasciaOraria,  codLocale,  codArea)
 \item AreaPascolo(\underline{\smash{codiceArea}})
-\item RecinsioneDivisoriaeZoneDiPascolo(\underline{\smash{codiceZona}},\underline{\smash{ codArea}}, posizione)
+\item RecinzioneDivisoriaeZoneDiPascolo(\underline{\smash{codiceZona}},\underline{\smash{ codArea}}, posizione)
 \item Mungitura(\underline{\smash{codAnimale}}, \underline{\smash{codMungitrice}},\underline{\smash{data}}, \underline{\smash{ora}}, quantità)
 \item Mungitrice(\underline{\smash{codice}}, posizione, marca, modello)
-\item Chemunge(\underline{\smash{codLatte}}, \underline{\smash{codMungitrice}})
+\item chemunge(\underline{\smash{codLatte}}, \underline{\smash{codMungitrice}})
 \item Latte(\underline{\smash{codiceLatte}}, quantitàSostanzeDisciolte,  codAnimale,  codSilos)
 \item Silos(\underline{\smash{codice}}, capacità, livello)
 \item prodottocon(\underline{\smash{codLatte}}, \underline{\smash{codLotto}})
@@ -4263,7 +4263,8 @@ Aggiornamento della relazione tra l'animale e l'attività di pascolo a cui parte
 \item Escursione(\underline{\smash{codice}}, giorno, orario,  codGuida)
 \item Guida(\underline{\smash{codfisc}}, nome, cognome, contatto)
 \item legataa(\underline{\smash{codEscursione}},\underline{\smash{ codItinerario}}, numSentieri,  codAgriturismo)
-\item compostoda( codItinerario,  nomeTappa)
+\item Itinerario(\underline{\smash{codice}}, numSentieri, codAgriturismo)
+\item compostoda( \underline{\smash{codItinerario}},  \underline{\smash{nomeTappa}})
 \item Tappe(\underline{\smash{nome}}, tempoPermanenza) 
 \item Account(\underline{\smash{utente}}, \underline{\smash{password}}, domandaRec, rispostaRec, numTelefono, codFiscale, scadenzaDoc, numDoc, dataIscrizione, codDoc, cognome, nome, enteRilascio, tipoDoc, indirizzo, codiceCarta)
 \item Recensione(\underline{\smash{codiceRecensione}}, gradimentoGenerale, qualitaPercepita, conservazione, campoTestuale, gusto, gradimentoGenerale,  utente,  password,  codProdotto)
@@ -4279,6 +4280,907 @@ Aggiornamento della relazione tra l'animale e l'attività di pascolo a cui parte
 \subsection{Vincoli d'integrità referenziale}
 
 \subsection{Normalizzazione}
+-- trafiletto--
+%TODO:
+% cambiare nome alle assenze di dipendenza funzionale
+\begin{enumerate}
+
+
+
+\item[] \textbf{Tabella Animale:}
+
+Animale(\underline{\smash{codice}}, sesso, specie, famiglia, idMadre, idPadre, dataDiNascita, altezza, peso, razza, posizione, orario,  codiceGps,  codLocale)
+\begin{itemize}
+\vspace{-5pt}
+\item codice $\Rightarrow$ sesso, specie, famiglia, idMadre, idPadre, dataDiNascita, altezza, altezza, peso, razza, posizione, orario, codiceGps, codLocale
+\vspace{-5pt}
+\end{itemize}
+Poichè la parte sinistra è superchiave, Animale è in BCNF
+\vspace{10pt}
+
+
+
+\item[] \textbf{Tabella acquistoanimale:}
+
+acquistoanimale(\underline{\smash{codiceAnimale}}, ragioneSocialeFornitore,  dataAcquisto,  dataArrivo)
+\begin{itemize}
+\vspace{-5pt}
+\item codiceAnimale $\Rightarrow$ dataAcquisto, dataArrivo, ragioneSocialeFornitore
+\vspace{-5pt}
+\end{itemize}
+Poichè la parte sinistra è superchiave, acquistoanimale è in BCNF
+\vspace{10pt}
+
+
+
+\item[] \textbf{Tabella Fornitore:}
+
+Fornitore(\underline{\smash{ragioneSociale}}, indirizzo, partitaIva)
+\begin{itemize}
+\vspace{-5pt}
+\item ragioneSociale $\Rightarrow$ indirizzo, partitaIva
+\item partitaIva $\Rightarrow$ ragioneSociale, indirizzo
+\vspace{-5pt}
+\end{itemize}
+Poichè la parte sinistra è superchiave, Fornitore è in BCNF\footnote{Infatti anche partitaIva, pur non essendo chiave primaria, è pur sempre una superchiave, in quanto non esistono due  istanze diverse di Fornitore che abbiano lo stesso valore di partitaIva}
+\vspace{10pt}
+
+
+
+\item[] \textbf{Tabella Riproduzione:}
+
+Riproduzione(\underline{\smash{codiceRiproduzione}}, complicanza, orario, data, stato, codVeterinario, codiceMadre, codicePadre)
+\begin{itemize}
+\vspace{-5pt}
+\item codiceRiproduzione $\Rightarrow$ complicanza, orario, data, stato, codVeterinario, codiceMadre, codicePadre
+\vspace{-5pt}
+\end{itemize}
+Poichè la parte sinistra è superchiave, Riproduzione è in BCNF
+\vspace{10pt}
+
+
+
+\item[] \textbf{Tabella SchedaGestazione:}
+
+SchedaGestazione(\underline{\smash{codiceGestazione}},  codRiproduzione,  codVeterinario)
+\begin{itemize}
+\vspace{-5pt}
+\item codiceGestazione $\Rightarrow$ codRiproduzione, codVeterinario
+\vspace{-5pt}
+\end{itemize}
+Poichè la parte sinistra è superchiave, SchedaGestazione è in BCNF
+\vspace{10pt}
+
+
+
+\item[] \textbf{Tabella Agriturismo:}
+
+Agriturismo(\underline{\smash{Nome}})
+
+Poichè non esistono dipendenze funzionali, Agriturismo è in BCNF
+\vspace{10pt}
+
+
+
+\item[] \textbf{Tabella Stalla:}
+
+Stalla(\underline{\smash{numProgressivo}},\underline{\smash{ nomeAgriturismo}})
+
+Poichè non esistono dipendenze funzionali, Stalla è in BCNF
+\vspace{10pt}
+
+
+
+\item[] \textbf{Tabella Locale:}
+
+Locale(\underline{\smash{codiceLocale}}, pavimentazione, capienzaMax, temperatura, umidità, orientazioneFinestre, specieOspitata, altezza, lunghezza, larghezza, tollerabilitaAzoto, tollerabilitaSporcizia, tollerabilitaMetano, nomeAgriturismo)
+\begin{itemize}
+\vspace{-5pt}
+\item codiceLocale $\Rightarrow$ pavimentazione, capienzaMax, temperatura, umidità, orientazioneFinestre, specieOspitata, altezza, lunghezza, larghezza, tollerabilitaAzoto, tollerabilitaSporcizia, tollerabilitaMetano,  numProgressivo,  nomeAgriturismo
+\item altezza, lunghezza, larghezza, specieOspitata $\Rightarrow$ capienzaMax
+\item specieOspitata $\Rightarrow$ pavimentazione
+\vspace{-5pt}
+\end{itemize}
+%TODO:
+% dividere in due relazioni 
+%    H,W,L,SpecieOspitata-->capienza max
+%    codLocale-->resto + H,W,L,SO
+%Poichè la parte sinistra è superchiave, Locale è in BCNF\footnote{Infatti, poichè codiceLocale determina altezza, lunghezza, larghezza e specieOspitata, allora per transitività, sia la relazione 2 che la 3 sono implicite nella relazione 1}
+\vspace{10pt}
+
+
+
+\item[] \textbf{Tabella Visivi:}
+
+Visivi(\underline{\smash{codiceVisivo}}, livelloSporcizia,  orarioRilevazione,  codLocale)
+\begin{itemize}
+\vspace{-5pt}
+\item codiceVisivo $\Rightarrow$ livelloSporcizia, orarioRilevazione, codLocale
+\vspace{-5pt}
+\end{itemize}
+Poichè la parte sinistra è superchiave, Visivi è in BCNF
+\vspace{10pt}
+
+
+
+\item[] \textbf{Tabella Ambientali:}
+
+Ambientali(\underline{\smash{codiceAmbientale}}, temperatura, umidità,  orarioRilevazione,  codLocale)
+\begin{itemize}
+\vspace{-5pt}
+\item codiceAmbientale $\Rightarrow$ temperatura, unidità, orarioRilevazione, codLocale
+\vspace{-5pt}
+\end{itemize}
+Poichè la parte sinistra è superchiave, Ambientali è in BCNF
+\vspace{10pt}
+
+
+
+\item[] \textbf{Tabella CompostiVolatili:}
+
+CompostiVolatili(\underline{\smash{codiceVolatili}}, concentrazioneMetano, concentrazioneAzoto,  codLocale)
+\begin{itemize}
+\vspace{-5pt}
+\item codiceVolatili $\Rightarrow$ concentrazioneMetano, concentrazioneAzoto, codLocale
+\vspace{-5pt}
+\end{itemize}
+Poichè la parte sinistra è superchiave, CompostiVolatili è in BCNF
+\vspace{10pt}
+
+
+
+\item[] \textbf{Tabella PuliziaLocale:}
+
+PuliziaLocale(\underline{\smash{codLocale}}, \underline{\smash{orarioRilevazione}}, \underline{\smash{dataRilevazione}}, stato, personale)
+\begin{itemize}
+\vspace{-5pt}
+\item codLocale, orarioRilevazione, dataRilevazione $\Rightarrow$ stato, personale
+\vspace{-5pt}
+\end{itemize}
+Poichè la parte sinistra è superchiave, PuliziaLocale è in BCNF
+\vspace{10pt}
+
+
+
+\item[] \textbf{Tabella PastoPerLocale:}
+
+%TODO:
+% codLocale non dovrebbe essere chiave?
+% è cmq BCNF
+PastoPerLocale(\underline{\smash{giorno}}, \underline{\smash{orario}},  codLocale,  fibre,  proteine,  glucidi,  concentrazioneSali,  concentrazioneVitamine)
+\begin{itemize}
+\vspace{-5pt}
+\item <++> $\Rightarrow$ <++>
+\vspace{-5pt}
+\end{itemize}
+Poichè la parte sinistra è superchiave, PastoPerLocale è in BCNF
+\vspace{10pt}
+
+
+
+\item[] \textbf{Tabella Pasto:}
+
+Pasto(\underline{\smash{fibre}},\underline{\smash{ proteine}},\underline{\smash{ glucidi}}, \underline{\smash{concentrazioneSali}},\underline{\smash{ concentrazioneVitamine}})
+
+Poichè non esistono dipendenze funzionali, Pasto è in BCNF
+\vspace{10pt}
+
+
+
+\item[] \textbf{Tabella Foraggio:}
+
+% TODO:
+% mancano attributi di foraggio
+% è comunque BCNF
+Foraggio(\underline{\smash{fibre}}, \underline{\smash{proteine}},\underline{\smash{ glucidi}})
+\begin{itemize}
+\vspace{-5pt}
+\item <++> $\Rightarrow$ <++>
+\vspace{-5pt}
+\end{itemize}
+Poichè la parte sinistra è superchiave, Foraggio è in BCNF
+\vspace{10pt}
+
+
+
+\item[] \textbf{Tabella Acqua:}
+
+Acqua(\underline{\smash{concentrazioneSali}}, \underline{\smash{concentrazioneVitamine}})
+
+Poichè non esistono dipendenze funzionali, Acqua è in BCNF
+\vspace{10pt}
+
+
+
+\item[] \textbf{Tabella Mangiatoia:}
+
+Mangiatoia(\underline{\smash{codice}}, quantitàRestante,  codLocale)
+\begin{itemize}
+\vspace{-5pt}
+\item codice $\Rightarrow$ quantitàRestante, codLocale
+\vspace{-5pt}
+\end{itemize}
+Poichè la parte sinistra è superchiave, Mangiatoia è in BCNF
+\vspace{10pt}
+
+
+
+\item[] \textbf{Tabella Abberveratoio:}
+
+Abberveratoio(\underline{\smash{codice}}, quantitàRestante,  codLocale)
+\begin{itemize}
+\vspace{-5pt}
+\item codice $\Rightarrow$ quantitàRestante, codLocale
+\vspace{-5pt}
+\end{itemize}
+Poichè la parte sinistra è superchiave, Abberveratoio è in BCNF
+\vspace{10pt}
+
+
+
+\item[] \textbf{Tabella Attivit:}
+
+AttivitàPascolo(\underline{\smash{codiceAttivita}}, fasciaOraria,  codLocale,  codArea)
+\begin{itemize}
+\vspace{-5pt}
+\item codiceAttività $\Rightarrow$ fasciaOraria, codLocale, codArea
+\vspace{-5pt}
+\end{itemize}
+Poichè la parte sinistra è superchiave, Pascolo è in BCNF
+\vspace{10pt}
+
+
+
+\item[] \textbf{Tabella AreaPascolo:}
+
+AreaPascolo(\underline{\smash{codiceArea}})
+
+Poichè non esistono dipendenze funzionali, AreaPascolo è in BCNF
+\vspace{10pt}
+
+
+
+\item[] \textbf{Tabella RecinsioneDivisoriaeZoneDiPascolo:}
+
+RecinsioneDivisoriaeZoneDiPascolo(\underline{\smash{codiceZona}},\underline{\smash{ codArea}}, posizione)
+\begin{itemize}
+\vspace{-5pt}
+\item codiceZona, codArea $\Rightarrow$ posizione
+\vspace{-5pt}
+\end{itemize}
+Poichè la parte sinistra è superchiave, RecinsioneDivisoriaeZoneDiPascolo è in BCNF
+\vspace{10pt}
+
+
+
+\item[] \textbf{Tabella Mungitura:}
+
+Mungitura(\underline{\smash{codAnimale}}, \underline{\smash{codMungitrice}},\underline{\smash{data}}, \underline{\smash{ora}}, quantità)
+\begin{itemize}
+\vspace{-5pt}
+\item codAnimale, codMungitrice, data, ora $\Rightarrow$ quantità
+\vspace{-5pt}
+\end{itemize}
+Poichè la parte sinistra è superchiave, Mungitura è in BCNF
+\vspace{10pt}
+
+
+
+\item[] \textbf{Tabella Mungitrice:}
+
+Mungitrice(\underline{\smash{codice}}, posizione, marca, modello)
+\begin{itemize}
+\vspace{-5pt}
+\item codice $\Rightarrow$ posizione, marca, modello
+\vspace{-5pt}
+\end{itemize}
+Poichè la parte sinistra è superchiave, Mungitrice è in BCNF
+\vspace{10pt}
+
+
+
+\item[] \textbf{Tabella Chemunge:}
+
+Chemunge(\underline{\smash{codLatte}}, \underline{\smash{codMungitrice}})
+
+Poichè non esistono dipendenze funzionali, Chemunge è in BCNF
+\vspace{10pt}
+
+
+
+\item[] \textbf{Tabella Latte:}
+
+Latte(\underline{\smash{codiceLatte}}, quantitàSostanzeDisciolte,  codAnimale,  codSilos)
+\begin{itemize}
+\vspace{-5pt}
+\item codiceLatte $\Rightarrow$ quantitàSostanzeDisciolte, codAnimale, codSilos
+\vspace{-5pt}
+\end{itemize}
+Poichè la parte sinistra è superchiave, Latte è in BCNF
+\vspace{10pt}
+
+
+
+\item[] \textbf{Tabella Silos:}
+
+Silos(\underline{\smash{codice}}, capacità, livello)
+\begin{itemize}
+\vspace{-5pt}
+\item codice $\Rightarrow$ capacità, livello
+\vspace{-5pt}
+\end{itemize}
+Poichè la parte sinistra è superchiave, Silos è in BCNF
+\vspace{10pt}
+
+
+
+\item[] \textbf{Tabella prodottocon:}
+
+prodottocon(\underline{\smash{codLatte}}, \underline{\smash{codLotto}})
+
+Poichè non esistono dipendenze funzionali, prodottocon è in BCNF
+\vspace{10pt}
+
+
+
+\item[] \textbf{Tabella Lotto:}
+
+Lotto(\underline{\smash{codiceLotto}}, codDipendenti, dataProd, codLab, durata)
+\begin{itemize}
+\vspace{-5pt}
+\item codiceLotto $\Rightarrow$ codDipendenti, dataProd, codLab, durata
+\vspace{-5pt}
+\end{itemize}
+Poichè la parte sinistra è superchiave, Lotto è in BCNF
+\vspace{10pt}
+
+
+
+\item[] \textbf{Tabella stoccaggiocantine:}
+
+stoccaggiocantine(\underline{\smash{codLotto}}, \underline{\smash{codCantina}})
+
+Poichè non esistono dipendenze funzionali, stoccaggiocantine è in BCNF
+\vspace{10pt}
+
+
+
+\item[] \textbf{Tabella stoccaggiomagazzini:}
+
+stoccaggiomagazzini(\underline{\smash{codLotto}}, \underline{\smash{codMagazzino}})
+
+Poichè non esistono dipendenze funzionali, stoccaggiomagazzini è in BCNF
+\vspace{10pt}
+
+
+
+\item[] \textbf{Tabella Cantine:}
+
+Cantine(\underline{\smash{codice}})
+
+Poichè non esistono dipendenze funzionali, Cantine è in BCNF
+\vspace{10pt}
+
+
+
+\item[] \textbf{Tabella Magazzini:}
+
+Magazzini(\underline{\smash{codice}})
+
+Poichè non esistono dipendenze funzionali, Magazzini è in BCNF
+\vspace{10pt}
+
+
+
+\item[] \textbf{Tabella Scaffalature:}
+
+Scaffalature(\underline{\smash{codCantina}}, \underline{\smash{codice}})
+
+Poichè non esistono dipendenze funzionali, Scaffalature è in BCNF
+\vspace{10pt}
+
+
+
+\item[] \textbf{Tabella Parametri:}
+
+Parametri(\underline{\smash{data}}, \underline{\smash{idSensore}}, temperatura, umidità,  codCantina)
+\begin{itemize}
+\vspace{-5pt}
+\item data, idSensore $\Rightarrow$ temperatura, umidità, codCantina
+\vspace{-5pt}
+\end{itemize}
+Poichè la parte sinistra è superchiave, Parametri è in BCNF
+\vspace{10pt}
+
+
+
+\item[] \textbf{Tabella Scaffali:}
+
+Scaffali(\underline{\smash{codice}}, \underline{\smash{codMagazzino}})
+
+Poichè non esistono dipendenze funzionali, Scaffali è in BCNF
+\vspace{10pt}
+
+
+
+\item[] \textbf{Tabella ControlloParametriFase:}
+
+ControlloParametriFase(\underline{\smash{parametriEffettivi}}, \underline{\smash{codLotto}}, \underline{\smash{codFase}})
+
+Poichè non esistono dipendenze funzionali, ControlloParametriFase è in BCNF
+\vspace{10pt}
+
+
+
+\item[] \textbf{Tabella Fasi:}
+
+Fasi(\underline{\smash{codiceFase}}, nome, parametriProcesso, durata)
+\begin{itemize}
+\vspace{-5pt}
+\item codiceFase $\Rightarrow$ nome, parametriProcesso, durata
+\vspace{-5pt}
+\end{itemize}
+Poichè la parte sinistra è superchiave, Fasi è in BCNF
+\vspace{10pt}
+
+
+
+\item[] \textbf{Tabella divisain:}
+
+divisain(\underline{\smash{codRicetta}}, \underline{\smash{codFase}})
+
+Poichè non esistono dipendenze funzionali, divisain è in BCNF
+\vspace{10pt}
+
+
+
+\item[] \textbf{Tabella Ricetta:}
+
+Ricetta(\underline{\smash{codiceRicetta}}, collocazioneGeografica, ricetta, durataStagionatura)
+\begin{itemize}
+\vspace{-5pt}
+\item codiceRicetta $\Rightarrow$ collocazioneGeografica, ricetta, durataStagionatura
+\vspace{-5pt}
+\end{itemize}
+Poichè la parte sinistra è superchiave, Ricetta è in BCNF
+\vspace{10pt}
+
+
+
+\item[] \textbf{Tabella Formaggio:}
+
+Formaggio(\underline{\smash{nome}}, \underline{\smash{nomeAgriturismo}}, deperibilita,  codRicetta,  codLatte)
+\begin{itemize}
+\vspace{-5pt}
+\item nome, nomeAgriturismo $\Rightarrow$ deperibilità, codRicetta, codLatte
+\vspace{-5pt}
+\end{itemize}
+Poichè la parte sinistra è superchiave, Formaggio è in BCNF
+\vspace{10pt}
+
+
+
+\item[] \textbf{Tabella Indicisalute:}
+
+Indicisalute(\underline{\smash{codAnimale}}, \underline{\smash{dataRilevazione}}, tipologiaRespirazione, lucentezzaPelo, vigilanza, idratazione, deambulazione)
+\begin{itemize}
+\vspace{-5pt}
+\item codiceAnimale, dataRilevazione $\Rightarrow$ tipologiaRespirazione, lucentezzaPelo, vigilanza, idratazione, deambulazione
+\vspace{-5pt}
+\end{itemize}
+Poichè la parte sinistra è superchiave, Indicisalute è in BCNF
+\vspace{10pt}
+
+
+
+\item[] \textbf{Tabella Visita:}
+
+Visita(\underline{\smash{codiceVisita}}, esito, descrizione, dataEffettiva, dataProgrammata,  codAnimale,  codVeterinario)
+\begin{itemize}
+\vspace{-5pt}
+\item codiceVisita $\Rightarrow$ esito, descrizione, dataEffettiva, dataProgrammata, codAnimale, codVeterinario
+\vspace{-5pt}
+\end{itemize}
+Poichè la parte sinistra è superchiave, Visita è in BCNF
+\vspace{10pt}
+
+
+
+\item[] \textbf{Tabella Esame:}
+
+Esame(\underline{\smash{codiceEsame}},  descrizione, data, macchinario, nome,  codAnimale,  codVeterinario)
+\begin{itemize}
+\vspace{-5pt}
+\item codiceEsame $\Rightarrow$ descrizione, data, macchinario, nome, codAnimale, codVeterinario
+\vspace{-5pt}
+\end{itemize}
+Poichè la parte sinistra è superchiave, Esame è in BCNF
+\vspace{10pt}
+
+
+
+\item[] \textbf{Tabella Veterinario:}
+
+Veterinario(\underline{\smash{codiceFiscale}}, nome, cognome, contatto)
+\begin{itemize}
+\vspace{-5pt}
+\item codFiscale $\Rightarrow$ nome, cognome, contatto
+\vspace{-5pt}
+\end{itemize}
+Poichè la parte sinistra è superchiave, Veterinario è in BCNF
+\vspace{10pt}
+
+
+
+\item[] \textbf{Tabella Terapia:}
+
+Terapia(\underline{\smash{codiceTerapia}}, dataInizio, durata, secondaTerapiaConsecutiva,  codAnimale)
+\begin{itemize}
+\vspace{-5pt}
+\item codiceTerapia $\Rightarrow$ dataInizio, durata, secondaTerapiaConsecutiva, codAnimale
+\vspace{-5pt}
+\end{itemize}
+Poichè la parte sinistra è superchiave, Terapia è in BCNF
+\vspace{10pt}
+
+
+
+\item[] \textbf{Tabella compostada:}
+
+compostada(\underline{\smash{codTerapia}}, \underline{\smash{nomeFarmaco}}, posologia)
+\begin{itemize}
+\vspace{-5pt}
+\item codTerapia, nomeFarmaco $\Rightarrow$ posologia
+\vspace{-5pt}
+\end{itemize}
+Poichè la parte sinistra è superchiave, compostada è in BCNF
+\vspace{10pt}
+
+
+
+\item[] \textbf{Tabella Farmaco:}
+
+Farmaco(\underline{\smash{nome}}, principioAttivo, dosaggio)
+\begin{itemize}
+\vspace{-5pt}
+\item nome $\Rightarrow$ pricipioAttivo, dosaggio
+\vspace{-5pt}
+\end{itemize}
+Poichè la parte sinistra è superchiave, Farmaco è in BCNF
+\vspace{10pt}
+
+
+
+\item[] \textbf{Tabella SchedaMedica:}
+
+% TODO:
+% potrebbe capitare che lo stesso veterinario compili due schede mediche dello stesso animale nello stesso giorno?
+% per evitare qualsiasi problema basta dire di sì
+SchedaMedica(\underline{\smash{codiceScheda}}, massaMagra, carenze, patologie, data, rispostaOculare, emocromo, spessoreZoccolo, fegato, cuore, pancreas, massaMagra,  codAnimale,  codVeterinario)
+\begin{itemize}
+\vspace{-5pt}
+\item codiceScheda $\Rightarrow$ massaMagram carenzem patologie, data, rispostaOculare, emocromo, spessoreZoccolo, fegato, cuore, pancreas, massaMagra, codAnimale, codVeterinario
+\vspace{-5pt}
+\end{itemize}
+Poichè la parte sinistra è superchiave, SchedaMedica è in BCNF
+\vspace{10pt}
+
+
+
+\item[] \textbf{Tabella DisturbiComportamentali:}
+
+DisturbiComportamentali(\underline{\smash{entità}}, \underline{\smash{nome}}, \underline{\smash{codScheda}})
+
+Poichè non esistono dipendenze funzionali, DisturbiComportamentali è in BCNF
+\vspace{10pt}
+
+
+
+\item[] \textbf{Tabella Lesioni:}
+
+Lesioni(\underline{\smash{tipologia}}, \underline{\smash{parteDelCorpo}}, \underline{\smash{entità}}, \underline{\smash{codScheda}})
+
+Poichè non esistono dipendenze funzionali, Lesioni è in BCNF
+\vspace{10pt}
+
+
+
+\item[] \textbf{Tabella Cliente:}
+
+Cliente(\underline{\smash{codCarta}}, anticipo)
+\begin{itemize}
+\vspace{-5pt}
+\item codCarta $\Rightarrow$ anticipo
+\vspace{-5pt}
+\end{itemize}
+Poichè la parte sinistra è superchiave, Cliente è in BCNF
+\vspace{10pt}
+
+
+
+\item[] \textbf{Tabella Pagamenti:}
+
+Pagamenti(\underline{\smash{codPagamento}}, tipoPagamento, totaleCosto, data, ora,  codCliente)
+\begin{itemize}
+\vspace{-5pt}
+\item codPagamento $\Rightarrow$ tipoPagamento, totaleCosto, data, ora, codCliente
+\vspace{-5pt}
+\end{itemize}
+Poichè la parte sinistra è superchiave, Pagamenti è in BCNF
+\vspace{10pt}
+
+
+
+\item[] \textbf{Tabella PrenotazioneStanza:}
+
+%FIX:
+% dataArrivo e dataPartenza non identificano una prenotazione, in quanto lo steso lasso temporale potrebbe essere usato da più clienti
+% soluzione proposta: una prenotazione viene identificata dal giorno di arrivo e dal clente che l'effettua com echiave esterna
+% inoltre dataPartenza non è più chiave in quanto un cliente non può fare più prenotazioni con lo stesso giorno di arrivo
+% per il resto è cmq in BCNF
+PrenotazioneStanza(\underline{\smash{dataArrivo}}, \underline{\smash{dataPartenza}},  codCliente,  numStanza)
+\begin{itemize}
+\vspace{-5pt}
+\item <++> $\Rightarrow$ <++>
+\vspace{-5pt}
+\end{itemize}
+Poichè la parte sinistra è superchiave, PrenotazioneStanza è in BCNF
+\vspace{10pt}
+
+
+
+\item[] \textbf{Tabella Stanza:}
+
+%TODO:
+% forse sarebbe più logico avere il codice dell'agriturismo a cui la stanza appartiene come chiave esterna
+% in questo modo si evita di avere la stanza numero 9573843
+% cmq è in BCNF
+Stanza(\underline{\smash{numStanza}}, costoGiornaliero, suite, numLetti, tipoLetti,  codAgriturismo)
+\begin{itemize}
+\vspace{-5pt}
+\item <++> $\Rightarrow$ <++>
+\vspace{-5pt}
+\end{itemize}
+Poichè la parte sinistra è superchiave, Stanza è in BCNF
+\vspace{10pt}
+
+
+
+\item[] \textbf{Tabella ServizioperStanza:}
+
+%FIX:
+% codice della prenotazione (che è a sua volta una chiave composta) dovrebbe essere primaria esterna oltre alla data di inizio e di utilizzo del servizio
+% rimane la data di fine utilizzo che non deve essere chiave in quanto, data una prenotazione, non si può iniziare ad utilizzare un servizio due volte nello stesso giorno 
+% (in un giorno o si utilizza o non si utilizza un servizio ma non ha senso dire quante volte al giorno viene utilizzato)
+% per il resto è in BCNF
+ServizioperStanza(\underline{\smash{dataInizioUtilizzo}}, \underline{\smash{dataFineUtilizzo}},  codStanza,  codServizio)
+\begin{itemize}
+\vspace{-5pt}
+\item <++> $\Rightarrow$ <++>
+\vspace{-5pt}
+\end{itemize}
+Poichè la parte sinistra è superchiave, ServizioperStanza è in BCNF
+\vspace{10pt}
+
+
+
+\item[] \textbf{Tabella ServizioAggiuntivo:}
+
+ServizioAggiuntivo(\underline{\smash{tipoServizio}}, costo)
+\begin{itemize}
+\vspace{-5pt}
+\item tipoServizio $\Rightarrow$ costo
+\vspace{-5pt}
+\end{itemize}
+Poichè la parte sinistra è superchiave, ServizioAggiuntivo è in BCNF
+\vspace{10pt}
+
+
+
+\item[] \textbf{Tabella PrenotazioneEscursione:}
+
+% FIX:
+% forse la prenotazione dovrebbe contenere il codice del cliente che l'ha effettuata come chiave esterna,
+% altrimanti nella stessa giornata non possono essere effettuate più prenotazioni per le escursioni
+PrenotazioneEscursione(\underline{\smash{dataPrenotazione}},  codEscursione)
+\begin{itemize}
+\vspace{-5pt}
+\item <++> $\Rightarrow$ <++>
+\vspace{-5pt}
+\end{itemize}
+Poichè la parte sinistra è superchiave, PrenotazioneEscursione è in BCNF
+\vspace{10pt}
+
+
+
+\item[] \textbf{Tabella Escursione:}
+
+Escursione(\underline{\smash{codice}}, giorno, orario,  codGuida)
+\begin{itemize}
+\vspace{-5pt}
+\item codice $\Rightarrow$ giorno, orario, codGuida
+\vspace{-5pt}
+\end{itemize}
+Poichè la parte sinistra è superchiave, Escursione è in BCNF
+\vspace{10pt}
+
+
+
+\item[] \textbf{Tabella Guida:}
+
+Guida(\underline{\smash{codfisc}}, nome, cognome, contatto)
+\begin{itemize}
+\vspace{-5pt}
+\item codfisc $\Rightarrow$ nome, cognome, contatto
+\vspace{-5pt}
+\end{itemize}
+Poichè la parte sinistra è superchiave, Guida è in BCNF
+\vspace{10pt}
+
+
+
+\item[] \textbf{Tabella legataa:}
+
+% FIX:
+% rivedere legataa e Itinerario, per concordare dove vanno a finire i vari attributi
+% per il resto è in BCNF
+legataa(\underline{\smash{codEscursione}},\underline{\smash{ codItinerario}}, numSentieri,  codAgriturismo)
+\begin{itemize}
+\vspace{-5pt}
+\item <++> $\Rightarrow$ <++>
+\vspace{-5pt}
+\end{itemize}
+Poichè la parte sinistra è superchiave, legataa è in BCNF
+\vspace{10pt}
+
+
+
+\item[] \textbf{Tabella legataa:}
+
+% FIX:
+% vedere la nota precedente
+% per il resto è in BCNF
+Itinerario(\underline{\smash{codEscursione}},\underline{\smash{ codItinerario}}, numSentieri,  codAgriturismo)
+\begin{itemize}
+\vspace{-5pt}
+\item <++> $\Rightarrow$ <++>
+\vspace{-5pt}
+\end{itemize}
+Poichè la parte sinistra è superchiave, Itinerario è in BCNF
+\vspace{10pt}
+
+
+
+\item[] \textbf{Tabella compostoda:}
+
+compostoda(\underline{\smash{ codItinerario}}, \underline{\smash{ nomeTappa}})
+
+Poichè non esistono dipendenze funzionali, compostoda è in BCNF
+\vspace{10pt}
+
+
+
+\item[] \textbf{Tabella Tappe:}
+
+Tappe(\underline{\smash{nome}}, tempoPermanenza)
+\begin{itemize}
+\vspace{-5pt}
+\item nome $\Rightarrow$ tempoPermanenza
+\vspace{-5pt}
+\end{itemize}
+Poichè la parte sinistra è superchiave, Tappe è in BCNF
+\vspace{10pt}
+ 
+
+
+\item[] \textbf{Tabella Account:}
+
+% TODO:
+% oltre ai vincoli d'integrità referenziale sull'anagrafica dell'account con l'anagrafica del cliente a cui è associato, codFiscale può determinare diversi campi
+% a questo punto forsee varrebbe la pena di creare una nuova tabella che associ ogni codFiscale ai dati da esso ricavabili e inserire nelle tabelle che lo richiedono
+% (account ma anche fornitore, veterinario etc.) solo il codice fiscale, così da poter ricavare il resto delle informazioni joinando con la nuova tabella anagrafica
+% risolto questo, la tabella è in BCNF
+Account(\underline{\smash{utente}}, \underline{\smash{password}}, domandaRec, rispostaRec, numTelefono, codFiscale, scadenzaDoc, numDoc, dataIscrizione, codDoc, cognome, nome, enteRilascio, tipoDoc, indirizzo, codiceCarta)
+\begin{itemize}
+\vspace{-5pt}
+\item <++> $\Rightarrow$ <++>
+\vspace{-5pt}
+\end{itemize}
+Poichè la parte sinistra è superchiave, Account è in BCNF
+\vspace{10pt}
+
+
+
+\item[] \textbf{Tabella Recensione:}
+
+% FIX: minore
+% viene ripetuto due volte l'attributo gradimentoGenerale
+Recensione(\underline{\smash{codiceRecensione}}, gradimentoGenerale, qualitaPercepita, conservazione, campoTestuale, gusto, gradimentoGenerale,  utente,  password,  codProdotto)
+\begin{itemize}
+\vspace{-5pt}
+\item codiceRecensione $\Rightarrow$ gradimentoGenerale, qualitàPercepita, conservazione, campoTestuale, gusto, utente, password, codProdotto
+\vspace{-5pt}
+\end{itemize}
+Poichè la parte sinistra è superchiave, Recensione è in BCNF
+\vspace{10pt}
+
+
+
+\item[] \textbf{Tabella FormaggioProdotto:}
+
+FormaggioProdotto(\underline{\smash{codiceProdotto}}, prezzo, peso, stockAppartenenza, rimastiInStock, scadenza,  codiceProdotto,  nome,  nomeAgriturismo)
+\begin{itemize}
+\vspace{-5pt}
+\item codiceProdotto $\Rightarrow$ prezzo, peso, stockAppartenenza, rimastiInStock, scadenza, codiceProdotto, nome, nomeAgriturismo
+\vspace{-5pt}
+\end{itemize}
+Poichè la parte sinistra è superchiave, FormaggioProdotto è in BCNF
+\vspace{10pt}
+
+
+
+\item[] \textbf{Tabella contenutoordine:}
+
+contenutoordine(\underline{\smash{codOrdine}}, \underline{\smash{codFormaggioprodotto}}, quantità, reso)
+\begin{itemize}
+\vspace{-5pt}
+\item codOrdine, codFormaggioprodotto $\Rightarrow$ quantità, reso
+\vspace{-5pt}
+\end{itemize}
+Poichè la parte sinistra è superchiave, contenutoordine è in BCNF
+\vspace{10pt}
+
+
+
+\item[] \textbf{Tabella OrdineProdotti:}
+
+OrdineProdotti(\underline{\smash{codiceOrdine}}, stato, data, tipoConsegnaReso,  utente,  password,  codSpedizione)
+\begin{itemize}
+\vspace{-5pt}
+\item codiceOrdine $\Rightarrow$ stato, data, tipoConsegnaReso, utente, passsword, codSpedizione
+\vspace{-5pt}
+\end{itemize}
+Poichè la parte sinistra è superchiave, OrdineProdotti è in BCNF
+\vspace{10pt}
+
+
+
+\item[] \textbf{Tabella Spedizione:}
+
+Spedizione(\underline{\smash{codice}}, dataConsegnaEffettiva, dataConsegnaPrevista, percorso, stato)
+\begin{itemize}
+\vspace{-5pt}
+\item codice $\Rightarrow$ dataConsegnaEffettiva, dataConsegnaPrevista, percorso, stato
+\vspace{-5pt}
+\end{itemize}
+Poichè la parte sinistra è superchiave, Spedizione è in BCNF
+\vspace{10pt}
+
+
+
+\item[] \textbf{Tabella processatada:}
+
+processatada(\underline{\smash{codSpedizione}}, \underline{\smash{codcentro}})
+
+Poichè non esistono dipendenze funzionali, processatada è in BCNF
+\vspace{10pt}
+
+
+
+\item[] \textbf{Tabella CentridiSmistamento:}
+
+CentridiSmistamento(\underline{\smash{codice}}, nome, indirizzo, contatto)
+\begin{itemize}
+\vspace{-5pt}
+\item codice $\Rightarrow$ nome, indirizzo, contatto
+\vspace{-5pt}
+\end{itemize}
+Poichè la parte sinistra è superchiave, CentridiSmistamento è in BCNF
+\vspace{10pt}
+
+
+\end{enumerate}
+
 
 \section{Implementazione MySQL}
 \subsection{Triggers}
