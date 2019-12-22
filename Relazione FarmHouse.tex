@@ -3105,9 +3105,6 @@ Questo permetterà, assieme ai volumi stimati per ogni entità e relazione nel s
 
 
 
-\subsection{Tavole degli accessi}
-\label{sec:accessi}
-
 
 
 
@@ -3118,7 +3115,7 @@ Questo permetterà, assieme ai volumi stimati per ogni entità e relazione nel s
 
 \stepcounter{counterAccessi}
 
-\subsubsection*{Operazione \thecounterAccessi{}: Controllo qualità del pasto}
+\subsection*{Operazione \thecounterAccessi{}: Controllo qualità del pasto}
 \noindent\textit{Descrizione:} Viene controllato che il pasto che viene somministrato agli animali non abbia ripercussioni sul loro stato di salute: in particolare vengono controllati gli indici di salute di tutti gli animali appartenenti ai locali nei quali è stato somministrato il pasto in esame
 
 \noindent\textit{Input:} composizione del pasto
@@ -3126,6 +3123,12 @@ Questo permetterà, assieme ai volumi stimati per ogni entità e relazione nel s
 \noindent\textit{Output:} media degli indici di salute
 
 \noindent\textit{Frequenza giornaliera:} 33\footnote{In ogni locale viene cambiato pasto 24 volte all'anno(circa ogni 2 settimane) per un totale di $24\times 500 = 12000$ cambiamenti annui.Dunque la frequenza giornaliera è di $\frac{12000}{365}\approx 33$}
+
+\subsubsection*{Porzione del diagramma interessata:}
+
+\subsubsection*{Porzione della tavola dei volumi interessata:}
+
+\subsubsection*{Tavola degli accessi:}
 
 E' presente la ridondanza \textit{qualità pasto} tra Pasto e Indici Salute che influenza la tavola degli accessi
 
@@ -3312,7 +3315,7 @@ Aggiornamento della ridondanza
 \end{longtable}\end{center}
 \stepcounter{counterAccessi}
 
-\subsubsection*{Operazione \thecounterAccessi{}: Registrazione di una ripoduzione con successo}
+\subsection*{Operazione \thecounterAccessi{}: Registrazione di una ripoduzione con successo}
 \noindent\textit{Descrizione:} Al completamento di una riproduzione terminata con succeso, viene compilata l'anagrafica del neonato, viene aggiornato lo stato della riproduzione e viene programmata una visita per il nuovo nato
 
 \noindent\textit{Input:} codice della riproduzione avvenuta con successo e dati appartenenti al neonato (sesso, specie, famiglia, razza, peso, altezza)
@@ -3320,6 +3323,12 @@ Aggiornamento della ridondanza
 \noindent\textit{Output:} registrazione del neonato con programmazione di una nuova visita
 
 \noindent\textit{Frequenza giornaliera:} 32\footnote{Il numero delle riproduzioni con successo in un anno è 11610. Ogni giorno ne vengono effettuate $\frac{11610}{365}\approx 32$}
+
+\subsubsection*{Porzione del diagramma interessata:}
+
+\subsubsection*{Porzione della tavola dei volumi interessata:}
+
+\subsubsection*{Tavola degli accessi:}
 
 \begin{center}\setlength{\extrarowheight}{1.5pt}\begin{longtable}{|p{0.2\linewidth}|p{0.1\linewidth}|p{0.175\linewidth}|p{0.1\linewidth}|p{0.3\linewidth}|}\hline \textbf{Nome costrutto}   & \multicolumn{1}{|c|}{\textbf{E/R}} & \textbf{Numero operazioni elementari} & \multicolumn{1}{|c|}{\textbf{Tipo}} & \textbf{Descrizione}\\ 
 \hline
@@ -3397,7 +3406,7 @@ Aggiornamento della relazione tra l'animale neonato e la visita programmata
 \end{longtable}\end{center}
 \stepcounter{counterAccessi}
 
-\subsubsection*{Operazione \thecounterAccessi{}: Pagamento delle stanze}
+\subsection*{Operazione \thecounterAccessi{}: Pagamento delle stanze}
 \noindent\textit{Descrizione:} Ogni giorno viene registrato il pagamento cumulativo di ogni cliente per ogni stanza prenotata e per ogni eventuale servizio aggiuntivo utilizzato
 
 \noindent\textit{Input:} la data odierna
@@ -3405,6 +3414,12 @@ Aggiornamento della relazione tra l'animale neonato e la visita programmata
 \noindent\textit{Output:} i pagamenti da effettuare
 
 \noindent\textit{Frequenza giornaliera:} 1
+
+\subsubsection*{Porzione del diagramma interessata:}
+
+\subsubsection*{Porzione della tavola dei volumi interessata:}
+
+\subsubsection*{Tavola degli accessi:}
 
 \begin{center}\setlength{\extrarowheight}{1.5pt}\begin{longtable}{|p{0.2\linewidth}|p{0.1\linewidth}|p{0.175\linewidth}|p{0.1\linewidth}|p{0.3\linewidth}|}\hline \textbf{Nome costrutto}   & \multicolumn{1}{|c|}{\textbf{E/R}} & \textbf{Numero operazioni elementari} & \multicolumn{1}{|c|}{\textbf{Tipo}} & \textbf{Descrizione}\\ 
 \hline
@@ -3537,7 +3552,7 @@ Aggiornamento della relazione tra il cliente ed il pagamento
 \end{longtable}\end{center}
 \stepcounter{counterAccessi}
 
-\subsubsection*{Operazione \thecounterAccessi{}: Stoccaggio del latte munto}
+\subsection*{Operazione \thecounterAccessi{}: Stoccaggio del latte munto}
 \noindent\textit{Descrizione:} Il latte munto viene conservato in appositi silos contenenti tutti latte con composizione chimico-fisica simile
 
 \noindent\textit{Input:} data e ora della mungitura, oltre che il codice del latte munto
@@ -3545,6 +3560,12 @@ Aggiornamento della relazione tra il cliente ed il pagamento
 \noindent\textit{Output:} Aggiornamento della quntità stoccata nel corretto silos
 
 \noindent\textit{Frequenza giornaliera:} 15000 \footnote{Le mungiture annuali sono 5475000. Ogni giorno ne vengono eseguite $\frac{5475000}{365}=15000$}
+
+\subsubsection*{Porzione del diagramma interessata:}
+
+\subsubsection*{Porzione della tavola dei volumi interessata:}
+
+\subsubsection*{Tavola degli accessi:}
 
 \begin{center}\setlength{\extrarowheight}{1.5pt}\begin{longtable}{|p{0.2\linewidth}|p{0.1\linewidth}|p{0.175\linewidth}|p{0.1\linewidth}|p{0.3\linewidth}|}\hline \textbf{Nome costrutto}   & \multicolumn{1}{|c|}{\textbf{E/R}} & \textbf{Numero operazioni elementari} & \multicolumn{1}{|c|}{\textbf{Tipo}} & \textbf{Descrizione}\\ 
 \hline
@@ -3600,7 +3621,7 @@ Aggiornamento della relazione tra il latte ed il silos nel quale è stoccato
 \end{longtable}\end{center}
 \stepcounter{counterAccessi}
 
-\subsubsection*{Operazione \thecounterAccessi{}: Controllo igiene dei locali}
+\subsection*{Operazione \thecounterAccessi{}: Controllo igiene dei locali}
 \noindent\textit{Descrizione:} Per garantire il rispetto delle condizioni di benessere degli animali all'interno dei locali, viene frequentemente controllato che i parametri rilevati rientrino nelle soglie di tollerabilità, ed eventualmente viene inviata una richiesta di intervento di pulizia, insieme all'aggiornamento dei parametri del locale con i valori più recenti raccolti
 
 \noindent\textit{Input:} Il codice del locale da controllare
@@ -3608,6 +3629,12 @@ Aggiornamento della relazione tra il latte ed il silos nel quale è stoccato
 \noindent\textit{Output:} Richiesta d'intervento di pulizia
 
 \noindent\textit{Frequenza giornaliera:} 40\footnote{Ognuno dei 20 agriturismi richiede 2 interventi di pulizia al giorno}
+
+\subsubsection*{Porzione del diagramma interessata:}
+
+\subsubsection*{Porzione della tavola dei volumi interessata:}
+
+\subsubsection*{Tavola degli accessi:}
 
 \begin{center}\setlength{\extrarowheight}{1.5pt}\begin{longtable}{|p{0.2\linewidth}|p{0.1\linewidth}|p{0.175\linewidth}|p{0.1\linewidth}|p{0.3\linewidth}|}\hline \textbf{Nome costrutto}   & \multicolumn{1}{|c|}{\textbf{E/R}} & \textbf{Numero operazioni elementari} & \multicolumn{1}{|c|}{\textbf{Tipo}} & \textbf{Descrizione}\\ 
 \hline
@@ -3729,7 +3756,7 @@ Aggiornamento della relazione tra il locale e l'intervento di pulizia
 \end{longtable}\end{center}
 \stepcounter{counterAccessi}
 
-\subsubsection*{Operazione \thecounterAccessi{}: Processamento degli ordini}
+\subsection*{Operazione \thecounterAccessi{}: Processamento degli ordini}
 \noindent\textit{Descrizione:} Gli utenti che si sono registrati nello store online possono acquistare i prodotti caseari e ricevere il proprio ordine tramite le spedizioni gestite dal database
 
 \noindent\textit{Input:} Il codice del nuovo ordine effettuato dal cliente sullo store online
@@ -3737,6 +3764,12 @@ Aggiornamento della relazione tra il locale e l'intervento di pulizia
 \noindent\textit{Output:} Processamento ed invio dell'ordine
 
 \noindent\textit{Frequenza giornaliera:} 400\footnote{Ogni agriturismo gestisce circa 20 ordini al giorno: $20\times 20= 400$}
+
+\subsubsection*{Porzione del diagramma interessata:}
+
+\subsubsection*{Porzione della tavola dei volumi interessata:}
+
+\subsubsection*{Tavola degli accessi:}
 
 \begin{center}\setlength{\extrarowheight}{1.5pt}\begin{longtable}{|p{0.2\linewidth}|p{0.1\linewidth}|p{0.175\linewidth}|p{0.1\linewidth}|p{0.3\linewidth}|}\hline \textbf{Nome costrutto}   & \multicolumn{1}{|c|}{\textbf{E/R}} & \textbf{Numero operazioni elementari} & \multicolumn{1}{|c|}{\textbf{Tipo}} & \textbf{Descrizione}\\ 
 \hline
@@ -3924,7 +3957,7 @@ Aggiornamento dello stato dell'ordine a \texttt{evaso}
 \end{longtable}\end{center}
 \stepcounter{counterAccessi}
 
-\subsubsection*{Operazione \thecounterAccessi{}: Prescrizione delle terapie}
+\subsection*{Operazione \thecounterAccessi{}: Prescrizione delle terapie}
 \noindent\textit{Descrizione:} Alla registrazione di una nuova terapia da parte di un veterinario, viene controllato se questa è la terza consecutiva sullo stesso animale, nel qual caso viene effettuato un ricollocamento in una zona di quarantena
 
 \noindent\textit{Input:} la nuova terapia e l'animale a cui è assegnata
@@ -3932,6 +3965,12 @@ Aggiornamento dello stato dell'ordine a \texttt{evaso}
 \noindent\textit{Output:} Trasferimanto dell'animale in un nuovo locale di quarantena
 
 \noindent\textit{Frequenza giornaliera:} 110\footnote{40000 terapie in un anno corrispondono a circa $\frac{40000}{365}\approx 110$ nuove terapie ogni giorno}
+
+\subsubsection*{Porzione del diagramma interessata:}
+
+\subsubsection*{Porzione della tavola dei volumi interessata:}
+
+\subsubsection*{Tavola degli accessi:}
 
 \begin{center}\setlength{\extrarowheight}{1.5pt}\begin{longtable}{|p{0.2\linewidth}|p{0.1\linewidth}|p{0.175\linewidth}|p{0.1\linewidth}|p{0.3\linewidth}|}\hline \textbf{Nome costrutto}   & \multicolumn{1}{|c|}{\textbf{E/R}} & \textbf{Numero operazioni elementari} & \multicolumn{1}{|c|}{\textbf{Tipo}} & \textbf{Descrizione}\\ 
 \hline
@@ -3965,7 +4004,7 @@ Ricollocamento del locale abitato dall'animale tramite l'aggiornamento della rel
 \end{longtable}\end{center}
 \stepcounter{counterAccessi}
 
-\subsubsection*{Operazione \thecounterAccessi{}: Controllo degli animali dispersi}
+\subsection*{Operazione \thecounterAccessi{}: Controllo degli animali dispersi}
 \noindent\textit{Descrizione:} Durante le attività di pascolo viene monitorato ad intervalli regolari il segnale GPS di ogni singolo animale affinchè ci si assicuri che rientri negli spazi delimitati dalle recinzioni per le zone dedicate al pascolo
 
 \noindent\textit{Input:} codice dell'attività di pascolo
@@ -3973,6 +4012,14 @@ Ricollocamento del locale abitato dall'animale tramite l'aggiornamento della rel
 \noindent\textit{Output:} segnalazione se l'animale è disperso
 
 \noindent\textit{Frequenza giornaliera:} 3968\footnote{Viene eseguito un controllo ogni 15 minuti durante le 8 ore dell'attività, quindi 32 controlli per ognuna delle $\frac{90000}{365}\approx 247$ attività giornaliere. Allora vengono eseguiti $247\times 32 = 7904$ controlli}
+
+\subsubsection*{Porzione del diagramma interessata:}
+
+\subsubsection*{Porzione della tavola dei volumi interessata:}
+
+\subsubsection*{Tavola degli accessi:}
+
+E' presente la ridondanza \textit{partecipazione attività} tra Attività pascolo e Animale che influenza la tavola degli accessi
 
 \begin{center}\setlength{\extrarowheight}{1.5pt}\begin{longtable}{|p{0.2\linewidth}|p{0.1\linewidth}|p{0.175\linewidth}|p{0.1\linewidth}|p{0.3\linewidth}|}
 \hline
