@@ -1,5 +1,3 @@
-%TODO:
-% cambiare nome alle assenze di dipendenza funzionale
 \begin{enumerate}
 
 
@@ -103,6 +101,13 @@ Locale(\underline{\smash{codiceLocale}}, pavimentazione, capienzaMax, temperatur
 %    H,W,L,SpecieOspitata-->capienza max
 %    codLocale-->resto + H,W,L,SO
 %Poichè la parte sinistra è superchiave, Locale è in BCNF\footnote{Infatti, poichè codiceLocale determina altezza, lunghezza, larghezza e specieOspitata, allora per transitività, sia la relazione 2 che la 3 sono implicite nella relazione 1}
+Poichè sono presenti dipendenze funzionali non banali, è necessario dividere la relazione in due tabelle. Seguendo l'algoritmo di decomposizione senza perdite, otteniamo due tabelle in BCNF così formate:
+
+\begin{itemize}
+\item Locale(\underline{\smash{codiceLocale}}, temperatura, umidità, orientazioneFinestre, specieOspitata, altezza, lunghezza, larghezza, tollerabilitaAzoto, tollerabilitaSporcizia, tollerabilitaMetano, nomeAgriturismo)
+\item CaratteristichePerTipoLocale(\underline{\smash{specieOspitata}}, \underline{\smash{altezza}}, \underline{\smash{lunghezza}}, \underline{\smash{larghezza}}, capienzaMax, pavimentazione)
+\end{itemize}
+
 \vspace{10pt}
 
 
@@ -568,7 +573,6 @@ Poichè la parte sinistra è superchiave, Farmaco è in BCNF
 
 \item[] \textbf{Tabella SchedaMedica:}
 
-% TODO:
 % potrebbe capitare che lo stesso veterinario compili due schede mediche dello stesso animale nello stesso giorno?
 % per evitare qualsiasi problema basta dire di sì
 SchedaMedica(\underline{\smash{codiceScheda}}, massaMagra, carenze, patologie, data, rispostaOculare, emocromo, spessoreZoccolo, fegato, cuore, pancreas, massaMagra,  codAnimale,  codVeterinario)
@@ -661,15 +665,14 @@ Poichè la parte sinistra è superchiave, Stanza è in BCNF
 
 \item[] \textbf{Tabella ServizioperStanza:}
 
-%FIX:
 % codice della prenotazione (che è a sua volta una chiave composta) dovrebbe essere primaria esterna oltre alla data di inizio e di utilizzo del servizio
 % rimane la data di fine utilizzo che non deve essere chiave in quanto, data una prenotazione, non si può iniziare ad utilizzare un servizio due volte nello stesso giorno 
 % (in un giorno o si utilizza o non si utilizza un servizio ma non ha senso dire quante volte al giorno viene utilizzato)
 % per il resto è in BCNF
-ServizioperStanza(\underline{\smash{dataInizioUtilizzo}}, \underline{\smash{dataFineUtilizzo}},  codStanza,  codServizio)
+ServizioperStanza(\underline{\smash{dataInizioUtilizzo}}, \underline{\smash{dataArrivo}}, \underline{\smash{codCliente}}, \underline{\smash{numStanza}}, \underline{\smash{nomeAgriturismo}}, \underline{\smash{codServizio}}, dataFineUtilizzo)
 \begin{itemize}
 \vspace{-5pt}
-\item <++> $\Rightarrow$ <++>
+\item dataInizioUtilizzo, dataArrivo, codCliente, numStanza, nomeAgriturismo, codServizio $\Rightarrow$ dataFineUtilizzo
 \vspace{-5pt}
 \end{itemize}
 Poichè la parte sinistra è superchiave, ServizioperStanza è in BCNF
@@ -692,16 +695,11 @@ Poichè la parte sinistra è superchiave, ServizioAggiuntivo è in BCNF
 
 \item[] \textbf{Tabella PrenotazioneEscursione:}
 
-% FIX:
 % forse la prenotazione dovrebbe contenere il codice del cliente che l'ha effettuata come chiave esterna,
 % altrimanti nella stessa giornata non possono essere effettuate più prenotazioni per le escursioni
-PrenotazioneEscursione(\underline{\smash{dataPrenotazione}},  codEscursione)
-\begin{itemize}
-\vspace{-5pt}
-\item <++> $\Rightarrow$ <++>
-\vspace{-5pt}
-\end{itemize}
-Poichè la parte sinistra è superchiave, PrenotazioneEscursione è in BCNF
+PrenotazioneEscursione(\underline{\smash{dataPrenotazione}},  \underline{\smash{codEscursione}}, \underline{\smash{codCliente}})
+
+Poichè non esistono dipendenze funzionali, PrenotazioneEscursione è in BCNF
 \vspace{10pt}
 
 
@@ -734,29 +732,23 @@ Poichè la parte sinistra è superchiave, Guida è in BCNF
 
 \item[] \textbf{Tabella legataa:}
 
-% FIX:
 % rivedere legataa e Itinerario, per concordare dove vanno a finire i vari attributi
 % per il resto è in BCNF
-legataa(\underline{\smash{codEscursione}},\underline{\smash{ codItinerario}}, numSentieri,  codAgriturismo)
-\begin{itemize}
-\vspace{-5pt}
-\item <++> $\Rightarrow$ <++>
-\vspace{-5pt}
-\end{itemize}
-Poichè la parte sinistra è superchiave, legataa è in BCNF
+legataa(\underline{\smash{codEscursione}},\underline{\smash{ codItinerario}})
+
+Poichè non esistono dipendenze funzionali, legataa è in BCNF
 \vspace{10pt}
 
 
 
 \item[] \textbf{Tabella legataa:}
 
-% FIX:
 % vedere la nota precedente
 % per il resto è in BCNF
-Itinerario(\underline{\smash{codEscursione}},\underline{\smash{ codItinerario}}, numSentieri,  codAgriturismo)
+Itinerario(\underline{\smash{codice}}, numSentieri, codAgriturismo)
 \begin{itemize}
 \vspace{-5pt}
-\item <++> $\Rightarrow$ <++>
+\item codice $\Rightarrow$ numSentieri, codAgriturismo
 \vspace{-5pt}
 \end{itemize}
 Poichè la parte sinistra è superchiave, Itinerario è in BCNF
@@ -788,7 +780,7 @@ Poichè la parte sinistra è superchiave, Tappe è in BCNF
 
 \item[] \textbf{Tabella Account:}
 
-% TODO:
+% RIFIUTATO
 % oltre ai vincoli d'integrità referenziale sull'anagrafica dell'account con l'anagrafica del cliente a cui è associato, codFiscale può determinare diversi campi
 % a questo punto forsee varrebbe la pena di creare una nuova tabella che associ ogni codFiscale ai dati da esso ricavabili e inserire nelle tabelle che lo richiedono
 % (account ma anche fornitore, veterinario etc.) solo il codice fiscale, così da poter ricavare il resto delle informazioni joinando con la nuova tabella anagrafica
@@ -796,7 +788,7 @@ Poichè la parte sinistra è superchiave, Tappe è in BCNF
 Account(\underline{\smash{utente}}, \underline{\smash{password}}, domandaRec, rispostaRec, numTelefono, codFiscale, scadenzaDoc, numDoc, dataIscrizione, codDoc, cognome, nome, enteRilascio, tipoDoc, indirizzo, codiceCarta)
 \begin{itemize}
 \vspace{-5pt}
-\item <++> $\Rightarrow$ <++>
+\item utente, password $\Rightarrow$ damandaRec, rispostaRec, numTelefono, codFiscale, scadenzaDoc, numDoc, dataIscrizione, codDoc, cognome, nome, enteRilascio, tipoDoc, indirizzo, codiceCarta
 \vspace{-5pt}
 \end{itemize}
 Poichè la parte sinistra è superchiave, Account è in BCNF
@@ -806,9 +798,8 @@ Poichè la parte sinistra è superchiave, Account è in BCNF
 
 \item[] \textbf{Tabella Recensione:}
 
-% FIX: minore
 % viene ripetuto due volte l'attributo gradimentoGenerale
-Recensione(\underline{\smash{codiceRecensione}}, gradimentoGenerale, qualitaPercepita, conservazione, campoTestuale, gusto, gradimentoGenerale,  utente,  password,  codProdotto)
+Recensione(\underline{\smash{codiceRecensione}}, gradimentoGenerale, qualitaPercepita, conservazione, campoTestuale, gusto, utente,  password,  codProdotto)
 \begin{itemize}
 \vspace{-5pt}
 \item codiceRecensione $\Rightarrow$ gradimentoGenerale, qualitàPercepita, conservazione, campoTestuale, gusto, utente, password, codProdotto
