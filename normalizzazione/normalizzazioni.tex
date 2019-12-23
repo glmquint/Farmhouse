@@ -161,13 +161,12 @@ Poichè la parte sinistra è superchiave, PuliziaLocale è in BCNF
 
 \item[] \textbf{Tabella PastoPerLocale:}
 
-%TODO:
 % codLocale non dovrebbe essere chiave?
 % è cmq BCNF
-PastoPerLocale(\underline{\smash{giorno}}, \underline{\smash{orario}},  codLocale,  fibre,  proteine,  glucidi,  concentrazioneSali,  concentrazioneVitamine)
+PastoPerLocale(\underline{\smash{giorno}}, \underline{\smash{orario}},  \underline{\smash{codLocale}},  fibre,  proteine,  glucidi,  concentrazioneSali,  concentrazioneVitamine)
 \begin{itemize}
 \vspace{-5pt}
-\item <++> $\Rightarrow$ <++>
+\item giorno, orario, codLocale $\Rightarrow$ fibre, proteine, glucidi, concentrazioneSali, concentrazioneVitamine
 \vspace{-5pt}
 \end{itemize}
 Poichè la parte sinistra è superchiave, PastoPerLocale è in BCNF
@@ -186,13 +185,12 @@ Poichè non esistono dipendenze funzionali, Pasto è in BCNF
 
 \item[] \textbf{Tabella Foraggio:}
 
-% TODO:
 % mancano attributi di foraggio
 % è comunque BCNF
-Foraggio(\underline{\smash{fibre}}, \underline{\smash{proteine}},\underline{\smash{ glucidi}})
+Foraggio(\underline{\smash{fibre}}, \underline{\smash{proteine}},\underline{\smash{ glucidi}}, cereali, frutta, piante, forma, kcalkg)
 \begin{itemize}
 \vspace{-5pt}
-\item <++> $\Rightarrow$ <++>
+\item fibre, proteine, glucidi $\Rightarrow$ cereali, frutta, piante, forma, kcalkg
 \vspace{-5pt}
 \end{itemize}
 Poichè la parte sinistra è superchiave, Foraggio è in BCNF
@@ -630,15 +628,14 @@ Poichè la parte sinistra è superchiave, Pagamenti è in BCNF
 
 \item[] \textbf{Tabella PrenotazioneStanza:}
 
-%FIX:
 % dataArrivo e dataPartenza non identificano una prenotazione, in quanto lo steso lasso temporale potrebbe essere usato da più clienti
 % soluzione proposta: una prenotazione viene identificata dal giorno di arrivo e dal clente che l'effettua com echiave esterna
 % inoltre dataPartenza non è più chiave in quanto un cliente non può fare più prenotazioni con lo stesso giorno di arrivo
 % per il resto è cmq in BCNF
-PrenotazioneStanza(\underline{\smash{dataArrivo}}, \underline{\smash{dataPartenza}},  codCliente,  numStanza)
+PrenotazioneStanza(\underline{\smash{dataArrivo}}, \underline{\smash{codCliente}}, \underline{\smash{numStanza}}, \underline{\smash{nomeAgriturismo}}, dataPartenza )
 \begin{itemize}
 \vspace{-5pt}
-\item <++> $\Rightarrow$ <++>
+\item dataArrivo, codCliente, numStanza, nomeAgriturismo $\Rightarrow$ dataPartenza
 \vspace{-5pt}
 \end{itemize}
 Poichè la parte sinistra è superchiave, PrenotazioneStanza è in BCNF
@@ -648,14 +645,13 @@ Poichè la parte sinistra è superchiave, PrenotazioneStanza è in BCNF
 
 \item[] \textbf{Tabella Stanza:}
 
-%TODO:
 % forse sarebbe più logico avere il codice dell'agriturismo a cui la stanza appartiene come chiave esterna
 % in questo modo si evita di avere la stanza numero 9573843
 % cmq è in BCNF
-Stanza(\underline{\smash{numStanza}}, costoGiornaliero, suite, numLetti, tipoLetti,  codAgriturismo)
+Stanza(\underline{\smash{numStanza}}, \underline{\smash{codAgriturismo}}, costoGiornaliero, suite, numLetti, tipoLetti )
 \begin{itemize}
 \vspace{-5pt}
-\item <++> $\Rightarrow$ <++>
+\item numStanza, codAgriturismo $\Rightarrow$ costoGiornaliero, suite, numLetti, tipoLetti
 \vspace{-5pt}
 \end{itemize}
 Poichè la parte sinistra è superchiave, Stanza è in BCNF
