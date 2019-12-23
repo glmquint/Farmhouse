@@ -4331,8 +4331,113 @@ Aggiornamento della relazione tra l'animale e l'attività di pascolo a cui parte
 
 \end{itemize}
 
-\subsection{Vincoli d'integrità referenziale}
-
+\subsection{Vincoli d'integrità}
+  \subsubsection{Vincoli di integrità referenziale}
+\begin{itemize}
+   \item Esiste un vincolo di integrità referenziale tra l'attributo codice in Animale e l'attributo codiceAnimale in acquistoanimale
+   \item Esiste un vincolo di integrità referenziale tra l'attributo codiceLocale in Locale e codLocale in Animale
+   \item Esiste un vincolo di integrità referenziale tra l'attributo ragioneSociale in Fornitore e l'attributo ragioneSocialeFornitore in acquistoanimale
+   \item Esiste un vincolo di integrità referenziale tra l'attributo codice in Animale e codiceAnimale in coinvolge
+   \item Esiste un vincolo di integrità referenziale tra l'attributo codiceRiproduzione in Riproduzione e codRiproduzione in coinvolge
+   \item Esiste un vincolo di integrità referenziale tra l'attributo codVeterinario in Riproduzione e codiceFiscale in Veterinario
+   \item Esiste un vincolo di integrità referenziale tra l'attributo codVeterinario in SchedaGestazione e codiceFiscale in Veterinario
+   \item Esiste un vincolo di integrità referenziale tra l'attributo codRiproduzione in SchedaGestazione e codiceRiproduzione in Riproduzione
+   \item Esiste un vincolo di integrità referenziale tra l'attributo nome in Agriturismo e nomeAgriturismo in Stalla
+   \item Esiste un vincolo di integrità referenziale tra l'attributo nome in Agriturismo e nomeAgriturismo in Locale
+   \item Esiste un vincolo di integrità referenziale tra l'attributo numeroProgressivo in Stalla e numProgressivo in Locale
+   \item Esiste un vincolo di integrità referenziale tra l'attributo codiceLocale in locale e codLocale in Ambientali
+   \item Esiste un vincolo di integrità referenziale tra l'attributo codiceLocale in locale e codLocale in Composti Volatili
+   \item Esiste un vincolo di integrità referenziale tra l'attributo codiceLocale in locale e codLocale in Visivi
+   \item Esiste un vincolo di integrità referenziale tra l'attributo codiceLocale in locale e codLocale in PuliziaLocale 
+   \item Esiste un vincolo di integrità referenziale tra gli attributi fibre, proteine, glucidi in PastoPerLocale con fibre, proteine, glucidi in Foraggio
+   \item Esiste un vincolo di integrità referenziale tra codLocale in PastoPerLocale e codiceLocale in Locale
+   \item Esiste un vincolo di integrità referenziale tra concentrazioneSali e concentrazioneVitamine in PastoPerLocale e concentrazioneSali e concentrazioneVitamine in Acqua  
+   \item Esiste un vincolo di integrità referenziale tra gli attributi fibre, proteine, glucidi in Pasto con fibre, proteine, glucidi in Foraggio
+   \item Esiste un vincolo di integrità referenziale tra concentrazioneSali e concentrazioneVitamine in Pasto e concentrazioneSali e concentrazioneVitamine in Acqua
+   \item Esiste un vincolo di integrità referenziale tra codLocale in Mangiatoia e codiceLocale in Locale
+   \item Esiste un vincolo di integrità referenziale tra codLocale in Abbeveratoio e codiceLocale in Locale
+   \item Esiste un vincolo di integrità referenziale tra codLocale in AttivitàPascolo e codiceLocale in Locale
+   \item Esiste un vincolo di integrità referenziale tra codArea in AttivitàPascolo e codiceArea in AreaPascolo
+   \item Esiste un vincolo di integrità referenziale tra codArea in RecinzioneDivisoriaeZoneDiPascolo e codiceArea in AreaPascolo
+   \item Esiste un vincolo di integrità referenziale tra codAnimale in Mungitura e codice in Animale
+   \item Esiste un vincolo di integrità referenziale tra codMungitrice in Mungitura e codice in Mungitrice
+   \item Esiste un vincolo di integrità referenziale tra codLatte in chemunge e codiceLatte in Latte
+   \item Esiste un vincolo di integrità referenziale tra codMungitrice in chemunge e codice in mungitrice
+   \item Esiste un vincolo di integrità referenziale tra codAnimale in Latte e codice in Animale
+   \item Esiste un vincolo di integrità referenziale tra codSilos in Latte e codice in Silos
+   \item Esiste un vincolo di integrità referenziale tra codLatte in prodottocon e codiceLatte in Latte
+   \item Esiste un vincolo di integrità referenziale tra codLotto in prodottocon e codiceLotto in Lotto
+   \item Esiste un vincolo di integrità referenziale tra codLotto in stoccaggiocantine con codiceLotto in Lotto
+   \item Esiste un vincolo di integrità referenziale tra codCantina in stoccaggiocantine e codice in Cantine
+   \item Esiste un vincolo di integrità referenziale tra codLotto in stoccaggiomagazzini e codiceLotto in Lotto
+   \item Esiste un vincolo di integrità referenziale tra codMagazzino in stoccaggiomagazzini e codice in Magazzini
+   \item Esiste un vincolo di integrità referenziale tra codCantina in Scaffalature e codice in Cantine
+   \item Esiste un vincolo di integrità referenziale tra codCantina in Parametri e codice in Cantine
+   \item Esiste un vincolo di integrità referenziale tra codMagazzieno in Scaffali e codice in Magazzini
+   \item Esiste un vincolo di integrità referenziale tra codLotto in ControlloParametriFase e codiceLotto in Lotto
+   \item Esiste un vincolo di integrità referenziale tra codFase in ControlloParametriFase e codiceFase in Fasi
+   \item Esiste un vincolo di integrità referenziale tra codRicetta in divisain e codiceRicetta in Ricetta
+   \item Esiste un vincolo di integrità referenziale tra codFase in divisain e codiceFase in Fasi
+   \item Esiste un vincolo di integrità referenziale tra nomeAgriturismo in Formaggio e nome in Agriturismo
+   \item Esiste un vincolo di integrità referenziale tra codRicetta in Formaggio e codiceRicetta in Ricetta
+   \item Esiste un vincolo di integrità referenziale tra codLatte in Formaggio e codiceLatte in Latte
+   \item Esiste un vincolo di integrità referenziale tra codAnimale in Indicisalute e codice in Animale
+   \item Esiste un vincolo di integrità referenziale tra codAnimale in Visita con codice in Animale
+   \item Esiste un vincolo di integrità referenziale tra codVeterinario in Visita e codiceVeterinario in Veterinario
+   \item Esiste un vincolo di integrità referenziale tra codAnimale in Esame e codice in Animale
+   \item Esiste un vincolo di integrità referenziale tra codVeterinario in Esame e codiceVeterinario in Veterinario
+   \item Esiste un vincolo di integrità referenziale tra codAnimale in Terapia e codice in Animale
+   \item Esiste un vincolo di integrità referenziale tra codTerapia in compostada e codiceTerapia in Terapia
+   \item Esiste un vincolo di integrità referenziale tra nomeFarmaco in compostada e nome in Farmaco
+   \item Esiste un vincolo di integrità referenziale tra codAnimale in SchedaMedica e codice in Animale
+   \item Esiste un vincolo di integrità referenziale tra codVeterinario in SchedaMedica e codiceVeterinario in Veterinario
+   \item Esiste un vincolo di integrità referenziale tra codScheda in DisturbiComportamentali e codiceScheda in SchedaMedica
+   \item Esiste un vincolo di integrità referenziale tra codScheda in Lesioni e codiceScheda in SchedaMedica
+   \item Esiste un vincolo di integrità referenziale tra codCliente in Pagamenti e codCarta in Cliente
+   \item Esiste un vincolo di integrità referenziale tra codCliente in PrenotazioneStanza e codCarta in Cliente
+   \item Esiste un vincolo di integrità referenziale tra numStanza in PrenotazioneStanza e numStanza in Stanza
+   \item Esiste un vincolo di integrità referenziale tra codAgriturismo in Stanza e nome in Agriturismo
+   \item Esiste un vincolo di integrità referenziale tra codStanza in ServizioperStanza e numStanza in Stanza
+   \item Esiste un vincolo di integrità referenziale tra codServizio in ServizioperStanza e tipoServizio in ServizioAggiuntivo
+   \item Esiste un vincolo di integrità referenziale tra codEscursione in PrenotazioneEscursione e codice in Escursione 
+   \item Esiste un vincolo di integrità referenziale tra codGuida in Escursione e codfisc in Guida
+   \item Esiste un vincolo di integrità referenziale tra codEscursione in legataa e codice in Escursione
+   \item Esiste un vincolo di integrità referenziale tra codItinerario in legataa e codice in Itinerario
+   \item Esiste un vincolo di integrità referenziale tra codAgriturismo in legataa e nome in Agriturismo
+   \item Esiste un vincolo di integrità referenziale tra codItinerario in compostoda e codice in Itinerario
+   \item Esiste un vincolo di integrità referenziale tra nome in Agriturismo e codice in Itinerario
+   \item Esiste un vincolo di integrità referenziale tra nomeTappa in compostoda e nome in Tappa
+   \item Esiste un vincolo di integrità referenziale tra codCarta in Cliente e codiceCarta in Account
+   \item Esiste un vincolo di integrità referenziale tra utente e password in Recensione e utente e password in Account
+   \item Esiste un vincolo di integrità referenziale tra codiceProdotto in FormaggioProdotto e codProdotto in Recensione
+   \item Esiste un vincolo di integrità referenziale tra nome in FormaggioProdotto e nome in Formaggio
+   \item Esiste un vincolo di integrità referenziale tra nome in Agriturismo e nomeAgriturismo in FormaggioProdotto
+   \item Esiste un vincolo di integrità referenziale tra codOrdine in contenutoordine e codiceOrdine in OrdineProdotti
+   \item Esiste un vincolo di integrità referenziale tra codFormaggioProdotto in contenutoordine e codiceProdotto in FormaggioProdotto
+   \item Esiste un vincolo di integrità referenziale tra utente e password in Account ed utente e password in OrdineProdotti
+   \item Esiste un vincolo di integrità referenziale tra codSpedizione in OrdineProdotti e codice in Spedizione
+   \item Esiste un vincolo di integrità referenziale tra codSpedizione in processatada e codice in Spedizione
+   \item Esiste un vincolo di integrità referenziale tra codCentro in processata da e codice in CentridiSmistamento
+\end{itemize}     
+   
+ \subsubsection{Vincoli di integrità generici}
+   \begin{itemize}
+     \item Esiste un vincolo di integrità che lega il codice di un animale al codice della madre e del padre (idMadre,idPadre)
+     \item Esiste un vincolo di integrità che lega l'attributo data in diproduzione con l'attributo dataDiNascita in Animale
+     \item Esiste un vincolo di integrità che lega l'attributo codicePadre in coinvolge con l'attributo codice in Animale
+     \item Esiste un vincolo di integrità che lega gli attributi temperatura e umidità in Locale con temperatura e umidità in Ambientali
+     \item Esiste un vincolo di integrità che lega gli attributi fibre proteine glucidi in Foraggio e kcal/kg in Foraggio
+     \item Esiste un vincolo di integrità che lega gli attributi dataInizio durata e secondaTerapiaConsecutiva in Terapia
+     \item Esiste un vincolo di integrità che lega dataProd e durata in Lotto e deperibilità in Formaggio a scadenza in Formaggio Prodotto
+     \item Esiste un vincolo di integrità che lega dataPartenza in PrenotazioneStanza a data in Pagamenti
+     \item Esiste un vincolo di integrità che lega anticipo in cliente, a tipoPagamento e a totaleCosto in Pagamenti.
+     \item Esiste un vincolo tra quantità in contenutoordine, rimastiinstock in FormaggioProdotto e stato in OrdineProdotti.
+     \item Esiste un vincolo di integrità tra reso in contenutoordine e stato e tipoConsegnaReso in Ordine Prodotti
+     \item Esiste un vincolo di integrità tra stato in Spedizione e stato in OrdineProdotti
+   \end{itemize}
+   
+   
+   
 \subsection{Normalizzazione}
 -- trafiletto--
 %TODO:
