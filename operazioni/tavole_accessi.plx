@@ -227,6 +227,7 @@ $$\noindent\textit{Frequenza giornaliera:} 400\footnote{Ogni agriturismo gestisc
 >!Pagamenti!E!1!S!Scrittura del pagamento intestato al cliente
 >!effettua!R!1!S!Aggiornamento della relazione tra il cliente ed il pagamento
 >!Spedizione!E!1!S!Scrittura di una nuova spedizione con stato \texttt{spedita}
+>!consegnato da!R!1!S!Aggiornamento della relazione tra la spedizione e l'ordine a cui è associata
 >!Ordine Prodotti!E!1!S!Aggiornamento dello stato dell'ordine a \texttt{spedito}
 >!processata da!R!5\footnote{Per ipotesi, ogni spedizione attraversa circa 5 centri di smistmento}!S!Aggiornamento della relazione tra l'ordine ed il centro di smistamento per cui attraversa
 >!Spedizione!E!1!S!Aggiornamento dello stato della spedizione a \texttt{in consegna}
