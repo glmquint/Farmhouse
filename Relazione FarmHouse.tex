@@ -3101,9 +3101,12 @@ valuta
 \label{sec:operazioni}
 Sono qui illustrate le principali operazioni significative capaci di apportare un forte contributo al carico applicativo della base di dati.
 Di ciascuna viene data una breve descrizione, assieme ad una stima della frequenza giornaliera con cui verranno svolte.
-Questo permetterà, assieme ai volumi stimati per ogni entità e relazione nel sistema (riportati a partire da pag. \pageref{sec:volumi}), di derivare il carico effettivo che il database dovrà gestire in termini di operazioni elementari, quali scritture e letture.\footnote{Legenda:\\ frequenza giornaliera: $f^T$\\ numero di operazioni elementari: $o^T$\\ numero di operazioni giornaliere: $n^T = f^T\cdot o^T$\\numero di operazioni elementari con ridondanza: $o^T_{RID}$\\numero di operazioni giornaliere con ridondanza: $n^T_{RID}=f^T\cdot o^T_{RID}$\\frequenza di aggiornamento della ridondanza: $f^A$\\numero di operazioni per l'aggiornamento della ridondanza: $o^A$\\numero di operazioni giornaliere per l'aggiornamento della ridondanza: $n^A = f^A\cdot o^A$}
+Questo permetterà, assieme ai volumi stimati per ogni entità e relazione nel sistema (riportati a partire da pag. \pageref{sec:volumi}), di derivare il carico effettivo che il database dovrà gestire in termini di operazioni elementari, quali scritture e letture.
+\\
 
-Legenda per il calcolo delle operazioni elementari
+Legenda per il calcolo delle operazioni elementari:
+\\
+frequenza giornaliera: $f^T$\\ numero di operazioni elementari: $o^T$\\ numero di operazioni giornaliere: $n^T = f^T\cdot o^T$\\numero di operazioni elementari con ridondanza: $o^T_{RID}$\\numero di operazioni giornaliere con ridondanza: $n^T_{RID}=f^T\cdot o^T_{RID}$\\frequenza di aggiornamento della ridondanza: $f^A$\\numero di operazioni per l'aggiornamento della ridondanza: $o^A$\\numero di operazioni giornaliere per l'aggiornamento della ridondanza: $n^A = f^A\cdot o^A$
 
 
 
@@ -3313,11 +3316,7 @@ Aggiornamento della ridondanza
 \\
 \hline
 \end{longtable}\end{center}
-
 In sintesi:
-
-
-
 %\begin{longtable}{p{0.4\linewidth}cl}
 %$&$= 33$\\\hline
 %$&$= 1590$\\\hline
@@ -3328,32 +3327,24 @@ In sintesi:
 % $&$= 26$\\\hline
 % $&$= 60\times26= 1560$\\\hline
 %\end{longtable}
-
-
-$$
-f^T=33
-$$
-$$
-o^T = 1590
-$$
-$$
-n^T = 1590\times33= 52470
-$$
-$$
-o^T_{RID}= 1056
-$$
-$$
-n^T_{RID} = 1056\times 33 = 34848
-$$
-$$
-f^A= 60
-$$
-$$
-o^A= 26
-$$
-$$
-n^A = 60\times 26 = 1560
-$$
+\begin{align*}
+\\ 
+&f^T=33
+\\ 
+&o^T = 1590
+\\ 
+&n^T = 1590\times33= 52470
+\\
+&o^T_{RID}= 1056
+\\
+&n^T_{RID} = 1056\times 33 = 34848
+\\
+&f^A= 60
+\\
+&o^A= 26
+\\
+&n^A = 60\times 26 = 1560
+\end{align*}
 
 
 
@@ -4302,32 +4293,24 @@ Aggiornamento della relazione tra l'animale e l'attività di pascolo a cui parte
 \end{longtable}\end{center}
 
 In sintesi:
-
-$$
-f^T=3968
-$$
-$$
-o^T = 128
-$$
-$$
-n^T = 3968\times128= 507904
-$$
-$$
-o^T_{RID}= 127
-$$
-$$
-n^T_{RID} = 3968\times 127 = 503936
-$$
-$$
-f^A= 247
-$$
-$$
-o^A= 42
-$$
-$$
-n^A = 247\times 42 = 10374
-$$
-
+\begin{align*}
+&f^T=3968
+\\
+&o^T = 128
+\\
+&n^T = 3968\times128= 507904
+\\
+&o^T_{RID}= 127
+\\
+&n^T_{RID} = 3968\times 127 = 503936
+\\
+&f^A= 247
+\\
+&o^A= 42
+\\
+&n^A = 247\times 42 = 10374
+\\
+\end{align*}
 
 
 \vspace{7pt}Quindi poichè $n^T - n^T_{RID} < n^A$, in quanto $507904 - 503936 = 3968 < 10374$, non conviene mantenere la ridondanza
