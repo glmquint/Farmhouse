@@ -3129,8 +3129,65 @@ frequenza giornaliera: $f^T$\\ numero di operazioni elementari: $o^T$\\ numero d
 
 \subsubsection*{Porzione del diagramma interessata:}
 
+
+
 \includegraphics[scale=2, width=1.15\textwidth]{operazioni/schemi_parziali/operazione-\thecounterAccessi.png} 
 \subsubsection*{Porzione della tavola dei volumi interessata:}
+
+\begin{center}\setlength{\extrarowheight}{1.5pt}\begin{longtable}{|p{0.23\linewidth}|p{0.1\linewidth}|p{0.11\linewidth}|p{0.45\linewidth}|}
+\hline \textbf{Nome}   & \begin{center}\vspace{-15pt}\textbf{E/R}\end{center} & \textbf{Numero Istanze} & \textbf{Motivazione}\\ 
+\hline
+pasto assegnato 				& \begin{center}
+\vspace{-25pt}R
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}547500\end{center}
+					&  Cardinalità (1,1) con Pasto per Locale \\ 
+
+\hline
+Pasto per Locale 				& \begin{center}
+\vspace{-25pt}R
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}547500\end{center}
+					&  Tre pasti al giorno per un anno per ogni locale $3\times365\times500=547500$ \\ 
+
+\hline
+locale assegnato 				& \begin{center}
+\vspace{-25pt}R
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}547500\end{center}
+					&  Cardinalità (1,1) con Pasto per Locale \\ 
+
+\hline
+abita 				& \begin{center}
+\vspace{-25pt}R
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}20000\end{center}
+					&  Cardinalità (1,1) con Animale \\ 
+
+\hline
+stato salute
+ & 
+\multicolumn{1}{|c|}{R}
+ & 
+\multicolumn{1}{|c|}{22000}
+ & 
+Cardinalità (1,1) con Indici Salute
+\\
+\hline
+Indici Salute
+ & 
+\multicolumn{1}{|c|}{E}
+ & 
+\multicolumn{1}{|c|}{22000}
+ & 
+Per ogni visita vengono rilevati nuovamente gli indici di salute
+\\
+\hline
+\end{longtable}\end{center}
 \subsubsection*{Tavola degli accessi:}
 
 E' presente la ridondanza \textit{qualità pasto} tra Pasto e Indici Salute che influenza la tavola degli accessi
@@ -3365,7 +3422,10 @@ In sintesi:
 
 \includegraphics[scale=2, width=1.15\textwidth]{operazioni/schemi_parziali/operazione-\thecounterAccessi.png} 
 \subsubsection*{Porzione della tavola dei volumi interessata:}
-
+\begin{center}\setlength{\extrarowheight}{1.5pt}\begin{longtable}{|p{0.23\linewidth}|p{0.1\linewidth}|p{0.11\linewidth}|p{0.45\linewidth}|}
+\hline \textbf{Nome}   & \begin{center}\vspace{-15pt}\textbf{E/R}\end{center} & \textbf{Numero Istanze} & \textbf{Motivazione}\\ 
+\hline
+\end{longtable}\end{center}
 \subsubsection*{Tavola degli accessi:}
 
 \begin{center}\setlength{\extrarowheight}{1.5pt}\begin{longtable}{|p{0.2\linewidth}|p{0.1\linewidth}|p{0.175\linewidth}|p{0.1\linewidth}|p{0.3\linewidth}|}\hline \textbf{Nome costrutto}   & \multicolumn{1}{|c|}{\textbf{E/R}} & \textbf{Numero operazioni elementari} & \multicolumn{1}{|c|}{\textbf{Tipo}} & \textbf{Descrizione}\\ 
@@ -3457,7 +3517,10 @@ Aggiornamento della relazione tra l'animale neonato e la visita programmata
 
 \includegraphics[scale=2, width=1.15\textwidth]{operazioni/schemi_parziali/operazione-\thecounterAccessi.png} 
 \subsubsection*{Porzione della tavola dei volumi interessata:}
-
+\begin{center}\setlength{\extrarowheight}{1.5pt}\begin{longtable}{|p{0.23\linewidth}|p{0.1\linewidth}|p{0.11\linewidth}|p{0.45\linewidth}|}
+\hline \textbf{Nome}   & \begin{center}\vspace{-15pt}\textbf{E/R}\end{center} & \textbf{Numero Istanze} & \textbf{Motivazione}\\ 
+\hline
+\end{longtable}\end{center}
 \subsubsection*{Tavola degli accessi:}
 
 \begin{center}\setlength{\extrarowheight}{1.5pt}\begin{longtable}{|p{0.2\linewidth}|p{0.1\linewidth}|p{0.175\linewidth}|p{0.1\linewidth}|p{0.3\linewidth}|}\hline \textbf{Nome costrutto}   & \multicolumn{1}{|c|}{\textbf{E/R}} & \textbf{Numero operazioni elementari} & \multicolumn{1}{|c|}{\textbf{Tipo}} & \textbf{Descrizione}\\ 
@@ -3604,7 +3667,10 @@ Aggiornamento della relazione tra il cliente ed il pagamento
 
 \includegraphics[scale=2, width=1.15\textwidth]{operazioni/schemi_parziali/operazione-\thecounterAccessi.png} 
 \subsubsection*{Porzione della tavola dei volumi interessata:}
-
+\begin{center}\setlength{\extrarowheight}{1.5pt}\begin{longtable}{|p{0.23\linewidth}|p{0.1\linewidth}|p{0.11\linewidth}|p{0.45\linewidth}|}
+\hline \textbf{Nome}   & \begin{center}\vspace{-15pt}\textbf{E/R}\end{center} & \textbf{Numero Istanze} & \textbf{Motivazione}\\ 
+\hline
+\end{longtable}\end{center}
 \subsubsection*{Tavola degli accessi:}
 
 \begin{center}\setlength{\extrarowheight}{1.5pt}\begin{longtable}{|p{0.2\linewidth}|p{0.1\linewidth}|p{0.175\linewidth}|p{0.1\linewidth}|p{0.3\linewidth}|}\hline \textbf{Nome costrutto}   & \multicolumn{1}{|c|}{\textbf{E/R}} & \textbf{Numero operazioni elementari} & \multicolumn{1}{|c|}{\textbf{Tipo}} & \textbf{Descrizione}\\ 
@@ -3674,7 +3740,10 @@ Aggiornamento della relazione tra il latte ed il silos nel quale è stoccato
 
 \includegraphics[scale=2, width=1.15\textwidth]{operazioni/schemi_parziali/operazione-\thecounterAccessi.png} 
 \subsubsection*{Porzione della tavola dei volumi interessata:}
-
+\begin{center}\setlength{\extrarowheight}{1.5pt}\begin{longtable}{|p{0.23\linewidth}|p{0.1\linewidth}|p{0.11\linewidth}|p{0.45\linewidth}|}
+\hline \textbf{Nome}   & \begin{center}\vspace{-15pt}\textbf{E/R}\end{center} & \textbf{Numero Istanze} & \textbf{Motivazione}\\ 
+\hline
+\end{longtable}\end{center}
 \subsubsection*{Tavola degli accessi:}
 
 \begin{center}\setlength{\extrarowheight}{1.5pt}\begin{longtable}{|p{0.2\linewidth}|p{0.1\linewidth}|p{0.175\linewidth}|p{0.1\linewidth}|p{0.3\linewidth}|}\hline \textbf{Nome costrutto}   & \multicolumn{1}{|c|}{\textbf{E/R}} & \textbf{Numero operazioni elementari} & \multicolumn{1}{|c|}{\textbf{Tipo}} & \textbf{Descrizione}\\ 
@@ -3810,7 +3879,10 @@ Aggiornamento della relazione tra il locale e l'intervento di pulizia
 
 \includegraphics[scale=2, width=1.15\textwidth]{operazioni/schemi_parziali/operazione-\thecounterAccessi.png} 
 \subsubsection*{Porzione della tavola dei volumi interessata:}
-
+\begin{center}\setlength{\extrarowheight}{1.5pt}\begin{longtable}{|p{0.23\linewidth}|p{0.1\linewidth}|p{0.11\linewidth}|p{0.45\linewidth}|}
+\hline \textbf{Nome}   & \begin{center}\vspace{-15pt}\textbf{E/R}\end{center} & \textbf{Numero Istanze} & \textbf{Motivazione}\\ 
+\hline
+\end{longtable}\end{center}
 \subsubsection*{Tavola degli accessi:}
 
 \begin{center}\setlength{\extrarowheight}{1.5pt}\begin{longtable}{|p{0.2\linewidth}|p{0.1\linewidth}|p{0.175\linewidth}|p{0.1\linewidth}|p{0.3\linewidth}|}\hline \textbf{Nome costrutto}   & \multicolumn{1}{|c|}{\textbf{E/R}} & \textbf{Numero operazioni elementari} & \multicolumn{1}{|c|}{\textbf{Tipo}} & \textbf{Descrizione}\\ 
@@ -4023,7 +4095,10 @@ Aggiornamento dello stato dell'ordine a \texttt{evaso}
 
 \includegraphics[scale=2, width=1.15\textwidth]{operazioni/schemi_parziali/operazione-\thecounterAccessi.png} 
 \subsubsection*{Porzione della tavola dei volumi interessata:}
-
+\begin{center}\setlength{\extrarowheight}{1.5pt}\begin{longtable}{|p{0.23\linewidth}|p{0.1\linewidth}|p{0.11\linewidth}|p{0.45\linewidth}|}
+\hline \textbf{Nome}   & \begin{center}\vspace{-15pt}\textbf{E/R}\end{center} & \textbf{Numero Istanze} & \textbf{Motivazione}\\ 
+\hline
+\end{longtable}\end{center}
 \subsubsection*{Tavola degli accessi:}
 
 \begin{center}\setlength{\extrarowheight}{1.5pt}\begin{longtable}{|p{0.2\linewidth}|p{0.1\linewidth}|p{0.175\linewidth}|p{0.1\linewidth}|p{0.3\linewidth}|}\hline \textbf{Nome costrutto}   & \multicolumn{1}{|c|}{\textbf{E/R}} & \textbf{Numero operazioni elementari} & \multicolumn{1}{|c|}{\textbf{Tipo}} & \textbf{Descrizione}\\ 
@@ -4071,7 +4146,10 @@ Ricollocamento del locale abitato dall'animale tramite l'aggiornamento della rel
 
 \includegraphics[scale=2, width=1.15\textwidth]{operazioni/schemi_parziali/operazione-\thecounterAccessi.png} 
 \subsubsection*{Porzione della tavola dei volumi interessata:}
-
+\begin{center}\setlength{\extrarowheight}{1.5pt}\begin{longtable}{|p{0.23\linewidth}|p{0.1\linewidth}|p{0.11\linewidth}|p{0.45\linewidth}|}
+\hline \textbf{Nome}   & \begin{center}\vspace{-15pt}\textbf{E/R}\end{center} & \textbf{Numero Istanze} & \textbf{Motivazione}\\ 
+\hline
+\end{longtable}\end{center}
 \subsubsection*{Tavola degli accessi:}
 
 E' presente la ridondanza \textit{partecipazione attività} tra Attività pascolo e Animale che influenza la tavola degli accessi
