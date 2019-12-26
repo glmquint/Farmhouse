@@ -3582,6 +3582,118 @@ Aggiornamento della relazione tra l'animale neonato e la visita programmata
 \begin{center}\setlength{\extrarowheight}{1.5pt}\begin{longtable}{|p{0.23\linewidth}|p{0.1\linewidth}|p{0.11\linewidth}|p{0.45\linewidth}|}
 \hline \textbf{Nome}   & \begin{center}\vspace{-15pt}\textbf{E/R}\end{center} & \textbf{Numero Istanze} & \textbf{Motivazione}\\ 
 \hline
+Prenotazione Stanza
+ & 
+\multicolumn{1}{|c|}{E}
+ & 
+\multicolumn{1}{|c|}{10000}
+ & 
+Si stima che mediamente in un anno ogni cliente prenoti una stanza
+\\
+
+\hline
+assegnazione stanza
+ & 
+\multicolumn{1}{|c|}{R}
+ & 
+\multicolumn{1}{|c|}{10000}
+ & 
+Cardinalità (1,1) con Prenotazione Stan\-za 
+\\
+
+\hline
+stanza associata
+ & 
+\multicolumn{1}{|c|}{R}
+ & 
+\multicolumn{1}{|c|}{1500}
+ & 
+Cardinalità (1,1) con Servizio per Stanza
+\\
+
+\hline
+stanza associata
+ & 
+\multicolumn{1}{|c|}{R}
+ & 
+\multicolumn{1}{|c|}{1500}
+ & 
+Cardinalità (1,1) con Servizio per Stanza
+\\
+
+\hline
+Servizio per Stanza
+ & 
+\multicolumn{1}{|c|}{E}
+ & 
+\multicolumn{1}{|c|}{1500}
+ & 
+Si considera che la metà delle stanze prenotate abbia usufruito di tre servizi aggiuntivi $1000\times 0.5 \times 3 = 1500$
+\\
+
+\hline
+servizio associato
+ & 
+\multicolumn{1}{|c|}{R}
+ & 
+\multicolumn{1}{|c|}{1500}
+ & 
+Cardinalità (1,1) con Servizio per Stanza
+\\
+
+\hline
+Servizio Aggiuntivo
+ & 
+\multicolumn{1}{|c|}{E}
+ & 
+\multicolumn{1}{|c|}{10}
+ & 
+Ogni agriturismo dispone delle stesse 10 tipologie di servizi aggiuntivi
+\\
+
+\hline
+assegnazione cliente
+ & 
+\multicolumn{1}{|c|}{R}
+ & 
+\multicolumn{1}{|c|}{10000}
+ & 
+Cardinalità (1,1) con Prenotazione Stanza
+\\
+
+\hline
+Cliente
+ & 
+\multicolumn{1}{|c|}{E}
+ & 
+\multicolumn{1}{|c|}{10000}
+ & 
+Ogni agriturismo ha in media 500 clienti all'anno
+\\
+
+\hline
+
+Pagamenti
+ & 
+\multicolumn{1}{|c|}{E}
+ & 
+\multicolumn{1}{|c|}{166000}
+ & 
+Si considera la somma dei pagamenti per gli ordini sullo store online, per la prenotazione delle stanze e delle escursioni $146000+2\times 10000= 166000$
+\\
+
+\hline
+effettua
+ & 
+\multicolumn{1}{|c|}{R}
+ & 
+\multicolumn{1}{|c|}{166000}
+ & 
+Cardinalità (1,1) con Pagamenti
+\\
+
+\hline
+
 \end{longtable}\end{center}
 \subsubsection*{Tavola degli accessi:}
 
@@ -3732,6 +3844,39 @@ Aggiornamento della relazione tra il cliente ed il pagamento
 \begin{center}\setlength{\extrarowheight}{1.5pt}\begin{longtable}{|p{0.23\linewidth}|p{0.1\linewidth}|p{0.11\linewidth}|p{0.45\linewidth}|}
 \hline \textbf{Nome}   & \begin{center}\vspace{-15pt}\textbf{E/R}\end{center} & \textbf{Numero Istanze} & \textbf{Motivazione}\\ 
 \hline
+Mungitura 				& \begin{center}
+\vspace{-25pt}E
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}5475000\end{center}
+					&  Si suppone che ogni giorno dell'anno ogni animale femmina di un agriturismo venga munto una volta $20000\times 0.75 \times 365 = 5475000$ \\ 
+
+\hline
+Latte 				& \begin{center}
+\vspace{-25pt}E
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}400\end{center}
+					&  Ogni agriturismo produce 20 tipologie di latte differente $20\times 20 = 400$\\ 
+
+\hline
+Silos 				& \begin{center}
+\vspace{-25pt}E
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}200\end{center}
+					&  Sono disponibili circa 10 silos per ogni agriturismo $10\times 20=200$ \\ 
+
+\hline
+stoccato in 				& \begin{center}
+\vspace{-25pt}R
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}400\end{center}
+					&  Cardinalità (1,1) con Latte \\ 
+
+\hline
+
 \end{longtable}\end{center}
 \subsubsection*{Tavola degli accessi:}
 
@@ -3805,6 +3950,79 @@ Aggiornamento della relazione tra il latte ed il silos nel quale è stoccato
 \begin{center}\setlength{\extrarowheight}{1.5pt}\begin{longtable}{|p{0.23\linewidth}|p{0.1\linewidth}|p{0.11\linewidth}|p{0.45\linewidth}|}
 \hline \textbf{Nome}   & \begin{center}\vspace{-15pt}\textbf{E/R}\end{center} & \textbf{Numero Istanze} & \textbf{Motivazione}\\ 
 \hline
+rilievo parametri visivi 				& \begin{center}
+\vspace{-25pt}R
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}500\end{center}
+					&  Cardinalità (1,1) con Visivi \\ 
+
+\hline
+Visivi 				& \begin{center}
+\vspace{-25pt}E
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}500\end{center}
+					&  Ogni locale è dotato di un sensore per i parametri visivi \\ 
+
+\hline
+rilievo parametri ambientali 				& \begin{center}
+\vspace{-25pt}R
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}500\end{center}
+					&  Cardinalità (1,1) con rilievo parametri ambientali \\ 
+
+\hline
+Ambientali 				& \begin{center}
+\vspace{-25pt}E
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}500\end{center}
+					&  Ogni locale è dotato di un sensore per i parametri ambientali \\ 
+
+\hline
+rilievo composti volatili 				& \begin{center}
+\vspace{-25pt}R
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}500\end{center}
+					&  Cardinalità (1,1) con Composti volatili \\ 
+
+\hline
+Composti volatili 				& \begin{center}
+\vspace{-25pt}E
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}500\end{center}
+					&  Ogni locale è dotato di un sensore per i composti volatili \\ 
+
+\hline
+Locale 				& \begin{center}
+\vspace{-25pt}E
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}500\end{center}
+					&  Ogni stalla ha in media 5 locali \\ 
+
+\hline
+Pulizia locale 				& \begin{center}
+\vspace{-25pt}E
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}580\end{center}
+					&  Ogni agriturismo effettua due richieste al giorno, per un totale di $2\times 365=730$ richieste annue\footnote{In questo modo, ognuno dei 25 locali viene pulito ${730\over 25}=29$ volte l'anno}. Quindi i 20 agriturismi compilano $730\times 20=14600$ record all'anno. \\ 
+
+\hline
+richiesta intervento 				& \begin{center}
+\vspace{-25pt}R
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}580\end{center}
+					&  Cardinalità (1,1) con Pulizia locale \\ 
+
+\hline
+
 \end{longtable}\end{center}
 \subsubsection*{Tavola degli accessi:}
 
@@ -3944,6 +4162,137 @@ Aggiornamento della relazione tra il locale e l'intervento di pulizia
 \begin{center}\setlength{\extrarowheight}{1.5pt}\begin{longtable}{|p{0.23\linewidth}|p{0.1\linewidth}|p{0.11\linewidth}|p{0.45\linewidth}|}
 \hline \textbf{Nome}   & \begin{center}\vspace{-15pt}\textbf{E/R}\end{center} & \textbf{Numero Istanze} & \textbf{Motivazione}\\ 
 \hline
+Ordine Prodotti
+ & 
+\multicolumn{1}{|c|}{E}
+ & 
+\multicolumn{1}{|c|}{146000}
+ & 
+ Ogni agriturismo gestisce in media 20 ordini al giorno $20\times 20\times 365 = 146000$
+\\
+
+\hline
+contenuto ordine
+ & 
+\multicolumn{1}{|c|}{R}
+ & 
+\multicolumn{1}{|c|}{2920000}
+ & 
+ Se si suppone che ogni ordine contenga 20 prodotti al massimo, si ottiene un numero totale di record pari a $20\times146000=2920000$
+\\
+
+\hline
+ Formaggio Prodotto
+ & 
+\multicolumn{1}{|c|}{E}
+ & 
+\multicolumn{1}{|c|}{3000000}
+ & 
+Per far fronte alle richieste della clientela, si decide di mantenere una produzione lievemente superiore alle vendite stimate (circa 80000 prodotti in più rispetto al volume di contenuto ordine)
+\\
+
+\hline
+Ordine Prodotti
+ & 
+\multicolumn{1}{|c|}{E}
+ & 
+\multicolumn{1}{|c|}{146000}
+ & 
+ Ogni agriturismo gestisce in media 20 ordini al giorno $20\times 20\times 365 = 146000$
+\\
+
+\hline
+esegue ordine
+ & 
+\multicolumn{1}{|c|}{R}
+ & 
+\multicolumn{1}{|c|}{146000}
+ & 
+Cardinalità (1,1) con Ordine Prodotti
+\\
+
+\hline
+Account
+ & 
+\multicolumn{1}{|c|}{E}
+ & 
+\multicolumn{1}{|c|}{7000}
+ & 
+Si suppone che il 70\% degli utenti sia registrato, e possegga di conseguenza un account
+\\
+
+\hline
+possiede visita
+ & 
+\multicolumn{1}{|c|}{R}
+ & 
+\multicolumn{1}{|c|}{22000}
+ & 
+Cardinalità (1,1) con Visita
+\\
+
+\hline
+Cliente
+ & 
+\multicolumn{1}{|c|}{E}
+ & 
+\multicolumn{1}{|c|}{10000}
+ & 
+Ogni agriturismo ha in media 500 clienti all'anno
+\\
+
+\hline
+Pagamenti
+ & 
+\multicolumn{1}{|c|}{E}
+ & 
+\multicolumn{1}{|c|}{166000}
+ & 
+Si considera la somma dei pagamenti per gli ordini sullo store online, per la prenotazione delle stanze e delle escursioni $146000+2\times 10000= 166000$
+\\
+
+\hline
+effettua
+ & 
+\multicolumn{1}{|c|}{R}
+ & 
+\multicolumn{1}{|c|}{166000}
+ & 
+Cardinalità (1,1) con Pagamenti
+\\
+
+\hline
+Spedizione
+ & 
+\multicolumn{1}{|c|}{E}
+ & 
+\multicolumn{1}{|c|}{2920}
+ & 
+Ogni spedizione consegnerà circa 50 ordini collocati per area geografica simile ${146000\over 50}=2920$
+\\
+
+\hline
+consegnato da
+ & 
+\multicolumn{1}{|c|}{R}
+ & 
+\multicolumn{1}{|c|}{146000}
+ & 
+Cardinalità (1,1) con Ordine Prodotti
+\\
+
+\hline
+processata da
+ & 
+\multicolumn{1}{|c|}{R}
+ & 
+\multicolumn{1}{|c|}{14600}
+ & 
+Si suppone che ogni spedizione sia processata da circa 5 centri di smistamento $2920\times 5=14600$
+\\
+
+\hline
+
 \end{longtable}\end{center}
 \subsubsection*{Tavola degli accessi:}
 
@@ -4160,6 +4509,25 @@ Aggiornamento dello stato dell'ordine a \texttt{evaso}
 \begin{center}\setlength{\extrarowheight}{1.5pt}\begin{longtable}{|p{0.23\linewidth}|p{0.1\linewidth}|p{0.11\linewidth}|p{0.45\linewidth}|}
 \hline \textbf{Nome}   & \begin{center}\vspace{-15pt}\textbf{E/R}\end{center} & \textbf{Numero Istanze} & \textbf{Motivazione}\\ 
 \hline
+Terapia
+ & 
+\multicolumn{1}{|c|}{E}
+ & 
+\multicolumn{1}{|c|}{40000}
+ & 
+Si suppone che ogni anno vengano prescritte 2 terapie per ogni animale $2\times 20000= 40000$
+\\
+
+\hline
+abita 				& \begin{center}
+\vspace{-25pt}R
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}20000\end{center}
+					&  Cardinalità (1,1) con Animale \\ 
+
+\hline
+
 \end{longtable}\end{center}
 \subsubsection*{Tavola degli accessi:}
 
@@ -4211,6 +4579,63 @@ Ricollocamento del locale abitato dall'animale tramite l'aggiornamento della rel
 \begin{center}\setlength{\extrarowheight}{1.5pt}\begin{longtable}{|p{0.23\linewidth}|p{0.1\linewidth}|p{0.11\linewidth}|p{0.45\linewidth}|}
 \hline \textbf{Nome}   & \begin{center}\vspace{-15pt}\textbf{E/R}\end{center} & \textbf{Numero Istanze} & \textbf{Motivazione}\\ 
 \hline
+attività locale 				& \begin{center}
+\vspace{-25pt}R
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}90000\end{center}
+					&  Cardinalità (1,1) con Attività pascolo \\ 
+
+\hline
+abita 				& \begin{center}
+\vspace{-25pt}R
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}20000\end{center}
+					&  Cardinalità (1,1) con Animale \\ 
+
+\hline
+localizzato 				& \begin{center}
+\vspace{-25pt}R
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}20000\end{center}
+					&  Cardinalità (1,1) con Animale e con GPS \\ 
+
+\hline
+GPS 				& \begin{center}
+\vspace{-25pt}E
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}20000\end{center}
+					&  Ogni animale è dotato di un dispositivo GPS \\ 
+
+\hline
+collocazione attività 				& \begin{center}
+\vspace{-25pt}R
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}90000\end{center}
+					&  Cardinalità (1,1) con Attività pascolo \\ 
+
+\hline
+divisione pascolo 				& \begin{center}
+\vspace{-25pt}R
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}180\end{center}
+					&  Cardinalità (1,1) con Recinzione divisoria e zona di pascolo \\ 
+
+\hline
+Recinzione divisoria e zona di pascolo 				& \begin{center}
+\vspace{-25pt}E
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}180\end{center}
+					&  Ogni area di pascolo è divisa in 3 recinsioni $60\times 3= 180$\\ 
+
+\hline
+
 \end{longtable}\end{center}
 \subsubsection*{Tavola degli accessi:}
 
