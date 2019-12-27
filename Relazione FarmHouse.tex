@@ -4880,6 +4880,250 @@ In sintesi:
 
 \vspace{7pt}Quindi poichè $n^T - n^T_{RID} < n^A$, in quanto $507904 - 503936 = 3968 < 10374$, non conviene mantenere la ridondanza
 
+\stepcounter{counterAccessi}
+
+\subsubsection*{Operazione \thecounterAccessi{}: Registrazione nuovo account}
+\noindent\textit{Descrizione:} All' inserimento di un nuovo account nello store online, viene controllato se i dati inseriti corrispondono a quelli di un cliente già registrato ma senza un account. Nel caso viene aggiunto un record in Account con i dati forniti durante la registrazione, altrimenti viene prima registrato il nuovo cliente a partire dal codice della sua carta
+
+\noindent\textit{Input:} anagrafica del cliente, dati dei documenti e informazioni sull'account da registrare
+
+\noindent\textit{Output:} aggiunta di un account e del cliente che lo possiede
+
+\noindent\textit{Frequenza giornaliera:} 19 \footnote{I 7000 accounts vengono registrati nel corso di un anno: $\frac{7000}{365}\approx 19$}
+
+\subsubsection*{Porzione del diagramma interessata:}
+
+
+
+\includegraphics[scale=2, width=1.15\textwidth]{operazioni/schemi_parziali/operazione-\thecounterAccessi.png} 
+
+
+
+\subsubsection*{Porzione della tavola dei volumi interessata:}
+
+
+
+\begin{center}\setlength{\extrarowheight}{1.5pt}\begin{longtable}{|p{0.23\linewidth}|p{0.1\linewidth}|p{0.11\linewidth}|p{0.45\linewidth}|}
+
+
+
+\hline \textbf{Nome}   & \begin{center}\vspace{-15pt}\textbf{E/R}\end{center} & \textbf{Numero Istanze} & \textbf{Motivazione}\\ 
+
+
+
+\hline
+
+
+
+\end{longtable}\end{center}
+
+\begin{center}\setlength{\extrarowheight}{1.5pt}\begin{longtable}{|p{0.2\linewidth}|p{0.1\linewidth}|p{0.175\linewidth}|p{0.1\linewidth}|p{0.3\linewidth}|}\hline \textbf{Nome costrutto}   & \multicolumn{1}{|c|}{\textbf{E/R}} & \textbf{Numero operazioni elementari} & \multicolumn{1}{|c|}{\textbf{Tipo}} & \textbf{Descrizione}\\ 
+\hline
+Cliente
+ & 
+\multicolumn{1}{|c|}{E}
+ & 
+\multicolumn{1}{|c|}{1}
+ & 
+\multicolumn{1}{|c|}{L}
+ & 
+Si ricava, se è presente, il cliente già registrato con questo codice di carta
+\\
+\hline
+Cliente
+ & 
+\multicolumn{1}{|c|}{E}
+ & 
+\multicolumn{1}{|c|}{1}
+ & 
+\multicolumn{1}{|c|}{S}
+ & 
+Aggiunta di un record in Cliente
+\\
+\hline
+Account
+ & 
+\multicolumn{1}{|c|}{E}
+ & 
+\multicolumn{1}{|c|}{1}
+ & 
+\multicolumn{1}{|c|}{S}
+ & 
+Aggiunta di un nuovo account nello store online
+\\
+\hline
+possiede
+ & 
+\multicolumn{1}{|c|}{R}
+ & 
+\multicolumn{1}{|c|}{1}
+ & 
+\multicolumn{1}{|c|}{S}
+ & 
+Aggiornamento della relazione tra il cliente e il suo nuovo account
+\\
+\hline
+\multicolumn{4}{|l|}{Totale}
+ & 
+\multicolumn{1}{|c|}{7}
+\\
+\hline
+\end{longtable}\end{center}
+\stepcounter{counterAccessi}
+
+\subsubsection*{Operazione \thecounterAccessi{}: Ridistribuzione degli animali all'aggiunta di un nuovo locale}
+\noindent\textit{Descrizione:} All'aggiunta di un nuovo locale, vengono smistati gli animali già presenti nella stalla affinchè sia mantenuto costante il numero di animali per locale
+
+\noindent\textit{Input:} dati del nuovo locale e codice della stalla a cui appartiene
+
+\noindent\textit{Output:} ridistribuzione degli animali nel nuovo locale aggiunto e registrazione dei nuovi sensori
+
+\noindent\textit{Frequenza giornaliera:} 0.27\footnote{Si stima che in un anno vengano aggiunti 100 nuovi locali, che corrispondono per un agriturismo ad un nuovo locale per ognuna della 5 stalle: $\frac{100}{365}\approx 0.27$}
+
+\subsubsection*{Porzione del diagramma interessata:}
+
+
+
+\includegraphics[scale=2, width=1.15\textwidth]{operazioni/schemi_parziali/operazione-\thecounterAccessi.png} 
+
+
+
+\subsubsection*{Porzione della tavola dei volumi interessata:}
+
+
+
+\begin{center}\setlength{\extrarowheight}{1.5pt}\begin{longtable}{|p{0.23\linewidth}|p{0.1\linewidth}|p{0.11\linewidth}|p{0.45\linewidth}|}
+
+
+
+\hline \textbf{Nome}   & \begin{center}\vspace{-15pt}\textbf{E/R}\end{center} & \textbf{Numero Istanze} & \textbf{Motivazione}\\ 
+
+
+
+\hline
+
+
+
+\end{longtable}\end{center}
+
+\begin{center}\setlength{\extrarowheight}{1.5pt}\begin{longtable}{|p{0.2\linewidth}|p{0.1\linewidth}|p{0.175\linewidth}|p{0.1\linewidth}|p{0.3\linewidth}|}\hline \textbf{Nome costrutto}   & \multicolumn{1}{|c|}{\textbf{E/R}} & \textbf{Numero operazioni elementari} & \multicolumn{1}{|c|}{\textbf{Tipo}} & \textbf{Descrizione}\\ 
+\hline
+divisione locali
+ & 
+\multicolumn{1}{|c|}{R}
+ & 
+\multicolumn{1}{|c|}{5}
+ & 
+\multicolumn{1}{|c|}{L}
+ & 
+Si passa dalla relazione per ricavare i 5 locali in cui abitano gli animali da ridistribuire
+\\
+\hline
+abita
+ & 
+\multicolumn{1}{|c|}{R}
+ & 
+\multicolumn{1}{|c|}{200}
+ & 
+\multicolumn{1}{|c|}{L}
+ & 
+Si passa dalla relazione per ottenere gli animali da ridistribuire
+\\
+\hline
+Locale
+ & 
+\multicolumn{1}{|c|}{E}
+ & 
+\multicolumn{1}{|c|}{1}
+ & 
+\multicolumn{1}{|c|}{S}
+ & 
+Registrazione del nuovo locale
+\\
+\hline
+Visivi
+ & 
+\multicolumn{1}{|c|}{E}
+ & 
+\multicolumn{1}{|c|}{2}
+ & 
+\multicolumn{1}{|c|}{S}
+ & 
+Registrazione dei nuovi sensori visivi per il locale
+\\
+\hline
+rilievo parametri visivi
+ & 
+\multicolumn{1}{|c|}{R}
+ & 
+\multicolumn{1}{|c|}{2}
+ & 
+\multicolumn{1}{|c|}{S}
+ & 
+Aggiornamento della relazione tra i sensori ed il locale
+\\
+\hline
+Ambientali
+ & 
+\multicolumn{1}{|c|}{E}
+ & 
+\multicolumn{1}{|c|}{2}
+ & 
+\multicolumn{1}{|c|}{S}
+ & 
+Registrazione dei nuovi sensori ambientali per il locale
+\\
+\hline
+rilievo parametri ambientali
+ & 
+\multicolumn{1}{|c|}{R}
+ & 
+\multicolumn{1}{|c|}{2}
+ & 
+\multicolumn{1}{|c|}{S}
+ & 
+Aggiornamento della relazione tra i sensori ed il locale
+\\
+\hline
+Composti volatili
+ & 
+\multicolumn{1}{|c|}{E}
+ & 
+\multicolumn{1}{|c|}{2}
+ & 
+\multicolumn{1}{|c|}{S}
+ & 
+Registrazione dei nuovi sensori ambientali per il locale
+\\
+\hline
+rilievo composti volatili
+ & 
+\multicolumn{1}{|c|}{R}
+ & 
+\multicolumn{1}{|c|}{2}
+ & 
+\multicolumn{1}{|c|}{S}
+ & 
+Aggiornamento della relazione tra i sensori ed il locale
+\\
+\hline
+abita
+ & 
+\multicolumn{1}{|c|}{R}
+ & 
+\multicolumn{1}{|c|}{33}
+ & 
+\multicolumn{1}{|c|}{S}
+ & 
+Aggiornamento della relazione per il ricollocamento dei 200 animali tra i 5 locali più quello appena registrato $\frac{200}{5+1}\approx 33$
+\\
+\hline
+\multicolumn{4}{|l|}{Totale}
+ & 
+\multicolumn{1}{|c|}{297}
+\\
+\hline
+\end{longtable}\end{center}
 
 
 \section{Progettazione logica}
