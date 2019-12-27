@@ -5198,7 +5198,7 @@ Aggiornamento della relazione per il ricollocamento dei 200 animali tra i 5 loca
 \item Tappe(\underline{\smash{nome}}, tempoPermanenza) 
 \item Account(\underline{\smash{utente}}, \underline{\smash{password}}, domandaRec, rispostaRec, numTelefono, codFiscale, scadenzaDoc, numDoc, dataIscrizione, codDoc, cognome, nome, enteRilascio, tipoDoc, indirizzo, codiceCarta)
 \item Recensione(\underline{\smash{codiceRecensione}}, gradimentoGenerale, qualitaPercepita, conservazione, campoTestuale, gusto,  utente,  password,  codProdotto)
-\item FormaggioProdotto(\underline{\smash{codiceProdotto}}, prezzo, peso, stockAppartenenza, rimastiInStock, scadenza,  codiceProdotto,  nome,  nomeAgriturismo)
+\item FormaggioProdotto(\underline{\smash{codiceProdotto}}, prezzo, peso, stockAppartenenza, rimastiInStock, scadenza,  nome,  nomeAgriturismo)
 \item contenutoordine(\underline{\smash{codOrdine}}, \underline{\smash{codFormaggioprodotto}}, quantità, reso)
 \item OrdineProdotti(\underline{\smash{codiceOrdine}}, stato, data, tipoConsegnaReso,  utente,  password,  codSpedizione)
 \item Spedizione(\underline{\smash{codice}}, dataConsegnaEffettiva, dataConsegnaPrevista, percorso, stato)
@@ -6130,10 +6130,10 @@ Poichè la parte sinistra è superchiave, Recensione è in BCNF
 
 \item[] \textbf{Tabella FormaggioProdotto:}
 
-FormaggioProdotto(\underline{\smash{codiceProdotto}}, prezzo, peso, stockAppartenenza, rimastiInStock, scadenza,  codiceProdotto,  nome,  nomeAgriturismo)
+FormaggioProdotto(\underline{\smash{codiceProdotto}}, prezzo, peso, stockAppartenenza, rimastiInStock, scadenza,  nome,  nomeAgriturismo)
 \begin{itemize}
 \vspace{-5pt}
-\item codiceProdotto $\Rightarrow$ prezzo, peso, stockAppartenenza, rimastiInStock, scadenza, codiceProdotto, nome, nomeAgriturismo
+\item codiceProdotto $\Rightarrow$ prezzo, peso, stockAppartenenza, rimastiInStock, scadenza, nome, nomeAgriturismo
 \vspace{-5pt}
 \end{itemize}
 Poichè la parte sinistra è superchiave, FormaggioProdotto è in BCNF
