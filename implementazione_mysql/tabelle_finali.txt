@@ -3,20 +3,20 @@
 DROP TABLE IF EXISTS `Animale`;
 CREATE TABLE `Animale`
 (
-	codice	<++>,
-	sesso	<++>,
-	specie	<++>,
-	famiglia	<++>,
-	idMadre	<++>,
-	idPadre	<++>,
-	dataDiNascita	<++>,
-	altezza	<++>,
-	peso	<++>,
-	razza	<++>,
-	posizione	<++>,
-	orario	<++>,
-	codiceGps	<++>,
-	codLocale	<++>,
+	codice	int unsigned not null auto_increment,
+	sesso	tinyint(1) not null,
+	specie	varchar(20),
+	famiglia	varchar(20),
+	idMadre	int unsigned,
+	idPadre	int unsigned,
+	dataDiNascita	date,
+	altezza	tinyint unsigned,
+	peso	tinyint unsigned,
+	razza	varchar(20),
+	posizione	int,
+	orario	timestamp,
+	codiceGps	int unsigned not null,
+	codLocale	int unsigned not null,
 	primary key (codice),
 	foreign key (codiceGps, codLocale) references <++>(<++>)
 );
@@ -24,10 +24,10 @@ CREATE TABLE `Animale`
 DROP TABLE IF EXISTS `acquistoanimale`;
 CREATE TABLE `acquistoanimale`
 (
-	codiceAnimale	<++>,
-	ragioneSocialeFornitore	<++>,
-	dataAcquisto	<++>,
-	dataArrivo	<++>,
+	codiceAnimale	int unsigned not null,
+	ragioneSocialeFornitore	varchar(40),
+	dataAcquisto	date,
+	dataArrivo	date,
 	primary key (codiceAnimale),
 	foreign key (codiceAnimale) references <++>(<++>)
 );
