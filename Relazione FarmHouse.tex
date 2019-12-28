@@ -6207,8 +6207,12 @@ Poichè la parte sinistra è superchiave, CentridiSmistamento è in BCNF
 
 
 \section{Implementazione MySQL}
-Nota sugli attributi:\\Per sfruttare i tipi di dato offerti dall'architettura mySQL, si è deciso di trasformare tutte le istanze di data e orario in un unico attributo data-orario di tipo TIMESTAMP.
+Nota sugli attributi:
+\begin{itemize}
+\item Per sfruttare i tipi di dato offerti dall'architettura mySQL, si è deciso di trasformare tutte le istanze di data e orario in un unico attributo data\_orario di tipo TIMESTAMP.
 Inoltre tutte le occorrenze di data sono state opportunamente ridenominate, affinchè non ci siano conflitti con la keyword omonima.
+\item Tutti gli attributi che riguardano una posizione geografica sono stati trasformati in due attributi latitudine e longitudine di tipo float.
+\end{itemize}
 \subsection{Triggers}
 \subsection{Data Analytics}
 

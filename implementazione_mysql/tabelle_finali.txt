@@ -3,381 +3,391 @@
 DROP TABLE IF EXISTS `Animale`;
 CREATE TABLE `Animale`
 (
-	codice	int unsigned not null auto_increment,
-	sesso	tinyint(1) not null,
-	specie	varchar(20),
-	famiglia	varchar(20),
-	idMadre	int unsigned,
-	idPadre	int unsigned,
+	codice	int unsigned not null unique auto_increment,
+	sesso	enum('Maschio', 'Femmina'),
+	specie	varchar(30),
+	famiglia	tinytext,
+	idMadre	int unsigned check(idMadre in (SELECT codice FROM Animale)),
+	idPadre	int unsigned check(idPadre in (SELECT codice FROM Animale)),
 	dataDiNascita	date,
 	altezza	tinyint unsigned,
-	peso	tinyint unsigned,
-	razza	varchar(20),
-	posizione	int,
-	orario	timestamp,
-	codiceGps	int unsigned not null,
+	peso	smallint unsigned,
+	razza	tinytext,
+	posizione	blob(8), 
+	orario	timestamp, 
+	codiceGps	int unsigned not null unique auto_increment,
 	codLocale	int unsigned not null,
 	primary key (codice),
-	foreign key (codiceGps, codLocale) references <++>(<++>)
+	foreign key (codLocale) references Locale(codice)
 );
 
 DROP TABLE IF EXISTS `acquistoanimale`;
 CREATE TABLE `acquistoanimale`
 (
-	codiceAnimale	int unsigned not null,
+	codiceAnimale	int unsigned not null unique,
 	ragioneSocialeFornitore	varchar(40),
 	dataAcquisto	date,
 	dataArrivo	date,
 	primary key (codiceAnimale),
-	foreign key (codiceAnimale) references <++>(<++>)
+	foreign key (codiceAnimale) references Animale(codice)
 );
 
 DROP TABLE IF EXISTS `Fornitore`;
 CREATE TABLE `Fornitore`
 (
-	ragioneSociale	<++>,
-	indirizzo	<++>,
-	partitaIva	<++>,
+	ragioneSociale	varchar(40) not null unique,
+	indirizzo	varchar(60),
+	partitaIva	dec(11),
 	primary key(ragioneSociale)	 
 );
 
 DROP TABLE IF EXISTS `Riproduzione`;
 CREATE TABLE `Riproduzione`
 (
-	codiceRiproduzione	<++>,
-	complicanza	<++>,
-	orario	<++>,
-	data	<++>,
-	stato	<++>,
-	codVeterinario	<++>,
-	codiceMadre	<++>,
-	codicePadre	<++>,
+	codiceRiproduzione	int unsigned not null unique,
+	complicanza	varchar(100),
+	data_orario:	timestamp,
+	stato	enum('successo', 'insuccesso'),
+	codVeterinario	char(16),
+	codiceMadre	int unsigned,
+	codicePadre	int unsigned,
 	primary key (codiceRiproduzione),
-	foreign key (codVeterinario, codiceMadre, codicePadre) references <++>(<++>)
+	foreign key (codVeterinario) references Veterinario(codiceFiscale), 
+	foreign key (codiceMadre) references Animale(codice)
 );
 
 DROP TABLE IF EXISTS `SchedaGestazione`;
 CREATE TABLE `SchedaGestazione`
 (
-	codiceGestazione	<++>,
-	codRiproduzione	<++>,
-	codVeterinario	<++>,
+	codiceGestazione	int unsigned not null unique auto_increment,
+	codRiproduzione	int unsigned not null unique,
+	codVeterinario	int unsigned not null ,
 	primary key (codiceGestazione),
-	foreign key (codRiproduzione, codVeterinario) references <++>(<++>)
+	foreign key (codRiproduzione) references Riproduzione(codiceRiproduzione), 
+	foreign key (codVeterinario) references Veterinario(codiceFiscale)
 );
 
 DROP TABLE IF EXISTS `Agriturismo`;
 CREATE TABLE `Agriturismo`
 (
-	Nome	<++>,
+	Nome	varchar(30) not null unique,
 	primary key(Nome)	 
 );
 
 DROP TABLE IF EXISTS `Stalla`;
 CREATE TABLE `Stalla`
 (
-	numProgressivo	<++>,
-	nomeAgriturismo	<++>,
+	numProgressivo	tinyint unsigned not null,
+	nomeAgriturismo	varchar(30) not null,
 	primary key (numProgressivo, nomeAgriturismo),
-	foreign key (nomeAgriturismo) references <++>(<++>)
+	foreign key (nomeAgriturismo) references Agriturismo(nome)
 );
 
 DROP TABLE IF EXISTS `Locale`;
 CREATE TABLE `Locale`
 (
-	codiceLocale	<++>,
-	temperatura	<++>,
-	umidità	<++>,
-	orientazioneFinestre	<++>,
-	tollerabilitaAzoto	<++>,
-	tollerabilitaSporcizia	<++>,
-	tollerabilitaMetano	<++>,
-	nomeAgriturismo	<++>,
-	specieOspitata	<++>,
-	altezza	<++>,
-	lunghezza	<++>,
-	larghezza	<++>,
+	codiceLocale	int unsigned not null unique auto_increment,
+	temperatura	float,
+	umidità	float,
+	orientazioneFinestre	enum('N','NE', 'E', 'SE', 'S', 'SO', 'O', 'NO'),
+	tollerabilitaAzoto	tinyint unsigned,
+	tollerabilitaSporcizia	tinyint unsigned,
+	tollerabilitaMetano	tinyint unsigned,
+	nomeAgriturismo	varchar(30) not null,
+	specieOspitata	varchar(30) check(specieOspitata in (select distinct(specie) from Animale)),
+	altezza	smallint unsigned not null,
+	lunghezza	smallint unsigned not null,
+	larghezza	smallint unsigned not null,
 	primary key (codiceLocale),
-	foreign key (nomeAgriturismo, specieOspitata, altezza, lunghezza, larghezza) references <++>(<++>)
+	foreign key (nomeAgriturismo) references Agriturismo(nome), 
+	foreign key (specieOspitata, altezza, lunghezza, larghezza) references CaratteristichePerTipoLocale(specieOspitata, altezza, lunghezza, larghezza)
 );
 
 DROP TABLE IF EXISTS `CaratteristichePerTipoLocale`;
 CREATE TABLE `CaratteristichePerTipoLocale`
 (
-	specieOspitata	<++>,
-	altezza	<++>,
-	lunghezza	<++>,
-	larghezza	<++>,
-	capienzaMax	<++>,
-	pavimentazione	<++>,
+	specieOspitata	varchar(30) check(specieOspitata in (select distinct(specie) from Animale)),
+	altezza	smallint unsigned not null,
+	lunghezza	smallint unsigned not null,
+	larghezza	smallint unsigned not null,
+	capienzaMax	tinyint unsigned not null,
+	pavimentazione	varchar(30),
 	primary key (specieOspitata, altezza, lunghezza, larghezza)	 
 );
 
 DROP TABLE IF EXISTS `Visivi`;
 CREATE TABLE `Visivi`
 (
-	codiceVisivo	<++>,
-	livelloSporcizia	<++>,
-	orarioRilevazione	<++>,
-	codLocale	<++>,
+	codiceVisivo	int unsigned not null unique auto_increment,
+	livelloSporcizia	float,
+	orarioRilevazione	timestamp not null,
+	codLocale	int unsigned not null,
 	primary key (codiceVisivo),
-	foreign key (codLocale) references <++>(<++>)
+	foreign key (codLocale) references Locale(codice)
 );
 
 DROP TABLE IF EXISTS `Ambientali`;
 CREATE TABLE `Ambientali`
 (
-	codiceAmbientale	<++>,
-	temperatura	<++>,
-	umidità	<++>,
-	orarioRilevazione	<++>,
-	codLocale	<++>,
+	codiceAmbientale	int unsigned not null unique auto_increment,
+	temperatura	float,
+	umidità	float,
+	orarioRilevazione	timestamp not null,
+	codLocale	int unsigned not null,
 	primary key (codiceAmbientale),
-	foreign key (codLocale) references <++>(<++>)
+	foreign key (codLocale) references Locale(codice)
 );
 
 DROP TABLE IF EXISTS `CompostiVolatili`;
 CREATE TABLE `CompostiVolatili`
 (
-	codiceVolatili	<++>,
-	concentrazioneMetano	<++>,
-	concentrazioneAzoto	<++>,
-	codLocale	<++>,
+	codiceVolatili	int unsigned not null unique auto_increment,
+	concentrazioneMetano	float,
+	concentrazioneAzoto	float,
+	codLocale	int unsigned not null,
 	primary key (codiceVolatili),
-	foreign key (codLocale) references <++>(<++>)
+	foreign key (codLocale) references Locale(codice)
 );
 
 DROP TABLE IF EXISTS `PuliziaLocale`;
 CREATE TABLE `PuliziaLocale`
 (
-	codLocale	<++>,
-	orarioRilevazione	<++>,
-	dataRilevazione	<++>,
-	stato	<++>,
-	personale	<++>,
+	codLocale	int unsigned not null,
+	data_orarioRilevazione	timestamp,
+	stato	enum('pendente', effettuato'),
+	personale	int unsigned not null,
 	primary key (codLocale, orarioRilevazione, dataRilevazione),
-	foreign key (codLocale) references <++>(<++>)
+	foreign key (codLocale) references Locale(codice)
 );
 
 DROP TABLE IF EXISTS `PastoPerLocale`;
 CREATE TABLE `PastoPerLocale`
 (
-	giorno	<++>,
-	orario	<++>,
-	codLocale	<++>,
-	fibre	<++>,
-	proteine	<++>,
-	glucidi	<++>,
-	concentrazioneSali	<++>,
-	concentrazioneVitamine	<++>,
+	giorno_orario	timestamp,
+	codLocale	int unsigned not null,
+	fibre	tintyint unsigned,
+	proteine	tinyint unsigned,
+	glucidi	tinyint,
+	concentrazioneSali	tinyint unsigned,
+	concentrazioneVitamine	tinyint unsigned,
 	primary key (giorno, orario,  codLocale),
-	foreign key (codLocale, fibre, proteine, glucidi, concentrazioneSali, concentrazioneVitamine) references <++>(<++>)
+	foreign key (codLocale) references Locale(codice), 
+	foreign key (fibre, proteine, glucidi, concentrazioneSali, concentrazioneVitamine) references Pasto(fibre, proteine, glucidi, concentrazioneSali, concentrazioneVitamine)
 );
 
 DROP TABLE IF EXISTS `Pasto`;
 CREATE TABLE `Pasto`
 (
-	fibre	<++>,
-	proteine	<++>,
-	glucidi	<++>,
-	concentrazioneSali	<++>,
-	concentrazioneVitamine	<++>,
+	fibre	tinyint unsigned,
+	proteine	tinyint unsigned,
+	glucidi	tinyint unsigned,
+	concentrazioneSali	tinyint unsigned,
+	concentrazioneVitamine	tinyint unsigned,
 	primary key (fibre, proteine, glucidi, concentrazioneSali, concentrazioneVitamine),
-	foreign key (fibre, proteine, glucidi, concentrazioneSali, concentrazioneVitamine) references <++>(<++>)
+	foreign key (fibre, proteine, glucidi) references Foraggio(fibre, proteine, glucidi), 
+	foreign key (concentrazioneSali, concentrazioneVitamine) references Acqua(concentrazioneSali, concentrazioneVitamine)
 );
 
 DROP TABLE IF EXISTS `Foraggio`;
 CREATE TABLE `Foraggio`
 (
-	fibre	<++>,
-	proteine	<++>,
-	glucidi	<++>,
-	cereali	<++>,
-	frutta	<++>,
-	piante	<++>,
-	forma	<++>,
-	kcalkg	<++>,
+	fibre	tinyint unsigned,
+	proteine	tinyint unsigned,
+	glucidi	tinyint insigned,
+	cereali	tinyint unsigned,
+	frutta	tinyint unsigned,
+	piante	tinyint unsigned,
+	forma	enum('insilato', 'fieno'),
+	kcalkg	tinyint unsigned,
 	primary key (fibre, proteine, glucidi)	 
 );
 
 DROP TABLE IF EXISTS `Acqua`;
 CREATE TABLE `Acqua`
 (
-	concentrazioneSali	<++>,
-	concentrazioneVitamine	<++>,
+	concentrazioneSali	tinyint unsigned,
+	concentrazioneVitamine	tinyint unsigned,
 	primary key (concentrazioneSali, concentrazioneVitamine)	 
 );
 
 DROP TABLE IF EXISTS `Mangiatoia`;
 CREATE TABLE `Mangiatoia`
 (
-	codice	<++>,
-	quantitàRestante	<++>,
-	codLocale	<++>,
+	codice	int unsigned not null unique auto_increment,
+	quantitàRestante	tinyint unsigned,
+	codLocale	int unsigned,
 	primary key (codice),
-	foreign key (codLocale) references <++>(<++>)
+	foreign key (codLocale) references Locale(codice)
 );
 
 DROP TABLE IF EXISTS `Abberveratoio`;
 CREATE TABLE `Abberveratoio`
 (
-	codice	<++>,
-	quantitàRestante	<++>,
-	codLocale	<++>,
+	codice	int unsigned not null unique auto_increment,
+	quantitàRestante tinyint unsigned,
+	codLocale	int unsigned,
 	primary key (codice),
-	foreign key (codLocale) references <++>(<++>)
+	foreign key (codLocale) references Locale(codice)
 );
 
 DROP TABLE IF EXISTS `AttivitàPascolo`;
 CREATE TABLE `AttivitàPascolo`
 (
-	codiceAttivita	<++>,
-	fasciaOraria	<++>,
-	codLocale	<++>,
-	codArea	<++>,
+	codiceAttivita	int unsigned not null unique auto_increment,
+	fasciaOraria	time,
+	codLocale	int unsigned not null,
+	codArea	tinyint unsigned,
 	primary key (codiceAttivita),
-	foreign key (codLocale, codArea) references <++>(<++>)
+	foreign key (codLocale) references Locale(codice), 
+	foreign key (codArea) references Area(codiceArea)
 );
 
 DROP TABLE IF EXISTS `AreaPascolo`;
 CREATE TABLE `AreaPascolo`
 (
-	codiceArea	<++>,
+	codiceArea	tinyint unsigned not null unique auto_increment,
 	primary key(codiceArea)	 
 );
 
 DROP TABLE IF EXISTS `RecinzioneDivisoriaeZoneDiPascolo`;
 CREATE TABLE `RecinzioneDivisoriaeZoneDiPascolo`
 (
-	codiceZona	<++>,
-	codArea	<++>,
-	posizione	<++>,
+	codiceZona	tinyint unsigned not null unique auto_increment,
+	codArea	tinyint unsigned,
+	longitudine	float,
+	latitudine	float,
 	primary key (codiceZona, codArea),
-	foreign key (codArea) references <++>(<++>)
+	foreign key (codArea) references Area(codiceArea)
 );
 
 DROP TABLE IF EXISTS `Mungitura`;
 CREATE TABLE `Mungitura`
 (
-	codAnimale	<++>,
-	codMungitrice	<++>,
-	data	<++>,
-	ora	<++>,
-	quantità	<++>,
+	codAnimale	int unsigned not null,
+	codMungitrice	int unsigned not null,
+	data_orario	timestamp not null,
+	quantità	int unsigned,
 	primary key (codAnimale, codMungitrice, data, ora),
-	foreign key (codAnimale, codMungitrice) references <++>(<++>)
+	foreign key (codAnimale) references Animale(codice), 
+	foreign key (codMungitrice) references Mungitrice(codice)
 );
 
 DROP TABLE IF EXISTS `Mungitrice`;
 CREATE TABLE `Mungitrice`
 (
-	codice	<++>,
-	posizione	<++>,
-	marca	<++>,
-	modello	<++>,
+	codice	int unsigned not null unique auto_increment,
+	longitudine	float,
+	latitudine	float,
+	marca	varchar(20),
+	modello	varchar(50),
 	primary key(codice)	 
 );
 
 DROP TABLE IF EXISTS `chemunge`;
 CREATE TABLE `chemunge`
 (
-	codLatte	<++>,
-	codMungitrice	<++>,
+	codLatte	int unsigned not null,
+	codMungitrice	int unsigned not null,
 	primary key (codLatte, codMungitrice),
-	foreign key (codLatte, codMungitrice) references <++>(<++>)
+	foreign key (codLatte) references Latte(codiceLatte), 
+	foreign key (codMungitrice) references Mungitrice(codice)
 );
 
 DROP TABLE IF EXISTS `Latte`;
 CREATE TABLE `Latte`
 (
-	codiceLatte	<++>,
-	quantitàSostanzeDisciolte	<++>,
-	codAnimale	<++>,
-	codSilos	<++>,
+	codiceLatte	int unsigned not null unique auto_increment,
+	quantitàSostanzeDisciolte	tinyint unsigned not null,
+	codAnimale	int unsigned not null,
+	codSilos	int unsigned,
 	primary key (codiceLatte),
-	foreign key (codAnimale, codSilos) references <++>(<++>)
+	foreign key (codAnimale) references Animale(codice), 
+	foreign key (codSilos) references Silos(codice)
 );
 
 DROP TABLE IF EXISTS `Silos`;
 CREATE TABLE `Silos`
 (
-	codice	<++>,
-	capacità	<++>,
-	livello	<++>,
+	codice	int unsigned not null unique,
+	capacità	tinyint not null,
+	livello	tinyint,
 	primary key(codice)	 
 );
 
 DROP TABLE IF EXISTS `prodottocon`;
 CREATE TABLE `prodottocon`
 (
-	codLatte	<++>,
-	codLotto	<++>,
+	codLatte	int unsigned not null,
+	codLotto	int unsigned not null,
 	primary key (codLatte, codLotto),
-	foreign key (codLatte, codLotto) references <++>(<++>)
+	foreign key (codLatte) references Latte(codiceLatte), 
+	foreign key (codLotto) references Lotto(codiceLotto)
 );
 
 DROP TABLE IF EXISTS `Lotto`;
 CREATE TABLE `Lotto`
 (
-	codiceLotto	<++>,
-	codDipendenti	<++>,
-	dataProd	<++>,
-	codLab	<++>,
-	durata	<++>,
+	codiceLotto	int unsigned not null unique auto_increment,
+	codDipendenti	int unsigned,
+	dataProd	date not null,
+	codLab	int unsigned not null,
+	durata	time,
 	primary key(codiceLotto)	 
 );
 
 DROP TABLE IF EXISTS `stoccaggiocantine`;
 CREATE TABLE `stoccaggiocantine`
 (
-	codLotto	<++>,
-	codCantina	<++>,
+	codLotto	int unsigned not null,
+	codCantina	int unsigned not null,
 	primary key (codLotto, codCantina),
-	foreign key (codLotto, codCantina) references <++>(<++>)
+	foreign key (codLotto) references Lotto(codiceLotto), 
+	foreign key (codCantina) references Cantina(codice)
 );
 
 DROP TABLE IF EXISTS `stoccaggiomagazzini`;
 CREATE TABLE `stoccaggiomagazzini`
 (
-	codLotto	<++>,
-	codMagazzino	<++>,
+	codLotto	int unsigned not null,
+	codMagazzino	int unsigned not null,
 	primary key (codLotto, codMagazzino),
-	foreign key (codLotto, codMagazzino) references <++>(<++>)
+	foreign key (codLotto) references Lotto(codiceLotto), 
+	foreign key (codMagazzino) references Magazzino(codice)
 );
 
 DROP TABLE IF EXISTS `Cantine`;
 CREATE TABLE `Cantine`
 (
-	codice	<++>,
+	codice	int unsigned not null unique auto_increment,
 	primary key(codice)	 
 );
 
 DROP TABLE IF EXISTS `Magazzini`;
 CREATE TABLE `Magazzini`
 (
-	codice	<++>,
+	codice	int unsigned not null unique auto_increment,
 	primary key(codice)	 
 );
 
 DROP TABLE IF EXISTS `Scaffalature`;
 CREATE TABLE `Scaffalature`
 (
-	codCantina	<++>,
-	codice	<++>,
+	codCantina	int unsigned not null unique,
+	codice	int unsigned not null unique,
 	primary key (codCantina, codice),
-	foreign key (codCantina) references <++>(<++>)
+	foreign key (codCantina) references Cnatine(codice)
 );
 
 DROP TABLE IF EXISTS `Parametri`;
 CREATE TABLE `Parametri`
 (
-	data	<++>,
-	idSensore	<++>,
-	temperatura	<++>,
-	umidità	<++>,
-	codCantina	<++>,
+	data	date not null,
+	idSensore	int unsigned not null,
+	temperatura	float,
+	umidità	float,
+	codCantina	int unsigned not null,
 	primary key (data, idSensore),
-	foreign key (codCantina) references <++>(<++>)
+	foreign key (codCantina) references Cantine(codice)
 );
 
 DROP TABLE IF EXISTS `Scaffali`;
