@@ -5180,7 +5180,7 @@ Aggiornamento della relazione per il ricollocamento dei 200 animali tra i 5 loca
 \item Terapia(\underline{\smash{codiceTerapia}}, dataInizio, durata, secondaTerapiaConsecutiva,  codAnimale)
 \item compostada(\underline{\smash{codTerapia}}, \underline{\smash{nomeFarmaco}}, posologia)
 \item Farmaco(\underline{\smash{nome}}, principioAttivo, dosaggio)
-\item SchedaMedica(\underline{\smash{codiceScheda}}, massaMagra, carenze, patologie, data, rispostaOculare, emocromo, spessoreZoccolo, fegato, cuore, pancreas, massaMagra,  codAnimale,  codVeterinario)
+\item SchedaMedica(\underline{\smash{codiceScheda}}, massaMagra, carenze, patologie, data, rispostaOculare, emocromo, spessoreZoccolo, fegato, cuore, pancreas, codAnimale,  codVeterinario)
 \item DisturbiComportamentali(\underline{\smash{entità}}, \underline{\smash{nome}}, \underline{\smash{codScheda}})
 \item Lesioni(\underline{\smash{tipologia}}, \underline{\smash{parteDelCorpo}}, \underline{\smash{entità}}, \underline{\smash{codScheda}})
 \item Cliente(\underline{\smash{codCarta}}, anticipo)
@@ -5893,10 +5893,10 @@ Poichè la parte sinistra è superchiave, Farmaco è in BCNF
 
 % potrebbe capitare che lo stesso veterinario compili due schede mediche dello stesso animale nello stesso giorno?
 % per evitare qualsiasi problema basta dire di sì
-SchedaMedica(\underline{\smash{codiceScheda}}, massaMagra, carenze, patologie, data, rispostaOculare, emocromo, spessoreZoccolo, fegato, cuore, pancreas, massaMagra,  codAnimale,  codVeterinario)
+SchedaMedica(\underline{\smash{codiceScheda}}, massaMagra, carenze, patologie, data, rispostaOculare, emocromo, spessoreZoccolo, fegato, cuore, pancreas, codAnimale,  codVeterinario)
 \begin{itemize}
 \vspace{-5pt}
-\item codiceScheda $\Rightarrow$ massaMagram carenzem patologie, data, rispostaOculare, emocromo, spessoreZoccolo, fegato, cuore, pancreas, massaMagra, codAnimale, codVeterinario
+\item codiceScheda $\Rightarrow$ massaMagram carenzem patologie, data, rispostaOculare, emocromo, spessoreZoccolo, fegato, cuore, pancreas, codAnimale, codVeterinario
 \vspace{-5pt}
 \end{itemize}
 Poichè la parte sinistra è superchiave, SchedaMedica è in BCNF
@@ -6207,6 +6207,8 @@ Poichè la parte sinistra è superchiave, CentridiSmistamento è in BCNF
 
 
 \section{Implementazione MySQL}
+Nota sugli attributi:\\Per sfruttare i tipi di dato offerti dall'architettura mySQL, si è deciso di trasformare tutte le istanze di data e orario in un unico attributo data-orario di tipo TIMESTAMP.
+Inoltre tutte le occorrenze di data sono state opportunamente ridenominate, affinchè non ci siano conflitti con la keyword omonima.
 \subsection{Triggers}
 \subsection{Data Analytics}
 
