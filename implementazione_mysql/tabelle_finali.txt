@@ -392,421 +392,453 @@ CREATE TABLE Parametri
 	foreign key (codCantina) references Cantine(codice)
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-DROP TABLE IF EXISTS Scaffali;
-CREATE TABLE Scaffali
+
+DROP TABLE IF EXISTS  Scaffali ;
+CREATE TABLE  Scaffali 
 (
-	codice	<++>,
-	codMagazzino	<++>,
+	codice	TINYINT(2) NOT NULL,
+	codMagazzino TINYINT (3) NOT NULL,
 	primary key (codice, codMagazzino),
-	foreign key (codMagazzino) references <++>(<++>)
-)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+	foreign key (codMagazzino) references Magazzini(codice)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-DROP TABLE IF EXISTS ControlloParametriFase;
-CREATE TABLE ControlloParametriFase
+DROP TABLE IF EXISTS  ControlloParametriFase ;
+CREATE TABLE  ControlloParametriFase 
 (
-	parametriEffettivi	<++>,
-	codLotto	<++>,
-	codFase	<++>,
+	parametriEffettivi	VARCHAR(200) UNIQUE,
+	codLotto	INTEGER NOT NULL,
+	codFase		INTEGER NOT NULL,
 	primary key (parametriEffettivi, codLotto, codFase),
-	foreign key (codLotto, codFase) references <++>(<++>)
-)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+	foreign key (codFase) references Fasi(codiceFase),
+	foreign key (codLotto) references Lotto(codiceLotto)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-DROP TABLE IF EXISTS Fasi;
-CREATE TABLE Fasi
+DROP TABLE IF EXISTS  Fasi ;
+CREATE TABLE  Fasi 
 (
-	codiceFase	<++>,
-	nome	<++>,
-	parametriProcesso	<++>,
-	durata	<++>,
+	codiceFase	INTEGER NOT NULL UNIQUE AUTO_INCREMENT,
+	nome	VARCHAR(30),
+	parametriProcesso 	VARCHAR(200),
+	durata	TIME NOT NULL,
 	primary key(codiceFase)	 
-)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-DROP TABLE IF EXISTS divisain;
-CREATE TABLE divisain
+DROP TABLE IF EXISTS  divisain ;
+CREATE TABLE  divisain 
 (
-	codRicetta	<++>,
-	codFase	<++>,
+	codRicetta	INTEGER NOT NULL UNIQUE,
+	codFase	INTEGER NOT NULL UNIQUE,
 	primary key (codRicetta, codFase),
-	foreign key (codRicetta, codFase) references <++>(<++>)
-)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+	foreign key (codRicetta) references Ricetta(codiceRicetta),
+	foreign key (codFase) references Fasi(codiceFase)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-DROP TABLE IF EXISTS Ricetta;
-CREATE TABLE Ricetta
+DROP TABLE IF EXISTS  Ricetta ;
+CREATE TABLE  Ricetta 
 (
-	codiceRicetta	<++>,
-	collocazioneGeografica	<++>,
-	ricetta	<++>,
-	durataStagionatura	<++>,
+	codiceRicetta	INTEGER NOT NULL UNIQUE AUTO_INCREMENT,
+	collocazioneGeografica	VARCHAR(30),
+	ricetta	VARCHAR(4096) NOT NULL,
+	durataStagionatura	TIME,
 	primary key(codiceRicetta)	 
-)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-DROP TABLE IF EXISTS Formaggio;
-CREATE TABLE Formaggio
+DROP TABLE IF EXISTS  Formaggio ;
+CREATE TABLE  Formaggio 
 (
-	nome	<++>,
-	nomeAgriturismo	<++>,
-	deperibilita	<++>,
-	codRicetta	<++>,
-	codLatte	<++>,
+	nome	VARCHAR(30) NOT NULL UNIQUE,
+	nomeAgriturismo	VARCHAR(30) NOT NULL,
+	deperibilita	TIME,
+	codRicetta	INTEGER NOT NULL,
+	codLatte	INTEGER NOT NULL,
 	primary key (nome, nomeAgriturismo),
-	foreign key (nomeAgriturismo) references <++>(<++>)
-)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+	foreign key (nomeAgriturismo) references Agriturismo(nome)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-DROP TABLE IF EXISTS Indicisalute;
-CREATE TABLE Indicisalute
+DROP TABLE IF EXISTS  Indicisalute ;
+CREATE TABLE  Indicisalute 
 (
-	codAnimale	<++>,
-	dataRilevazione	<++>,
-	tipologiaRespirazione	<++>,
-	lucentezzaPelo	<++>,
-	vigilanza	<++>,
-	idratazione	<++>,
-	deambulazione	<++>,
+	codAnimale	INT UNSIGNED NOT NULL,
+	dataRilevazione	DATE NOT NULL UNIQUE,
+	tipologiaRespirazione	VARCHAR(20),
+	lucentezzaPelo	VARCHAR(20),
+	vigilanza	VARCHAR(20),
+	idratazione	VARCHAR(20),
+	deambulazione	VARCHAR(20),
 	primary key (codAnimale, dataRilevazione),
-	foreign key (codAnimale) references <++>(<++>)
-)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+	foreign key (codAnimale) references Animale(codice)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-DROP TABLE IF EXISTS Visita;
-CREATE TABLE Visita
+DROP TABLE IF EXISTS  Visita ;
+CREATE TABLE  Visita 
 (
-	codiceVisita	<++>,
-	esito	<++>,
-	descrizione	<++>,
-	dataEffettiva	<++>,
-	dataProgrammata	<++>,
-	codAnimale	<++>,
-	codVeterinario	<++>,
+	codiceVisita	SMALLINT UNSIGNED NOT NULL UNIQUE AUTO_INCREMENT,
+	esito	CHAR(8),
+	descrizione	VARCHAR(500),
+	dataEffettiva	DATE,
+	dataProgrammata	DATE,
+	codAnimale	INT UNSIGNED NOT NULL,
+	codVeterinario	CHAR(16) NOT NULL,
 	primary key (codiceVisita),
-	foreign key (codAnimale, codVeterinario) references <++>(<++>)
-)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+	foreign key (codAnimale) references Animale(codice)
+	foreign key (codVeterinario) references Veterinario(codiceFiscale)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-DROP TABLE IF EXISTS Esame;
-CREATE TABLE Esame
+DROP TABLE IF EXISTS  Esame ;
+CREATE TABLE  Esame 
 (
-	codiceEsame	<++>,
-	descrizione	<++>,
-	data	<++>,
-	macchinario	<++>,
-	nome	<++>,
-	codAnimale	<++>,
-	codVeterinario	<++>,
+	codiceEsame	SMALLINT UNSIGNED NOT NULL UNIQUE AUTO_INCREMENT,
+	descrizione	VARCHAR(500),
+	dataEsame	DATE,
+	macchinario	VARCHAR(20),
+	nome	VARCHAR(20),
+	codAnimale INT UNSIGNED NOT NULL	,
+	codVeterinario	CHAR(16) NOT NULL,
 	primary key (codiceEsame),
-	foreign key (codAnimale, codVeterinario) references <++>(<++>)
-)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+	foreign key (codAnimale) references Animale(codice)
+	foreign key (codVeterinario) references Veterinario(codiceFiscale)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-DROP TABLE IF EXISTS Veterinario;
-CREATE TABLE Veterinario
+DROP TABLE IF EXISTS  Veterinario ;
+CREATE TABLE  Veterinario 
 (
-	codiceFiscale	<++>,
-	nome	<++>,
-	cognome	<++>,
-	contatto	<++>,
+	codiceFiscale	CHAR(16) NOT NULL UNIQUE,
+	nome	VARCHAR(20),
+	cognome	VARCHAR(20),
+	contatto	VARCHAR(40),
 	primary key(codiceFiscale)	 
-)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-DROP TABLE IF EXISTS Terapia;
-CREATE TABLE Terapia
+DROP TABLE IF EXISTS  Terapia ;
+CREATE TABLE  Terapia 
 (
-	codiceTerapia	<++>,
-	dataInizio	<++>,
-	durata	<++>,
-	secondaTerapiaConsecutiva	<++>,
-	codAnimale	<++>,
+	codiceTerapia	INTEGER UNSIGNED NOT NULL UNIQUE AUTO_INCREMENT ,
+	dataInizio	DATE,
+	durata	TIME,
+	secondaTerapiaConsecutiva	BOOLEAN,
+	codAnimale	INT UNSIGNED NOT NULL,
 	primary key (codiceTerapia),
-	foreign key (codAnimale) references <++>(<++>)
-)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+	foreign key (codAnimale) references Animale(codice)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-DROP TABLE IF EXISTS compostada;
-CREATE TABLE compostada
+DROP TABLE IF EXISTS  compostada ;
+CREATE TABLE  compostada 
 (
-	codTerapia	<++>,
-	nomeFarmaco	<++>,
-	posologia	<++>,
+	codTerapia	INTEGER UNSIGNED NOT NULL,
+	nomeFarmaco	VARCHAR(30) NOT NULL,
+	posologia	VARCHAR(500),
 	primary key (codTerapia, nomeFarmaco),
-	foreign key (codTerapia, nomeFarmaco) references <++>(<++>)
-)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+	foreign key (codTerapia) references Terapia(codiceTerapia)
+	foreign key (nomeFarmaco) references Farmaco(nome)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-DROP TABLE IF EXISTS Farmaco;
-CREATE TABLE Farmaco
+DROP TABLE IF EXISTS  Farmaco ;
+CREATE TABLE  Farmaco 
 (
-	nome	<++>,
-	principioAttivo	<++>,
-	dosaggio	<++>,
+	nome	VARCHAR(30) NOT NULL UNIQUE,
+	principioAttivo	VARCHAR(50),
+	dosaggio	SMALLINT UNSIGNED NOT NULL,
 	primary key(nome)	 
-)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-DROP TABLE IF EXISTS SchedaMedica;
-CREATE TABLE SchedaMedica
+DROP TABLE IF EXISTS  SchedaMedica ;
+CREATE TABLE  SchedaMedica 
 (
-	codiceScheda	<++>,
-	massaMagra	<++>,
-	carenze	<++>,
-	patologie	<++>,
-	data	<++>,
-	rispostaOculare	<++>,
-	emocromo	<++>,
-	spessoreZoccolo	<++>,
-	fegato	<++>,
-	cuore	<++>,
-	pancreas	<++>,
-	massaMagra	<++>,
-	codAnimale	<++>,
-	codVeterinario	<++>,
+	codiceScheda	SMALLINT UNSIGNED NOT NULL UNIQUE AUTO_INCREMENT,
+	massaMagra	VARCHAR(255),
+	carenze	VARCHAR(255),
+	patologie	VARCHAR(255),
+	dataScheda	DATE,
+	rispostaOculare	VARCHAR(255),
+	emocromo	VARCHAR(255),
+	spessoreZoccolo	VARCHAR(255),
+	fegato	VARCHAR(255),
+	cuore	VARCHAR(255),
+	pancreas	VARCHAR(255),
+	codAnimale	codAnimale	INT UNSIGNED NOT NULL,
+	codVeterinario	CHAR(16) NOT NULL,
 	primary key (codiceScheda),
-	foreign key (codAnimale, codVeterinario) references <++>(<++>)
-)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+	foreign key (codAnimale) references Animale(codice)
+    foreign key (codVeterinario) references Veterinario(codiceFiscale)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-DROP TABLE IF EXISTS DisturbiComportamentali;
-CREATE TABLE DisturbiComportamentali(entità	<++>,
-	nome	<++>,
-	codScheda)  primary key (entità, nome, codScheda),
-	foreign key (codScheda) references <++>(<++>)
-DROP TABLE IF EXISTS Lesioni;
-CREATE TABLE Lesioni
+DROP TABLE IF EXISTS  DisturbiComportamentali ;
+CREATE TABLE  DisturbiComportamentali 
 (
-	tipologia	<++>,
-	parteDelCorpo	<++>,
-	entità	<++>,
-	codScheda	<++>,
+    entità	VARCHAR(255) NOT NULL,
+	nome	VARCHAR(30) NOT NULL,
+	codScheda	SMALLINT UNSIGNED NOT NULL, 
+	primary key (entità, nome, codScheda), 
+	foreign key (codScheda) references SchedaMedica(codiceScheda)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+DROP TABLE IF EXISTS  Lesioni ;
+CREATE TABLE  Lesioni 
+(
+	tipologia	VARCHAR(255) NOT NULL,
+	parteDelCorpo	VARCHAR(20) NOT NULL,
+	entità	VARCHAR(255) NOT NULL,
+	codScheda	SMALLINT UNSIGNED NOT NULL,
 	primary key (tipologia, parteDelCorpo, entità, codScheda),
-	foreign key (codScheda) references <++>(<++>)
-)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+	foreign key (codScheda) references SchedaMedica(codiceScheda)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-DROP TABLE IF EXISTS Cliente;
-CREATE TABLE Cliente
+DROP TABLE IF EXISTS  Cliente ;
+CREATE TABLE  Cliente 
 (
-	codCarta	<++>,
-	anticipo	<++>,
+	codCarta	CHAR(16) NOT NULL UNIQUE,
+	anticipo	SMALLINT ,
 	primary key(codCarta)	 
-)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-DROP TABLE IF EXISTS Pagamenti;
-CREATE TABLE Pagamenti
+DROP TABLE IF EXISTS  Pagamenti ;
+CREATE TABLE  Pagamenti 
 (
-	codPagamento	<++>,
-	tipoPagamento	<++>,
-	totaleCosto	<++>,
-	data	<++>,
-	ora	<++>,
-	codCliente	<++>,
+	codPagamento	INT UNSIGNED NOT NULL UNIQUE AUTO_INCREMENT,
+	tipoPagamento	VARCHAR(20),
+	totaleCosto	SMALLINT NOT NULL,
+	data_ora_Pagamento	TIMESTAMP,
+	codCliente	CHAR(16) NOT NULL,
 	primary key (codPagamento),
-	foreign key (codCliente) references <++>(<++>)
-)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+	foreign key (codCliente) references Cliente(codCarta)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-DROP TABLE IF EXISTS PrenotazioneStanza;
-CREATE TABLE PrenotazioneStanza
+DROP TABLE IF EXISTS  PrenotazioneStanza ;
+CREATE TABLE  PrenotazioneStanza 
 (
-	dataArrivo	<++>,
-	nomeAgriturismo	<++>,
-	codCliente	<++>,
-	numStanza	<++>,
-	dataPartenza	<++>,
+	dataArrivo	DATE NOT NULL,
+	nomeAgriturismo	VARCHAR(30) NOT NULL,
+	codCliente	CHAR(16) NOT NULL,
+	numStanza	TINYINT(5) NOT NULL,
+	dataPartenza	DATE NOT NULL,
+	/*CHECK(numStanza,nomeAgriturismo IN (SELECT numStanza,codAgriturismo FROM Stanza))*/
 	primary key (dataArrivo, nomeAgriturismo, codCliente, numStanza),
-	foreign key (nomeAgriturismo, codCliente, numStanza) references <++>(<++>)
-)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+	foreign key (nomeAgriturismo) references Agriturismo(Nome)
+	foreign key (numStanza) references Stanza(numStanza)
+	foreign key (codCliente) references Cliente(codCarta)
+	
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-DROP TABLE IF EXISTS Stanza;
-CREATE TABLE Stanza
+DROP TABLE IF EXISTS  Stanza ;
+CREATE TABLE  Stanza 
 (
-	numStanza	<++>,
-	codAgriturismo	<++>,
-	costoGiornaliero	<++>,
-	suite	<++>,
-	numLetti	<++>,
-	tipoLetti	<++>,
+	numStanza	TINYINT(5) NOT NULL,
+	codAgriturismo	VARCHAR(30) NOT NULL,
+	costoGiornaliero	TINYINT UNSIGNED NOT NULL,
+	suite	ENUM('singola','doppia','suite') NOT NULL,
+	numLetti	TINYINT(2) UNSIGNED NOT NULL,
+	tipoLetti	VARCHAR(100),
 	primary key (numStanza, codAgriturismo),
-	foreign key (codAgriturismo) references <++>(<++>)
-)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+	foreign key (codAgriturismo) references Agriturismo(nome)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-DROP TABLE IF EXISTS ServizioperStanza;
-CREATE TABLE ServizioperStanza
+DROP TABLE IF EXISTS  ServizioperStanza ;
+CREATE TABLE  ServizioperStanza 
 (
-	dataInizioUtilizzo	<++>,
-	dataArrivo	<++>,
-	codCliente	<++>,
-	numStanza	<++>,
-	nomeAgriturismo	<++>,
-	codServizio	<++>,
-	dataFineUtilizzo	<++>,
+	dataInizioUtilizzo DATE NOT NULL,
+	dataArrivo	DATE NOT NULL,
+	codCliente	CHAR(16) NOT NULL,
+	numStanza	TINYINT(5) UNSIGNED NOT NULL,
+	nomeAgriturismo	VARCHAR(30) NOT NULL,
+	codServizio	VARCHAR(20) NOT NULL,
+	dataFineUtilizzo	DATE NOT NULL,
 	primary key (dataInizioUtilizzo, dataArrivo, codCliente, numStanza, nomeAgriturismo, codServizio),
-	foreign key (dataArrivo, codCliente, numStanza, nomeAgriturismo, codServizio) references <++>(<++>)
-)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+	foreign key (dataArrivo) references PrenotazioneStanza(dataArrivo),
+	foreign key (codCliente) references PrenotazioneStanza(codCliente),
+	foreign key (numStanza) references Stanza(numStanza),
+	foreign key (nomeAgriturismo) references Agriturismo(nome),
+    foreign key (codServizio) references ServizioAggiuntivo(tipoServizio)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-DROP TABLE IF EXISTS ServizioAggiuntivo;
-CREATE TABLE ServizioAggiuntivo
+DROP TABLE IF EXISTS  ServizioAggiuntivo ;
+CREATE TABLE  ServizioAggiuntivo 
 (
-	tipoServizio	<++>,
-	costo	<++>,
+	tipoServizio	VARCHAR(20) NOT NULL UNIQUE,
+	costo	TINYINT UNSIGNED NOT NULL,
 	primary key(tipoServizio)	 
-)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-DROP TABLE IF EXISTS PrenotazioneEscursione;
-CREATE TABLE PrenotazioneEscursione
+DROP TABLE IF EXISTS  PrenotazioneEscursione ;
+CREATE TABLE  PrenotazioneEscursione 
 (
-	dataPrenotazione	<++>,
-	codEscursione	<++>,
-	codCliente	<++>,
+	dataPrenotazione	DATE NOT NULL ,
+	codEscursione	,
+	codCliente	CHAR(16) NOT NULL,
 	primary key (dataPrenotazione, codEscursione, codCliente),
-	foreign key (codEscursione, codCliente) references <++>(<++>)
-)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+	foreign key (codEscursione) references Escursione(codice)
+	foreign key (codCliente) references Cliente(codCarta)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-DROP TABLE IF EXISTS Escursione;
-CREATE TABLE Escursione
+DROP TABLE IF EXISTS  Escursione ;
+CREATE TABLE  Escursione 
 (
-	codice	<++>,
-	giorno	<++>,
-	orario	<++>,
-	codGuida	<++>,
+	codice	TINYINT UNSIGNED NOT NULL UNIQUE AUTO_INCREMENT,
+	giorno_orario	TIMESTAMP,
+	codGuida	CHAR(16) NOT NULL,
 	primary key (codice),
-	foreign key (codGuida) references <++>(<++>)
-)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+	foreign key (codGuida) references Guida(codFisc)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-DROP TABLE IF EXISTS Guida;
-CREATE TABLE Guida
+DROP TABLE IF EXISTS  Guida ;
+CREATE TABLE  Guida 
 (
-	codfisc	<++>,
-	nome	<++>,
-	cognome	<++>,
-	contatto	<++>,
+	codfisc	CHAR(16) NOT NULL UNIQUE,
+	nome	VARCHAR(20) NOT NULL,
+	cognome	VARCHAR(20) NOT NULL,
+	contatto 	CHAR(11) NOT NULL UNIQUE,
 	primary key(codfisc)	 
-)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-DROP TABLE IF EXISTS legataa;
-CREATE TABLE legataa
+DROP TABLE IF EXISTS  legataa ;
+CREATE TABLE  legataa 
 (
-	codEscursione	<++>,
-	codItinerario	<++>,
+	codEscursione	TINYINT UNSIGNED NOT NULL,
+	codItinerario	SMALLINT NOT NULL,
 	primary key (codEscursione, codItinerario),
-	foreign key (codEscursione, codItinerario) references <++>(<++>)
-)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+	foreign key (codEscursione) references Escursione(codice),
+	foreign key (codItinerario) references Itinerario(codice)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-DROP TABLE IF EXISTS Itinerario;
-CREATE TABLE Itinerario
+DROP TABLE IF EXISTS  Itinerario ;
+CREATE TABLE  Itinerario 
 (
-	codice	<++>,
-	numSentieri	<++>,
-	codAgriturismo	<++>,
+	codice	SMALLINT NOT NULL UNIQUE AUTO_INCREMENT,
+	numSentieri	VARCHAR(255),
+	codAgriturismo VARCHAR(30) NOT NULL,
 	primary key (codice),
-	foreign key (codAgriturismo) references <++>(<++>)
-)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+	foreign key (codAgriturismo) references Agriturismo(nome)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-DROP TABLE IF EXISTS compostoda;
-CREATE TABLE compostoda( codItinerario	<++>,
-	nomeTappa)     primary key (codItinerario, nomeTappa),
-	foreign key (codItinerario, nomeTappa) references <++>(<++>)
-DROP TABLE IF EXISTS Tappe;
-CREATE TABLE Tappe
+DROP TABLE IF EXISTS  compostoda ;
+CREATE TABLE  compostoda 
+( 
+	codItinerario SMALLINT NOT NULL,
+	nomeTappa VARCHAR(30) NOT NULL,
+	primary key (codItinerario, nomeTappa),
+	foreign key (codItinerario) references Itinerario(codice);
+	foreign key (nomeTappa) references Tappe(nome)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+DROP TABLE IF EXISTS  Tappe ;
+CREATE TABLE  Tappe 
 (
-	nome	<++>,
-	tempoPermanenza	<++>,
+	nome		VARCHAR(30) NOT NULL UNIQUE,
+	tempoPermanenza	TIME,
 	primary key(nome) 	 
-)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-DROP TABLE IF EXISTS Account;
-CREATE TABLE Account
+DROP TABLE IF EXISTS  Account ;
+CREATE TABLE  Account 
 (
-	utente	<++>,
-	password	<++>,
-	domandaRec	<++>,
-	rispostaRec	<++>,
-	numTelefono	<++>,
-	codFiscale	<++>,
-	scadenzaDoc	<++>,
-	numDoc	<++>,
-	dataIscrizione	<++>,
-	codDoc	<++>,
-	cognome	<++>,
-	nome	<++>,
-	enteRilascio	<++>,
-	tipoDoc	<++>,
-	indirizzo	<++>,
-	codiceCarta	<++>,
+	utente	VARCHAR(20) NOT NULL UNIQUE,
+	password	VARCHAR(16)NOT NULL UNIQUE,
+	domandaRec	VARCHAR(100),
+	rispostaRec	VARCHAR(255),
+	numTelefono	VARCHAR(10),
+	codFiscale	CHAR(16),
+	scadenzaDoc	DATE,
+	numDoc	VARCHAR(15),
+	dataIscrizione	DATE,
+	codDoc	VARCHAR(15),
+	cognome	VARCHAR(30),
+	nome	VARCHAR(30),
+	enteRilascio	VARCHAR(30),
+	tipoDoc	VARCHAR(30),
+	indirizzo	VARCHAR(50),
+	codiceCarta	CHAR(16) NOT NULL,
 	primary key (utente, password),
-	foreign key (codiceCarta) references <++>(<++>)
-)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+	foreign key (codiceCarta) references Cliente(codiceCarta)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-DROP TABLE IF EXISTS Recensione;
-CREATE TABLE Recensione
+DROP TABLE IF EXISTS  Recensione ;
+CREATE TABLE  Recensione 
 (
-	codiceRecensione	<++>,
-	gradimentoGenerale	<++>,
-	qualitaPercepita	<++>,
-	conservazione	<++>,
-	campoTestuale	<++>,
-	gusto	<++>,
-	utente	<++>,
-	password	<++>,
-	codProdotto	<++>,
+	codiceRecensione	INT UNSIGNED NOT NULL UNIQUE AUTO_INCREMENT,
+	gradimentoGenerale	TINYINT NOT NULL,
+	qualitaPercepita	TINYINT NOT NULL,
+	conservazione	VARCHAR(30),
+	campoTestuale	VARCHAR(255),
+	gusto	TINYINT NOT NULL,
+	utente	NOT NULL,
+	password	NOT NULL,
+	codProdotto INT UNSIGNED NOT NULL,
 	primary key (codiceRecensione),
-	foreign key (utente, password, codProdotto) references <++>(<++>)
-)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+	foreign key (utente) references Account(utente),
+	foreign key (password) references Account(password),
+	foreign key (codProdotto) references FormaggioProdotto(codiceProdotto)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-DROP TABLE IF EXISTS FormaggioProdotto;
-CREATE TABLE FormaggioProdotto
+DROP TABLE IF EXISTS  FormaggioProdotto ;
+CREATE TABLE  FormaggioProdotto 
 (
-	codiceProdotto	<++>,
-	prezzo	<++>,
-	peso	<++>,
-	stockAppartenenza	<++>,
-	rimastiInStock	<++>,
-	scadenza	<++>,
-	nome	<++>,
-	nomeAgriturismo	<++>,
+	codiceProdotto	INT UNSIGNED NOT NULL UNIQUE AUTO_INCREMENT,
+	prezzo	TINYINT NOT NULL,
+	peso	VARCHAR(6),
+	stockAppartenenza	INT UNSIGNED NOT NULL,
+	rimastiInStock	SMALLINT,
+	scadenza	DATE NOT NULL,
+	nome	VARCHAR(30) NOT NULL,
+	nomeAgriturismo	VARCHAR(30) NOT NULL,
 	primary key (codiceProdotto),
-	foreign key (nome, nomeAgriturismo) references <++>(<++>)
-)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+	foreign key (nome) references Formaggio(nome)
+	foreign key (nomeAgriturismo) references Formaggio(nomeAgriturismo)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-DROP TABLE IF EXISTS contenutoordine;
-CREATE TABLE contenutoordine
+DROP TABLE IF EXISTS  contenutoordine ;
+CREATE TABLE  contenutoordine 
 (
-	codOrdine	<++>,
-	codFormaggioprodotto	<++>,
-	quantità	<++>,
-	reso	<++>,
+	codOrdine	SMALLINT UNSIGNED NOT NULL,
+	codFormaggioprodotto	INT UNSIGNED NOT NULL,
+	quantità	TINYINT NOT NULL,
+	reso	BOOLEAN NOT NULL,
 	primary key (codOrdine, codFormaggioprodotto),
-	foreign key (codOrdine, codFormaggioprodotto) references <++>(<++>)
-)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+	foreign key (codFormaggioprodotto) references FormaggioProdotto(codiceProdotto),
+	foreign key (codOrdine) references OrdineProdotti(codiceOrdine)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-DROP TABLE IF EXISTS OrdineProdotti;
-CREATE TABLE OrdineProdotti
+DROP TABLE IF EXISTS  OrdineProdotti ;
+CREATE TABLE  OrdineProdotti 
 (
-	codiceOrdine	<++>,
-	stato	<++>,
-	data	<++>,
-	tipoConsegnaReso	<++>,
-	utente	<++>,
-	password	<++>,
-	codSpedizione	<++>,
+	codiceOrdine	SMALLINT UNSIGNED NOT NULL UNIQUE AUTO_INCREMENT,
+	stato	ENUM('in processazione','in preparazione','spedito','evaso')
+	data_ordine	DATE NOT NULL,
+	tipoConsegnaReso	BOOLEAN,
+	utente	VARCHAR(20) NOT NULL,
+	password	VARCHAR(16)NOT NULL,
+	codSpedizione	SMALLINT UNSIGNED NOT NULL,
 	primary key (codiceOrdine),
-	foreign key (utente, password, codSpedizione) references <++>(<++>)
-)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+	foreign key (utente) references Account(utente),
+	foreign key (password) references  Account(password),
+	foreign key (codSpedizione) references Spedizione(codice)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-DROP TABLE IF EXISTS Spedizione;
-CREATE TABLE Spedizione
+DROP TABLE IF EXISTS  Spedizione ;
+CREATE TABLE  Spedizione 
 (
-	codice	<++>,
-	dataConsegnaEffettiva	<++>,
-	dataConsegnaPrevista	<++>,
-	percorso	<++>,
-	stato	<++>,
+	codice	SMALLINT UNSIGNED NOT NULL UNIQUE AUTO_INCREMENT,
+	dataConsegnaEffettiva	DATE NOT NULL,
+	dataConsegnaPrevista	DATE NOT NULL,
+	percorso	VARCHAR(255),
+	stato	ENUM('spedita','in consegna','consegnata'),
 	primary key(codice)	 
-)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-DROP TABLE IF EXISTS processatada;
-CREATE TABLE processatada
+DROP TABLE IF EXISTS  processatada ;
+CREATE TABLE  processatada 
 (
-	codSpedizione	<++>,
-	codcentro	<++>,
+	codSpedizione	SMALLINT UNSIGNED NOT NULL,
+	codcentro	TINYINT UNSIGNED NOT NULL,
 	primary key (codSpedizione, codcentro),
-	foreign key (codSpedizione, codcentro) references <++>(<++>)
-)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+	foreign key (codSpedizione) references Spedizione(codice),
+	foreign key (codcentro) references CentridiSmistamento(codice)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-DROP TABLE IF EXISTS CentridiSmistamento;
-CREATE TABLE CentridiSmistamento
+DROP TABLE IF EXISTS  CentridiSmistamento ;
+CREATE TABLE  CentridiSmistamento 
 (
-	codice	<++>,
-	nome	<++>,
-	indirizzo	<++>,
-	contatto	<++>,
+	codice	TINYINT UNSIGNED NOT NULL UNIQUE AUTO_INCREMENT,
+	nome	VARCHAR(30),
+	indirizzo	VARCHAR(40),
+	contatto	VARCHAR(10),
 	primary key(codice)	 
-)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
