@@ -531,9 +531,9 @@ CREATE TABLE  Terapia
 DROP TABLE IF EXISTS  Farmaco ;
 CREATE TABLE  Farmaco 
 (
-	nome	VARCHAR(30) NOT NULL UNIQUE,
+	nome	VARCHAR(255) NOT NULL UNIQUE,
 	principioAttivo	VARCHAR(50),
-	dosaggio	SMALLINT UNSIGNED NOT NULL,
+	dosaggio	VARCHAR(20),
 	primary key(nome)	 
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
