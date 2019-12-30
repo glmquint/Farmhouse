@@ -1,4 +1,5 @@
 /* Di ciascun attributo è necessario specificarne il tipo [varchar(n) | [tiny]int(m)..], il valore di default [default 0 | user | null...], e i vincoli [not null | unique]*/
+/*I valori percentuali sono espressi con tinyint unsigned, il cui valor massimo è 255. Servono quindi dei triggers per verificare che il valore non superi il 100(%)*/
 
 DROP TABLE IF EXISTS Animale;
 CREATE TABLE Animale
@@ -30,8 +31,8 @@ CREATE TABLE acquistoanimale
 	dataAcquisto	date not null,
 	dataArrivo	date,
 	primary key (codiceAnimale),
-	foreign key (codiceAnimale) references Animale(codice)
-	/*TODO: ragioneSocialeFornitore non è foreign key?*/.
+	foreign key (codiceAnimale) references Animale(codice),
+	foreign key (ragioneSocialeFornitore) references Fornitore(ragioneSociale)
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 DROP TABLE IF EXISTS Fornitore;
@@ -46,13 +47,13 @@ CREATE TABLE Fornitore
 DROP TABLE IF EXISTS Riproduzione;
 CREATE TABLE Riproduzione
 (
-	codiceRiproduzione	int unsigned not null unique auto_increment,
+	codiceRiproduzione	smallint unsigned not null unique auto_increment,
 	complicanza	varchar(100),
 	data_orario:	timestamp,
 	stato	enum('successo', 'insuccesso'),
-	codVeterinario	char(16),
-	codiceMadre	int unsigned,
-	codicePadre	int unsigned,
+	codVeterinario	char(16) not null,
+	codiceMadre	smallint unsigned,
+	codicePadre	smallint unsigned,
 	primary key (codiceRiproduzione),
 	foreign key (codVeterinario) references Veterinario(codiceFiscale), 
 	foreign key (codiceMadre) references Animale(codice)
@@ -61,7 +62,7 @@ CREATE TABLE Riproduzione
 DROP TABLE IF EXISTS SchedaGestazione;
 CREATE TABLE SchedaGestazione
 (
-	codiceGestazione	int unsigned not null unique auto_increment,
+	codiceGestazione	smallint unsigned not null unique auto_increment,
 	codRiproduzione	int unsigned not null unique,
 	codVeterinario	int unsigned not null ,
 	primary key (codiceGestazione),
@@ -88,30 +89,32 @@ CREATE TABLE Stalla
 DROP TABLE IF EXISTS Locale;
 CREATE TABLE Locale
 (
-	codiceLocale	int unsigned not null unique auto_increment,
+	codiceLocale	smallint unsigned not null unique auto_increment,
 	temperatura	float,
 	umidità	float,
 	orientazioneFinestre	enum('N','NE', 'E', 'SE', 'S', 'SO', 'O', 'NO'),
+	/*Tutte le soglie di tollerabilità sono espresse in valori percentuali*/
 	tollerabilitaAzoto	tinyint unsigned,
 	tollerabilitaSporcizia	tinyint unsigned,
 	tollerabilitaMetano	tinyint unsigned,
+	codiceStalla	tinyint unsigned not null,
 	nomeAgriturismo	varchar(30) not null,
-	specieOspitata	varchar(30) check(specieOspitata in (select distinct(specie) from Animale)),
-	altezza	smallint unsigned not null,
-	lunghezza	smallint unsigned not null,
-	larghezza	smallint unsigned not null,
+	specieOspitata	varchar(30), -- check(specieOspitata in (select distinct(specie) from Animale)),
+	altezza	smallint unsigned not null, /*in cm*/
+	lunghezza	smallint unsigned not null, /*in cm*/
+	larghezza	smallint unsigned not null, /*in cm*/
 	primary key (codiceLocale),
-	foreign key (nomeAgriturismo) references Agriturismo(nome), 
+	foreign key (codiceStalla, nomeAgriturismo) references Stalla(numProgressivo, nomeAgriturismo), 
 	foreign key (specieOspitata, altezza, lunghezza, larghezza) references CaratteristichePerTipoLocale(specieOspitata, altezza, lunghezza, larghezza)
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 DROP TABLE IF EXISTS CaratteristichePerTipoLocale;
 CREATE TABLE CaratteristichePerTipoLocale
 (
-	specieOspitata	varchar(30) check(specieOspitata in (select distinct(specie) from Animale)),
-	altezza	smallint unsigned not null,
-	lunghezza	smallint unsigned not null,
-	larghezza	smallint unsigned not null,
+	specieOspitata	varchar(30), -- check(specieOspitata in (select distinct(specie) from Animale)),
+	altezza	smallint unsigned not null, /*in cm*/
+	lunghezza	smallint unsigned not null, /*in cm*/
+	larghezza	smallint unsigned not null, /*in cm*/
 	capienzaMax	tinyint unsigned not null,
 	pavimentazione	varchar(30),
 	primary key (specieOspitata, altezza, lunghezza, larghezza)	 
@@ -120,10 +123,10 @@ CREATE TABLE CaratteristichePerTipoLocale
 DROP TABLE IF EXISTS Visivi;
 CREATE TABLE Visivi
 (
-	codiceVisivo	int unsigned not null unique auto_increment,
-	livelloSporcizia	float,
+	codiceVisivo	smallint unsigned not null unique auto_increment,
+	livelloSporcizia	tinyint unsigned, /*percentuale*/
 	orarioRilevazione	timestamp not null,
-	codLocale	int unsigned not null,
+	codLocale	smallint unsigned not null,
 	primary key (codiceVisivo),
 	foreign key (codLocale) references Locale(codice)
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -133,9 +136,9 @@ CREATE TABLE Ambientali
 (
 	codiceAmbientale	int unsigned not null unique auto_increment,
 	temperatura	float,
-	umidità	float,
+	umidità	tinyint unsigned, /*percentuale*/
 	orarioRilevazione	timestamp not null,
-	codLocale	int unsigned not null,
+	codLocale	smallint unsigned not null,
 	primary key (codiceAmbientale),
 	foreign key (codLocale) references Locale(codice)
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -144,9 +147,9 @@ DROP TABLE IF EXISTS CompostiVolatili;
 CREATE TABLE CompostiVolatili
 (
 	codiceVolatili	int unsigned not null unique auto_increment,
-	concentrazioneMetano	float,
-	concentrazioneAzoto	float,
-	codLocale	int unsigned not null,
+	concentrazioneMetano	tinyint unsigned, /*percentuale*/
+	concentrazioneAzoto	tinyint unsigned, /*percentuale*/
+	codLocale	smallint unsigned not null,
 	primary key (codiceVolatili),
 	foreign key (codLocale) references Locale(codice)
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -154,10 +157,10 @@ CREATE TABLE CompostiVolatili
 DROP TABLE IF EXISTS PuliziaLocale;
 CREATE TABLE PuliziaLocale
 (
-	codLocale	int unsigned not null,
+	codLocale	smallint unsigned not null,
 	data_orarioRilevazione	timestamp,
-	stato	enum('pendente', 'effettuato'),
-	personale	int unsigned not null,
+	stato	enum('pendente', 'effettuato') not null,
+	personale	varchar(255) not null,
 	primary key (codLocale, orarioRilevazione, dataRilevazione),
 	foreign key (codLocale) references Locale(codice)
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -166,13 +169,13 @@ DROP TABLE IF EXISTS PastoPerLocale;
 CREATE TABLE PastoPerLocale
 (
 	giorno_orario	timestamp,
-	codLocale	int unsigned not null,
-	fibre	tintyint unsigned,
-	proteine	tinyint unsigned,
-	glucidi	tinyint,
-	concentrazioneSali	tinyint unsigned,
-	concentrazioneVitamine	tinyint unsigned,
-	primary key (giorno, orario,  codLocale),
+	codLocale	smallint unsigned not null,
+	fibre	int unsigned,
+	proteine	int unsigned,
+	glucidi	int unsigned,
+	concentrazioneSali	tinyint unsigned,/*percentuale*/
+	concentrazioneVitamine	tinyint unsigned,/*percentuale*/
+	primary key (giorno_orario,  codLocale),
 	foreign key (codLocale) references Locale(codice), 
 	foreign key (fibre, proteine, glucidi, concentrazioneSali, concentrazioneVitamine) references Pasto(fibre, proteine, glucidi, concentrazioneSali, concentrazioneVitamine)
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -180,11 +183,11 @@ CREATE TABLE PastoPerLocale
 DROP TABLE IF EXISTS Pasto;
 CREATE TABLE Pasto
 (
-	fibre	tinyint unsigned,
-	proteine	tinyint unsigned,
-	glucidi	tinyint unsigned,
-	concentrazioneSali	tinyint unsigned,
-	concentrazioneVitamine	tinyint unsigned,
+	fibre	int unsigned,
+	proteine	int unsigned,
+	glucidi	int unsigned,
+	concentrazioneSali	tinyint unsigned,/*percentuale*/
+	concentrazioneVitamine	tinyint unsigned,/*percentuale*/
 	primary key (fibre, proteine, glucidi, concentrazioneSali, concentrazioneVitamine),
 	foreign key (fibre, proteine, glucidi) references Foraggio(fibre, proteine, glucidi), 
 	foreign key (concentrazioneSali, concentrazioneVitamine) references Acqua(concentrazioneSali, concentrazioneVitamine)
@@ -193,31 +196,31 @@ CREATE TABLE Pasto
 DROP TABLE IF EXISTS Foraggio;
 CREATE TABLE Foraggio
 (
-	fibre	tinyint unsigned,
-	proteine	tinyint unsigned,
-	glucidi	tinyint insigned,
-	cereali	tinyint unsigned,
-	frutta	tinyint unsigned,
-	piante	tinyint unsigned,
+	fibre	int unsigned,
+	proteine	int unsigned,
+	glucidi	int unsigned,
+	cereali	tinyint unsigned,/*percentuale*/
+	frutta	tinyint unsigned,/*percentuale*/
+	piante	tinyint unsigned,/*percentuale*/
 	forma	enum('insilato', 'fieno'),
-	kcalkg	tinyint unsigned,
+	kcalkg	int unsigned,
 	primary key (fibre, proteine, glucidi)	 
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 DROP TABLE IF EXISTS Acqua;
 CREATE TABLE Acqua
 (
-	concentrazioneSali	tinyint unsigned,
-	concentrazioneVitamine	tinyint unsigned,
+	concentrazioneSali	tinyint unsigned,/*percentuale*/
+	concentrazioneVitamine	tinyint unsigned,/*percentuale*/
 	primary key (concentrazioneSali, concentrazioneVitamine)	 
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 DROP TABLE IF EXISTS Mangiatoia;
 CREATE TABLE Mangiatoia
 (
-	codice	int unsigned not null unique auto_increment,
-	quantitàRestante	tinyint unsigned,
-	codLocale	int unsigned,
+	codice	smallint unsigned not null unique auto_increment,
+	quantitàRestante	tinyint unsigned,/*percentuale*/
+	codLocale	smallint unsigned,
 	primary key (codice),
 	foreign key (codLocale) references Locale(codice)
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -225,9 +228,9 @@ CREATE TABLE Mangiatoia
 DROP TABLE IF EXISTS Abberveratoio;
 CREATE TABLE Abberveratoio
 (
-	codice	int unsigned not null unique auto_increment,
-	quantitàRestante tinyint unsigned,
-	codLocale	int unsigned,
+	codice	smallint unsigned not null unique auto_increment,
+	quantitàRestante tinyint unsigned,/*percentuale*/
+	codLocale	smallint unsigned,
 	primary key (codice),
 	foreign key (codLocale) references Locale(codice)
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -235,9 +238,9 @@ CREATE TABLE Abberveratoio
 DROP TABLE IF EXISTS AttivitàPascolo;
 CREATE TABLE AttivitàPascolo
 (
-	codiceAttivita	int unsigned not null unique auto_increment,
-	fasciaOraria	time,
-	codLocale	int unsigned not null,
+	codiceAttivita	smallint unsigned not null unique auto_increment,
+	giorno_orario	timestamp,
+	codLocale	smallint unsigned not null,
 	codArea	tinyint unsigned,
 	primary key (codiceAttivita),
 	foreign key (codLocale) references Locale(codice), 
@@ -265,11 +268,11 @@ CREATE TABLE RecinzioneDivisoriaeZoneDiPascolo
 DROP TABLE IF EXISTS Mungitura;
 CREATE TABLE Mungitura
 (
-	codAnimale	int unsigned not null,
-	codMungitrice	int unsigned not null,
+	codAnimale	smallint unsigned not null,
+	codMungitrice	smallint unsigned not null,
 	data_orario	timestamp not null,
 	quantità	int unsigned,
-	primary key (codAnimale, codMungitrice, data, ora),
+	primary key (codAnimale, codMungitrice, data_orario),
 	foreign key (codAnimale) references Animale(codice), 
 	foreign key (codMungitrice) references Mungitrice(codice)
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
