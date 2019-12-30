@@ -280,7 +280,7 @@ CREATE TABLE Mungitura
 DROP TABLE IF EXISTS Mungitrice;
 CREATE TABLE Mungitrice
 (
-	codice	int unsigned not null unique auto_increment,
+	codice	smallint unsigned not null unique auto_increment,
 	longitudine	float,
 	latitudine	float,
 	marca	varchar(20),
@@ -291,8 +291,8 @@ CREATE TABLE Mungitrice
 DROP TABLE IF EXISTS chemunge;
 CREATE TABLE chemunge
 (
-	codLatte	int unsigned not null,
-	codMungitrice	int unsigned not null,
+	codLatte	smallint unsigned not null,
+	codMungitrice	smallint unsigned not null,
 	primary key (codLatte, codMungitrice),
 	foreign key (codLatte) references Latte(codiceLatte), 
 	foreign key (codMungitrice) references Mungitrice(codice)
@@ -301,10 +301,10 @@ CREATE TABLE chemunge
 DROP TABLE IF EXISTS Latte;
 CREATE TABLE Latte
 (
-	codiceLatte	int unsigned not null unique auto_increment,
+	codiceLatte	smallint unsigned not null unique auto_increment,
 	quantitàSostanzeDisciolte	tinyint unsigned not null,
-	codAnimale	int unsigned not null,
-	codSilos	int unsigned,
+	codAnimale	smallint unsigned not null,
+	codSilos	tinyint unsigned,
 	primary key (codiceLatte),
 	foreign key (codAnimale) references Animale(codice), 
 	foreign key (codSilos) references Silos(codice)
@@ -313,17 +313,17 @@ CREATE TABLE Latte
 DROP TABLE IF EXISTS Silos;
 CREATE TABLE Silos
 (
-	codice	int unsigned not null unique,
-	capacità	tinyint not null,
-	livello	tinyint,
+	codice	tinyint unsigned not null unique ,
+	capacità	smallint not null,
+	livello	smallint not null,
 	primary key(codice)	 
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 DROP TABLE IF EXISTS prodottocon;
 CREATE TABLE prodottocon
 (
-	codLatte	int unsigned not null,
-	codLotto	int unsigned not null,
+	codLatte	smallint unsigned not null,
+	codLotto	smallint unsigned not null,
 	primary key (codLatte, codLotto),
 	foreign key (codLatte) references Latte(codiceLatte), 
 	foreign key (codLotto) references Lotto(codiceLotto)
@@ -332,10 +332,10 @@ CREATE TABLE prodottocon
 DROP TABLE IF EXISTS Lotto;
 CREATE TABLE Lotto
 (
-	codiceLotto	int unsigned not null unique auto_increment,
-	codDipendenti	int unsigned,
+	codiceLotto	smallint unsigned not null unique auto_increment,
+	codDipendenti	 varchar(255),
 	dataProd	date not null,
-	codLab	int unsigned not null,
+	codLab	tinyint unsigned not null,
 	durata	time,
 	primary key(codiceLotto)	 
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -343,8 +343,8 @@ CREATE TABLE Lotto
 DROP TABLE IF EXISTS stoccaggiocantine;
 CREATE TABLE stoccaggiocantine
 (
-	codLotto	int unsigned not null,
-	codCantina	int unsigned not null,
+	codLotto	smallint unsigned not null,
+	codCantina	tinyint unsigned not null,
 	primary key (codLotto, codCantina),
 	foreign key (codLotto) references Lotto(codiceLotto), 
 	foreign key (codCantina) references Cantina(codice)
@@ -353,8 +353,8 @@ CREATE TABLE stoccaggiocantine
 DROP TABLE IF EXISTS stoccaggiomagazzini;
 CREATE TABLE stoccaggiomagazzini
 (
-	codLotto	int unsigned not null,
-	codMagazzino	int unsigned not null,
+	codLotto	smallint unsigned not null,
+	codMagazzino	tinyint unsigned not null,
 	primary key (codLotto, codMagazzino),
 	foreign key (codLotto) references Lotto(codiceLotto), 
 	foreign key (codMagazzino) references Magazzino(codice)
@@ -363,35 +363,35 @@ CREATE TABLE stoccaggiomagazzini
 DROP TABLE IF EXISTS Cantine;
 CREATE TABLE Cantine
 (
-	codice	int unsigned not null unique auto_increment,
+	codice	tinyint unsigned not null unique auto_increment,
 	primary key(codice)	 
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 DROP TABLE IF EXISTS Magazzini;
 CREATE TABLE Magazzini
 (
-	codice	int unsigned not null unique auto_increment,
+	codice	tinyint unsigned not null unique auto_increment,
 	primary key(codice)	 
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 DROP TABLE IF EXISTS Scaffalature;
 CREATE TABLE Scaffalature
 (
-	codCantina	int unsigned not null unique,
-	codice	int unsigned not null unique,
+	codCantina	tinyint unsigned not null unique,
+	codice	smallint unsigned not null unique,
 	primary key (codCantina, codice),
-	foreign key (codCantina) references Cnatine(codice)
+	foreign key (codCantina) references Cantine(codice)
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 DROP TABLE IF EXISTS Parametri;
 CREATE TABLE Parametri
 (
-	data	date not null,
+	dataParametri	date not null,
 	idSensore	int unsigned not null,
 	temperatura	float,
 	umidità	float,
-	codCantina	int unsigned not null,
-	primary key (data, idSensore),
+	codCantina	tinyint unsigned not null,
+	primary key (dataParametri, idSensore),
 	foreign key (codCantina) references Cantine(codice)
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
