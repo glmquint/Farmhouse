@@ -5140,7 +5140,7 @@ Aggiornamento della relazione per il ricollocamento dei 200 animali tra i 5 loca
 \item SchedaGestazione(\underline{\smash{codiceGestazione}},  codRiproduzione,  codVeterinario)
 \item Agriturismo(\underline{\smash{Nome}})
 \item Stalla(\underline{\smash{numProgressivo}},\underline{\smash{ nomeAgriturismo}})
-\item Locale(\underline{\smash{codiceLocale}}, pavimentazione, capienzaMax, temperatura, umidità, orientazioneFinestre, specieOspitata, altezza, lunghezza, larghezza, tollerabilitaAzoto, tollerabilitaSporcizia, tollerabilitaMetano, nomeAgriturismo)
+\item Locale(\underline{\smash{codiceLocale}}, pavimentazione, capienzaMax, temperatura, umidità, orientazioneFinestre, specieOspitata, altezza, lunghezza, larghezza, tollerabilitaAzoto, tollerabilitaSporcizia, tollerabilitaMetano, codiceStalle, nomeAgriturismo)
 \item Visivi(\underline{\smash{codiceVisivo}}, livelloSporcizia,  orarioRilevazione,  codLocale)
 \item Ambientali(\underline{\smash{codiceAmbientale}}, temperatura, umidità,  orarioRilevazione,  codLocale)
 \item CompostiVolatili(\underline{\smash{codiceVolatili}}, concentrazioneMetano, concentrazioneAzoto,  codLocale)
@@ -5406,10 +5406,10 @@ Poichè non esistono dipendenze funzionali, Stalla è in BCNF
 
 \item[] \textbf{Tabella Locale:}
 
-Locale(\underline{\smash{codiceLocale}}, pavimentazione, capienzaMax, temperatura, umidità, orientazioneFinestre, specieOspitata, altezza, lunghezza, larghezza, tollerabilitaAzoto, tollerabilitaSporcizia, tollerabilitaMetano, nomeAgriturismo)
+Locale(\underline{\smash{codiceLocale}}, pavimentazione, capienzaMax, temperatura, umidità, orientazioneFinestre, specieOspitata, altezza, lunghezza, larghezza, tollerabilitaAzoto, tollerabilitaSporcizia, tollerabilitaMetano, codiceStalla, nomeAgriturismo)
 \begin{itemize}
 \vspace{-5pt}
-\item codiceLocale $\Rightarrow$ pavimentazione, capienzaMax, temperatura, umidità, orientazioneFinestre, specieOspitata, altezza, lunghezza, larghezza, tollerabilitaAzoto, tollerabilitaSporcizia, tollerabilitaMetano,  numProgressivo,  nomeAgriturismo
+\item codiceLocale $\Rightarrow$ pavimentazione, capienzaMax, temperatura, umidità, orientazioneFinestre, specieOspitata, altezza, lunghezza, larghezza, tollerabilitaAzoto, tollerabilitaSporcizia, tollerabilitaMetano,  numProgressivo,  codiceStalla, nomeAgriturismo
 \item altezza, lunghezza, larghezza, specieOspitata $\Rightarrow$ capienzaMax
 \item specieOspitata $\Rightarrow$ pavimentazione
 \vspace{-5pt}
@@ -5422,7 +5422,7 @@ Locale(\underline{\smash{codiceLocale}}, pavimentazione, capienzaMax, temperatur
 Poichè sono presenti dipendenze funzionali non banali, è necessario dividere la relazione in due tabelle. Seguendo l'algoritmo di decomposizione senza perdite, otteniamo due tabelle in BCNF così formate:
 
 \begin{itemize}
-\item Locale(\underline{\smash{codiceLocale}}, temperatura, umidità, orientazioneFinestre,  tollerabilitaAzoto, tollerabilitaSporcizia, tollerabilitaMetano, nomeAgriturismo, specieOspitata, altezza, lunghezza, larghezza)
+\item Locale(\underline{\smash{codiceLocale}}, temperatura, umidità, orientazioneFinestre,  tollerabilitaAzoto, tollerabilitaSporcizia, tollerabilitaMetano, codiceStalla, nomeAgriturismo, specieOspitata, altezza, lunghezza, larghezza)
 \item CaratteristichePerTipoLocale(\underline{\smash{specieOspitata}}, \underline{\smash{altezza}}, \underline{\smash{lunghezza}}, \underline{\smash{larghezza}}, capienzaMax, pavimentazione)
 \end{itemize}
 
