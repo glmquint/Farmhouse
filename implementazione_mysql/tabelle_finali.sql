@@ -277,7 +277,7 @@ CREATE TABLE Mungitura
 DROP TABLE IF EXISTS Mungitrice;
 CREATE TABLE Mungitrice
 (
-	codice	int unsigned not null unique auto_increment,
+	codice	smallint unsigned not null unique auto_increment,
 	longitudine	float,
 	latitudine	float,
 	marca	varchar(20),
@@ -288,8 +288,8 @@ CREATE TABLE Mungitrice
 DROP TABLE IF EXISTS chemunge;
 CREATE TABLE chemunge
 (
-	codLatte	int unsigned not null,
-	codMungitrice	int unsigned not null,
+	codLatte	smallint unsigned not null,
+	codMungitrice	smallint unsigned not null,
 	primary key (codLatte, codMungitrice),
 	foreign key (codLatte) references Latte(codiceLatte), 
 	foreign key (codMungitrice) references Mungitrice(codice)
@@ -298,10 +298,10 @@ CREATE TABLE chemunge
 DROP TABLE IF EXISTS Latte;
 CREATE TABLE Latte
 (
-	codiceLatte	int unsigned not null unique auto_increment,
+	codiceLatte	smallint unsigned not null unique auto_increment,
 	quantitàSostanzeDisciolte	tinyint unsigned not null,
-	codAnimale	int unsigned not null,
-	codSilos	int unsigned,
+	codAnimale	smallint unsigned not null,
+	codSilos	tinyint unsigned,
 	primary key (codiceLatte),
 	foreign key (codAnimale) references Animale(codice), 
 	foreign key (codSilos) references Silos(codice)
@@ -383,12 +383,12 @@ CREATE TABLE Scaffalature
 DROP TABLE IF EXISTS Parametri;
 CREATE TABLE Parametri
 (
-	data	date not null,
+	dataParametri	date not null,
 	idSensore	int unsigned not null,
 	temperatura	float,
 	umidità	float,
 	codCantina	tinyint unsigned not null,
-	primary key (data, idSensore),
+	primary key (dataParametri, idSensore),
 	foreign key (codCantina) references Cantine(codice)
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
