@@ -3,21 +3,21 @@
 DROP TABLE IF EXISTS Animale;
 CREATE TABLE Animale
 (
-	codice	int unsigned not null unique auto_increment,
-	sesso	enum('Maschio', 'Femmina'),
+	codice	smallint unsigned not null unique auto_increment,
+	sesso	enum('Maschio', 'Femmina') not null,
 	specie	varchar(30),
 	famiglia	varchar(30),
-	idMadre	int unsigned,
-	idPadre	int unsigned,
+	idMadre	smallint unsigned,
+	idPadre	smallint unsigned,
 	dataDiNascita	date,
-	altezza	tinyint unsigned,
-	peso	smallint unsigned,
+	altezza	tinyint unsigned, /*Si suppone che nessun animale superi i 255 cm in altezza*/
+	peso	smallint unsigned, /*Si suppone che nessun animale superi le 65 tonnelate*/
 	razza	varchar(30),
 	latitudine	float,
 	longitudine	float,
 	orario	timestamp, 
-	codiceGps	int unsigned not null unique,
-	codLocale	int unsigned not null,
+	codiceGps	smallint unsigned not null unique,
+	codLocale	smallint unsigned not null,
 	primary key (codice),
 	foreign key (codLocale) references Locale(codice)
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -25,12 +25,13 @@ CREATE TABLE Animale
 DROP TABLE IF EXISTS acquistoanimale;
 CREATE TABLE acquistoanimale
 (
-	codiceAnimale	int unsigned not null unique,
+	codiceAnimale	smallint unsigned not null unique,
 	ragioneSocialeFornitore	varchar(40),
-	dataAcquisto	date,
+	dataAcquisto	date not null,
 	dataArrivo	date,
 	primary key (codiceAnimale),
 	foreign key (codiceAnimale) references Animale(codice)
+	/*TODO: ragioneSocialeFornitore non è foreign key?*/.
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 DROP TABLE IF EXISTS Fornitore;
@@ -155,7 +156,7 @@ CREATE TABLE PuliziaLocale
 (
 	codLocale	int unsigned not null,
 	data_orarioRilevazione	timestamp,
-	stato	enum('pendente', effettuato'),
+	stato	enum('pendente', 'effettuato'),
 	personale	int unsigned not null,
 	primary key (codLocale, orarioRilevazione, dataRilevazione),
 	foreign key (codLocale) references Locale(codice)
