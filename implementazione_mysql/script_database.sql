@@ -71,7 +71,7 @@ CREATE TABLE Animale
 	latitudine	FLOAT,
 	longitudine	FLOAT,
 	orario	timestamp, 
-	codiceGps	SMALLINT UNSIGNED NOT NULL unique,
+	codiceGps	SMALLINT UNSIGNED NOT NULL unique auto_increment,
 	codLocale	SMALLINT UNSIGNED NOT NULL,
 	primary key (codice),
 	foreign key (codLocale) references Locale(codiceLocale)

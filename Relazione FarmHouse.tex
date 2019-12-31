@@ -5143,7 +5143,7 @@ Aggiornamento della relazione per il ricollocamento dei 200 animali tra i 5 loca
 \item Locale(\underline{\smash{codiceLocale}}, pavimentazione, capienzaMax, temperatura, umidità, orientazioneFinestre, specieOspitata, altezza, lunghezza, larghezza, tollerabilitaAzoto, tollerabilitaSporcizia, tollerabilitaMetano, codiceStalle, nomeAgriturismo)
 \item Visivi(\underline{\smash{codiceVisivo}}, livelloSporcizia,  orarioRilevazione,  codLocale)
 \item Ambientali(\underline{\smash{codiceAmbientale}}, temperatura, umidità,  orarioRilevazione,  codLocale)
-\item CompostiVolatili(\underline{\smash{codiceVolatili}}, concentrazioneMetano, concentrazioneAzoto,  codLocale)
+\item CompostiVolatili(\underline{\smash{codiceVolatili}}, concentrazioneMetano, concentrazioneAzoto,  orarioRilevazione, codLocale)
 \item PuliziaLocale(\underline{\smash{codLocale}}, \underline{\smash{orarioRilevazione}}, \underline{\smash{dataRilevazione}}, stato, personale)
 \item PastoPerLocale(\underline{\smash{giorno}}, \underline{\smash{orario}},  \underline{\smash{codLocale}},  fibre,  proteine,  glucidi,  concentrazioneSali,  concentrazioneVitamine)
 \item Pasto(\underline{\smash{fibre}},\underline{\smash{ proteine}},\underline{\smash{ glucidi}}, \underline{\smash{concentrazioneSali}},\underline{\smash{ concentrazioneVitamine}})
@@ -5458,10 +5458,10 @@ Poichè la parte sinistra è superchiave, Ambientali è in BCNF
 
 \item[] \textbf{Tabella CompostiVolatili:}
 
-CompostiVolatili(\underline{\smash{codiceVolatili}}, concentrazioneMetano, concentrazioneAzoto,  codLocale)
+CompostiVolatili(\underline{\smash{codiceVolatili}}, concentrazioneMetano, concentrazioneAzoto,  orarioRilevazione, codLocale)
 \begin{itemize}
 \vspace{-5pt}
-\item codiceVolatili $\Rightarrow$ concentrazioneMetano, concentrazioneAzoto, codLocale
+\item codiceVolatili $\Rightarrow$ concentrazioneMetano, concentrazioneAzoto, orarioRilevazione, codLocale
 \vspace{-5pt}
 \end{itemize}
 Poichè la parte sinistra è superchiave, CompostiVolatili è in BCNF
