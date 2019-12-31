@@ -163,6 +163,7 @@ CREATE TABLE CompostiVolatili
 	codiceVolatili INT UNSIGNED NOT NULL unique auto_increment,
 	concentrazioneMetano	TINYINT UNSIGNED, /*percentuale*/
 	concentrazioneAzoto	TINYINT UNSIGNED, /*percentuale*/
+    orarioRilevazione	timestamp NOT NULL,
 	codLocale	SMALLINT UNSIGNED NOT NULL,
 	primary key (codiceVolatili),
 	foreign key (codLocale) references Locale(codiceLocale)
