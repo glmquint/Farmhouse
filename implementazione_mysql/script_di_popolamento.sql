@@ -1,7 +1,7 @@
 INSERT INTO Farmaco(nome,principioAttivo,dosaggio) VALUES ('VITAMINA E 30 MG FIALA 1 ML >10<','TOCOFEROLO ACETATO ALFA','30MG');
 INSERT INTO Farmaco(nome,principioAttivo,dosaggio) VALUES ('MEXILETINA 50  MG CPS','MEXILETINA (DC.IT)','600MG');
 INSERT INTO Farmaco(nome,principioAttivo,dosaggio) VALUES ('NIAPRAZINA 600 MG POLVERE','NIAPRAZINA',NULL);
-INSERT INTO Farmaco(nome,principioAttivo,dosaggio) VALUES ('SOLUZIONE FISIOLOGICA 0,9 % SACCA PER IRRIGAZIONE 5000 ML','SODIO CLORURO (FU)','4500MG');
+INSERT INTO Farmaco(nome,principioAttivo,dosaggio) VALUES ('SOLUZIONE FISIOLOGICA 0.9 % SACCA PER IRRIGAZIONE 5000 ML','SODIO CLORURO (FU)','4500MG');
 INSERT INTO Farmaco(nome,principioAttivo,dosaggio) VALUES ('CAPTOPRIL SOLUZIONE 1 MG/ML 10ML','CAPTOPRIL (DC.IT) (FU)','10MG');
 INSERT INTO Farmaco(nome,principioAttivo,dosaggio) VALUES ('FLECAINIDE 35 MG CPS','FLECAINIDE (DC.IT)','35MG');
 INSERT INTO Farmaco(nome,principioAttivo,dosaggio) VALUES ('ACIDO BORICO IN ALCOOL 60�','ACIDO BORICO (FU)','4000MG');
@@ -15,7 +15,7 @@ INSERT INTO Farmaco(nome,principioAttivo,dosaggio) VALUES ('ISONIAZIDE 130 MG CP
 INSERT INTO Farmaco(nome,principioAttivo,dosaggio) VALUES ('ISONIAZIDE 70 MG CPS','ISONIAZIDE','70MG');
 INSERT INTO Farmaco(nome,principioAttivo,dosaggio) VALUES ('ISONIAZIDE 80 MG CPS','ISONIAZIDE','80MG');
 INSERT INTO Farmaco(nome,principioAttivo,dosaggio) VALUES ('CLOPIDOGREL 50 MG CARTINE','CLOPIDOGREL','50MG');
-INSERT INTO Farmaco(nome,principioAttivo,dosaggio) VALUES ('SCIROPPO POTASSIO CITRATO 1,15mEq/1ml 1g','POTASSIO CITRATO',NULL);
+INSERT INTO Farmaco(nome,principioAttivo,dosaggio) VALUES ('SCIROPPO POTASSIO CITRATO 1.15mEq/1ml 1g','POTASSIO CITRATO',NULL);
 INSERT INTO Farmaco(nome,principioAttivo,dosaggio) VALUES ('FLECAINIDE SOSPENSIONE ORALE 2MG/ML','FLECAINIDE (DC.IT)','2MG');
 INSERT INTO Farmaco(nome,principioAttivo,dosaggio) VALUES ('FLECAINIDE SOSPENSIONE ORALE 10MG/ML','FLECAINIDE (DC.IT)','10MG');
 INSERT INTO Farmaco(nome,principioAttivo,dosaggio) VALUES ('ERITROMICINA 100 100 MG CARTINA','ERITROMICINA','100MG');
@@ -26,7 +26,7 @@ INSERT INTO Farmaco(nome,principioAttivo,dosaggio) VALUES ('BEDROCAN 19% FLOS 40
 INSERT INTO Farmaco(nome,principioAttivo,dosaggio) VALUES ('BEDROCAN 19% FLOS 60 MG','CANNABIDIOLO','60MG');
 INSERT INTO Farmaco(nome,principioAttivo,dosaggio) VALUES ('BEDROCAN 19% FLOS 70 MG','CANNABIDIOLO','70MG');
 INSERT INTO Farmaco(nome,principioAttivo,dosaggio) VALUES ('BEDROCAN 19% FLOS 80 MG','CANNABIDIOLO','80MG');
-INSERT INTO Farmaco(nome,principioAttivo,dosaggio) VALUES ('ACIDO ACETICO 0,01MOLARE STERILE 100 ML','ACIDO ACETICO GLACIALE (FU)','60MG');
+INSERT INTO Farmaco(nome,principioAttivo,dosaggio) VALUES ('ACIDO ACETICO 0.01MOLARE STERILE 100 ML','ACIDO ACETICO GLACIALE (FU)','60MG');
 INSERT INTO Farmaco(nome,principioAttivo,dosaggio) VALUES ('ACIDO ACETICO 0.5%  5000 ML','ACIDO ACETICO GLACIALE (FU)','25000MG');
 INSERT INTO Farmaco(nome,principioAttivo,dosaggio) VALUES ('ACIDO ACETICO 1% 200 ML','ACIDO ACETICO GLACIALE (FU)','2000MG');
 INSERT INTO Farmaco(nome,principioAttivo,dosaggio) VALUES ('ACIDO ACETICO 20% 10000 ML','ACIDO ACETICO GLACIALE (FU)','2000000MG');
@@ -68,7 +68,7 @@ INSERT INTO Farmaco(nome,principioAttivo,dosaggio) VALUES ('PIRAZINAMIDE CAPSULE
 INSERT INTO Farmaco(nome,principioAttivo,dosaggio) VALUES ('PROPAFENONE CLOR. MG 10 CPS','PROPAFENONE CLOR.','10MG');
 INSERT INTO Farmaco(nome,principioAttivo,dosaggio) VALUES ('PROPRANOLOLO 1 MG CAPSULE','PROPRANOLOLO CLORIDRATO (FU)','1MG');
 INSERT INTO Farmaco(nome,principioAttivo,dosaggio) VALUES ('PROPRANOLOLO 12 MG CAPSULE','PROPRANOLOLO CLORIDRATO (FU)','12MG');
-INSERT INTO Farmaco(nome,principioAttivo,dosaggio) VALUES ('PROPRANOLOLO 2,5 MG CAPSULE','PROPRANOLOLO CLORIDRATO (FU)','2.5MG');
+INSERT INTO Farmaco(nome,principioAttivo,dosaggio) VALUES ('PROPRANOLOLO 2.5 MG CAPSULE','PROPRANOLOLO CLORIDRATO (FU)','2.5MG');
 INSERT INTO Farmaco(nome,principioAttivo,dosaggio) VALUES ('RIBOFLAVINA 25 MG 1CPS','RIBOFLAVINA','25MG');
 INSERT INTO Farmaco(nome,principioAttivo,dosaggio) VALUES ('RIBOFLAVINA 60 MG 1CPS','RIBOFLAVINA','60MG');
 INSERT INTO Farmaco(nome,principioAttivo,dosaggio) VALUES ('RIBOFLAVINA 175 MG 1CPS','RIBOFLAVINA','175MG');
@@ -79,8 +79,8 @@ INSERT INTO Farmaco(nome,principioAttivo,dosaggio) VALUES ('SODIO BENZOATO 20% S
 INSERT INTO Farmaco(nome,principioAttivo,dosaggio) VALUES ('SODIO CLORURO  100 MG CPS','SODIO CLORURO (FU)','100MG');
 INSERT INTO Farmaco(nome,principioAttivo,dosaggio) VALUES ('SODIO CLORURO  200 MG CPS','SODIO CLORURO (FU)','200MG');
 INSERT INTO Farmaco(nome,principioAttivo,dosaggio) VALUES ('SODIO CLORURO  400 MG CPS','SODIO CLORURO (FU)','400MG');
-INSERT INTO Farmaco(nome,principioAttivo,dosaggio) VALUES ('SPIRONOLATTONE 4,5 MG CPS','SPIRONOLATTONE (DC.IT) (FU)','4,5MG');
-INSERT INTO Farmaco(nome,principioAttivo,dosaggio) VALUES ('SPIRONOLATTONE 6,25 MG CPS','SPIRONOLATTONE (DC.IT) (FU)','6,25MG');
+INSERT INTO Farmaco(nome,principioAttivo,dosaggio) VALUES ('SPIRONOLATTONE 4.5 MG CPS','SPIRONOLATTONE (DC.IT) (FU)','4.5MG');
+INSERT INTO Farmaco(nome,principioAttivo,dosaggio) VALUES ('SPIRONOLATTONE 6.25 MG CPS','SPIRONOLATTONE (DC.IT) (FU)','6.25MG');
 INSERT INTO Farmaco(nome,principioAttivo,dosaggio) VALUES ('STIRIPENTOLO 100 MG CAPSULE (DA DIACOMIT)','STIRIPENTOLO','100MG');
 INSERT INTO Farmaco(nome,principioAttivo,dosaggio) VALUES ('STIRIPENTOLO 50 MG CAPSULE (DA DIACOMIT)','STIRIPENTOLO','50MG');
 INSERT INTO Farmaco(nome,principioAttivo,dosaggio) VALUES ('STIRIPENTOLO 150 MG CAPSULE (DA DIACOMIT)','STIRIPENTOLO','150MG');
