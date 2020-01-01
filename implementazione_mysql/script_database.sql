@@ -268,8 +268,8 @@ CREATE TABLE RecinzioneDivisoriaeZoneDiPascolo
 	foreign key (codArea) references AreaPascolo(codiceArea)
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-DROP TABLE IF EXISTS AttivitàPascolo;
-CREATE TABLE AttivitàPascolo
+DROP TABLE IF EXISTS AttivitaPascolo;
+CREATE TABLE AttivitaPascolo
 (
 	codiceAttivita	SMALLINT UNSIGNED NOT NULL unique auto_increment,
 	giorno_orario	timestamp,
