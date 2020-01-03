@@ -628,14 +628,13 @@ DROP TABLE IF EXISTS  PrenotazioneStanza ;
 CREATE TABLE  PrenotazioneStanza 
 (
 	dataArrivo	DATE NOT NULL,
+	numStanza	TINYINT UNSIGNED NOT NULL,
 	nomeAgriturismo	VARCHAR(30) NOT NULL,
 	codCliente	CHAR(16) NOT NULL,
-	numStanza	TINYINT UNSIGNED NOT NULL,
 	dataPartenza	DATE NOT NULL,
 	/*CHECK(numStanza,nomeAgriturismo IN (SELECT numStanza,codAgriturismo FROM Stanza))*/
-	primary key (dataArrivo, nomeAgriturismo, codCliente, numStanza),
-	foreign key (nomeAgriturismo) references Agriturismo(Nome),
-	foreign key (numStanza) references Stanza(numStanza),
+	primary key (dataArrivo, numStanza, nomeAgriturismo, codCliente),
+	foreign key (numStanza,nomeAgriturismo) references Stanza(numStanza,codAgriturismo),
 	foreign key (codCliente) references Cliente(codCarta)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -652,16 +651,13 @@ CREATE TABLE  ServizioperStanza
 (
 	dataInizioUtilizzo DATE NOT NULL,
 	dataArrivo	DATE NOT NULL,
-	codCliente	CHAR(16) NOT NULL,
 	numStanza	TINYINT UNSIGNED NOT NULL,
 	nomeAgriturismo	VARCHAR(30) NOT NULL,
+	codCliente	CHAR(16) NOT NULL,
 	codServizio	VARCHAR(20) NOT NULL,
 	dataFineUtilizzo	DATE NOT NULL,
-	primary key (dataInizioUtilizzo, dataArrivo, codCliente, numStanza, nomeAgriturismo, codServizio),
-	foreign key (dataArrivo) references PrenotazioneStanza(dataArrivo),
-    foreign key (codCliente) references PrenotazioneStanza(codCliente),
-	foreign key (numStanza) references Stanza(numStanza),
-	foreign key (nomeAgriturismo) references Agriturismo(Nome),
+	primary key (dataInizioUtilizzo, dataArrivo, numStanza, nomeAgriturismo, codCliente, codServizio),
+	foreign key (dataArrivo, numStanza, nomeAgriturismo, codCliente) references PrenotazioneStanza(dataArrivo, numStanza, nomeAgriturismo, codCliente),
     foreign key (codServizio) references ServizioAggiuntivo(tipoServizio)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
