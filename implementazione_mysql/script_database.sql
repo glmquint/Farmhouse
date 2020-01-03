@@ -15,7 +15,7 @@ CREATE TABLE Agriturismo
 DROP TABLE IF EXISTS Stalla;
 CREATE TABLE Stalla
 (
-	numProgressivo	TINYINT UNSIGNED NOT NULL,
+	numProgressivo	TINYINT UNSIGNED NOT NULL auto_increment,
 	nomeAgriturismo	VARCHAR(30) NOT NULL,
 	primary key (numProgressivo, nomeAgriturismo),
 	foreign key (nomeAgriturismo) references Agriturismo(nome)
@@ -71,7 +71,7 @@ CREATE TABLE Animale
 	latitudine	FLOAT,
 	longitudine	FLOAT,
 	orario	timestamp, 
-	codiceGps	SMALLINT UNSIGNED NOT NULL unique auto_increment,
+	codiceGps	SMALLINT UNSIGNED NOT NULL unique,
 	codLocale	SMALLINT UNSIGNED NOT NULL,
 	primary key (codice),
 	foreign key (codLocale) references Locale(codiceLocale)
@@ -240,8 +240,8 @@ CREATE TABLE Mangiatoia
 	foreign key (codLocale) references Locale(codiceLocale)
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-DROP TABLE IF EXISTS Abberveratoio;
-CREATE TABLE Abberveratoio
+DROP TABLE IF EXISTS Abbeveratoio;
+CREATE TABLE Abbeveratoio
 (
 	codice	SMALLINT UNSIGNED NOT NULL unique auto_increment,
 	quantitàRestante TINYINT UNSIGNED,/*percentuale*/
@@ -542,7 +542,7 @@ DROP TABLE IF EXISTS  compostada ;
 CREATE TABLE  compostada 
 (
 	codTerapia	INTEGER UNSIGNED NOT NULL,
-	nomeFarmaco	VARCHAR(30) NOT NULL,
+	nomeFarmaco	VARCHAR(255) NOT NULL,
 	posologia	VARCHAR(500),
 	primary key (codTerapia, nomeFarmaco),
 	foreign key (codTerapia) references Terapia(codiceTerapia),
