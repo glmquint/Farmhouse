@@ -59,7 +59,7 @@ DROP TABLE IF EXISTS Animale;
 CREATE TABLE Animale
 (
 	codice	SMALLINT UNSIGNED NOT NULL unique auto_increment,
-	sesso	ENUM('Maschio', 'Femmina') NOT NULL,
+	sesso	ENUM('M', 'F') NOT NULL,
 	specie	VARCHAR(30),
 	famiglia	VARCHAR(30),
 	idMadre	SMALLINT UNSIGNED,
@@ -116,8 +116,8 @@ CREATE TABLE Riproduzione
 	data_orario	timestamp,
 	stato	ENUM('successo', 'insuccesso'),
 	codVeterinario	char(16) NOT NULL,
-	codiceMadre	SMALLINT UNSIGNED,
-	codicePadre	SMALLINT UNSIGNED,
+	codiceMadre	SMALLINT UNSIGNED NOT NULL,
+	codicePadre	SMALLINT UNSIGNED NOT NULL,
 	primary key (codiceRiproduzione),
 	foreign key (codVeterinario) references Veterinario(codiceFiscale), 
 	foreign key (codiceMadre) references Animale(codice)
@@ -759,12 +759,13 @@ CREATE TABLE  FormaggioProdotto
 	codiceProdotto	INT UNSIGNED NOT NULL UNIQUE AUTO_INCREMENT,
 	prezzo	TINYINT NOT NULL,
 	peso	VARCHAR(6),
-	stockAppartenenza	INT UNSIGNED NOT NULL,
 	rimastiInStock	SMALLINT,
 	scadenza	DATE NOT NULL,
+	lottoAppartenenza	INT UNSIGNED NOT NULL,
 	nome	VARCHAR(30) NOT NULL,
 	nomeAgriturismo	VARCHAR(30) NOT NULL,
 	primary key (codiceProdotto),
+    foreign key (lottoAppartenenza) references Lotto(codiceLotto),
 	foreign key (nome) references Formaggio(nome),
 	foreign key (nomeAgriturismo) references Formaggio(nomeAgriturismo)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
