@@ -761,7 +761,7 @@ CREATE TABLE  FormaggioProdotto
 	peso	VARCHAR(6),
 	rimastiInStock	SMALLINT,
 	scadenza	DATE NOT NULL,
-	lottoAppartenenza	INT UNSIGNED NOT NULL,
+	lottoAppartenenza	SMALLINT UNSIGNED NOT NULL,
 	nome	VARCHAR(30) NOT NULL,
 	nomeAgriturismo	VARCHAR(30) NOT NULL,
 	primary key (codiceProdotto),
