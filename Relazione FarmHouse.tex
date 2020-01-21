@@ -4882,7 +4882,7 @@ In sintesi:
 
 \stepcounter{counterAccessi}
 
-\subsubsection*{Operazione \thecounterAccessi{}: Registrazione nuovo account}
+\subsection*{Operazione \thecounterAccessi{}: Registrazione nuovo account}
 \noindent\textit{Descrizione:} All' inserimento di un nuovo account nello store online, viene controllato se i dati inseriti corrispondono a quelli di un cliente già registrato ma senza un account. Nel caso viene aggiunto un record in Account con i dati forniti durante la registrazione, altrimenti viene prima registrato il nuovo cliente a partire dal codice della sua carta
 
 \noindent\textit{Input:} anagrafica del cliente, dati dei documenti e informazioni sull'account da registrare
@@ -4909,6 +4909,35 @@ In sintesi:
 
 \hline \textbf{Nome}   & \begin{center}\vspace{-15pt}\textbf{E/R}\end{center} & \textbf{Numero Istanze} & \textbf{Motivazione}\\ 
 
+\hline
+Cliente
+ & 
+\multicolumn{1}{|c|}{E}
+ & 
+\multicolumn{1}{|c|}{10000}
+ & 
+Ogni agriturismo ha in media 500 clienti all'anno
+\\
+
+\hline
+Account
+ & 
+\multicolumn{1}{|c|}{E}
+ & 
+\multicolumn{1}{|c|}{7000}
+ & 
+Si suppone che il 70\% degli utenti sia registrato, e possegga di conseguenza un account
+\\
+
+\hline
+possiede
+ & 
+\multicolumn{1}{|c|}{R}
+ & 
+\multicolumn{1}{|c|}{40000}
+ & 
+Cardinalità (1,1) con Scheda Medica
+\\
 
 
 \hline
@@ -4971,7 +5000,7 @@ Aggiornamento della relazione tra il cliente e il suo nuovo account
 \end{longtable}\end{center}
 \stepcounter{counterAccessi}
 
-\subsubsection*{Operazione \thecounterAccessi{}: Ridistribuzione degli animali all'aggiunta di un nuovo locale}
+\subsection*{Operazione \thecounterAccessi{}: Ridistribuzione degli animali all'aggiunta di un nuovo locale}
 \noindent\textit{Descrizione:} All'aggiunta di un nuovo locale, vengono smistati gli animali già presenti nella stalla affinchè sia mantenuto costante il numero di animali per locale
 
 \noindent\textit{Input:} dati del nuovo locale e codice della stalla a cui appartiene
@@ -4998,6 +5027,79 @@ Aggiornamento della relazione tra il cliente e il suo nuovo account
 
 \hline \textbf{Nome}   & \begin{center}\vspace{-15pt}\textbf{E/R}\end{center} & \textbf{Numero Istanze} & \textbf{Motivazione}\\ 
 
+\hline
+divisione locale 				& \begin{center}
+\vspace{-25pt}R
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}500\end{center}
+					&  Cardinalità (1,1) con Locale \\ 
+					
+\hline
+abita 				& \begin{center}
+\vspace{-25pt}R
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}20000\end{center}
+					&  Cardinalità (1,1) con Animale \\ 
+
+
+\hline
+Locale 				& \begin{center}
+\vspace{-25pt}E
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}500\end{center}
+					&  Ogni stalla ha in media 5 locali \\ 
+					
+\hline
+Visivi 				& \begin{center}
+\vspace{-25pt}E
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}500\end{center}
+					&  Ogni locale è dotato di un sensore per i parametri visivi \\ 
+
+\hline
+rilievo parametri visivi 				& \begin{center}
+\vspace{-25pt}R
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}500\end{center}
+					&  Cardinalità (1,1) con Visivi \\ 
+
+\hline
+Ambientali 				& \begin{center}
+\vspace{-25pt}E
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}500\end{center}
+					&  Ogni locale è dotato di un sensore per i parametri ambientali \\ 
+
+\hline
+rilievo parametri ambientali 				& \begin{center}
+\vspace{-25pt}R
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}500\end{center}
+					&  Cardinalità (1,1) con rilievo parametri ambientali \\ 
+
+\hline
+Composti volatili 				& \begin{center}
+\vspace{-25pt}E
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}500\end{center}
+					&  Ogni locale è dotato di un sensore per i composti volatili \\ 
+
+\hline
+rilievo composti volatili 				& \begin{center}
+\vspace{-25pt}R
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}500\end{center}
+					&  Cardinalità (1,1) con Composti volatili \\ 
+
 
 
 \hline
@@ -5008,7 +5110,7 @@ Aggiornamento della relazione tra il cliente e il suo nuovo account
 
 \begin{center}\setlength{\extrarowheight}{1.5pt}\begin{longtable}{|p{0.2\linewidth}|p{0.1\linewidth}|p{0.175\linewidth}|p{0.1\linewidth}|p{0.3\linewidth}|}\hline \textbf{Nome costrutto}   & \multicolumn{1}{|c|}{\textbf{E/R}} & \textbf{Numero operazioni elementari} & \multicolumn{1}{|c|}{\textbf{Tipo}} & \textbf{Descrizione}\\ 
 \hline
-divisione locali
+divisione locale
  & 
 \multicolumn{1}{|c|}{R}
  & 
