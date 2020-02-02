@@ -437,7 +437,7 @@ Visivi 				&  Sensore visivo del livello di sporcizia del locale
 
 \end{longtable}
 \end{center}
-\pagebreak
+%\pagebreak
 \subsubsection{Relazioni}
 \label{Allevamento Relazioni}
 \begin{center}
@@ -1490,7 +1490,7 @@ Tappe				 	&  Area dell'agriturismo dedicata alla visita e al riposo durante le 
 
 \end{longtable}
 \end{center}
-\pagebreak
+%\pagebreak
 \subsubsection{Relazioni}
 \label{Soggiono Relazioni}
 \begin{center}
@@ -3135,7 +3135,14 @@ Questo permetterà, assieme ai volumi stimati per ogni entità e relazione nel s
 
 Legenda per il calcolo delle operazioni elementari:
 \\
-frequenza giornaliera: $f^T$\\ numero di operazioni elementari: $o^T$\\ numero di operazioni giornaliere: $n^T = f^T\cdot o^T$\\numero di operazioni elementari con ridondanza: $o^T_{RID}$\\numero di operazioni giornaliere con ridondanza: $n^T_{RID}=f^T\cdot o^T_{RID}$\\frequenza di aggiornamento della ridondanza: $f^A$\\numero di operazioni per l'aggiornamento della ridondanza: $o^A$\\numero di operazioni giornaliere per l'aggiornamento della ridondanza: $n^A = f^A\cdot o^A$
+frequenza giornaliera: $f^T$\\ 
+numero di operazioni elementari: $o^T$\\ 
+numero di operazioni giornaliere: $n^T = f^T\cdot o^T$\\
+numero di operazioni elementari con ridondanza: $o^T_{RID}$\\
+numero di operazioni giornaliere con ridondanza: $n^T_{RID}=f^T\cdot o^T_{RID}$\\
+frequenza di aggiornamento della ridondanza: $f^A$\\
+numero di operazioni per l'aggiornamento della ridondanza: $o^A$\\
+numero di operazioni giornaliere per aggiornare la ridondanza: $n^A = f^A\cdot o^A$
 
 
 
@@ -3160,7 +3167,7 @@ frequenza giornaliera: $f^T$\\ numero di operazioni elementari: $o^T$\\ numero d
 
 
 
-\includegraphics[scale=2, width=1.15\textwidth]{operazioni/schemi_parziali/operazione-\thecounterAccessi.png} 
+\includegraphics[scale=2, width=1\textwidth]{operazioni/schemi_parziali/operazione-\thecounterAccessi.png} 
 \subsubsection*{Porzione della tavola dei volumi interessata:}
 
 \begin{center}\setlength{\extrarowheight}{1.5pt}\begin{longtable}{|p{0.23\linewidth}|p{0.1\linewidth}|p{0.11\linewidth}|p{0.45\linewidth}|}
@@ -3217,6 +3224,7 @@ Per ogni visita vengono rilevati nuovamente gli indici di salute
 \\
 \hline
 \end{longtable}\end{center}
+\pagebreak
 \subsubsection*{Tavola degli accessi:}
 
 E' presente la ridondanza \textit{qualità pasto} tra Pasto e Indici Salute che influenza la tavola degli accessi
@@ -3449,7 +3457,7 @@ In sintesi:
 
 \subsubsection*{Porzione del diagramma interessata:}
 
-\includegraphics[scale=2, width=1.15\textwidth]{operazioni/schemi_parziali/operazione-\thecounterAccessi.png} 
+\includegraphics[scale=2, width=1\textwidth]{operazioni/schemi_parziali/operazione-\thecounterAccessi.png} 
 \subsubsection*{Porzione della tavola dei volumi interessata:}
 \begin{center}\setlength{\extrarowheight}{1.5pt}\begin{longtable}{|p{0.23\linewidth}|p{0.1\linewidth}|p{0.11\linewidth}|p{0.45\linewidth}|}
 \hline \textbf{Nome}   & \begin{center}\vspace{-15pt}\textbf{E/R}\end{center} & \textbf{Numero Istanze} & \textbf{Motivazione}\\ 
@@ -3596,7 +3604,7 @@ Aggiornamento della relazione tra l'animale neonato e la visita programmata
 
 \subsubsection*{Porzione del diagramma interessata:}
 
-\includegraphics[scale=2, width=1.15\textwidth]{operazioni/schemi_parziali/operazione-\thecounterAccessi.png} 
+\includegraphics[scale=2, width=1.1\textwidth]{operazioni/schemi_parziali/operazione-\thecounterAccessi.png} 
 \subsubsection*{Porzione della tavola dei volumi interessata:}
 \begin{center}\setlength{\extrarowheight}{1.5pt}\begin{longtable}{|p{0.23\linewidth}|p{0.1\linewidth}|p{0.11\linewidth}|p{0.45\linewidth}|}
 \hline \textbf{Nome}   & \begin{center}\vspace{-15pt}\textbf{E/R}\end{center} & \textbf{Numero Istanze} & \textbf{Motivazione}\\ 
@@ -3714,6 +3722,7 @@ Cardinalità (1,1) con Pagamenti
 \hline
 
 \end{longtable}\end{center}
+\pagebreak
 \subsubsection*{Tavola degli accessi:}
 
 \begin{center}\setlength{\extrarowheight}{1.5pt}\begin{longtable}{|p{0.2\linewidth}|p{0.1\linewidth}|p{0.175\linewidth}|p{0.1\linewidth}|p{0.3\linewidth}|}\hline \textbf{Nome costrutto}   & \multicolumn{1}{|c|}{\textbf{E/R}} & \textbf{Numero operazioni elementari} & \multicolumn{1}{|c|}{\textbf{Tipo}} & \textbf{Descrizione}\\ 
@@ -3858,7 +3867,7 @@ Aggiornamento della relazione tra il cliente ed il pagamento
 
 \subsubsection*{Porzione del diagramma interessata:}
 
-\includegraphics[scale=2, width=1.15\textwidth]{operazioni/schemi_parziali/operazione-\thecounterAccessi.png} 
+\includegraphics[scale=2, width=0.8\textwidth]{operazioni/schemi_parziali/operazione-\thecounterAccessi.png} 
 \subsubsection*{Porzione della tavola dei volumi interessata:}
 \begin{center}\setlength{\extrarowheight}{1.5pt}\begin{longtable}{|p{0.23\linewidth}|p{0.1\linewidth}|p{0.11\linewidth}|p{0.45\linewidth}|}
 \hline \textbf{Nome}   & \begin{center}\vspace{-15pt}\textbf{E/R}\end{center} & \textbf{Numero Istanze} & \textbf{Motivazione}\\ 
@@ -3952,7 +3961,7 @@ Aggiornamento della relazione tra il latte ed il silos nel quale è stoccato
 \hline
 \end{longtable}\end{center}
 \stepcounter{counterAccessi}
-
+\pagebreak
 \subsection*{Operazione \thecounterAccessi{}: Controllo igiene dei locali}
 \noindent\textit{Descrizione:} Per garantire il rispetto delle condizioni di benessere degli animali all'interno dei locali, viene frequentemente controllato che i parametri rilevati rientrino nelle soglie di tollerabilità, ed eventualmente viene inviata una richiesta di intervento di pulizia, insieme all'aggiornamento dei parametri del locale con i valori più recenti raccolti
 
@@ -3964,7 +3973,7 @@ Aggiornamento della relazione tra il latte ed il silos nel quale è stoccato
 
 \subsubsection*{Porzione del diagramma interessata:}
 
-\includegraphics[scale=2, width=1.15\textwidth]{operazioni/schemi_parziali/operazione-\thecounterAccessi.png} 
+\includegraphics[scale=2, width=1\textwidth]{operazioni/schemi_parziali/operazione-\thecounterAccessi.png} 
 \subsubsection*{Porzione della tavola dei volumi interessata:}
 \begin{center}\setlength{\extrarowheight}{1.5pt}\begin{longtable}{|p{0.23\linewidth}|p{0.1\linewidth}|p{0.11\linewidth}|p{0.45\linewidth}|}
 \hline \textbf{Nome}   & \begin{center}\vspace{-15pt}\textbf{E/R}\end{center} & \textbf{Numero Istanze} & \textbf{Motivazione}\\ 
@@ -4164,7 +4173,7 @@ Aggiornamento della relazione tra il locale e l'intervento di pulizia
 \hline
 \end{longtable}\end{center}
 \stepcounter{counterAccessi}
-
+\pagebreak
 \subsection*{Operazione \thecounterAccessi{}: Processamento degli ordini}
 \noindent\textit{Descrizione:} Gli utenti che si sono registrati nello store online possono acquistare i prodotti caseari e ricevere il proprio ordine tramite le spedizioni gestite dal database
 
@@ -4581,7 +4590,7 @@ Ricollocamento del locale abitato dall'animale tramite l'aggiornamento della rel
 \hline
 \end{longtable}\end{center}
 \stepcounter{counterAccessi}
-
+\pagebreak
 \subsection*{Operazione \thecounterAccessi{}: Controllo degli animali dispersi}
 \noindent\textit{Descrizione:} Durante le attività di pascolo viene monitorato ad intervalli regolari il segnale GPS di ogni singolo animale affinchè ci si assicuri che rientri negli spazi delimitati dalle recinzioni per le zone dedicate al pascolo
 
@@ -5018,7 +5027,7 @@ Aggiornamento della relazione tra il cliente e il suo nuovo account
 \hline
 \end{longtable}\end{center}
 \stepcounter{counterAccessi}
-
+\pagebreak
 \subsection*{Operazione \thecounterAccessi{}: Ridistribuzione degli animali all'aggiunta di un nuovo locale}
 \noindent\textit{Descrizione:} All'aggiunta di un nuovo locale, vengono smistati gli animali già presenti nella stalla affinchè sia mantenuto costante il numero di animali per locale
 
@@ -5035,7 +5044,7 @@ Aggiornamento della relazione tra il cliente e il suo nuovo account
 \includegraphics[scale=2, width=1.15\textwidth]{operazioni/schemi_parziali/operazione-\thecounterAccessi.png} 
 
 
-
+\pagebreak
 \subsubsection*{Porzione della tavola dei volumi interessata:}
 
 
@@ -5246,7 +5255,7 @@ Aggiornamento della relazione per il ricollocamento dei 200 animali tra i 5 loca
 \hline
 \end{longtable}\end{center}
 
-
+\pagebreak
 \section{Progettazione logica}
 
 \subsection{Schema logico}
