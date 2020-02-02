@@ -11,6 +11,8 @@
 \usepackage{float}
 \usepackage{fancyhdr}
 
+\usepackage{stix} % Use the STIX fonts
+
 
 \author{Guillaume Quint \& Francesco Bonciani}
 \title{Relazione Progetto di Base Dati 2019}
@@ -18,11 +20,33 @@
 
 \begin{document}
 \captionsetup[figure]{labelfont={it}, labelformat={default}, name={Figura }, font={footnotesize}}
-\maketitle
+%\maketitle
 \thispagestyle{empty}
 \clearpage
 \pagenumbering{Roman}
 \renewcommand{\abstractname}{Visione d'insieme}
+
+
+
+\begin{titlepage} % Suppresses displaying the page number on the title page and the subsequent page counts as page 1
+	
+	\raggedleft % Right align the title page
+	
+	\rule{1pt}{\textheight} % Vertical line
+	\hspace{0.05\textwidth} % Whitespace between the vertical line and title page text
+	\parbox[b]{0.75\textwidth}{ % Paragraph box for holding the title page text, adjust the width to move the title page left or right on the page
+		\hspace*{-6cm}\vspace*{-2.7cm}\includegraphics[height=35mm]{logo_titolo_unipi}\\
+		{\Huge\bfseries Relazione per il Progetto di Base Dati 2019}\\[2\baselineskip] % Title
+		{\large\textit{FarmHouse 4.0}}\\[4\baselineskip] % Subtitle or further description
+		{\Large\textsc{Guillaume Quint,\\ Francesco Bonciani}} % Author name, lower case for consistent small caps
+		
+		\vspace{0.5\textheight} % Whitespace between the title block and the publisher
+		
+		{\noindent Università di Pisa, Ingegneria Informatica\\\today}\\[\baselineskip] % Publisher and logo
+	}
+
+\end{titlepage}
+
 
 
 \begin{abstract}
