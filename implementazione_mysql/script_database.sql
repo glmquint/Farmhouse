@@ -483,8 +483,15 @@ CREATE TABLE  Indicisalute
 	vigilanza	VARCHAR(20),
 	idratazione	VARCHAR(20),
 	deambulazione	VARCHAR(20),
+	/*Per la ridondanza Qualità pasto*/
+	fibre INT UNSIGNED,
+	proteine INT UNSIGNED,
+	glucidi INT UNSIGNED,
+	concentrazioneSali	TINYINT UNSIGNED,/*percentuale*/
+	concentrazioneVitamine	TINYINT UNSIGNED,/*percentuale*/
 	primary key (codAnimale, dataRilevazione),
-	foreign key (codAnimale) references Animale(codice)
+	foreign key (codAnimale) references Animale(codice),
+	foreign key (fibre, proteine, glucidi, concentrazioneSali, concentrazioneVitamine) references Pasto(fibre, proteine, glucidi, concentrazioneSali, concentrazioneVitamine)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 DROP TABLE IF EXISTS  Visita ;
