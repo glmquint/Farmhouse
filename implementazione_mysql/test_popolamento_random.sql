@@ -61,10 +61,10 @@ CREATE TABLE CaratteristichePerTipoLocale
 
 INSERT INTO CaratteristichePerTipoLocale 
 		SELECT ELT(0.5 + RAND()*2, 'Ovino', 'Bovino'),
-		FLOOR(350 + RAND()*(450-350)),
-		FLOOR(3000 + RAND()*(4000-3000)),
-		FLOOR(1000 + RAND()*(3000-1000)),
-		FLOOR(35 + RAND()*(45-35)),
+		FLOOR(350.5 + RAND()*(450-350)),
+		FLOOR(3000.5 + RAND()*(4000-3000)),
+		FLOOR(1000.5 + RAND()*(3000-1000)),
+		FLOOR(35.5 + RAND()*(45-35)),
 		ELT(0.5 + RAND()*20, 'lavorazione su rilievi antiscivolo con lavorazione su rilievi antiscivolo',
 							'rigatura con tappeti in gomma',
 							'piena in cemento con trattamento antiscivolo',
@@ -88,11 +88,6 @@ INSERT INTO CaratteristichePerTipoLocale
 			FROM Stalla CROSS JOIN Agriturismo
 			LIMIT 50;
 
-INSERT INTO Stalla VALUES ((SELECT FLOOR(RAND()*5)),(SELECT nome
-									FROM FARMHOUSE.Agriturismo A
-									ORDER BY RAND()
-									LIMIT 1));
-
 DROP TABLE IF EXISTS Locale;
 CREATE TABLE Locale
 (
@@ -101,9 +96,9 @@ CREATE TABLE Locale
 	umidità	FLOAT,
 	orientazioneFinestre	ENUM('N','NE', 'E', 'SE', 'S', 'SO', 'O', 'NO'),
 	/*Tutte le soglie di tollerabilità sono espresse in valori percentuali*/
-	tollerabilitaAzoto	TINYINT UNSIGNED,
-	tollerabilitaSporcizia	TINYINT UNSIGNED,
-	tollerabilitaMetano	TINYINT UNSIGNED,
+	tollerabilitaAzoto	FLOAT,
+	tollerabilitaSporcizia	FLOAT,
+	tollerabilitaMetano	FLOAT,
 	codiceStalla	TINYINT UNSIGNED NOT NULL,
 	nomeAgriturismo	VARCHAR(50) NOT NULL,
 	specieOspitata	VARCHAR(30), -- check(specieOspitata in (select distinct(specie) from Animale)),
@@ -114,6 +109,24 @@ CREATE TABLE Locale
 	foreign key (codiceStalla, nomeAgriturismo) references Stalla(numProgressivo, nomeAgriturismo), 
 	foreign key (specieOspitata, altezza, lunghezza, larghezza) references CaratteristichePerTipoLocale(specieOspitata, altezza, lunghezza, larghezza)
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+INSERT INTO Locale
+SELECT 'x',
+		15.5 + RAND()*(16-15),
+        0.5 + RAND()*(50-0),
+        ELT(0.5 + RAND()*8,'N','NE', 'E', 'SE', 'S', 'SO', 'O', 'NO'),
+        0.5 + RAND()*(5-0),
+        0.5 + RAND()*(5-0),
+        0.5 + RAND()*(5-0),
+        S.NumProgressivo,
+        S.NomeAgriturismo,
+        CTL.SpecieOspitata,
+        CTL.Altezza,
+		CTL.Lunghezza,
+        CTL.Larghezza
+FROM Stalla S, CaratteristichePerTipoLocale CTL
+ORDER BY RAND()
+LIMIT 100;
 
 DROP TABLE IF EXISTS Animale;
 CREATE TABLE Animale
@@ -136,6 +149,37 @@ CREATE TABLE Animale
 	primary key (codice),
 	foreign key (codLocale) references Locale(codiceLocale)
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+INSERT INTO Animale
+SELECT 'x',
+		ELT(0.5 + RAND()*2,'M', 'F'),
+        ELT(0.5 + RAND()*2,'Bovino', 'Ovino'),
+        'Bovidae',
+        (SELECT A.codice
+        FROM Animale A
+        WHERE A.sesso = 'F'
+        ORDER BY RAND()
+        LIMIT 1),
+        (SELECT A.codice
+        FROM Animale A
+        WHERE A.sesso = 'M'
+        ORDER BY RAND()
+        LIMIT 1),
+        '2000-01-01' + INTERVAL FLOOR(0.5 + RAND()*(6000-0)) DAY,
+        130.5 + RAND()*(155-130),
+        600 + RAND()*(750-600),
+        ELT(0.5 + RAND()*36,'Dorper','Merino','Naso Nero Del Vallese','Suffolk','Texel','Romanov','Dorset Horn','Awassi','Lacaune','Corriedale','Ryeland','Scottish Blackface','Jacob','Cheviot','Sarda','Finnica','Iceland','Frisona','Alberdeen Angus','Jersey','Limousine','Bruna Svizzera','Longhorn Texas','Maine Anjou','Normanna','Pezzata Rossa','Montbèliarde','Marchigiana','Salers','Droughtmaster','Bruna Originale Svizzera','Sussex Cattle','Retinta','Nguni','Grigia Ungherese','Shetlan'),
+        -180.5 + RAND()*(360),
+        -180.5 + RAND()*(360),
+        '2019-01-01 00:00:00' + INTERVAL FLOOR(0.5 + RAND()*(360*86400)) SECOND,
+        (SELECT MAX(A.CodiceGPS) +1 
+        FROM Animale A),
+        (SELECT L.codiceLocale
+        FROM Locale L
+        ORDER BY RAND()
+        LIMIT 1)
+FROM Locale A CROSS JOIN Locale B
+LIMIT 1;
 
 DROP TABLE IF EXISTS Fornitore;
 CREATE TABLE Fornitore

@@ -341,7 +341,7 @@ CREATE TABLE Lotto
 	codDipendenti	 VARCHAR(255),
 	dataProd DATE NOT NULL,
 	codLab	TINYINT UNSIGNED NOT NULL,
-	durata	time,
+	durata	INT, -- da intendere in giorni prima della deperibilità
 	primary key(codiceLotto)	 
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -466,7 +466,7 @@ CREATE TABLE  Formaggio
 (
 	nome	VARCHAR(30) NOT NULL UNIQUE,
 	nomeAgriturismo	VARCHAR(30) NOT NULL,
-	deperibilita	TIME,
+	deperibilita	INT, -- da intendere come giorni prima della deperibilità
 	codRicetta	INTEGER NOT NULL,
 	codLatte	INTEGER NOT NULL,
 	primary key (nome, nomeAgriturismo),
@@ -605,7 +605,7 @@ CREATE TABLE  Pagamenti
 	codPagamento	INT UNSIGNED NOT NULL UNIQUE AUTO_INCREMENT,
 	tipoPagamento	VARCHAR(20),
 	totaleCosto	SMALLINT NOT NULL,
-	data_ora_Pagamento	TIMESTAMP,
+	dataPagamento	DATE,
 	codCliente	CHAR(16) NOT NULL,
 	primary key (codPagamento),
 	foreign key (codCliente) references Cliente(codCarta)
