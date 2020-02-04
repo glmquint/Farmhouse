@@ -52,16 +52,18 @@ CREATE TABLE  FormaggioProdotto
 
 DROP TRIGGER IF EXISTS VII_scadenza_formaggio_prodotto;
 DELIMITER $$
-CREATE TRIGGER scadenza_formaggio_prodotto
+CREATE TRIGGER VII_scadenza_formaggio_prodotto
 BEFORE INSERT ON FormaggioProdotto
 FOR EACH ROW 
 BEGIN
 IF (SELECT * FROM Lotto L WHERE L.codiceLotto = NEW.LottoAppartenenza ) IS NULL THEN
 	signal sqlstate '70006' SET MESSAGE_TEXT = 'ERRORE: Impossibile trovare il lotto di appartenenza del formaggio';
 ELSE
-	SET NEW.Scadenza = (SELECT L.DataProd + INTERVAL NEW.deperibilita DAY FROM Lotto L WHERE L.codiceLotto = NEW.LottoAppartenenza);
+	SET NEW.Scadenza = (SELECT L.DataProd FROM Lotto L WHERE L.codiceLotto = NEW.LottoAppartenenza)
+		+ INTERVAL (SELECT F.deperibilita FROM Formaggio F WHERE F.nome = NEW.nome AND F.nomeAgriturimso = NEW.nomeAgriturismo)DAY;
 END IF;
 END $$
+DELIMITER ;
 
 /*-------------------------------------------------------------
 
@@ -100,7 +102,7 @@ CREATE TRIGGER VIII_data_pagamento_prenotazione_stanza
 BEFORE INSERT ON Pagamenti
 FOR EACH ROW 
 BEGIN 
-SET NEW.data_ora_pagamento = (SELECT PS.dataPartenza FROM PrenotazioneStanza PS WHERE PS.codCliente = NEW.codCliente ORDER BY PS.dataPartenza DESC);
+SET NEW.dataPagamento = (SELECT PS.dataPartenza FROM PrenotazioneStanza PS WHERE PS.codCliente = NEW.codCliente ORDER BY PS.dataPartenza DESC);
 END $$
 DELIMITER ;
 
