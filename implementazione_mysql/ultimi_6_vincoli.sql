@@ -67,7 +67,7 @@ DELIMITER ;
 
 /*-------------------------------------------------------------
 
-Esiste un vincolo di integrità che lega dataPartenza in PrenotazioneStanza adata in Pagamenti
+Esiste un vincolo di integrità che lega dataPartenza in PrenotazioneStanza a data in Pagamenti
 
 DROP TABLE IF EXISTS  Pagamenti ;
 CREATE TABLE  Pagamenti 
