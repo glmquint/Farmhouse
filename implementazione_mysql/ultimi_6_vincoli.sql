@@ -56,11 +56,11 @@ CREATE TRIGGER VII_scadenza_formaggio_prodotto
 BEFORE INSERT ON FormaggioProdotto
 FOR EACH ROW 
 BEGIN
-IF (SELECT * FROM Lotto L WHERE L.codiceLotto = NEW.LottoAppartenenza ) IS NULL THEN
+IF (SELECT L.codiceLotto FROM Lotto L WHERE L.codiceLotto = NEW.LottoAppartenenza ) IS NULL THEN
 	signal sqlstate '70006' SET MESSAGE_TEXT = 'ERRORE: Impossibile trovare il lotto di appartenenza del formaggio';
 ELSE
 	SET NEW.Scadenza = (SELECT L.DataProd FROM Lotto L WHERE L.codiceLotto = NEW.LottoAppartenenza)
-		+ INTERVAL (SELECT F.deperibilita FROM Formaggio F WHERE F.nome = NEW.nome AND F.nomeAgriturimso = NEW.nomeAgriturismo)DAY;
+		+ INTERVAL (SELECT F.deperibilita FROM Formaggio F WHERE F.nome = NEW.nome AND F.nomeAgriturismo = NEW.nomeAgriturismo)DAY;
 END IF;
 END $$
 DELIMITER ;
@@ -201,16 +201,17 @@ FOR EACH ROW
 BEGIN 
 IF 0 < (SELECT COUNT(*)
 			FROM OrdineProdotti OP INNER JOIN ContenutoOrdine CO ON OP.codiceOrdine = CO.codOrdine
-								INNER JOIN FormaggioProdotto FP ON (CO.codFormaggioProdotto = FP.codiceProdotto AND CO.quntità > FP.rimastiInStock)) THEN
+								INNER JOIN FormaggioProdotto FP ON (CO.codFormaggioProdotto = FP.codiceProdotto AND CO.quantità > FP.rimastiInStock)) THEN
 	SET NEW.stato = 'in processazione';
     ELSE
     
-    /*Aggiorna la quantità di rimasti in stock per ogni prodotto ordinato*/    
+    /*Aggiorna la quantità di rimasti in stock per ogni prodotto ordinato*/  
+    /*MAKE SURE THAT secure.mode IS DISABLED IN Preferences-->SQL.Editor!!*/
     UPDATE FormaggioProdotto
     SET rimastiInStock = rimastiInStock - (SELECT quantità
 											FROM ContenutoOrdine CO
                                             WHERE CO.codOrdine = NEW.codiceOrdine)
-	WHERE codiceProdotto IN (SELECT CO.codiceFormaggioprodotto
+	WHERE codiceProdotto IN (SELECT CO.codFormaggioprodotto
 							FROM contenutoordine CO
                             WHERE CO.codOrdine = NEW.codiceOrdine);
     /*Infine aggiorna lo stato dell'ordine*/
