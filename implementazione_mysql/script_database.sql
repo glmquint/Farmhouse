@@ -478,11 +478,11 @@ CREATE TABLE  Indicisalute
 (
 	codAnimale	SMALLINT UNSIGNED NOT NULL,
 	dataRilevazione	DATE NOT NULL UNIQUE,
-	tipologiaRespirazione	VARCHAR(20),
-	lucentezzaPelo	VARCHAR(20),
-	vigilanza	VARCHAR(20),
-	idratazione	VARCHAR(20),
-	deambulazione	VARCHAR(20),
+	tipologiaRespirazione	SMALLINT UNSIGNED,
+	lucentezzaPelo	SMALLINT UNSIGNED,
+	vigilanza	SMALLINT UNSIGNED,
+	idratazione	SMALLINT UNSIGNED,
+	deambulazione	SMALLINT UNSIGNED,
 	/*Per la ridondanza Qualità pasto*/
 	fibre INT UNSIGNED,
 	proteine INT UNSIGNED,
