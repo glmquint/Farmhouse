@@ -104,6 +104,7 @@ DELIMITER ;
 
 DELIMITER $$
  
+DROP FUNCTION IF EXISTS prima_somministrazione;
 CREATE FUNCTION prima_somministrazione(
 	/*il pasto*/
     _fibre INT UNSIGNED,
@@ -124,7 +125,7 @@ BEGIN
 				AND PPL.proteine = _proteine
                 AND PPL.glucidi = _glucidi
                 AND PPL.concentrazioneSali = _concentrazioneSali
-                AND PPL.concentrazioneVitamine = _concentrazioneVitmine
+                AND PPL.concentrazioneVitamine = _concentrazioneVitamine
                 AND PPL.codLocale = _codiceLocale
 			LIMIT 1
             INTO return_value;
@@ -138,7 +139,7 @@ BEGIN
 END$$
 DELIMITER ;
 
-
+DROP PROCEDURE IF EXISTS OP1_controllo_qualita_pasto;
 DELIMITER $$
 CREATE PROCEDURE OP1_controllo_qualita_pasto
 	(IN _fibre INT UNSIGNED,
@@ -155,13 +156,13 @@ BEGIN
     AVG(I.lucentezzaPelo) AS lucentezzaPelo
  FROM Locale L INNER JOIN Animale A ON L.codice = A.codiceLocale
 				INNER JOIN IndiciSalute I ON A.codice = I.codiceAnimale
- WHERE L.codiceLocale IN (SELECT DISTINCT(PPL.codlocale
+ WHERE L.codiceLocale IN (SELECT DISTINCT(PPL.codlocale)
 							FROM PastoPerLocale PPL
                             WHERE PPL.fibre = _fibre
 								AND PPL.proteine = _proteine
                                 AND PPL.glucidi = _glucidi
                                 AND PPL.concentrazioneSali = _concentrazioneSali
-                                AND PPL.concentrazioneVitamine = _concentrazioneVitamine))
+                                AND PPL.concentrazioneVitamine = _concentrazioneVitamine)
 	AND IF(prima_somministrazione(_fibre,
 									_proteine, 
                                     _glucidi, 
@@ -192,6 +193,7 @@ Output:registrazione del neonato con programmazione di una nuova visita
 Frequenza giornaliera:32
 */
 
+DROP FUNCTION IF EXISTS first_available_code;
 DELIMITER $$
 CREATE FUNCTION first_available_code() 
 RETURNS SMALLINT UNSIGNED
@@ -208,6 +210,7 @@ BEGIN
 END$$
 DELIMITER ;
 
+DROP FUNCTION IF EXISTS first_available_GPS;
 DELIMITER $$
 CREATE FUNCTION first_available_GPS() 
 RETURNS SMALLINT UNSIGNED
@@ -231,24 +234,24 @@ AFTER UPDATE ON Riproduzione
 FOR EACH ROW 
 BEGIN 
 IF NEW.stato = 'insuccesso' THEN
-INSERT INTO
-	Visita(descrizione,
-			dataProgrammata,
-			codAnimale,
-			codVeterinario)
-	VALUES('Visita di controllo automaticamente richiesta in seguito alla riproduzione fallita da parte dell\'animale',
-			CURRENT_DATE + INTERVAL 3 DAY,
-            NEW.codiceMadre,
-            (SELECT R.codVeterinario
-				FROM Riproduzione R
-				WHERE R.codiceRiproduzione = NEW.codRiproduzione));
-ELSE IF NEW.stato = 'successo' THEN
+	INSERT INTO
+		Visita(descrizione,
+				dataProgrammata,
+				codAnimale,
+				codVeterinario)
+		VALUES('Visita di controllo automaticamente richiesta in seguito alla riproduzione fallita da parte dell\'animale',
+				CURRENT_DATE + INTERVAL 3 DAY,
+				NEW.codiceMadre,
+				(SELECT R.codVeterinario
+					FROM Riproduzione R
+					WHERE R.codiceRiproduzione = NEW.codiceRiproduzione));
+ELSEIF NEW.stato = 'successo' THEN
 	signal sqlstate '70006' SET MESSAGE_TEXT = 'Chiamare la procedure OP2_registrazione_neonato per registrare il neonato e prenotargli una visita';
 END IF;
-SET NEW.attributo = ();
 END $$
 DELIMITER ;
 
+DROP PROCEDURE IF EXISTS OP2_registrazione_neonato;
 DELIMITER $$
 CREATE PROCEDURE OP2_registrazione_neonato
 	(IN _codRiproduzione SMALLINT UNSIGNED,
@@ -365,7 +368,7 @@ BEGIN
 			VALUES (costo_stanze + costo_servizi,
 					cliente);
 	END LOOP preleva;
-	CLOSE nome_cursore;
+	CLOSE cursore;
 END $$
 DELIMITER ;
 
