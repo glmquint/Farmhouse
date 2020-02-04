@@ -56,6 +56,28 @@ DELIMITER ;
 
 */
 
+/* MODULE CURSOR:
+
+DECLARE finito INTEGER DEFAULT 0;
+DECLARE result_var VARCHAR(255) DEFAULT "";
+DECLARE nome_cursore CURSOR FOR
+	SELECT
+		...
+DECLARE CONTINUE HANDLER FOR NOT FOUND SET finito = 1;
+
+OPEN nome_cursore;
+
+preleva: LOOP
+	FETCH nome_cursore INTO result_var;
+    IF finito = 1 THEN
+		LEAVE preleva;
+	END IF;
+    SET uscita = CONCAT(uscita, ';', result_var);
+END LOOP preleva;
+CLOSE nome_cursore;
+
+*/
+
 /*-------------------------------------------------------------
 
 /*Operazione 1: Controllo qualità del pasto
@@ -286,3 +308,71 @@ BEGIN
 				WHERE R.codiceRiproduzione = _codRiproduzione));
 END $$
 DELIMITER ;
+
+/*-------------------------------------------------------------
+
+Operazione 3: Pagamento delle stanze
+Descrizione:Ogni giorno viene registrato il pagamento cumulativo di ogni cliente
+	per ogni stanza prenotata e per ogni eventuale servizio aggiuntivo utilizzato
+Input:la data odierna
+Output:i pagamenti da effettuare
+Frequenza giornaliera:1
+*/
+
+DELIMITER $$
+CREATE PROCEDURE OP3_incassa_prenotazioni_del_giorno
+	(IN _day DATE)
+BEGIN
+  DECLARE finito INTEGER DEFAULT 0;
+  DECLARE costo_stanze INTEGER UNSIGNED DEFAULT 0;
+  DECLARE costo_servizi INTEGER UNSIGNED DEFAULT 0;
+	DECLARE cliente VARCHAR(16) DEFAULT "";
+	DECLARE cursore CURSOR FOR
+		SELECT PS.codCliente
+		FROM PrenotazioneStanza PS
+        WHERE PS.dataPartenza = _day;
+	DECLARE CONTINUE HANDLER FOR NOT FOUND SET finito = 1;
+
+	OPEN cursore;
+
+	preleva: LOOP
+		FETCH cursore INTO cliente;
+		IF finito = 1 THEN
+			LEAVE preleva;
+		END IF;
+        
+        /*calcola costo delle stanze prenotate*/
+        SELECT SUM(S.costoGiornaliero * DATE_DIFF(PS.dataPartenza, PS.dataArrivo))
+        FROM PrenotazioneStanza PS INNER JOIN Stanza 
+			ON PS.numStanza = S.numStanza AND PS.nomeAgriturismo = S.codAgriturismo
+        WHERE PS.codCliente = cliente
+			AND PS.dataPartenza = _day INTO costo_stanze;
+        
+        /*calcola il costo dei servizi utilizzati*/
+        SELECT SUM(SA.costo * DATE_DIFF(SPS.dataFineUtilizzo, SPS.dataInizioUtilizzo))
+        FROM PrenotazioneStanza PS INNER JOIN ServizioPerStanza SPS
+			ON PS.dataArrivo = SPS.dataArrivo
+				AND PS.numStanza = SPS.numStanza
+                AND PS.nomeAgriturismo = SPS.nomeAgriturismo
+                AND PS.codCliente = SPS.codCliente
+		WHERE PS.codCliente = cliente
+			AND PS.dataPartenza = _day INTO costo_servizi;
+          
+		/*inserisci i valori come nuovo pagamento da effettuare*/
+		INSERT INTO 
+			Pagamenti(totaleCosto,
+						codCliente)
+			VALUES (costo_stanze + costo_servizi,
+					cliente);
+	END LOOP preleva;
+	CLOSE nome_cursore;
+END $$
+DELIMITER ;
+
+SET GLOBAL event_scheduler = ON;
+
+CREATE EVENT controllo_pagamenti
+ON SCHEDULE EVERY 1 DAY 
+STARTS '2021-01-01 00:00:01'
+DO CALL OP3_incassa_prenotazioni_del_giorno(CURRENT_DATE());
+
