@@ -78,7 +78,7 @@ CLOSE nome_cursore;
 
 */
 
-/*-------------------------------------------------------------
+/*-------------------------------------------------------------OK
 
 /*Operazione 1: Controllo qualità del pasto
 Descrizione:Viene controllato che il pasto che viene somministrato agli animali
@@ -102,9 +102,9 @@ END $$
 DELIMITER ;
 */
 
-DELIMITER $$
  
 DROP FUNCTION IF EXISTS prima_somministrazione;
+DELIMITER $$
 CREATE FUNCTION prima_somministrazione(
 	/*il pasto*/
     _fibre INT UNSIGNED,
@@ -131,7 +131,7 @@ BEGIN
             INTO return_value;
             
 	IF return_value IS NOT NULL THEN
-		RETURN(DATE_FORMAT(FROM_UNIXTIME(return_value), '%e %b %Y'));
+		RETURN(DATE_FORMAT(return_value, '%Y-%m-%d'));
 	ELSE
 		RETURN(NULL);
 	END IF;
@@ -148,14 +148,15 @@ CREATE PROCEDURE OP1_controllo_qualita_pasto
 	IN _concentrazioneSali	TINYINT UNSIGNED,/*percentuale*/
 	IN _concentrazioneVitamine	TINYINT UNSIGNED)
 BEGIN
+/*Considera la media di tutti gli indici di salute rilevati dopo la prima sommisitrazione del pasto in ogni locale*/
  SELECT L.codiceLocale AS Locale, 
 	AVG(I.tipologiaRespirazione) AS tipologiaRespirazione, 
 	AVG(I.deambulazione) AS tipologiaRespirazione, 
     AVG(I.idratazione) AS idratazione, 
     AVG(I.vigilanza) AS vigilanza, 
     AVG(I.lucentezzaPelo) AS lucentezzaPelo
- FROM Locale L INNER JOIN Animale A ON L.codice = A.codiceLocale
-				INNER JOIN IndiciSalute I ON A.codice = I.codiceAnimale
+ FROM Locale L INNER JOIN Animale A ON L.codiceLocale = A.codLocale
+				INNER JOIN IndiciSalute I ON A.codice = I.codAnimale
  WHERE L.codiceLocale IN (SELECT DISTINCT(PPL.codlocale)
 							FROM PastoPerLocale PPL
                             WHERE PPL.fibre = _fibre
@@ -177,6 +178,32 @@ BEGIN
                                                         L.codiceLocale),
             0)
 GROUP BY L.codiceLocale;
+END $$
+DELIMITER ;
+
+/*TODO: Aggiornare la ridondanza: ad un nuovo indice di salute, inserire l'ultimo pasto preso dall'animale*/
+
+DROP TRIGGER IF EXISTS aggiorna_ridondanza_pasto_in_IndiciSalute;
+DELIMITER $$
+CREATE TRIGGER aggiorna_ridondanza_pasto_in_IndiciSalute
+BEFORE INSERT ON IndiciSalute
+FOR EACH ROW
+BEGIN
+	DECLARE var_fibre INT UNSIGNED DEFAULT NULL;
+	DECLARE var_proteine INT UNSIGNED DEFAULT NULL;
+	DECLARE var_glucidi INT UNSIGNED DEFAULT NULL;
+	DECLARE var_sali TINYINT UNSIGNED DEFAULT NULL;
+	DECLARE var_vitamine TINYINT UNSIGNED DEFAULT NULL;
+	SELECT fibre, proteine, glucidi, concentrazioneSali, concentrazioneVitamine -- CONCAT(fibre, ';', proteine, ';', glucidi, ';', concentrazioneSali, ';', concentrazioneVitamine)
+				FROM Animale A INNER JOIN PastoPerLocale PPL ON A.codLocale = PPL.codLocale
+                WHERE A.codice = 10 -- NEW.codAnimale
+                ORDER BY PPL.giorno_orario DESC
+                LIMIT 1 INTO var_fibre, var_proteine, var_glucidi, var_sali, var_vitamine;
+	SET NEW.fibre = var_fibre;
+    SET NEW.proteine = var_proteine;
+    SET NEW.glucidi = var_glucidi;
+    SET NEW.concentrazioneSali = var_sali;
+    SET NEW.concentrazioneVitamine = var_vitamine;
 END $$
 DELIMITER ;
 
@@ -322,6 +349,7 @@ Output:i pagamenti da effettuare
 Frequenza giornaliera:1
 */
 
+DROP PROCEDURE IF EXISTS OP3_incassa_prenotazioni_del_giorno;
 DELIMITER $$
 CREATE PROCEDURE OP3_incassa_prenotazioni_del_giorno
 	(IN _day DATE)
@@ -363,9 +391,11 @@ BEGIN
           
 		/*inserisci i valori come nuovo pagamento da effettuare*/
 		INSERT INTO 
-			Pagamenti(totaleCosto,
+			Pagamenti(tipoPagamento, 
+						totaleCosto,
 						codCliente)
-			VALUES (costo_stanze + costo_servizi,
+			VALUES ('stanza',
+					costo_stanze + costo_servizi,
 					cliente);
 	END LOOP preleva;
 	CLOSE cursore;
@@ -374,6 +404,7 @@ DELIMITER ;
 
 SET GLOBAL event_scheduler = ON;
 
+DROP EVENT IF EXISTS controllo_pagamenti;
 CREATE EVENT controllo_pagamenti
 ON SCHEDULE EVERY 1 DAY 
 STARTS '2021-01-01 00:00:01'
