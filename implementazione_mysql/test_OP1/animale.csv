@@ -1,0 +1,10 @@
+codice,sesso,specie,famiglia,idMadre,idPadre,dataDiNascita,altezza,peso,razza,latitudine,longitudine,orario,codiceGps,codLocale
+5,M,"bos lobe",tetracerus,NULL,NULL,1966-05-19,92,191,tedesca,117.249,-178.78,"2012-03-11 18:33:37",4,66
+6,F,"bos lobe",tetracerus,NULL,NULL,1967-05-19,92,191,tedesca,117.249,-178.78,"2012-03-11 18:33:37",5,67
+7,M,"bos lobe",tetracerus,NULL,NULL,1968-05-19,92,191,tedesca,117.249,-178.78,"2012-03-11 18:33:37",6,68
+8,M,"bos lobe",tetracerus,NULL,NULL,1966-05-19,92,191,tedesca,117.249,-178.78,"2012-03-11 18:33:37",0,67
+9,F,"bos lobe",tetracerus,NULL,NULL,1967-05-19,92,191,tedesca,117.249,-178.78,"2012-03-11 18:33:37",7,68
+10,M,"bos lobe",tetracerus,NULL,NULL,1968-05-19,92,191,tedesca,117.249,-178.78,"2012-03-11 18:33:37",8,66
+11,M,"bos lobe",tetracerus,NULL,NULL,1966-05-19,92,191,tedesca,117.249,-178.78,"2012-03-11 18:33:37",9,68
+12,F,"bos lobe",tetracerus,NULL,NULL,1967-05-19,92,191,tedesca,117.249,-178.78,"2012-03-11 18:33:37",10,66
+13,M,"bos lobe",tetracerus,NULL,NULL,1968-05-19,92,191,tedesca,117.249,-178.78,"2012-03-11 18:33:37",11,67
