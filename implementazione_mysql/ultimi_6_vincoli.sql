@@ -15,7 +15,7 @@ DELIMITER ;
 
 */
 
-/*-------------------------------------------------------------
+/*-------------------------------------------------------------OK
 
 Esiste un vincolo di integrità che lega dataProd e durata in Lotto e deperi-bilità in Formaggio a scadenza in Formaggio Prodotto
 
@@ -102,7 +102,9 @@ CREATE TRIGGER VIII_data_pagamento_prenotazione_stanza
 BEFORE INSERT ON Pagamenti
 FOR EACH ROW 
 BEGIN 
-SET NEW.dataPagamento = (SELECT PS.dataPartenza FROM PrenotazioneStanza PS WHERE PS.codCliente = NEW.codCliente ORDER BY PS.dataPartenza DESC);
+IF NEW.tipoPagamento = 'stanza' THEN
+	SET NEW.dataPagamento = (SELECT PS.dataPartenza FROM PrenotazioneStanza PS WHERE PS.codCliente = NEW.codCliente ORDER BY PS.dataPartenza DESC);
+END IF;
 END $$
 DELIMITER ;
 
@@ -313,5 +315,21 @@ ELSEIF NEW.stato = 'consegnata' THEN
     SET stato = 'evaso'
     WHERE codSpedizione = NEW.codice;
 END IF;
+END $$
+DELIMITER ;
+
+/*-------------------------------------------------------------
+
+Trigger non ancora espresso ma estremamente utile nella registrazione di nuovi animali
+Descrizione: ad ogni nuovo animale viene associato il numero più basso disponibile come codice GPS,
+	di fatto implementando un AUTO-INCREMENT su un valore non chiave*/
+    
+DROP TRIGGER IF EXISTS XIII_nuovo_GPS;
+DELIMITER $$
+CREATE TRIGGER XIII_nuovo_GPS
+BEFORE INSERT ON Animale
+FOR EACH ROW
+BEGIN
+	SET NEW.codiceGPS = first_available_GPS();
 END $$
 DELIMITER ;
