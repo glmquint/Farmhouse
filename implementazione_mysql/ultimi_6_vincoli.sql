@@ -140,6 +140,7 @@ CREATE TRIGGER IX_anticipo_su_pagamento
 BEFORE INSERT ON Pagamenti
 FOR EACH ROW 
 BEGIN 
+/*TODO: controllare se l'anticipo deve essere considerato anche per pagamenti di escursioni e di acquisti online*/
 SET NEW.totaleCosto = NEW.totaleCosto - (SELECT C.anticipo FROM Cliente C WHERE C.codCarta = NEW.codCliente);
 END $$
 DELIMITER ;
@@ -194,31 +195,65 @@ CREATE TABLE  OrdineProdotti
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 */
+DROP PROCEDURE IF EXISTS aggiorna_rimasti_in_stock;
+DELIMITER $$
+CREATE PROCEDURE aggiorna_rimasti_in_stock
+	(IN _ordine SMALLINT UNSIGNED)
+BEGIN
+	DECLARE finito INTEGER DEFAULT 0;
+	DECLARE prodotto INT UNSIGNED;
+	DECLARE cursore CURSOR FOR
+		SELECT CO.codFormaggioProdotto
+        FROM contenutoOrdine CO
+        WHERE CO.codOrdine = _ordine;
+	DECLARE CONTINUE HANDLER FOR NOT FOUND SET finito = 1;
+
+	OPEN cursore;
+
+	preleva: LOOP
+		FETCH cursore INTO prodotto;
+		IF finito = 1 THEN
+			LEAVE preleva;
+		END IF;
+		UPDATE FormaggioProdotto
+        SET rimastiInStock = rimastiInStock - (SELECT quantità 
+												FROM contenutoOrdine 
+                                                WHERE codOrdine = _ordine 
+													AND codFormaggioProdotto = prodotto)
+		WHERE codiceProdotto = prodotto;
+	END LOOP preleva;
+	CLOSE cursore;
+END $$
+DELIMITER ;
+
 
 DROP TRIGGER IF EXISTS X_controllo_disponibilita_ordine;
 DELIMITER $$
 CREATE TRIGGER X_controllo_disponibilita_ordine
-BEFORE INSERT ON OrdineProdotti
-FOR EACH ROW 
-BEGIN 
+AFTER INSERT ON ContenutoOrdine
+FOR EACH ROW
+BEGIN
+/*se c'è almeno un prodotto ordinato che non è disponibile in stock*/
 IF 0 < (SELECT COUNT(*)
-			FROM OrdineProdotti OP INNER JOIN ContenutoOrdine CO ON OP.codiceOrdine = CO.codOrdine
-								INNER JOIN FormaggioProdotto FP ON (CO.codFormaggioProdotto = FP.codiceProdotto AND CO.quantità > FP.rimastiInStock)) THEN
-	SET NEW.stato = 'in processazione';
-    ELSE
-    
+		FROM contenutoOrdine CO INNER JOIN FormaggioProdotto FP ON CO.codFormaggioProdotto = FP.codiceProdotto
+		WHERE CO.codOrdine = NEW.codOrdine
+			AND CO.quantità > FP.rimastiInStock) THEN
+	UPDATE OrdineProdotti
+    SET stato = 'in processazione'
+    WHERE codiceOrdine = NEW.codOrdine;
+ELSE
+ 
     /*Aggiorna la quantità di rimasti in stock per ogni prodotto ordinato*/  
-    /*MAKE SURE THAT secure.mode IS DISABLED IN Preferences-->SQL.Editor!!*/
-    UPDATE FormaggioProdotto
-    SET rimastiInStock = rimastiInStock - (SELECT quantità
-											FROM ContenutoOrdine CO
-                                            WHERE CO.codOrdine = NEW.codiceOrdine)
-	WHERE codiceProdotto IN (SELECT CO.codFormaggioprodotto
-							FROM contenutoordine CO
-                            WHERE CO.codOrdine = NEW.codiceOrdine);
+	/*MAKE SURE THAT secure.mode IS DISABLED IN Preferences-->SQL.Editor!!*/
+    CALL aggiorna_rimasti_in_stock(NEW.codOrdine);
+                            
     /*Infine aggiorna lo stato dell'ordine*/
-    SET NEW.stato = 'in preparazione';
+	UPDATE OrdineProdotti
+    SET stato = 'in preparazione'
+    WHERE codiceOrdine = NEW.codOrdine;
 END IF;
+
+
 END $$
 DELIMITER ;
 
