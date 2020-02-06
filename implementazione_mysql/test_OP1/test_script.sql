@@ -1,3 +1,4 @@
+/*Test script per l'operazione 1*/
 INSERT INTO Locale(codiceLocale,temperatura,umidità,orientazioneFinestre,tollerabilitaAzoto,tollerabilitaSporcizia,tollerabilitaMetano,codiceStalla,nomeAgriturismo,specieOspitata,altezza,lunghezza,larghezza) 
 	VALUES (66,28,39,'S',8,5,5,1,'Settesoldi','bos lobe',486,2299,1096);
 INSERT INTO Locale(codiceLocale,temperatura,umidità,orientazioneFinestre,tollerabilitaAzoto,tollerabilitaSporcizia,tollerabilitaMetano,codiceStalla,nomeAgriturismo,specieOspitata,altezza,lunghezza,larghezza) 
