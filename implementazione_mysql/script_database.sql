@@ -827,7 +827,7 @@ CREATE TABLE  contenutoordine
 (
 	codOrdine	SMALLINT UNSIGNED NOT NULL,
 	codFormaggioprodotto	INT UNSIGNED NOT NULL,
-	quantità	TINYINT NOT NULL,
+	quantità	TINYINT UNSIGNED NOT NULL,
 	reso	BOOLEAN NOT NULL,
 	primary key (codOrdine, codFormaggioprodotto),
 	foreign key (codFormaggioprodotto) references FormaggioProdotto(codiceProdotto),
