@@ -79,6 +79,8 @@ CLOSE nome_cursore;
 
 */
 
+SET GLOBAL event_scheduler = ON;
+
 /*-------------------------------------------------------------OK
 
 /*Operazione 1: Controllo qualità del pasto
@@ -401,8 +403,6 @@ BEGIN
 END $$
 DELIMITER ;
 
-SET GLOBAL event_scheduler = ON;
-
 DROP EVENT IF EXISTS controllo_pagamenti;
 CREATE EVENT controllo_pagamenti
 ON SCHEDULE EVERY 1 DAY 
@@ -527,6 +527,79 @@ valori più recenti raccolti
 Input:Il codice del locale da controllare
 Output:Richiesta d’intervento di pulizia
 Frequenza giornaliera:40
+*/
+
+DROP PROCEDURE IF EXISTS OP5_controllo_igiene_locali;
+DELIMITER $$
+CREATE PROCEDURE OP5_controllo_igiene_locali
+	(IN _locale SMALLINT UNSIGNED)
+BEGIN
+
+DECLARE finito INTEGER DEFAULT 0;
+DECLARE locale SMALLINT UNSIGNED DEFAULT NULL;
+DECLARE cursore CURSOR FOR
+	SELECT L.codice
+    FROM Locale L;
+DECLARE CONTINUE HANDLER FOR NOT FOUND SET finito = 1;
+
+OPEN cursore;
+
+/*per ogni locale*/
+preleva: LOOP
+	FETCH cursore INTO locale;
+    IF finito = 1 THEN
+		LEAVE preleva;
+	END IF;
+    /*considera le medie di tutti i sensori nel locale*/
+    SELECT AVG(V.livelloSporcizia)
+    FROM Visivi V
+    WHERE V.codLocale = locale INTO @media_sporcizia;
+    
+    SELECT AVG(A.temperatura)
+    FROM Ambientali A
+    WHERE A.codLocale = locale INTO @media_temperatura;
+    
+    SELECT AVG(A.umidità)
+    FROM Ambientali A
+    WHERE A.codLocale = locale INTO @media_umidita;
+    
+    SELECT AVG(CV.concentrazioneMetano)
+    FROM CompostiVolatili CV
+    WHERE CV.codLocale = locale INTO @media_metano;
+    
+    SELECT AVG(CV.concentrazioneAzoto)
+    FROM CompostiVolatili CV
+    WHERE CV.codLocale = locale INTO @media_azoto;
+    
+    /*aggiorna temperatura e umidità medi*/
+    UPDATE Locale
+    SET temperatura = @media_temperatura
+    , umidità = @media_umidita
+    WHERE codice = locale;
+    
+    /*considera le soglie di tollerabilità*/
+    SELECT L.tollerabilitaAzoto, L.tollerabilitaSporcizia, L.tollerabilitaMetano
+    FROM Locale L
+    WHERE L.codice = locale INTO @max_azoto, @max_sporcizia, @max_metano;
+    
+    /*se anche solo uno di questi valori supera la soglia consentita*/
+    IF @media_azoto > @max_azoto OR @media_sporcizia > @max_sporcizia OR @media_metano > @max_metano THEN
+		/*effettua una nuova richiesta d'intervento di pulizia per il locale*/
+		INSERT INTO PuliziaLocale (codLocale, data_orarioRilevazione, stato, personale)
+        VALUES (locale, CURRENT_TIMESTAMP(), 'pendente', 'personale per la pulizia del locale');
+    END IF;
+    
+END LOOP preleva;
+CLOSE cursore;
+
+END $$
+DELIMITER ;
+
+DROP EVENT IF EXISTS controllo_igiene_locali;
+CREATE EVENT controllo_igiene_locali
+ON SCHEDULE EVERY 12 HOUR 
+STARTS '2021-01-01 00:08:00'
+DO CALL OP5_controllo_igiene_locali();
 
 /*-------------------------------------------------------------
 
