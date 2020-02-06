@@ -1,5 +1,6 @@
 /* MODULE PROCEDURE :
 
+DROP PROCEDURE IF EXISTS procedure_name;
 DELIMITER $$
 CREATE PROCEDURE procedure_name
 	(IN _var CHAR(20),
@@ -14,8 +15,8 @@ DELIMITER ;
 
 /* MODULE FUNCTION:
 
+DROP FUNCTION IF EXISTS function_name;
 DELIMITER $$
- 
 CREATE FUNCTION function_name(
     var DECIMAL(10,2)
 ) 
@@ -110,7 +111,7 @@ CREATE FUNCTION prima_somministrazione(
     _fibre INT UNSIGNED,
 	_proteine INT UNSIGNED,
 	_glucidi INT UNSIGNED,
-	_concentrazioneSali	TINYINT UNSIGNED,/*percentuale*/
+	_concentrazioneSali	TINYINT UNSIGNED,
 	_concentrazioneVitamine	TINYINT UNSIGNED,
     /*il locale*/
     _codiceLocale	SMALLINT
@@ -181,8 +182,6 @@ GROUP BY L.codiceLocale;
 END $$
 DELIMITER ;
 
-/*TODO: Aggiornare la ridondanza: ad un nuovo indice di salute, inserire l'ultimo pasto preso dall'animale*/
-
 DROP TRIGGER IF EXISTS aggiorna_ridondanza_pasto_in_IndiciSalute;
 DELIMITER $$
 CREATE TRIGGER aggiorna_ridondanza_pasto_in_IndiciSalute
@@ -194,9 +193,9 @@ BEGIN
 	DECLARE var_glucidi INT UNSIGNED DEFAULT NULL;
 	DECLARE var_sali TINYINT UNSIGNED DEFAULT NULL;
 	DECLARE var_vitamine TINYINT UNSIGNED DEFAULT NULL;
-	SELECT fibre, proteine, glucidi, concentrazioneSali, concentrazioneVitamine -- CONCAT(fibre, ';', proteine, ';', glucidi, ';', concentrazioneSali, ';', concentrazioneVitamine)
+	SELECT fibre, proteine, glucidi, concentrazioneSali, concentrazioneVitamine
 				FROM Animale A INNER JOIN PastoPerLocale PPL ON A.codLocale = PPL.codLocale
-                WHERE A.codice = 10 -- NEW.codAnimale
+                WHERE A.codice = NEW.codAnimale
                 ORDER BY PPL.giorno_orario DESC
                 LIMIT 1 INTO var_fibre, var_proteine, var_glucidi, var_sali, var_vitamine;
 	SET NEW.fibre = var_fibre;
@@ -410,3 +409,171 @@ ON SCHEDULE EVERY 1 DAY
 STARTS '2021-01-01 00:00:01'
 DO CALL OP3_incassa_prenotazioni_del_giorno(CURRENT_DATE());
 
+/*-------------------------------------------------------------
+
+Operazione 4: Stoccaggio del latte munto
+Descrizione:Il latte munto viene conservato in appositi silos contenenti tutti latte
+con composizione chimico-fisica simile
+Input:data e ora della mungitura, oltre che il codice del latte munto
+Output:Aggiornamento della quntità stoccata nel corretto silos
+Frequenza giornaliera:15000
+*/
+
+DROP PrOCEDURE IF EXISTS OP4_stoccaggio_latte;
+DELIMITER $$
+CREATE PROCEDURE OP4_stoccaggio_latte
+	(/*mungitura*/
+    IN _data_ora TIMESTAMP,
+    IN _animale SMALLINT UNSIGNED,
+    IN _mangitrice SMALLINT UNSIGNED,
+    /*latte*/
+    IN _codLatte SMALLINT UNSIGNED)
+BEGIN
+
+/*cerca il silos che ha la minor differenza tra 
+  la quantità di sostanze disciolte nel latte
+  con la media delle sostanze dei latti già stoccati in quel silo*/
+SELECT S.codice
+FROM Silos S
+WHERE ABS((
+			SELECT L.quantitàSostanzeDisciolte
+			FROM Latte L
+			WHERE L.codiceLatte = _codLatte) - 
+            (
+            SELECT AVG(L1.quantitàSostanzeDisciolte)
+			FROM Silos S1 INNER JOIN Latte L1 ON S1.codice = L1.codSilos
+			WHERE S1.codice = S.codice
+			) 
+		) = 
+		(
+		SELECT MIN(ABS((
+			SELECT L2.quantitàSostanzeDisciolte
+			FROM Latte L2
+			WHERE L2.codiceLatte = _codLatte
+			) - 
+			(
+			SELECT AVG(L3.quantitàSostanzeDisciolte)
+			FROM Silos S3 INNER JOIN Latte L3 ON S3.codice = L3.codSilos
+			WHERE S3.codice = S4.codice
+            )
+		)
+	)
+	FROM Silos S4
+)LIMIT 1 INTO @silo;
+
+/*controlla se c'è spazio nel silos*/
+IF (SELECT S.capacità - S.livello
+	FROM Silos S
+    WHERE S.codice = @silo) < 
+    (SELECT M.quantità
+    FROM Mungitura
+    WHERE M.codAnimale = _animale
+		AND M.codMungitrice = _mungitrice
+        AND M.data_orario = _data_ora) THEN
+	/* se non c'è spazio, controlla se esiste già un silos vuoto*/
+	SELECT S.codice
+    FROM Silos S
+    WHERE S.livello = 0 INTO @silo;
+    IF @silo IS NULL THEN
+		/*se non c'è, creane uno nuovo (valore capacità di default da scegliere)*/
+		INSERT INTO Silos (codice, capacità, livello)
+			VALUES ((SELECT MAX(S.codice)
+					FROM Silos S), 1000, (SELECT M.quantità
+									FROM Mungitura
+									WHERE M.codAnimale = _animale
+										AND M.codMungitrice = _mungitrice
+										AND M.data_orario = _data_ora));
+		/*usare il nuovo silo per aggiornare dove è stoccato il latte*/
+		SET @silo = (SELECT MAX(S.codice)
+					FROM Silos S);
+		ELSE
+        /*se c'è, aumentare il livello di quel silos
+          (direttamente la quantità, in quanto il silo è vuoto)*/
+			UPDATE Silos
+            SET livello = /*livello + */(SELECT M.quantità
+									FROM Mungitura
+									WHERE M.codAnimale = _animale
+										AND M.codMungitrice = _mungitrice
+										AND M.data_orario = _data_ora)
+			WHERE codice = @silo;
+    END IF;
+    
+    ELSE
+    /*se c'è spazio nel silo, aggiungi lla quantità munta al livello*/
+		UPDATE Silos
+		SET livello = livello + (SELECT M.quantità
+								FROM Mungitura
+								WHERE M.codAnimale = _animale
+									AND M.codMungitrice = _mungitrice
+									AND M.data_orario = _data_ora)
+		WHERE codice = @silo;
+END IF;
+
+/*aggiornare in quale silo è stato stoccato il latte*/
+UPDATE Latte
+SET codSilos = @silo;
+
+END $$
+DELIMITER ;
+
+/*-------------------------------------------------------------
+
+Operazione 5: Controllo igiene dei locali
+Descrizione:Per garantire il rispetto delle condizioni di benessere degli animali
+all’interno dei locali, viene frequentemente controllato che i parametri rilevati 
+rientrino nelle soglie di tollerabilità, ed eventualmente viene inviata una richiesta
+di intervento di pulizia, insieme all’aggiornamento dei parametri del locale con i
+valori più recenti raccolti
+Input:Il codice del locale da controllare
+Output:Richiesta d’intervento di pulizia
+Frequenza giornaliera:40
+
+/*-------------------------------------------------------------
+
+Operazione 6: Processamento degli ordini
+Descrizione:Gli utenti che si sono registrati nello store online possono acquistare i
+prodotti caseari e ricevere il proprio ordine tramite le spedizioni gestite dal database
+Input:Il codice del nuovo ordine effettuato dal cliente sullo store online
+Output:Processamento ed invio dell’ordine
+Frequenza giornaliera:400
+
+/*-------------------------------------------------------------
+
+Operazione 7: Prescrizione delle terapie
+Descrizione:Alla registrazione di una nuova terapia da parte di un veterinario,
+viene controllato se questa è la terza consecutiva sullo stesso animale, nel qual
+caso viene effettuato un ricollocamento in una zona di quarantena
+Input:la nuova terapia e l’animale a cui è assegnata
+Output:Trasferimanto dell’animale in un nuovo locale di quarantena
+Frequenza giornaliera:110
+
+/*-------------------------------------------------------------
+
+Operazione 8: Controllo degli animali dispersi
+Descrizione:Durante le attività di pascolo viene monitorato ad intervalli regolari
+il segnale GPS di ogni singolo animale affinchè ci si assicuri che rientri negli spazi
+delimitati dalle recinzioni per le zone dedicate al pascolo
+Input:codice dell’attività di pascolo
+Output:segnalazione se l’animale è disperso
+Frequenza giornaliera:3968
+
+/*-------------------------------------------------------------
+
+perazione 9: Registrazione nuovo account
+Descrizione:All’ inserimento di un nuovo account nello store online, viene 
+controllato se i dati inseriti corrispondono a quelli di un cliente già registrato ma senza
+un account. Nel caso viene aggiunto un record in Account con i dati forniti 
+durante la registrazione, altrimenti viene prima registrato il nuovo cliente a partire
+dal codice della sua carta
+Input:anagrafica del cliente, dati dei documenti e informazioni sull’account daregistrare
+Output:aggiunta di un account e del cliente che lo possiede
+Frequenza giornaliera:19
+
+/*-------------------------------------------------------------
+
+Operazione 10: Ridistribuzione degli animali all’aggiunta di unnuovo locale
+Descrizione:All’aggiunta di un nuovo locale, vengono smistati gli animali già
+presenti nella stalla affinchè sia mantenuto costante il numero di animali per locale
+Input:dati del nuovo locale e codice della stalla a cui appartiene
+Output:ridistribuzione degli animali nel nuovo locale aggiunto e registrazione deinuovi sensori
+Frequenza giornaliera:0.27
