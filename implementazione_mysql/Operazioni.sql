@@ -609,6 +609,35 @@ prodotti caseari e ricevere il proprio ordine tramite le spedizioni gestite dal 
 Input:Il codice del nuovo ordine effettuato dal cliente sullo store online
 Output:Processamento ed invio dell’ordine
 Frequenza giornaliera:400
+*/
+
+/*vincolo X controlla già la disponibilità dell'ordine!!
+
+DROP PROCEDURE IF EXISTS OP6_processamento_ordini;
+DELIMITER $$
+CREATE PROCEDURE OP6_processamento_ordini
+	(IN _var CHAR(20),
+    OUT var_ INT)
+BEGIN
+  SELECT attr
+  FROM table INTO var_;
+END $$
+DELIMITER ;
+
+DROP TRIGGER IF EXISTS check_nuovo_ordine;
+DELIMITER $$
+CREATE TRIGGER check_nuovo_ordine
+BEFORE INSERT ON Tabella
+FOR EACH ROW 
+BEGIN 
+IF  THEN
+	signal sqlstate '70006' SET MESSAGE_TEXT = 'ERRORE: ';
+END IF;
+SET NEW.attributo = ();
+END $$
+DELIMITER ;
+
+*/
 
 /*-------------------------------------------------------------
 
