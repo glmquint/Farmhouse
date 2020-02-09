@@ -529,7 +529,7 @@ CREATE TABLE  Terapia
 (
 	codiceTerapia	INTEGER UNSIGNED NOT NULL UNIQUE AUTO_INCREMENT ,
 	dataInizio	DATE,
-	durata	TIME,
+	durata	INTEGER UNSIGNED, -- numero di giorni
 	secondaTerapiaConsecutiva	BOOLEAN,
 	codAnimale	SMALLINT UNSIGNED NOT NULL,
 	primary key (codiceTerapia),

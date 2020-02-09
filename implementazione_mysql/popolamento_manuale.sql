@@ -135,7 +135,7 @@ INSERT INTO Visita (codiceVisita, esito, descrizione, dataEffettiva, dataProgram
 INSERT INTO Esame (codiceEsame, descrizione, dataEsame, macchinario, nome, codAnimale, codVeterinario)
 	VALUES (default, 'Vivamus urna feli  scelerisque quis neque e  ornare dapibus nun. Morbi in nulla vel risus iaculis lacini. Proin eget mauris vel urna dapibus gravid. In at pharetra lore. Quisque at facilisis ipsu. Cras vehicula ut velit in aucto. Ut risus arc  maximus ', '2019-09-12', 'amet varius risu  nec accumsan ligul. Cras feugiat urna non rhoncus posuer.Mauris sagittis risus in metus feugia  et tempus mi aliqua. Donec quis eros veli. Cras sollicitudin felis eget orci consequa  at sodales magna tincidun. Mauris quis mauris qua. Lorem ipsum ', 'est sed pulvina. Vestibulum vitae velit vehicul  finibus dui i  convallis turpi.Vivamus et enim torto. Ut facilisis finibus sempe. Curabitur blandit rutrum metu. Nulla rutrum nibh sed ante euismod cursu. Donec vitae ligula molli  pretium nisl ege  hendrerit mass. ', 3, 'BLLDNC38A18E290R');
 INSERT INTO Terapia (codiceTerapia, dataInizio, durata, secondaTerapiaConsecutiva, codAnimale)
-	VALUES (default, '2019-04-12', '00:12:09', 0, 2);
+	VALUES (default, '2019-04-12', 14, 0, 2);
 INSERT INTO Farmaco (nome, principioAttivo, dosaggio)
 	VALUES ('VITAMINA E 30 MG FIALA 1 ML >10<','TOCOFEROLO ACETATO ALFA','30MG');
 INSERT INTO compostada (codTerapia, nomeFarmaco, posologia)
