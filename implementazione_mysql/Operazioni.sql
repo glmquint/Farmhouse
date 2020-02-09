@@ -648,6 +648,56 @@ caso viene effettuato un ricollocamento in una zona di quarantena
 Input:la nuova terapia e l’animale a cui è assegnata
 Output:Trasferimanto dell’animale in un nuovo locale di quarantena
 Frequenza giornaliera:110
+*/
+
+/*Ogni Agriturismo ha un locale di quarantena, identificato da un codice superiore a 10000*/
+DROP FUNCTION IF EXISTS localeQuarantena;
+DELIMITER $$
+CREATE FUNCTION localeQuarantena(
+    _locale SMALLINT UNSIGNED
+) 
+RETURNS SMALLINT UNSIGNED
+DETERMINISTIC
+BEGIN
+    DECLARE return_value SMALLINT UNSIGNED;
+ 
+    SELECT L.codiceLocale
+    FROM Locale L
+    WHERE L.codiceLocale > 10000 -- soglia oltre la quale il locale è di quarantena
+		AND 40 > (SELECT COUNT(A.codice)
+					FROM Animale A
+                    WHERE A.codLocale = L.codiceLocale)
+		AND L.nomeAgriturismo = (SELECT L1.nomeAgriturismo
+								FROM Locale L1
+                                WHERE L1.codiceLocale = _locale) 
+	LIMIT 1 INTO return_value;
+    RETURN (return_value);
+END$$
+DELIMITER ;
+
+DROP TRIGGER IF EXISTS OP7_check_nuova_terapia;
+DELIMITER $$
+CREATE TRIGGER OP7_check_nuova_terapia
+BEFORE INSERT ON Terapia
+FOR EACH ROW 
+BEGIN 
+IF (SELECT T.codiceTerapia
+	FROM Terapia T
+    WHERE T.codAnimale = NEW.codAnimale
+        AND T.dataInizio + INTERVAL T.durata DAY  >= CURRENT_DATE()
+        AND T.secondaTerapiaConsecutiva) IS NOT NULL THEN
+	UPDATE Animale
+    SET codLocale = localeQuarantena(codLocale)
+    WHERE codice = NEW.codAnimale;
+ELSEIF (SELECT T.codiceTerapia
+		FROM Terapia T
+		WHERE T.codAnimale = NEW.codAnimale
+			AND T.dataInizio + INTERVAL T.durata DAY  >= CURRENT_DATE()
+			AND NOT T.secondaTerapiaConsecutiva) IS NOT NULL THEN
+	SET NEW.secondaTerapiaConsecutiva = 1;
+END IF;
+END $$
+DELIMITER ;
 
 /*-------------------------------------------------------------
 
@@ -658,6 +708,96 @@ delimitati dalle recinzioni per le zone dedicate al pascolo
 Input:codice dell’attività di pascolo
 Output:segnalazione se l’animale è disperso
 Frequenza giornaliera:3968
+*/
+
+
+DROP EVENT IF EXISTS controllo_attivita_pascolo;
+CREATE EVENT controllo_attivita_pascolo
+ON SCHEDULE EVERY 15 MINUTE 
+STARTS '2021-01-01 00:00:01'
+DO CALL attivita_in_data(CURRENT_DATE());
+
+DROP PROCEDURE IF EXISTS attivita_in_data;
+DELIMITER $$
+CREATE PROCEDURE attivita_in_data
+	(IN _data DATE)
+BEGIN
+	DECLARE finito INTEGER DEFAULT 0;
+	DECLARE attivita SMALLINT UNSIGNED DEFAULT NULL;
+	DECLARE cursore CURSOR FOR
+		SELECT AP.codiceAttivita
+        FROM AttivitaPascolo AP
+        WHERE DATE_FORMAT(AP.giorno_orario, '%Y-%m-%d') = _data;
+	DECLARE CONTINUE HANDLER FOR NOT FOUND SET finito = 1;
+
+	OPEN cursore;
+
+	preleva: LOOP
+		FETCH cursore INTO attivita;
+		IF finito = 1 THEN
+			LEAVE preleva;
+		END IF;
+        CALL OP8_check_animali_dispersi(attivita);
+	END LOOP preleva;
+	CLOSE cursore;
+END $$
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS OP8_check_animali_dispersi;
+DELIMITER $$
+CREATE PROCEDURE OP8_check_animali_dispersi
+	(IN _attivita SMALLINT UNSIGNED)
+BEGIN
+/*
+	DECLARE finito INTEGER DEFAULT 0;
+	DECLARE animale SMALLINT UNSIGNED DEFAULT NULL;
+	DECLARE animali_dispersi VARCHAR(255) DEFAULT "";
+	DECLARE cursore CURSOR FOR
+		SELECT A.codice
+        FROM Animale A
+        WHERE A.codLocale = (SELECT AP.codLocale
+							FROM AttivitaPascolo AP
+                            WHERE AP.codiceAttivita = _attivita);
+	DECLARE CONTINUE HANDLER FOR NOT FOUND SET finito = 1;
+
+	OPEN cursore;
+
+	preleva: LOOP
+		FETCH cursore INTO animale;
+		IF finito = 1 THEN
+			LEAVE preleva;
+		END IF;
+        IF -- distanza minima da una recinzione è superiore ad una soglia 
+			THEN
+			SET animale_dispersi = CONCAT(animali_dispersi, ';', animale);
+		END IF;
+	END LOOP preleva;
+	CLOSE cursore;
+    */
+   	DECLARE animali_dispersi VARCHAR(255) DEFAULT "";
+    
+    SELECT GROUP_CONCAT(A.codice SEPARATOR ';')
+    FROM Animale A
+    WHERE A.codLocale = (SELECT AP.codLocale
+							FROM AttivitaPascolo AP
+                            WHERE AP.codiceAttivita = _attivita)
+		AND 100 < -- distanza oltre la quale un animale è definito disperso
+			(SELECT MIN(SQRT(POW(A.longitudine - RD.longitudine, 2)+POW(A.latitudine - RD.longitudine, 2)))
+			FROM RecinzioneDivisoriaeZonaDiPascolo RD
+			WHERE RD.codArea = (SELECT AP1.codArea
+								FROM AreaPascolo AP1
+								WHERE AP1.codiceAttivita = _attivita) ) INTO animali_dispersi;
+    
+    IF animali_dispersi <> "" THEN
+		SELECT animali_dispersi;
+		signal sqlstate '70006' SET MESSAGE_TEXT = 'Lista degli anmali dispersi mostrata in tabella';
+	ELSE
+		signal sqlstate '70006' SET MESSAGE_TEXT = 'Nessun animali disperso';
+    END IF;
+
+END $$
+DELIMITER ;
+
 
 /*-------------------------------------------------------------
 
@@ -670,6 +810,20 @@ dal codice della sua carta
 Input:anagrafica del cliente, dati dei documenti e informazioni sull’account daregistrare
 Output:aggiunta di un account e del cliente che lo possiede
 Frequenza giornaliera:19
+*/
+
+DROP TRIGGER IF EXISTS OP9_check_nuovo_account;
+DELIMITER $$
+CREATE TRIGGER OP9_check_nuovo_account
+BEFORE INSERT ON Account
+FOR EACH ROW 
+BEGIN 
+IF NEW.codiceCarta NOT IN (SELECT C.codCarta
+							FROM Cliente C) THEN
+	INSERT INTO Cliente (codCarta) VALUES (NEW.codiceCarta);
+END IF;
+END $$
+DELIMITER ;
 
 /*-------------------------------------------------------------
 
@@ -679,3 +833,146 @@ presenti nella stalla affinchè sia mantenuto costante il numero di animali per 
 Input:dati del nuovo locale e codice della stalla a cui appartiene
 Output:ridistribuzione degli animali nel nuovo locale aggiunto e registrazione deinuovi sensori
 Frequenza giornaliera:0.27
+*/
+
+DROP PROCEDURE IF EXISTS ridistrubuzione_in_stalla;
+DELIMITER $$
+CREATE PROCEDURE ridistrubuzione_in_stalla
+	(IN _stalla TINYINT UNSIGNED,
+    IN _locale SMALLINT UNSIGNED)
+BEGIN
+	DECLARE num_animali INTEGER DEFAULT 0;
+	DECLARE num_locali INTEGER DEFAULT 0;
+    DECLARE da_togliere INTEGER DEFAULT 0;
+    
+	DECLARE finito INTEGER DEFAULT 0;
+	DECLARE locali SMALLINT UNSIGNED DEFAULT NULL;
+	DECLARE cursore CURSOR FOR
+		SELECT L.codiceLocale
+        FROM Locale L
+        WHERE L.codiceStalla = _stalla;
+	DECLARE CONTINUE HANDLER FOR NOT FOUND SET finito = 1;
+
+	SELECT COUNT(A.codice)
+	FROM Animale A INNER JOIN Locale L ON A.codLocale = L.codiceLocale
+	WHERE L.codiceStalla = _stalla INTO num_animali;
+
+	SELECT COUNT(L.codiceLocale) -- + 1 considerare il locale che deve essere aggiunto
+	FROM Locale L
+	WHERE L.codiceStalla = _stalla INTO num_locali;
+  
+    SET da_togliere = FLOOR((num_animali / num_locali) - (num_animali / (num_locali + 1)));
+
+	OPEN cursore;
+
+	preleva: LOOP
+		FETCH cursore INTO locali;
+		IF finito = 1 THEN
+			LEAVE preleva;
+		END IF;
+			UPDATE Animale
+			SET codLocale = _locale
+			WHERE codice IN (SELECT A.codice
+							FROM Animale A
+                            WHERE A.codiceLocale = locale
+                            LIMIT da_togliere);
+	END LOOP preleva;
+	CLOSE cursore;
+  	
+END $$
+DELIMITER ;
+
+DROP TRIGGER IF EXISTS OP10_ridistribuzione_animali;
+DELIMITER $$
+CREATE TRIGGER OP10_ridistribuzione_animali
+BEFORE INSERT ON Locale
+FOR EACH ROW 
+BEGIN 
+	CALL ridistrubuzione_in_stalla(NEW.codiceStalla, NEW.codiceLocale);
+END $$
+DELIMITER ;
+
+
+/*-------------------------------------------------------------
+
+
+/* MODULE PROCEDURE :
+
+DROP PROCEDURE IF EXISTS procedure_name;
+DELIMITER $$
+CREATE PROCEDURE procedure_name
+	(IN _var CHAR(20),
+    OUT var_ INT)
+BEGIN
+  SELECT attr
+  FROM table INTO var_;
+END $$
+DELIMITER ;
+
+*/
+
+/* MODULE FUNCTION:
+
+DROP FUNCTION IF EXISTS function_name;
+DELIMITER $$
+CREATE FUNCTION function_name(
+    var DECIMAL(10,2)
+) 
+RETURNS VARCHAR(20)
+DETERMINISTIC
+BEGIN
+    DECLARE return_value VARCHAR(20);
+ 
+    IF credit > 50000 THEN
+        SET customerLevel = 'PLATINUM';
+    ELSEIF (credit >= 50000 AND 
+            credit <= 10000) THEN
+        SET customerLevel = 'GOLD';
+    ELSEIF credit < 10000 THEN
+        SET customerLevel = 'SILVER';
+    END IF;
+    -- return the customer level
+    RETURN (return_value);
+END$$
+DELIMITER ;
+
+*/
+
+/* MODULE TRIGGER:
+
+DROP TRIGGER IF EXISTS nome_trigger;
+DELIMITER $$
+CREATE TRIGGER nome_trigger
+BEFORE INSERT ON Tabella
+FOR EACH ROW 
+BEGIN 
+IF  THEN
+	signal sqlstate '70006' SET MESSAGE_TEXT = 'ERRORE: ';
+END IF;
+SET NEW.attributo = ();
+END $$
+DELIMITER ;
+
+*/
+
+/* MODULE CURSOR:
+
+DECLARE finito INTEGER DEFAULT 0;
+DECLARE result_var VARCHAR(255) DEFAULT "";
+DECLARE nome_cursore CURSOR FOR
+	SELECT
+		...
+DECLARE CONTINUE HANDLER FOR NOT FOUND SET finito = 1;
+
+OPEN nome_cursore;
+
+preleva: LOOP
+	FETCH nome_cursore INTO result_var;
+    IF finito = 1 THEN
+		LEAVE preleva;
+	END IF;
+    SET uscita = CONCAT(uscita, ';', result_var);
+END LOOP preleva;
+CLOSE nome_cursore;
+
+*/
