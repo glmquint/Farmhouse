@@ -861,7 +861,9 @@ BEGIN
 	FROM Locale L
 	WHERE L.codiceStalla = _stalla INTO num_locali;
   
-    SET da_togliere = FLOOR((num_animali / num_locali) - (num_animali / (num_locali + 1)));
+    SET da_togliere = FLOOR((num_animali / num_locali - 1) - (num_animali / (num_locali)));
+    
+    SELECT da_togliere;
 
 	OPEN cursore;
 
@@ -870,12 +872,13 @@ BEGIN
 		IF finito = 1 THEN
 			LEAVE preleva;
 		END IF;
-			UPDATE Animale
-			SET codLocale = _locale
+			UPDATE Animale AS A INNER JOIN (SELECT A2.codice
+											FROM Animale A2
+											WHERE A2.codLocale = locali
+											LIMIT da_togliere) AS A2 ON A.codice = A2.codice
+			SET A.codLocale = _locale;/*
 			WHERE codice IN (SELECT A.codice
-							FROM Animale A
-                            WHERE A.codiceLocale = locale
-                            LIMIT da_togliere);
+							FROM Animale A );*/
 	END LOOP preleva;
 	CLOSE cursore;
   	
@@ -885,7 +888,7 @@ DELIMITER ;
 DROP TRIGGER IF EXISTS OP10_ridistribuzione_animali;
 DELIMITER $$
 CREATE TRIGGER OP10_ridistribuzione_animali
-BEFORE INSERT ON Locale
+AFTER INSERT ON Locale
 FOR EACH ROW 
 BEGIN 
 	CALL ridistrubuzione_in_stalla(NEW.codiceStalla, NEW.codiceLocale);

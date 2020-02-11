@@ -853,3 +853,11 @@ CREATE TABLE  processatada
 	foreign key (codSpedizione) references Spedizione(codice),
 	foreign key (codcentro) references CentridiSmistamento(codice)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*for debugging purpose...*/
+
+DROP TABLE IF EXISTS logtable;
+CREATE TABLE logtable
+(
+	info TEXT PRIMARY
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
