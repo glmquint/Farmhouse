@@ -1,0 +1,1 @@
+/*Test script per il vincolo III*/
