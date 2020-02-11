@@ -49,11 +49,9 @@ INSERT INTO CaratteristichePerTipoLocale (specieOspitata, altezza, lunghezza, la
 INSERT INTO Locale (codiceLocale, temperatura, umidità, orientazioneFinestre, tollerabilitaAzoto, tollerabilitaSporcizia, tollerabilitaMetano, codiceStalla, nomeAgriturismo, specieOspitata, altezza, lunghezza, larghezza)
 	VALUES (default, 28, 39, 'S', 8, 5, 5, 1, 'Settesoldi', 'bos lobe', 486, 2299, 1096);
 INSERT INTO Animale (codice, sesso, specie, famiglia, idMadre, idPadre, dataDiNascita, altezza, peso, razza, latitudine, longitudine, orario, codiceGps, codLocale)
-	VALUES (default, 'M', 'bos lobe', 'tetracerus', NULL, NULL, '1967-05-19', 92, 191, 'tedesca', 117.249, -178.780, '2012-03-11 18:33:37', 1, 1);
+	VALUES (default, 'M', 'bos lobe', 'tetracerus', NULL, NULL, '1977-05-19', 92, 191, 'tedesca', 117.249, -178.780, '2012-03-11 18:33:37', 1, 1);
 INSERT INTO Animale (codice, sesso, specie, famiglia, idMadre, idPadre, dataDiNascita, altezza, peso, razza, latitudine, longitudine, orario, codiceGps, codLocale)
-	VALUES (default, 'F', 'bos lobe', 'tetracerus', NULL, NULL, '1967-05-19', 92, 191, 'tedesca', 117.249, -178.780, '2013-04-12 19:43:25', 2, 1);
-INSERT INTO Animale (codice, sesso, specie, famiglia, idMadre, idPadre, dataDiNascita, altezza, peso, razza, latitudine, longitudine, orario, codiceGps, codLocale)
-	VALUES (default, 'F', 'bos lobe', 'tetracerus', 1, 2, '1967-05-19', 92, 191, 'tedesca', 117.249, -178.780, '2019-03-20 18:13:15', 3, 1);
+	VALUES (default, 'F', 'bos lobe', 'tetracerus', NULL, NULL, '1977-05-19', 92, 191, 'tedesca', 117.249, -178.780, '2013-04-12 19:43:25', 2, 1);
 INSERT INTO Fornitore (ragioneSociale, indirizzo, partitaIva)
 	VALUES ('Bellini S.p.a. ', 'viale Fiore n.20', 96179312746);
 INSERT INTO acquistoanimale (codiceAnimale, ragioneSocialeFornitore, dataAcquisto, dataArrivo)
@@ -61,7 +59,9 @@ INSERT INTO acquistoanimale (codiceAnimale, ragioneSocialeFornitore, dataAcquist
 INSERT INTO Veterinario (codiceFiscale, nome, cognome, contatto)
 	VALUES ('BLLDNC38A18E290R', 'Domenico', 'Bellini', 6773261698);
 INSERT INTO Riproduzione (codiceRiproduzione, complicanza, data_orario, stato, codVeterinario, codiceMadre, codicePadre)
-	VALUES (default, 'Sed ut ligula sit amet dolor ultrices efficitu. Cras varius nisl mollis mollis tempo. Nullam velit m  fermentum vitae lacinia u  consectetur vitae null. Suspendisse sed arcu vel eros convallis sagittis non ut torto. Sed sed tortor in erat facilisis pretium commodo in nis. ', '2019-03-20 18:13:15', 'successo', 'BLLDNC38A18E290R', 1, 2);
+	VALUES (default, 'Sed ut ligula sit amet dolor ultrices efficitu. Cras varius nisl mollis mollis tempo. Nullam velit m  fermentum vitae lacinia u  consectetur vitae null. Suspendisse sed arcu vel eros convallis sagittis non ut torto. Sed sed tortor in erat facilisis pretium commodo in nis. ', '1977-05-19 18:13:15', 'successo', 'BLLDNC38A18E290R', 2, 1);
+INSERT INTO Animale (codice, sesso, specie, famiglia, idMadre, idPadre, dataDiNascita, altezza, peso, razza, latitudine, longitudine, orario, codiceGps, codLocale)
+	VALUES (default, 'F', 'bos lobe', 'tetracerus', 2, 1, '1977-05-19', 92, 191, 'tedesca', 117.249, -178.780, '2019-03-20 18:13:15', 3, 1);
 INSERT INTO SchedaGestazione (codiceGestazione, codRiproduzione, codVeterinario)
 	VALUES (default, 1, 'BLLDNC38A18E290R');
 INSERT INTO Visivi (codiceVisivo, livelloSporcizia, orarioRilevazione, codLocale)
