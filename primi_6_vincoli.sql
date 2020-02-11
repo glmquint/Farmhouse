@@ -1,9 +1,9 @@
+/*vincolo I*/
 DROP TRIGGER IF EXISTS controllo_genitori;
 DELIMITER $$ 
 CREATE TRIGGER controllo_genitori
 BEFORE INSERT ON Animale FOR EACH ROW
 BEGIN 
-    
 	IF new.idMadre NOT IN (
 	                         SELECT codice 
                              FROM Animale A
@@ -22,11 +22,12 @@ BEGIN
 	    signal sqlstate '70006' SET MESSAGE_TEXT='il codice padre inserito non è valido';
 	END IF;
 	
-	
-	IF new.dataDiNascita NOT IN (SELECT data_orario + INTERVAL 9 MONTH
-	                           FROM Riproduzione R INNER JOIN Animale A ON A.codice=R.codAnimale
-	                           WHERE new.idMadre=R.codice AND new.idPadre=R.codicepadre) THEN
-    signal sqlstate '70006' SET MESSAGE_TEXT='la data di nascita non è valida';
+	/*vincolo II*/
+	IF NEW.idMadre IS NOT NULL AND NEW.idPadre IS NOT NULL AND new.dataDiNascita NOT IN (SELECT DATE_FORMAT(R.data_orario, '%Y-%m-%d')
+							   FROM Riproduzione R 
+							   WHERE new.idMadre=R.codiceMadre AND new.idPadre=R.codicepadre) THEN
+
+		signal sqlstate '70006' SET MESSAGE_TEXT='la data di nascita non è valida';
 	END IF;
 END $$	
 DELIMITER ;
@@ -39,7 +40,7 @@ DELIMITER ;
 
 
 
-
+/*vincolo III*/
 DROP TRIGGER IF EXISTS codicePadre_riproduzione;
 DELIMITER $$ 
 CREATE TRIGGER codicePadre_riproduzione
@@ -65,7 +66,7 @@ DELIMITER ;
 
 
 
-
+/*vincolo IV*/
 DROP TRIGGER IF EXISTS aggiornamento_ambientali;
 DELIMITER $$ 
 CREATE TRIGGER aggiornamento_ambientali
@@ -87,7 +88,7 @@ DELIMITER ;
 
 
 
-
+/*vincolo V*/
 DROP TRIGGER IF EXISTS calcolo_kcal;
 DELIMITER $$ 
 CREATE TRIGGER calcolo_kcal
@@ -103,7 +104,7 @@ DELIMITER ;
 
 
 
-
+/*vincolo VI*/
 DROP TRIGGER IF EXISTS aggiornamento_terapie;
 DELIMITER $$ 
 CREATE TRIGGER aggiornamento_terapie
@@ -111,7 +112,7 @@ BEFORE INSERT ON Terapia FOR EACH ROW
 BEGIN 
 	IF (SELECT COUNT(*)
     FROM Terapia T INNER JOIN Animale A ON  T.codAnimale=A.codice
-	WHERE dataInizio+INTERVAL(durata)DAY<=CURRENT_DATE)>1 AND secondaTerapiaConsecutiva IS NULL THEN
+	WHERE T.dataInizio+INTERVAL(T.durata)DAY<=CURRENT_DATE())>1 AND NEW.secondaTerapiaConsecutiva IS NULL THEN
 	    SET new.secondaTerapiaConsecutiva=TRUE;
 	ELSE
 	    SET new.secondaTerapiaConsecutiva=FALSE;

@@ -853,3 +853,24 @@ CREATE TABLE  processatada
 	foreign key (codSpedizione) references Spedizione(codice),
 	foreign key (codcentro) references CentridiSmistamento(codice)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*---------*/
+
+DROP TABLE IF EXISTS  logtable ;
+CREATE TABLE  logtable
+(
+	id	INT AUTO_INCREMENT,
+	info	TEXT(1024),
+    ts TIMESTAMP,
+	primary key (id)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+DROP PROCEDURE IF EXISTS LOG;
+DELIMITER $$
+CREATE PROCEDURE LOG(IN _msg TEXT(1024))
+BEGIN
+	INSERT INTO logtable (info, ts) VALUES (_msg, current_timestamp());
+    
+END $$
+DELIMITER ;
+
