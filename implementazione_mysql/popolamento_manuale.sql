@@ -149,11 +149,11 @@ INSERT INTO Lesioni (tipologia, parteDelCorpo, entità, codScheda)
 INSERT INTO Cliente (codCarta, anticipo)
 	VALUES ('a30si59rr95jh99l', 41);
 INSERT INTO Pagamenti (codPagamento, tipoPagamento, totaleCosto, dataPagamento, codCliente)
-	VALUES (default, 'Donec vulputate risus du  in faucibus libero tempor i. Proin quis erat condimentu  aliquet dolor eleifen  interdum dolo. Vivamus condimentum lorem nec libero convalli  sed auctor quam malesuad. Maecenas eget nibh sit amet ante efficitur aliqua. Mauris eu cursus sapie. Nulla sit ', 689, '2019-08-26 20:13:25', 'a30si59rr95jh99l');
+	VALUES (default, 'Donec vulputate risus du  in faucibus libero tempor i. Proin quis erat condimentu  aliquet dolor eleifen  interdum dolo. Vivamus condimentum lorem nec libero convalli  sed auctor quam malesuad. Maecenas eget nibh sit amet ante efficitur aliqua. Mauris eu cursus sapie. Nulla sit ', 689, '2019-08-26', 'a30si59rr95jh99l');
 INSERT INTO Stanza (numStanza, codAgriturismo, costoGiornaliero, suite, numLetti, tipoLetti)
 	VALUES (0, 'Settesoldi', 109, 'singola', 8, 'velit in hendreri. Aenean eu hendrerit just. Nulla pellentesque quis odio sed hendreri. Morbi non erat eu nulla semper tincidun. Vestibulum vel mi a nibh mollis eleifen.Aenean malesuada sollicitudin dapibu. Pellentesque posuere maximus sapie  vitae rhoncus nibh tempus no. Donec lobortis luctus ');
 INSERT INTO PrenotazioneStanza (dataArrivo, numStanza, nomeAgriturismo, codCliente, dataPartenza)
-	VALUES ('2019-01-05', 0, 'Settesoldi', 'a30si59rr95jh99l', '2019-07-07 06:01:55');
+	VALUES ('2019-01-05', 0, 'Settesoldi', 'a30si59rr95jh99l', '2019-07-07');
 INSERT INTO ServizioAggiuntivo (tipoServizio, costo)
 	VALUES ('catering', 78);
 INSERT INTO ServizioperStanza (dataInizioUtilizzo, dataArrivo, numStanza, nomeAgriturismo, codCliente, codServizio, dataFineUtilizzo)

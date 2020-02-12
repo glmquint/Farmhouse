@@ -36,35 +36,10 @@ END IF;
 END $$
 DELIMITER ;
 
-/*-------------------------------------------------------------
+/*-------------------------------------------------------------OK
 
 Esiste un vincolo di integrità che lega dataPartenza in PrenotazioneStanza a data in Pagamenti
 
-DROP TABLE IF EXISTS  Pagamenti ;
-CREATE TABLE  Pagamenti 
-(
-	codPagamento	INT UNSIGNED NOT NULL UNIQUE AUTO_INCREMENT,
-	tipoPagamento	VARCHAR(20),
-	totaleCosto	SMALLINT NOT NULL,
-	data_ora_Pagamento	TIMESTAMP,
-	codCliente	CHAR(16) NOT NULL,
-	primary key (codPagamento),
-	foreign key (codCliente) references Cliente(codCarta)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-
-DROP TABLE IF EXISTS  PrenotazioneStanza ;
-CREATE TABLE  PrenotazioneStanza 
-(
-	dataArrivo	DATE NOT NULL,
-	numStanza	TINYINT UNSIGNED NOT NULL,
-	nomeAgriturismo	VARCHAR(30) NOT NULL,
-	codCliente	CHAR(16) NOT NULL,
-	dataPartenza	DATE NOT NULL,
-	primary key (dataArrivo, numStanza, nomeAgriturismo, codCliente),
-	foreign key (numStanza,nomeAgriturismo) references Stanza(numStanza,codAgriturismo),
-	foreign key (codCliente) references Cliente(codCarta)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 */
 
 DROP TRIGGER IF EXISTS VIII_data_pagamento_prenotazione_stanza;
@@ -79,29 +54,9 @@ END IF;
 END $$
 DELIMITER ;
 
-/*-------------------------------------------------------------
+/*-------------------------------------------------------------OK
 
 Esiste un vincolo di integrità che lega anticipo in cliente, a tipoPagamentoe a totaleCosto in Pagamenti.
-
-DROP TABLE IF EXISTS  Cliente ;
-CREATE TABLE  Cliente 
-(
-	codCarta	CHAR(16) NOT NULL UNIQUE,
-	anticipo	SMALLINT ,
-	primary key(codCarta)	 
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-DROP TABLE IF EXISTS  Pagamenti ;
-CREATE TABLE  Pagamenti 
-(
-	codPagamento	INT UNSIGNED NOT NULL UNIQUE AUTO_INCREMENT,
-	tipoPagamento	VARCHAR(20),
-	totaleCosto	SMALLINT NOT NULL,
-	data_ora_Pagamento	TIMESTAMP,
-	codCliente	CHAR(16) NOT NULL,
-	primary key (codPagamento),
-	foreign key (codCliente) references Cliente(codCarta)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 */
 
