@@ -863,7 +863,7 @@ BEGIN
   
     SET da_togliere = FLOOR((num_animali / num_locali - 1) - (num_animali / (num_locali)));
     
-    SELECT da_togliere;
+    CALL LOG(da_togliere);
 
 	OPEN cursore;
 

@@ -855,7 +855,7 @@ CREATE TABLE  processatada
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
-/*---------*/
+/*----For debugging purpose-----*/
 
 DROP TABLE IF EXISTS  logtable ;
 CREATE TABLE  logtable

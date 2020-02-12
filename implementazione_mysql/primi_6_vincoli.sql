@@ -1,4 +1,5 @@
 /*vincolo I*/
+-- Esiste un vincolo di integrità che lega il codice di un animale al codice dellamadre e del padre (idMadre,idPadre)
 DROP TRIGGER IF EXISTS controllo_genitori;
 DELIMITER $$ 
 CREATE TRIGGER controllo_genitori
@@ -23,6 +24,7 @@ BEGIN
 	END IF;
 	
 	/*vincolo II*/
+    -- Esiste un vincolo di integrità che lega l’attributo data in diproduzione conl’attributo dataDiNascita in Animale
 	IF NEW.idMadre IS NOT NULL AND NEW.idPadre IS NOT NULL AND new.dataDiNascita NOT IN (SELECT DATE_FORMAT(R.data_orario, '%Y-%m-%d')
 							   FROM Riproduzione R 
 							   WHERE new.idMadre=R.codiceMadre AND new.idPadre=R.codicepadre) THEN
@@ -41,6 +43,7 @@ DELIMITER ;
 
 
 /*vincolo III*/
+-- Esiste un vincolo di integrità che lega l’attributo codicePadre in coinvolgecon l’attributo codice in Animale
 DROP TRIGGER IF EXISTS codicePadre_riproduzione;
 DELIMITER $$ 
 CREATE TRIGGER codicePadre_riproduzione
@@ -67,6 +70,7 @@ DELIMITER ;
 
 
 /*vincolo IV*/
+-- Esiste un vincolo di integrità che lega gli attributi temperatura e umidità inLocale con temperatura e umidità in Ambientali
 DROP TRIGGER IF EXISTS aggiornamento_ambientali;
 DELIMITER $$ 
 CREATE TRIGGER aggiornamento_ambientali
@@ -89,6 +93,7 @@ DELIMITER ;
 
 
 /*vincolo V*/
+-- Esiste un vincolo di integrità che lega gli attributi fibre proteine glucidi inForaggio e kcal/kg in Foraggio
 DROP TRIGGER IF EXISTS calcolo_kcal;
 DELIMITER $$ 
 CREATE TRIGGER calcolo_kcal
@@ -105,6 +110,7 @@ DELIMITER ;
 
 
 /*vincolo VI*/
+-- Esiste un vincolo di integrità che lega gli attributi dataInizio durata e secon-daTerapiaConsecutiva in Terapia
 DROP TRIGGER IF EXISTS aggiornamento_terapie;
 DELIMITER $$ 
 CREATE TRIGGER aggiornamento_terapie

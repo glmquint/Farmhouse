@@ -19,35 +19,6 @@ DELIMITER ;
 
 Esiste un vincolo di integrità che lega dataProd e durata in Lotto e deperi-bilità in Formaggio a scadenza in Formaggio Prodotto
 
-DROP TABLE IF EXISTS Lotto;
-CREATE TABLE Lotto
-(
-	codiceLotto	SMALLINT UNSIGNED NOT NULL unique auto_increment,
-	codDipendenti	 VARCHAR(255),
-	dataProd DATE NOT NULL,
-	codLab	TINYINT UNSIGNED NOT NULL,
-	durata	INT, -- da intendere in giorni prima della deperibilità
-	primary key(codiceLotto)	 
-)ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-
-DROP TABLE IF EXISTS  FormaggioProdotto ;
-CREATE TABLE  FormaggioProdotto 
-(
-	codiceProdotto	INT UNSIGNED NOT NULL UNIQUE AUTO_INCREMENT,
-	prezzo	TINYINT NOT NULL,
-	peso	VARCHAR(6),
-	rimastiInStock	SMALLINT,
-	scadenza	DATE NOT NULL,
-	lottoAppartenenza	SMALLINT UNSIGNED NOT NULL,
-	nome	VARCHAR(30) NOT NULL,
-	nomeAgriturismo	VARCHAR(30) NOT NULL,
-	primary key (codiceProdotto),
-    foreign key (lottoAppartenenza) references Lotto(codiceLotto),
-	foreign key (nome) references Formaggio(nome),
-	foreign key (nomeAgriturismo) references Formaggio(nomeAgriturismo)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
 */
 
 DROP TRIGGER IF EXISTS VII_scadenza_formaggio_prodotto;
