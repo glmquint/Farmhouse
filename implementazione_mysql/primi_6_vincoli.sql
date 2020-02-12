@@ -1,8 +1,8 @@
 /*vincolo I*/
 -- Esiste un vincolo di integrità che lega il codice di un animale al codice dellamadre e del padre (idMadre,idPadre)
-DROP TRIGGER IF EXISTS controllo_genitori;
+DROP TRIGGER IF EXISTS I_controllo_genitori;
 DELIMITER $$ 
-CREATE TRIGGER controllo_genitori
+CREATE TRIGGER I_controllo_genitori
 BEFORE INSERT ON Animale FOR EACH ROW
 BEGIN 
 	IF new.idMadre NOT IN (
@@ -23,7 +23,18 @@ BEGIN
 	    signal sqlstate '70006' SET MESSAGE_TEXT='il codice padre inserito non è valido';
 	END IF;
 	
-	/*vincolo II*/
+
+END $$	
+DELIMITER ;
+
+
+/*vincolo II*/
+DROP TRIGGER IF EXISTS II_controllo_data_nascita;
+DELIMITER $$
+CREATE TRIGGER II_controllo_data_nascita
+BEFORE INSERT ON Animale FOR EACH ROW
+BEGIN 
+
     -- Esiste un vincolo di integrità che lega l’attributo data in diproduzione conl’attributo dataDiNascita in Animale
 	IF NEW.idMadre IS NOT NULL AND NEW.idPadre IS NOT NULL AND new.dataDiNascita NOT IN (SELECT DATE_FORMAT(R.data_orario, '%Y-%m-%d')
 							   FROM Riproduzione R 
@@ -39,14 +50,11 @@ DELIMITER ;
 
 
 
-
-
-
 /*vincolo III*/
 -- Esiste un vincolo di integrità che lega l’attributo codicePadre in coinvolgecon l’attributo codice in Animale
-DROP TRIGGER IF EXISTS codicePadre_riproduzione;
+DROP TRIGGER IF EXISTS III_codicePadre_riproduzione;
 DELIMITER $$ 
-CREATE TRIGGER codicePadre_riproduzione
+CREATE TRIGGER III_codicePadre_riproduzione
 BEFORE INSERT ON Riproduzione FOR EACH ROW
 BEGIN 
     
@@ -71,9 +79,9 @@ DELIMITER ;
 
 /*vincolo IV*/
 -- Esiste un vincolo di integrità che lega gli attributi temperatura e umidità inLocale con temperatura e umidità in Ambientali
-DROP TRIGGER IF EXISTS aggiornamento_ambientali;
+DROP TRIGGER IF EXISTS IV_aggiornamento_ambientali;
 DELIMITER $$ 
-CREATE TRIGGER aggiornamento_ambientali
+CREATE TRIGGER IV_aggiornamento_ambientali
 BEFORE UPDATE ON Ambientali FOR EACH ROW
 BEGIN 
 UPDATE Locale
@@ -94,9 +102,9 @@ DELIMITER ;
 
 /*vincolo V*/
 -- Esiste un vincolo di integrità che lega gli attributi fibre proteine glucidi inForaggio e kcal/kg in Foraggio
-DROP TRIGGER IF EXISTS calcolo_kcal;
+DROP TRIGGER IF EXISTS V_calcolo_kcal;
 DELIMITER $$ 
-CREATE TRIGGER calcolo_kcal
+CREATE TRIGGER V_calcolo_kcal
 BEFORE INSERT ON Foraggio FOR EACH ROW
 BEGIN 
 	SET new.kcalkg=new.proteine*3.8+new.glucidi*3.8 ;
@@ -111,9 +119,9 @@ DELIMITER ;
 
 /*vincolo VI*/
 -- Esiste un vincolo di integrità che lega gli attributi dataInizio durata e secon-daTerapiaConsecutiva in Terapia
-DROP TRIGGER IF EXISTS aggiornamento_terapie;
+DROP TRIGGER IF EXISTS VI_aggiornamento_terapie;
 DELIMITER $$ 
-CREATE TRIGGER aggiornamento_terapie
+CREATE TRIGGER VI_aggiornamento_terapie
 BEFORE INSERT ON Terapia FOR EACH ROW
 BEGIN 
 	IF (SELECT COUNT(*)
