@@ -71,54 +71,9 @@ SET NEW.totaleCosto = NEW.totaleCosto - (SELECT C.anticipo FROM Cliente C WHERE 
 END $$
 DELIMITER ;
 
-/*-------------------------------------------------------------
+/*-------------------------------------------------------------OK
 
 Esiste un vincolo tra quantità in contenutoordine, rimastiinstock in Formag-gioProdotto e stato in OrdineProdotti.
-
-DROP TABLE IF EXISTS  contenutoordine ;
-CREATE TABLE  contenutoordine 
-(
-	codOrdine	SMALLINT UNSIGNED NOT NULL,
-	codFormaggioprodotto	INT UNSIGNED NOT NULL,
-	quantità	TINYINT NOT NULL,
-	reso	BOOLEAN NOT NULL,
-	primary key (codOrdine, codFormaggioprodotto),
-	foreign key (codFormaggioprodotto) references FormaggioProdotto(codiceProdotto),
-	foreign key (codOrdine) references OrdineProdotti(codiceOrdine)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-DROP TABLE IF EXISTS  FormaggioProdotto ;
-CREATE TABLE  FormaggioProdotto 
-(
-	codiceProdotto	INT UNSIGNED NOT NULL UNIQUE AUTO_INCREMENT,
-	prezzo	TINYINT NOT NULL,
-	peso	VARCHAR(6),
-	rimastiInStock	SMALLINT,
-	scadenza	DATE NOT NULL,
-	lottoAppartenenza	SMALLINT UNSIGNED NOT NULL,
-	nome	VARCHAR(30) NOT NULL,
-	nomeAgriturismo	VARCHAR(30) NOT NULL,
-	primary key (codiceProdotto),
-    foreign key (lottoAppartenenza) references Lotto(codiceLotto),
-	foreign key (nome) references Formaggio(nome),
-	foreign key (nomeAgriturismo) references Formaggio(nomeAgriturismo)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-DROP TABLE IF EXISTS  OrdineProdotti ;
-CREATE TABLE  OrdineProdotti 
-(
-	codiceOrdine	SMALLINT UNSIGNED NOT NULL UNIQUE AUTO_INCREMENT,
-	stato	ENUM('in processazione','in preparazione','spedito','evaso'),
-	data_ordine	DATE NOT NULL,
-	tipoConsegnaReso	BOOLEAN,
-	utente	VARCHAR(20) NOT NULL,
-	password	VARCHAR(16)NOT NULL,
-	codSpedizione	SMALLINT UNSIGNED NOT NULL,
-	primary key (codiceOrdine),
-	foreign key (utente) references Account(utente),
-	foreign key (password) references  Account(password),
-	foreign key (codSpedizione) references Spedizione(codice)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 */
 DROP PROCEDURE IF EXISTS aggiorna_rimasti_in_stock;
@@ -185,34 +140,7 @@ DELIMITER ;
 
 /*-------------------------------------------------------------
 
-Esiste un vincolo di integrità tra reso in contenutoordine e stato e tipoCon-segnaReso in Ordine Prodotti
-
-DROP TABLE IF EXISTS  contenutoordine ;
-CREATE TABLE  contenutoordine 
-(
-	codOrdine	SMALLINT UNSIGNED NOT NULL,
-	codFormaggioprodotto	INT UNSIGNED NOT NULL,
-	quantità	TINYINT NOT NULL,
-	reso	BOOLEAN NOT NULL,
-	primary key (codOrdine, codFormaggioprodotto),
-	foreign key (codFormaggioprodotto) references FormaggioProdotto(codiceProdotto),
-	foreign key (codOrdine) references OrdineProdotti(codiceOrdine)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-CREATE TABLE  OrdineProdotti 
-(
-	codiceOrdine	SMALLINT UNSIGNED NOT NULL UNIQUE AUTO_INCREMENT,
-	stato	ENUM('in processazione','in preparazione','spedito','evaso'),
-	data_ordine	DATE NOT NULL,
-	tipoConsegnaReso	BOOLEAN,
-	utente	VARCHAR(20) NOT NULL,
-	password	VARCHAR(16)NOT NULL,
-	codSpedizione	SMALLINT UNSIGNED NOT NULL,
-	primary key (codiceOrdine),
-	foreign key (utente) references Account(utente),
-	foreign key (password) references  Account(password),
-	foreign key (codSpedizione) references Spedizione(codice)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+Esiste un vincolo di integrità tra reso in contenutoordine e stato e tipoConsegnaReso in Ordine Prodotti
 
 */
 
