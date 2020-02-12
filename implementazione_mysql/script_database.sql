@@ -854,10 +854,24 @@ CREATE TABLE  processatada
 	foreign key (codcentro) references CentridiSmistamento(codice)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-/*for debugging purpose...*/
 
-DROP TABLE IF EXISTS logtable;
-CREATE TABLE logtable
+/*---------*/
+
+DROP TABLE IF EXISTS  logtable ;
+CREATE TABLE  logtable
 (
-	info TEXT PRIMARY
+	id	INT AUTO_INCREMENT,
+	info	TEXT(1024),
+    ts TIMESTAMP,
+	primary key (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+DROP PROCEDURE IF EXISTS LOG;
+DELIMITER $$
+CREATE PROCEDURE LOG(IN _msg TEXT(1024))
+BEGIN
+	INSERT INTO logtable (info, ts) VALUES (_msg, current_timestamp());
+    
+END $$
+DELIMITER ;
+
