@@ -138,7 +138,7 @@ END IF;
 END $$
 DELIMITER ;
 
-/*-------------------------------------------------------------
+/*-------------------------------------------------------------OK
 
 Esiste un vincolo di integrità tra reso in contenutoordine e stato e tipoConsegnaReso in Ordine Prodotti
 
@@ -162,31 +162,6 @@ DELIMITER ;
 
 Esiste un vincolo di integrità tra stato in Spedizione e stato in OrdineProdot
 
-DROP TABLE IF EXISTS  Spedizione ;
-CREATE TABLE  Spedizione 
-(
-	codice	SMALLINT UNSIGNED NOT NULL UNIQUE AUTO_INCREMENT,
-	dataConsegnaEffettiva	DATE NOT NULL,
-	dataConsegnaPrevista	DATE NOT NULL,
-	percorso	VARCHAR(255),
-	stato	ENUM('spedita','in consegna','consegnata'),
-	primary key(codice)	 
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-CREATE TABLE  OrdineProdotti 
-(
-	codiceOrdine	SMALLINT UNSIGNED NOT NULL UNIQUE AUTO_INCREMENT,
-	stato	ENUM('in processazione','in preparazione','spedito','evaso'),
-	data_ordine	DATE NOT NULL,
-	tipoConsegnaReso	BOOLEAN,
-	utente	VARCHAR(20) NOT NULL,
-	password	VARCHAR(16)NOT NULL,
-	codSpedizione	SMALLINT UNSIGNED NOT NULL,
-	primary key (codiceOrdine),
-	foreign key (utente) references Account(utente),
-	foreign key (password) references  Account(password),
-	foreign key (codSpedizione) references Spedizione(codice)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 */
 
 DROP TRIGGER IF EXISTS XII_stato_spedizione;
