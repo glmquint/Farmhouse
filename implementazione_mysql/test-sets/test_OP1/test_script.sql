@@ -89,3 +89,5 @@ INSERT INTO PastoPerLocale(giorno_orario,codLocale,fibre,proteine,glucidi,concen
     
 CALL OP1_controllo_qualita_pasto(100, 960, 870, 10, 0);/*fibre, proteine, glucidi, sali, vitamine*/
 CALL OP1_controllo_qualita_pasto(101, 961, 871, 11, 1);/*fibre, proteine, glucidi, sali, vitamine*/
+
+SELECT * FROM log_qualita_pasto;
