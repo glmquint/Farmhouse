@@ -158,7 +158,7 @@ END IF;
 END $$
 DELIMITER ;
 
-/*-------------------------------------------------------------
+/*-------------------------------------------------------------OK
 
 Esiste un vincolo di integrità tra stato in Spedizione e stato in OrdineProdot
 
@@ -182,9 +182,8 @@ END IF;
 END $$
 DELIMITER ;
 
-/*-------------------------------------------------------------
+/*-------------------------------------------------------------OK
 
-Trigger non ancora espresso ma estremamente utile nella registrazione di nuovi animali
 Descrizione: ad ogni nuovo animale viene associato il numero più basso disponibile come codice GPS,
 	di fatto implementando un AUTO-INCREMENT su un valore non chiave*/
     
