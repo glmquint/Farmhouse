@@ -5,6 +5,7 @@ INSERT INTO Locale(codiceLocale,temperatura,umidità,orientazioneFinestre,toller
 	VALUES (67,28,39,'S',8,5,5,1,'Settesoldi','bos lobe',486,2299,1096);
 INSERT INTO Locale(codiceLocale,temperatura,umidità,orientazioneFinestre,tollerabilitaAzoto,tollerabilitaSporcizia,tollerabilitaMetano,codiceStalla,nomeAgriturismo,specieOspitata,altezza,lunghezza,larghezza) 
 	VALUES (68,28,39,'S',8,5,5,1,'Settesoldi','bos lobe',486,2299,1096);
+    
 INSERT INTO Animale(codice,sesso,specie,famiglia,idMadre,idPadre,dataDiNascita,altezza,peso,razza,latitudine,longitudine,orario,codiceGps,codLocale) 
 	VALUES (5,'M','bos lobe','tetracerus',NULL,NULL,'1966-05-19',92,191,'tedesca',117.249,-178.78,'2012-03-11 18:33:37',4,66);
 INSERT INTO Animale(codice,sesso,specie,famiglia,idMadre,idPadre,dataDiNascita,altezza,peso,razza,latitudine,longitudine,orario,codiceGps,codLocale) 
@@ -23,24 +24,28 @@ INSERT INTO Animale(codice,sesso,specie,famiglia,idMadre,idPadre,dataDiNascita,a
 	VALUES (12,'F','bos lobe','tetracerus',NULL,NULL,'1967-05-19',92,191,'tedesca',117.249,-178.78,'2012-03-11 18:33:37',10,66);
 INSERT INTO Animale(codice,sesso,specie,famiglia,idMadre,idPadre,dataDiNascita,altezza,peso,razza,latitudine,longitudine,orario,codiceGps,codLocale) 
 	VALUES (13,'M','bos lobe','tetracerus',NULL,NULL,'1968-05-19',92,191,'tedesca',117.249,-178.78,'2012-03-11 18:33:37',11,67);
+
 INSERT INTO Foraggio(fibre,proteine,glucidi,cereali,frutta,piante,forma,kcalkg) 
 	VALUES (100,960,870,39,3,10,'insilato',5500);
 INSERT INTO Foraggio(fibre,proteine,glucidi,cereali,frutta,piante,forma,kcalkg) 
 	VALUES (101,961,871,39,3,10,'insilato',5500);
 INSERT INTO Foraggio(fibre,proteine,glucidi,cereali,frutta,piante,forma,kcalkg) 
 	VALUES (102,962,872,39,3,10,'insilato',5500);
+    
 INSERT INTO Acqua(concentrazioneSali,concentrazioneVitamine) 
 	VALUES (10,0);
 INSERT INTO Acqua(concentrazioneSali,concentrazioneVitamine) 
 	VALUES (11,1);
 INSERT INTO Acqua(concentrazioneSali,concentrazioneVitamine) 
 	VALUES (12,2);
+    
 INSERT INTO Pasto(fibre,proteine,glucidi,concentrazioneSali,concentrazioneVitamine) 
 	VALUES (100,960,870,10,0);
 INSERT INTO Pasto(fibre,proteine,glucidi,concentrazioneSali,concentrazioneVitamine) 
 	VALUES (101,961,871,11,1);
 INSERT INTO Pasto(fibre,proteine,glucidi,concentrazioneSali,concentrazioneVitamine) 
 	VALUES (102,962,872,12,2);
+    
 INSERT INTO PastoPerLocale(giorno_orario,codLocale,fibre,proteine,glucidi,concentrazioneSali,concentrazioneVitamine) 
 	VALUES ('2019-01-04 01:39:20',66,100,960,870,10,0);
 INSERT INTO PastoPerLocale(giorno_orario,codLocale,fibre,proteine,glucidi,concentrazioneSali,concentrazioneVitamine) 

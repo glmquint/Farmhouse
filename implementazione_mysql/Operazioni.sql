@@ -1,84 +1,3 @@
-/* MODULE PROCEDURE :
-
-DROP PROCEDURE IF EXISTS procedure_name;
-DELIMITER $$
-CREATE PROCEDURE procedure_name
-	(IN _var CHAR(20),
-    OUT var_ INT)
-BEGIN
-  SELECT attr
-  FROM table INTO var_;
-END $$
-DELIMITER ;
-
-*/
-
-/* MODULE FUNCTION:
-
-DROP FUNCTION IF EXISTS function_name;
-DELIMITER $$
-CREATE FUNCTION function_name(
-    var DECIMAL(10,2)
-) 
-RETURNS VARCHAR(20)
-DETERMINISTIC
-BEGIN
-    DECLARE return_value VARCHAR(20);
- 
-    IF credit > 50000 THEN
-        SET customerLevel = 'PLATINUM';
-    ELSEIF (credit >= 50000 AND 
-            credit <= 10000) THEN
-        SET customerLevel = 'GOLD';
-    ELSEIF credit < 10000 THEN
-        SET customerLevel = 'SILVER';
-    END IF;
-    -- return the customer level
-    RETURN (return_value);
-END$$
-DELIMITER ;
-
-*/
-
-/* MODULE TRIGGER:
-
-DROP TRIGGER IF EXISTS nome_trigger;
-DELIMITER $$
-CREATE TRIGGER nome_trigger
-BEFORE INSERT ON Tabella
-FOR EACH ROW 
-BEGIN 
-IF  THEN
-	signal sqlstate '70006' SET MESSAGE_TEXT = 'ERRORE: ';
-END IF;
-SET NEW.attributo = ();
-END $$
-DELIMITER ;
-
-*/
-
-/* MODULE CURSOR:
-
-DECLARE finito INTEGER DEFAULT 0;
-DECLARE result_var VARCHAR(255) DEFAULT "";
-DECLARE nome_cursore CURSOR FOR
-	SELECT
-		...
-DECLARE CONTINUE HANDLER FOR NOT FOUND SET finito = 1;
-
-OPEN nome_cursore;
-
-preleva: LOOP
-	FETCH nome_cursore INTO result_var;
-    IF finito = 1 THEN
-		LEAVE preleva;
-	END IF;
-    SET uscita = CONCAT(uscita, ';', result_var);
-END LOOP preleva;
-CLOSE nome_cursore;
-
-*/
-
 SET GLOBAL event_scheduler = ON;
 
 /*-------------------------------------------------------------OK
@@ -93,17 +12,29 @@ Output:media degli indici di salute
 Frequenza giornaliera:33
 */
 
-/* Magari può essere utile un trigger da attivare ogni volta che viene cambiato pasto in un locale...
+
 DROP TRIGGER IF EXISTS cambio_pasto;
 DELIMITER $$
 CREATE TRIGGER cambio_pasto
-BEFORE UPDATE ON PastoPerLocale
+BEFORE INSERT ON PastoPerLocale
 FOR EACH ROW 
 BEGIN 
--- chiama la stored procedure...
+	SET @fibre = 0;
+    SET @proteine = 0;
+    SET @glucidi = 0;
+    SET @concentrazioneSali = 0;
+    SET @concentrazioneVitamine = 0;
+	SELECT PPL.fibre, PPL.proteine, PPL.glucidi, PPL.concentrazioneSali, PPL.concentrazioneVitamine
+		INTO @fibre, @proteine, @glucidi, @concentrazioneSali, @concentrazioneVitamine
+	FROM PastoPerLocale PPL
+	WHERE PPL.codLocale = NEW.codLocale
+	AND PPL.giorno_orario = (SELECT MAX(PPL1.giorno_orario)
+							FROM PastoPerLocale PPL1
+							WHERE PPL.codLocale = NEW.codLocale) ;
+	CALL OP1_controllo_qualita_pasto(@fibre, @proteine, @glucidi, @concentrazioneSali, @concentrazioneVitamine);
 END $$
 DELIMITER ;
-*/
+
 
  
 DROP FUNCTION IF EXISTS prima_somministrazione;
@@ -142,6 +73,22 @@ BEGIN
 END$$
 DELIMITER ;
 
+DROP TABLE IF EXISTS log_qualita_pasto;
+CREATE TABLE log_qualita_pasto
+(
+	fibre INT UNSIGNED,
+    proteine INT UNSIGNED,
+    glucidi INT UNSIGNED,
+    sali TINYINT UNSIGNED,
+    vitamine TINYINT UNSIGNED,
+    media_respirazione SMALLINT UNSIGNED,
+    media_deambulazione SMALLINT UNSIGNED,
+    media_idratazione SMALLINT UNSIGNED,
+    media_vigilanza SMALLINT UNSIGNED,
+    media_lucentezza_pelo SMALLINT UNSIGNED,
+	primary key (fibre, proteine, glucidi, sali, vitamine)
+)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 DROP PROCEDURE IF EXISTS OP1_controllo_qualita_pasto;
 DELIMITER $$
 CREATE PROCEDURE OP1_controllo_qualita_pasto
@@ -151,36 +98,49 @@ CREATE PROCEDURE OP1_controllo_qualita_pasto
 	IN _concentrazioneSali	TINYINT UNSIGNED,/*percentuale*/
 	IN _concentrazioneVitamine	TINYINT UNSIGNED)
 BEGIN
-/*Considera la media di tutti gli indici di salute rilevati dopo la prima sommisitrazione del pasto in ogni locale*/
- SELECT L.codiceLocale AS Locale, 
-	AVG(I.tipologiaRespirazione) AS tipologiaRespirazione, 
-	AVG(I.deambulazione) AS tipologiaRespirazione, 
-    AVG(I.idratazione) AS idratazione, 
-    AVG(I.vigilanza) AS vigilanza, 
-    AVG(I.lucentezzaPelo) AS lucentezzaPelo
- FROM Locale L INNER JOIN Animale A ON L.codiceLocale = A.codLocale
-				INNER JOIN IndiciSalute I ON A.codice = I.codAnimale
- WHERE L.codiceLocale IN (SELECT DISTINCT(PPL.codlocale)
-							FROM PastoPerLocale PPL
-                            WHERE PPL.fibre = _fibre
-								AND PPL.proteine = _proteine
-                                AND PPL.glucidi = _glucidi
-                                AND PPL.concentrazioneSali = _concentrazioneSali
-                                AND PPL.concentrazioneVitamine = _concentrazioneVitamine)
-	AND IF(prima_somministrazione(_fibre,
-									_proteine, 
-                                    _glucidi, 
-                                    _concentrazioneSali, 
-                                    _concentrazioneVitamine, 
-                                    L.codiceLocale) IS NOT NULL,
-			I.dataRilevazione > prima_somministrazione(_fibre, 
-														_proteine, 
-                                                        _glucidi, 
-                                                        _concentrazioneSali, 
-                                                        _concentrazioneVitamine, 
-                                                        L.codiceLocale),
-            0)
-GROUP BY L.codiceLocale;
+	IF _fibre IS NOT NULL 
+		AND _proteine IS NOT NULL 
+		AND _glucidi IS NOT NULL 
+		AND _concentrazioneSali IS NOT NULL 
+		AND _concentrazioneVitamine IS NOT NULL THEN
+        
+		/*Considera la media di tutti gli indici di salute rilevati dopo la prima sommisitrazione del pasto in ogni locale*/
+		 REPLACE INTO log_qualita_pasto
+         SELECT 
+			_proteine AS proteine,
+            _glucidi AS glucidi,
+            _concentrazioneSali AS concentrazioneSali,
+            _concentrazioneVitamine AS concentrazioneVitamine,
+            L.codiceLocale AS Locale, 
+			AVG(I.tipologiaRespirazione) AS tipologiaRespirazione, 
+			AVG(I.deambulazione) AS deambulazione, 
+			AVG(I.idratazione) AS idratazione, 
+			AVG(I.vigilanza) AS vigilanza, 
+			AVG(I.lucentezzaPelo) AS lucentezzaPelo
+		 FROM Locale L INNER JOIN Animale A ON L.codiceLocale = A.codLocale
+						INNER JOIN IndiciSalute I ON A.codice = I.codAnimale
+		 WHERE L.codiceLocale IN (SELECT DISTINCT(PPL.codlocale)
+									FROM PastoPerLocale PPL
+									WHERE PPL.fibre = _fibre
+										AND PPL.proteine = _proteine
+										AND PPL.glucidi = _glucidi
+										AND PPL.concentrazioneSali = _concentrazioneSali
+										AND PPL.concentrazioneVitamine = _concentrazioneVitamine)
+			AND IF(prima_somministrazione(_fibre,
+											_proteine, 
+											_glucidi, 
+											_concentrazioneSali, 
+											_concentrazioneVitamine, 
+											L.codiceLocale) IS NOT NULL,
+					I.dataRilevazione > prima_somministrazione(_fibre, 
+																_proteine, 
+																_glucidi, 
+																_concentrazioneSali, 
+																_concentrazioneVitamine, 
+																L.codiceLocale),
+					0)
+		GROUP BY L.codiceLocale;
+END IF;
 END $$
 DELIMITER ;
 
