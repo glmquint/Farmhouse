@@ -205,7 +205,7 @@ RETURNS SMALLINT UNSIGNED
 DETERMINISTIC
 BEGIN
     DECLARE return_value SMALLINT UNSIGNED;
-	SET return_value = 0;
+	SET return_value = 1;
 	WHILE (SELECT A.codiceGPS
 			FROM Animale A
             WHERE codiceGPS = return_value) IS NOT NULL DO
@@ -375,7 +375,7 @@ ON SCHEDULE EVERY 1 DAY
 STARTS '2021-01-01 00:00:01'
 DO CALL OP3_incassa_prenotazioni_del_giorno(CURRENT_DATE());
 
-/*-------------------------------------------------------------
+/*-------------------------------------------------------------OK
 
 Operazione 4: Stoccaggio del latte munto
 Descrizione:Il latte munto viene conservato in appositi silos contenenti tutti latte
@@ -385,13 +385,30 @@ Output:Aggiornamento della quntità stoccata nel corretto silos
 Frequenza giornaliera:15000
 */
 
-DROP PrOCEDURE IF EXISTS OP4_stoccaggio_latte;
+DROP FUNCTION IF EXISTS first_available_silo;
+DELIMITER $$
+CREATE FUNCTION first_available_silo() 
+RETURNS SMALLINT UNSIGNED
+DETERMINISTIC
+BEGIN
+    DECLARE return_value SMALLINT UNSIGNED;
+	SET return_value = 1;
+	WHILE (SELECT S.codice
+			FROM Silos S
+            WHERE S.codice = return_value) IS NOT NULL DO
+		SET return_value = return_value + 1;
+	END WHILE;
+    RETURN (return_value);
+END$$
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS OP4_stoccaggio_latte;
 DELIMITER $$
 CREATE PROCEDURE OP4_stoccaggio_latte
 	(/*mungitura*/
     IN _data_ora TIMESTAMP,
     IN _animale SMALLINT UNSIGNED,
-    IN _mangitrice SMALLINT UNSIGNED,
+    IN _mungitrice SMALLINT UNSIGNED,
     /*latte*/
     IN _codLatte SMALLINT UNSIGNED)
 BEGIN
@@ -399,7 +416,16 @@ BEGIN
 /*cerca il silos che ha la minor differenza tra 
   la quantità di sostanze disciolte nel latte
   con la media delle sostanze dei latti già stoccati in quel silo*/
-SELECT S.codice
+SELECT S.codice, ABS((
+			SELECT L.quantitàSostanzeDisciolte
+			FROM Latte L
+			WHERE L.codiceLatte = _codLatte) - 
+            (
+            SELECT AVG(L1.quantitàSostanzeDisciolte)
+			FROM Silos S1 INNER JOIN Latte L1 ON S1.codice = L1.codSilos
+			WHERE S1.codice = S.codice
+			) 
+		)
 FROM Silos S
 WHERE ABS((
 			SELECT L.quantitàSostanzeDisciolte
@@ -425,59 +451,64 @@ WHERE ABS((
 		)
 	)
 	FROM Silos S4
-)LIMIT 1 INTO @silo;
+)LIMIT 1 INTO @silo, @diff;
+
+-- CALL LOG(CONCAT("silo è : ", @silo, "; diff è: ", @diff));
 
 /*controlla se c'è spazio nel silos*/
 IF (SELECT S.capacità - S.livello
 	FROM Silos S
     WHERE S.codice = @silo) < 
     (SELECT M.quantità
-    FROM Mungitura
+    FROM Mungitura M
     WHERE M.codAnimale = _animale
 		AND M.codMungitrice = _mungitrice
         AND M.data_orario = _data_ora) THEN
 	/* se non c'è spazio, controlla se esiste già un silos vuoto*/
-	SELECT S.codice
-    FROM Silos S
-    WHERE S.livello = 0 INTO @silo;
+    SET @silo = (SELECT IFNULL ((SELECT S.codice FROM Silos S WHERE S.livello = 0), NULL));
     IF @silo IS NULL THEN
+		-- CALL LOG(CONCAT("silo è diventato null!"));
+		SET @silo = first_available_silo();
 		/*se non c'è, creane uno nuovo (valore capacità di default da scegliere)*/
 		INSERT INTO Silos (codice, capacità, livello)
-			VALUES ((SELECT MAX(S.codice)
-					FROM Silos S), 1000, (SELECT M.quantità
-									FROM Mungitura
+			VALUES (@silo, 1000, (SELECT M.quantità
+									FROM Mungitura M
 									WHERE M.codAnimale = _animale
 										AND M.codMungitrice = _mungitrice
 										AND M.data_orario = _data_ora));
 		/*usare il nuovo silo per aggiornare dove è stoccato il latte*/
-		SET @silo = (SELECT MAX(S.codice)
-					FROM Silos S);
-		ELSE
+		/*SET @silo = (SELECT MAX(S.codice)
+					FROM Silos S);*/
+	ELSE
         /*se c'è, aumentare il livello di quel silos
           (direttamente la quantità, in quanto il silo è vuoto)*/
+			-- CALL LOG(CONCAT("allora c'è e vale: ", @silo, " infatti livello è: ", (select S.livello FROM Silos S WHERE S.codice = @silo)));
 			UPDATE Silos
             SET livello = /*livello + */(SELECT M.quantità
-									FROM Mungitura
+									FROM Mungitura M
 									WHERE M.codAnimale = _animale
 										AND M.codMungitrice = _mungitrice
 										AND M.data_orario = _data_ora)
 			WHERE codice = @silo;
     END IF;
     
-    ELSE
-    /*se c'è spazio nel silo, aggiungi lla quantità munta al livello*/
+ELSE
+    /*se c'è spazio nel silo, aggiungi la quantità munta al livello*/
 		UPDATE Silos
 		SET livello = livello + (SELECT M.quantità
-								FROM Mungitura
+								FROM Mungitura M
 								WHERE M.codAnimale = _animale
 									AND M.codMungitrice = _mungitrice
 									AND M.data_orario = _data_ora)
 		WHERE codice = @silo;
 END IF;
 
+-- CALL LOG(CONCAT("silo dopo il controllo: ", @silo));
+
 /*aggiornare in quale silo è stato stoccato il latte*/
 UPDATE Latte
-SET codSilos = @silo;
+SET codSilos = @silo
+WHERE codiceLatte = _codLatte;
 
 END $$
 DELIMITER ;
