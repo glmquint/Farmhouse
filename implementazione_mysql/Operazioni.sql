@@ -304,7 +304,7 @@ BEGIN
 END $$
 DELIMITER ;
 
-/*-------------------------------------------------------------
+/*-------------------------------------------------------------OK
 
 Operazione 3: Pagamento delle stanze
 Descrizione:Ogni giorno viene registrato il pagamento cumulativo di ogni cliente
