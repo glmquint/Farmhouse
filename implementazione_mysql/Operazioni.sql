@@ -513,7 +513,7 @@ WHERE codiceLatte = _codLatte;
 END $$
 DELIMITER ;
 
-/*-------------------------------------------------------------
+/*-------------------------------------------------------------OK
 
 Operazione 5: Controllo igiene dei locali
 Descrizione:Per garantire il rispetto delle condizioni di benessere degli animali
@@ -529,13 +529,13 @@ Frequenza giornaliera:40
 DROP PROCEDURE IF EXISTS OP5_controllo_igiene_locali;
 DELIMITER $$
 CREATE PROCEDURE OP5_controllo_igiene_locali
-	(IN _locale SMALLINT UNSIGNED)
+	(/*IN _locale SMALLINT UNSIGNED*/)
 BEGIN
 
 DECLARE finito INTEGER DEFAULT 0;
 DECLARE locale SMALLINT UNSIGNED DEFAULT NULL;
 DECLARE cursore CURSOR FOR
-	SELECT L.codice
+	SELECT L.codiceLocale
     FROM Locale L;
 DECLARE CONTINUE HANDLER FOR NOT FOUND SET finito = 1;
 
@@ -572,12 +572,12 @@ preleva: LOOP
     UPDATE Locale
     SET temperatura = @media_temperatura
     , umidità = @media_umidita
-    WHERE codice = locale;
+    WHERE codiceLocale = locale;
     
     /*considera le soglie di tollerabilità*/
     SELECT L.tollerabilitaAzoto, L.tollerabilitaSporcizia, L.tollerabilitaMetano
     FROM Locale L
-    WHERE L.codice = locale INTO @max_azoto, @max_sporcizia, @max_metano;
+    WHERE L.codiceLocale = locale INTO @max_azoto, @max_sporcizia, @max_metano;
     
     /*se anche solo uno di questi valori supera la soglia consentita*/
     IF @media_azoto > @max_azoto OR @media_sporcizia > @max_sporcizia OR @media_metano > @max_metano THEN

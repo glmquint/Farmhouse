@@ -47,7 +47,7 @@ INSERT INTO Stalla (numProgressivo, nomeAgriturismo)
 INSERT INTO CaratteristichePerTipoLocale (specieOspitata, altezza, lunghezza, larghezza, capienzaMax, pavimentazione)
 	VALUES ('bos lobe', 486, 2299, 1096, 45, 'trattamento antiscivolo con resine epissidiche');
 INSERT INTO Locale (codiceLocale, temperatura, umidità, orientazioneFinestre, tollerabilitaAzoto, tollerabilitaSporcizia, tollerabilitaMetano, codiceStalla, nomeAgriturismo, specieOspitata, altezza, lunghezza, larghezza)
-	VALUES (default, 28, 39, 'S', 8, 5, 5, 1, 'Settesoldi', 'bos lobe', 486, 2299, 1096);
+	VALUES (default, 20, 39, 'S', 18, 5, 5, 1, 'Settesoldi', 'bos lobe', 486, 2299, 1096);
 INSERT INTO Animale (codice, sesso, specie, famiglia, idMadre, idPadre, dataDiNascita, altezza, peso, razza, latitudine, longitudine, orario, codiceGps, codLocale)
 	VALUES (default, 'M', 'bos lobe', 'tetracerus', NULL, NULL, '1977-05-19', 92, 191, 'tedesca', 117.249, -178.780, '2012-03-11 18:33:37', 1, 1);
 INSERT INTO Animale (codice, sesso, specie, famiglia, idMadre, idPadre, dataDiNascita, altezza, peso, razza, latitudine, longitudine, orario, codiceGps, codLocale)
