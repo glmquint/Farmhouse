@@ -22,7 +22,7 @@ INSERT INTO ServizioperStanza (dataInizioUtilizzo, dataArrivo, numStanza, nomeAg
 
 
 CALL OP3_incassa_prenotazioni_del_giorno('2019-05-15'); -- normalmente lo scheduler chiama giornalmente questa funzione
+
+
 -- pagamento totale: 110€*10 + 20€*3 + 40€*4 - 50€ = 1270€
-
-
 SELECT * FROM Pagamenti;
