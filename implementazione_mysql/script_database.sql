@@ -623,7 +623,7 @@ CREATE TABLE  Stanza
 (
 	numStanza	TINYINT UNSIGNED NOT NULL,
 	codAgriturismo	VARCHAR(30) NOT NULL,
-	costoGiornaliero	TINYINT UNSIGNED NOT NULL,
+	costoGiornaliero	SMALLINT UNSIGNED NOT NULL,
 	suite	ENUM('singola','doppia','suite') NOT NULL,
 	numLetti	TINYINT UNSIGNED NOT NULL,
 	tipoLetti	VARCHAR(100),

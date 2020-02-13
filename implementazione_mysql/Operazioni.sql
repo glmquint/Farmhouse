@@ -338,19 +338,20 @@ BEGIN
 		END IF;
         
         /*calcola costo delle stanze prenotate*/
-        SELECT SUM(S.costoGiornaliero * DATE_DIFF(PS.dataPartenza, PS.dataArrivo))
-        FROM PrenotazioneStanza PS INNER JOIN Stanza 
+        SELECT SUM(S.costoGiornaliero * DATEDIFF(PS.dataPartenza, PS.dataArrivo)) -- si considerano le notti, quindi la differenza in giorni
+        FROM PrenotazioneStanza PS INNER JOIN Stanza S
 			ON PS.numStanza = S.numStanza AND PS.nomeAgriturismo = S.codAgriturismo
         WHERE PS.codCliente = cliente
 			AND PS.dataPartenza = _day INTO costo_stanze;
         
         /*calcola il costo dei servizi utilizzati*/
-        SELECT SUM(SA.costo * DATE_DIFF(SPS.dataFineUtilizzo, SPS.dataInizioUtilizzo))
+        SELECT SUM(SA.costo * (DATEDIFF(SPS.dataFineUtilizzo, SPS.dataInizioUtilizzo) + 1)) -- la data di fine utilizzo è da comprendere nei giorni di utilizzo
         FROM PrenotazioneStanza PS INNER JOIN ServizioPerStanza SPS
 			ON PS.dataArrivo = SPS.dataArrivo
 				AND PS.numStanza = SPS.numStanza
                 AND PS.nomeAgriturismo = SPS.nomeAgriturismo
-                AND PS.codCliente = SPS.codCliente
+                AND PS.codCliente = SPS.codCliente INNER JOIN ServizioAggiuntivo SA
+			ON SPS.codServizio = SA.tipoServizio
 		WHERE PS.codCliente = cliente
 			AND PS.dataPartenza = _day INTO costo_servizi;
           
@@ -362,6 +363,7 @@ BEGIN
 			VALUES ('stanza',
 					costo_stanze + costo_servizi,
 					cliente);
+		-- CALL LOG(CONCAT("cstanze: ", costo_stanze, " cservizi: ", costo_servizi));
 	END LOOP preleva;
 	CLOSE cursore;
 END $$
