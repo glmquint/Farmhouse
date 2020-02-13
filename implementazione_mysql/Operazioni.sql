@@ -168,7 +168,7 @@ BEGIN
 END $$
 DELIMITER ;
 
-/*-------------------------------------------------------------
+/*-------------------------------------------------------------OK
 
 /*
 Operazione 2: Registrazione di una ripoduzione con successo
@@ -188,7 +188,7 @@ RETURNS SMALLINT UNSIGNED
 DETERMINISTIC
 BEGIN
     DECLARE return_value SMALLINT UNSIGNED;
-	SET return_value = 0;
+	SET return_value = 1;
 	WHILE (SELECT A.codice
 			FROM Animale A
             WHERE codice = return_value) IS NOT NULL DO
@@ -233,9 +233,9 @@ IF NEW.stato = 'insuccesso' THEN
 				(SELECT R.codVeterinario
 					FROM Riproduzione R
 					WHERE R.codiceRiproduzione = NEW.codiceRiproduzione));
-ELSEIF NEW.stato = 'successo' THEN
-	signal sqlstate '70006' SET MESSAGE_TEXT = 'Chiamare la procedure OP2_registrazione_neonato per registrare il neonato e prenotargli una visita';
-END IF;
+/*ELSEIF NEW.stato = 'successo' THEN
+	signal sqlstate '45000' SET MESSAGE_TEXT = 'Chiamare la procedure OP2_registrazione_neonato per registrare il neonato e prenotargli una visita';
+*/END IF;
 END $$
 DELIMITER ;
 
@@ -254,7 +254,9 @@ BEGIN
   DECLARE codice_ SMALLINT UNSIGNED;
   DECLARE GPS_ SMALLINT UNSIGNED;
   SET codice_ = first_available_code();
+  CALL LOG(CONCAT("codice_neonato: ", codice_));
   SET GPS_ = first_available_GPS();
+  -- START TRANSACTION;
   INSERT INTO 
   Animale(codice,
 			sesso,
@@ -286,6 +288,7 @@ BEGIN
 			(SELECT A.codLocale /*il neonato abita il locale della madre*/
 				FROM Animale A INNER JOIN Riproduzione R ON A.codice = R.codiceMadre
 				WHERE R.codiceRiproduzione = _codRiproduzione)); 
+	-- COMMIT WORK;
   INSERT INTO 
 	Visita(descrizione,
 			dataProgrammata,
@@ -297,6 +300,7 @@ BEGIN
             (SELECT R.codVeterinario
 				FROM Riproduzione R
 				WHERE R.codiceRiproduzione = _codRiproduzione));
+	COMMIT;
 END $$
 DELIMITER ;
 
@@ -823,7 +827,7 @@ BEGIN
   
     SET da_togliere = FLOOR((num_animali / num_locali - 1) - (num_animali / (num_locali)));
     
-    CALL LOG(da_togliere);
+    CALL LOG(CONCAT("da togliere: ", da_togliere));
 
 	OPEN cursore;
 
