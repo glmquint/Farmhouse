@@ -598,7 +598,7 @@ ON SCHEDULE EVERY 12 HOUR
 STARTS '2021-01-01 00:08:00'
 DO CALL OP5_controllo_igiene_locali();
 
-/*-------------------------------------------------------------
+/*-------------------------------------------------------------OK
 
 Operazione 6: Processamento degli ordini
 Descrizione:Gli utenti che si sono registrati nello store online possono acquistare i
@@ -608,19 +608,31 @@ Output:Processamento ed invio dell’ordine
 Frequenza giornaliera:400
 */
 
-/*vincolo X controlla già la disponibilità dell'ordine!!
+/*vincolo X controlla già la disponibilità dell'ordine!!*/
 
 DROP PROCEDURE IF EXISTS OP6_processamento_ordini;
 DELIMITER $$
 CREATE PROCEDURE OP6_processamento_ordini
-	(IN _var CHAR(20),
-    OUT var_ INT)
+	(IN _codiceOrdine	SMALLINT UNSIGNED)
 BEGIN
-  SELECT attr
-  FROM table INTO var_;
+	DECLARE totale INTEGER UNSIGNED DEFAULT 0;
+    DECLARE cliente CHAR(16);
+
+  SELECT SUM(CO.quantità * FP.prezzo) INTO totale
+  FROM ContenutoOrdine CO INNER JOIN FormaggioProdotto FP ON CO.codFormaggioprodotto = FP.codiceProdotto
+  WHERE CO.codOrdine = _codiceOrdine;
+    
+  SELECT A.codiceCarta INTO cliente
+  FROM OrdineProdotti OP INNER JOIN Account A ON OP.utente = A.utente AND OP.password = A.password
+  WHERE OP.codiceOrdine = _codiceOrdine;
+  
+  INSERT INTO Pagamenti (codPagamento, tipoPagamento, totaleCosto, dataPagamento, codCliente)
+	VALUES (default, 'online', totale, NULL, cliente);
+
 END $$
 DELIMITER ;
 
+/*
 DROP TRIGGER IF EXISTS check_nuovo_ordine;
 DELIMITER $$
 CREATE TRIGGER check_nuovo_ordine
@@ -632,9 +644,9 @@ IF  THEN
 END IF;
 SET NEW.attributo = ();
 END $$
-DELIMITER ;
+DELIMITER */
 
-*/
+
 
 /*-------------------------------------------------------------
 

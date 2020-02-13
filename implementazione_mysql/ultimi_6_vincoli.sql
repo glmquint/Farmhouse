@@ -66,8 +66,9 @@ CREATE TRIGGER IX_anticipo_su_pagamento
 BEFORE INSERT ON Pagamenti
 FOR EACH ROW 
 BEGIN 
-/*TODO: controllare se l'anticipo deve essere considerato anche per pagamenti di escursioni e di acquisti online*/
-SET NEW.totaleCosto = NEW.totaleCosto - (SELECT C.anticipo FROM Cliente C WHERE C.codCarta = NEW.codCliente);
+IF NEW.tipoPagamento = 'stanza' THEN -- l'anticipo è da considerare solo per le prenotazioni di stanze
+	SET NEW.totaleCosto = NEW.totaleCosto - (SELECT C.anticipo FROM Cliente C WHERE C.codCarta = NEW.codCliente);
+END IF;
 END $$
 DELIMITER ;
 
