@@ -126,7 +126,7 @@ BEFORE INSERT ON Terapia FOR EACH ROW
 BEGIN 
 	IF (SELECT COUNT(*)
     FROM Terapia T INNER JOIN Animale A ON  T.codAnimale=A.codice
-	WHERE T.dataInizio+INTERVAL(T.durata)DAY<=CURRENT_DATE())>1 AND NEW.secondaTerapiaConsecutiva IS NULL THEN
+	WHERE T.dataInizio+INTERVAL(T.durata)DAY<=NEW.dataInizio)>1 AND NEW.secondaTerapiaConsecutiva IS NULL THEN
 	    SET new.secondaTerapiaConsecutiva=TRUE;
 	ELSE
 	    SET new.secondaTerapiaConsecutiva=FALSE;

@@ -648,7 +648,7 @@ DELIMITER */
 
 
 
-/*-------------------------------------------------------------
+/*-------------------------------------------------------------OK
 
 Operazione 7: Prescrizione delle terapie
 Descrizione:Alla registrazione di una nuova terapia da parte di un veterinario,
@@ -690,19 +690,31 @@ CREATE TRIGGER OP7_check_nuova_terapia
 BEFORE INSERT ON Terapia
 FOR EACH ROW 
 BEGIN 
-IF (SELECT T.codiceTerapia
+
+SET @terapia = (SELECT IFNULL((SELECT T.codiceTerapia
 	FROM Terapia T
     WHERE T.codAnimale = NEW.codAnimale
-        AND T.dataInizio + INTERVAL T.durata DAY  >= CURRENT_DATE()
-        AND T.secondaTerapiaConsecutiva) IS NOT NULL THEN
+        AND T.dataInizio + INTERVAL T.durata DAY  >= NEW.dataInizio
+        AND T.secondaTerapiaConsecutiva
+        AND T.codiceTerapia <> NEW.codiceTerapia), NULL));
+	
+SET @terapia2 = (SELECT IFNULL((SELECT T.codiceTerapia
+		FROM Terapia T
+		WHERE T.codAnimale = NEW.codAnimale
+			AND T.dataInizio + INTERVAL T.durata DAY  >= NEW.DataInizio
+			AND NOT T.secondaTerapiaConsecutiva
+            AND T.codiceTerapia <> NEW.codiceTerapia ), NULL));
+
+
+IF @terapia IS NOT NULL THEN
+	-- CALL LOG(CONCAT("if1->terapia: ", @terapia, " ", NEW.codiceTerapia));
+
 	UPDATE Animale
     SET codLocale = localeQuarantena(codLocale)
     WHERE codice = NEW.codAnimale;
-ELSEIF (SELECT T.codiceTerapia
-		FROM Terapia T
-		WHERE T.codAnimale = NEW.codAnimale
-			AND T.dataInizio + INTERVAL T.durata DAY  >= CURRENT_DATE()
-			AND NOT T.secondaTerapiaConsecutiva) IS NOT NULL THEN
+ELSEIF @terapia2 IS NOT NULL THEN
+	-- CALL LOG(CONCAT("if2->terapia2: ", @terapia2, " ", NEW.codiceTerapia));
+
 	SET NEW.secondaTerapiaConsecutiva = 1;
 END IF;
 END $$
