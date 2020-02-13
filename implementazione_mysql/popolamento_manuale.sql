@@ -93,7 +93,7 @@ INSERT INTO AttivitaPascolo (codiceAttivita, giorno_orario, codLocale, codArea)
 INSERT INTO Mungitrice (codice, longitudine, latitudine, marca, modello)
 	VALUES (default, 121.995, 20.170, 'laoreet i. Sed id consectetur ipsu. Vivamus mollis magna in lectus finibu  quis vulputate turpis facilisi.Proin vitae imperdiet nequ. Pellentesque nisl veli  congue a consequat i  sollicitudin efficitur ero. Nulla facilis. Sed viverra velit eget velit vehicula loborti. Pellentesque semper ', 'ut ullamcorpe. Quisque sit amet augue eget purus tincidunt port. Vestibulum vel tortor molesti  ullamcorper felis i  aliquet ero. Morbi magna sapie  pharetra nec pretium i  sollicitudin quis metu. Sed porttitor condimentum nisl quis suscipi. Etiam et orci risu. Integer sed ');
 INSERT INTO Mungitura (codAnimale, codMungitrice, data_orario, quantità)
-	VALUES (1, 1, '2019-12-18 06:25:53', 94);
+	VALUES (2, 1, '2019-12-18 06:25:53', 94);
 INSERT INTO Silos (codice, capacità, livello)
 	VALUES (default, 488, 661);
 INSERT INTO Latte (codiceLatte, quantitàSostanzeDisciolte, codAnimale, codSilos)

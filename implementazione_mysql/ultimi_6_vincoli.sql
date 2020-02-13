@@ -196,3 +196,20 @@ BEGIN
 	SET NEW.codiceGPS = first_available_GPS();
 END $$
 DELIMITER ;
+
+
+/*-------------------------------------------------------------
+
+Descrizione: le mungiture possono essere effettuate ovviamente solo da animali femmina*/
+
+DROP TRIGGER IF EXISTS XIV_mungitura_femmina;
+DELIMITER $$
+CREATE TRIGGER XIV_mungitura_femmina
+BEFORE INSERT ON Mungitura
+FOR EACH ROW
+BEGIN
+	IF (SELECT A.sesso FROM Animale A WHERE A.codice = NEW.codAnimale) <> 'F' THEN
+		signal sqlstate '70006' SET MESSAGE_TEXT = 'ERRORE: L\'animale da mungere deve essere femmina';
+	END IF;
+END $$
+DELIMITER ;
