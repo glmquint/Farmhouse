@@ -829,7 +829,6 @@ BEGIN
 IF NEW.codiceCarta NOT IN (SELECT C.codCarta
 							FROM Cliente C) THEN
 	INSERT INTO Cliente (codCarta) VALUES (NEW.codiceCarta);
-COMMIT;
 END IF;
 END $$
 DELIMITER ;
@@ -904,87 +903,3 @@ BEGIN
 END $$
 DELIMITER ;
 
-
-/*-------------------------------------------------------------
-
-
-/* MODULE PROCEDURE :
-
-DROP PROCEDURE IF EXISTS procedure_name;
-DELIMITER $$
-CREATE PROCEDURE procedure_name
-	(IN _var CHAR(20),
-    OUT var_ INT)
-BEGIN
-  SELECT attr
-  FROM table INTO var_;
-END $$
-DELIMITER ;
-
-*/
-
-/* MODULE FUNCTION:
-
-DROP FUNCTION IF EXISTS function_name;
-DELIMITER $$
-CREATE FUNCTION function_name(
-    var DECIMAL(10,2)
-) 
-RETURNS VARCHAR(20)
-DETERMINISTIC
-BEGIN
-    DECLARE return_value VARCHAR(20);
- 
-    IF credit > 50000 THEN
-        SET customerLevel = 'PLATINUM';
-    ELSEIF (credit >= 50000 AND 
-            credit <= 10000) THEN
-        SET customerLevel = 'GOLD';
-    ELSEIF credit < 10000 THEN
-        SET customerLevel = 'SILVER';
-    END IF;
-    -- return the customer level
-    RETURN (return_value);
-END$$
-DELIMITER ;
-
-*/
-
-/* MODULE TRIGGER:
-
-DROP TRIGGER IF EXISTS nome_trigger;
-DELIMITER $$
-CREATE TRIGGER nome_trigger
-BEFORE INSERT ON Tabella
-FOR EACH ROW 
-BEGIN 
-IF  THEN
-	signal sqlstate '70006' SET MESSAGE_TEXT = 'ERRORE: ';
-END IF;
-SET NEW.attributo = ();
-END $$
-DELIMITER ;
-
-*/
-
-/* MODULE CURSOR:
-
-DECLARE finito INTEGER DEFAULT 0;
-DECLARE result_var VARCHAR(255) DEFAULT "";
-DECLARE nome_cursore CURSOR FOR
-	SELECT
-		...
-DECLARE CONTINUE HANDLER FOR NOT FOUND SET finito = 1;
-
-OPEN nome_cursore;
-
-preleva: LOOP
-	FETCH nome_cursore INTO result_var;
-    IF finito = 1 THEN
-		LEAVE preleva;
-	END IF;
-    SET uscita = CONCAT(uscita, ';', result_var);
-END LOOP preleva;
-CLOSE nome_cursore;
-
-*/
