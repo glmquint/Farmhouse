@@ -833,7 +833,7 @@ END IF;
 END $$
 DELIMITER ;
 
-/*-------------------------------------------------------------
+/*-------------------------------------------------------------OK
 
 Operazione 10: Ridistribuzione degli animali all’aggiunta di unnuovo locale
 Descrizione:All’aggiunta di un nuovo locale, vengono smistati gli animali già
@@ -863,32 +863,37 @@ BEGIN
 
 	SELECT COUNT(A.codice)
 	FROM Animale A INNER JOIN Locale L ON A.codLocale = L.codiceLocale
-	WHERE L.codiceStalla = _stalla INTO num_animali;
+	WHERE L.codiceStalla = _stalla INTO num_animali; -- in una stalla
 
 	SELECT COUNT(L.codiceLocale) -- + 1 considerare il locale che deve essere aggiunto
 	FROM Locale L
-	WHERE L.codiceStalla = _stalla INTO num_locali;
-  
-    SET da_togliere = FLOOR((num_animali / num_locali - 1) - (num_animali / (num_locali)));
+	WHERE L.codiceStalla = _stalla INTO num_locali; -- in una stalla
     
-    CALL LOG(CONCAT("da togliere: ", da_togliere));
+	CALL LOG(CONCAT("num_animali: ", num_animali, " num_locali: ", num_locali));
 
-	OPEN cursore;
+    IF num_locali > 1 THEN
+  
+		SET da_togliere = (FLOOR(num_animali / (num_locali - 1)) - FLOOR(num_animali / (num_locali)));
+		CALL LOG(CONCAT("da togliere: ", da_togliere));
 
-	preleva: LOOP
-		FETCH cursore INTO locali;
-		IF finito = 1 THEN
-			LEAVE preleva;
-		END IF;
-			UPDATE Animale AS A INNER JOIN (SELECT A2.codice
-											FROM Animale A2
-											WHERE A2.codLocale = locali
-											LIMIT da_togliere) AS A2 ON A.codice = A2.codice
-			SET A.codLocale = _locale;
-			-- WHERE codice IN (SELECT A.codice
-			-- 				FROM Animale A );
-	END LOOP preleva;
-	CLOSE cursore;
+
+		OPEN cursore;
+
+		preleva: LOOP
+			FETCH cursore INTO locali;
+			IF finito = 1 THEN
+				LEAVE preleva;
+			END IF;
+				UPDATE Animale AS A INNER JOIN (SELECT A2.codice
+												FROM Animale A2
+												WHERE A2.codLocale = locali
+												LIMIT da_togliere) AS A2 ON A.codice = A2.codice
+				SET A.codLocale = _locale;
+				-- WHERE codice IN (SELECT A.codice
+				-- 				FROM Animale A );
+		END LOOP preleva;
+		CLOSE cursore;
+	END IF;
   	
 END $$
 DELIMITER ;
