@@ -720,7 +720,7 @@ END IF;
 END $$
 DELIMITER ;
 
-/*-------------------------------------------------------------
+/*-------------------------------------------------------------OK
 
 Operazione 8: Controllo degli animali dispersi
 Descrizione:Durante le attività di pascolo viene monitorato ad intervalli regolari
