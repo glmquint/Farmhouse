@@ -731,17 +731,32 @@ Output:segnalazione se l’animale è disperso
 Frequenza giornaliera:3968
 */
 
+DROP TABLE IF EXISTS animali_dispersi;
+CREATE TABLE animali_dispersi(
+	date TIMESTAMP PRIMARY KEY,
+    dispersi VARCHAR(1024)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 
 DROP EVENT IF EXISTS controllo_attivita_pascolo;
+DELIMITER $$
 CREATE EVENT controllo_attivita_pascolo
 ON SCHEDULE EVERY 15 MINUTE 
 STARTS '2021-01-01 00:00:01'
-DO CALL attivita_in_data(CURRENT_DATE());
+DO 
+BEGIN
+	CALL attivita_in_data(CURRENT_DATE(), @void);
+    -- CALL LOG(CONCAT("void: ", IFNULL(@void, 'null')));
+    INSERT INTO animali_dispersi VALUES(CURRENT_TIMESTAMP(), @void);
+END $$
+DELIMITER ;
+
 
 DROP PROCEDURE IF EXISTS attivita_in_data;
 DELIMITER $$
 CREATE PROCEDURE attivita_in_data
-	(IN _data DATE)
+	(IN _data DATE,
+    OUT dispersi_ VARCHAR(1024))
 BEGIN
 	DECLARE finito INTEGER DEFAULT 0;
 	DECLARE attivita SMALLINT UNSIGNED DEFAULT NULL;
@@ -750,7 +765,7 @@ BEGIN
         FROM AttivitaPascolo AP
         WHERE DATE_FORMAT(AP.giorno_orario, '%Y-%m-%d') = _data;
 	DECLARE CONTINUE HANDLER FOR NOT FOUND SET finito = 1;
-
+	SET dispersi_ = "";
 	OPEN cursore;
 
 	preleva: LOOP
@@ -758,7 +773,9 @@ BEGIN
 		IF finito = 1 THEN
 			LEAVE preleva;
 		END IF;
-        CALL OP8_check_animali_dispersi(attivita);
+        CALL OP8_check_animali_dispersi(attivita, @disp);
+        SET dispersi_ = CONCAT(dispersi_, "-Attivita: ", attivita, " dispersi: ", IFNULL(@disp, 'nessuno'));
+        -- CALL LOG(CONCAT("dispersi_: ", IFNULL(dispersi_, 'null')));
 	END LOOP preleva;
 	CLOSE cursore;
 END $$
@@ -767,54 +784,24 @@ DELIMITER ;
 DROP PROCEDURE IF EXISTS OP8_check_animali_dispersi;
 DELIMITER $$
 CREATE PROCEDURE OP8_check_animali_dispersi
-	(IN _attivita SMALLINT UNSIGNED)
+	(IN _attivita SMALLINT UNSIGNED,
+    OUT animali_dispersi VARCHAR(255))
 BEGIN
-/*
-	DECLARE finito INTEGER DEFAULT 0;
-	DECLARE animale SMALLINT UNSIGNED DEFAULT NULL;
-	DECLARE animali_dispersi VARCHAR(255) DEFAULT "";
-	DECLARE cursore CURSOR FOR
-		SELECT A.codice
-        FROM Animale A
-        WHERE A.codLocale = (SELECT AP.codLocale
-							FROM AttivitaPascolo AP
-                            WHERE AP.codiceAttivita = _attivita);
-	DECLARE CONTINUE HANDLER FOR NOT FOUND SET finito = 1;
 
-	OPEN cursore;
-
-	preleva: LOOP
-		FETCH cursore INTO animale;
-		IF finito = 1 THEN
-			LEAVE preleva;
-		END IF;
-        IF -- distanza minima da una recinzione è superiore ad una soglia 
-			THEN
-			SET animale_dispersi = CONCAT(animali_dispersi, ';', animale);
-		END IF;
-	END LOOP preleva;
-	CLOSE cursore;
-    */
-   	DECLARE animali_dispersi VARCHAR(255) DEFAULT "";
     
     SELECT GROUP_CONCAT(A.codice SEPARATOR ';')
     FROM Animale A
     WHERE A.codLocale = (SELECT AP.codLocale
 							FROM AttivitaPascolo AP
                             WHERE AP.codiceAttivita = _attivita)
-		AND 100 < -- distanza oltre la quale un animale è definito disperso
-			(SELECT MIN(SQRT(POW(A.longitudine - RD.longitudine, 2)+POW(A.latitudine - RD.longitudine, 2)))
-			FROM RecinzioneDivisoriaeZonaDiPascolo RD
+		AND 50 < -- distanza oltre la quale un animale è definito disperso
+			(SELECT MIN(SQRT(POW(A.longitudine - RD.longitudine, 2)+POW(A.latitudine - RD.latitudine, 2)))
+			FROM RecinzioneDivisoriaeZoneDiPascolo RD
 			WHERE RD.codArea = (SELECT AP1.codArea
-								FROM AreaPascolo AP1
+								FROM AttivitaPascolo AP1
 								WHERE AP1.codiceAttivita = _attivita) ) INTO animali_dispersi;
-    
-    IF animali_dispersi <> "" THEN
-		SELECT animali_dispersi;
-		signal sqlstate '70006' SET MESSAGE_TEXT = 'Lista degli anmali dispersi mostrata in tabella';
-	ELSE
-		signal sqlstate '70006' SET MESSAGE_TEXT = 'Nessun animali disperso';
-    END IF;
+	-- CALL LOG(CONCAT("animali_dispersi: ", IFNULL(animali_dispersi, 'null')));
+
 
 END $$
 DELIMITER ;
@@ -897,9 +884,9 @@ BEGIN
 											FROM Animale A2
 											WHERE A2.codLocale = locali
 											LIMIT da_togliere) AS A2 ON A.codice = A2.codice
-			SET A.codLocale = _locale;/*
-			WHERE codice IN (SELECT A.codice
-							FROM Animale A );*/
+			SET A.codLocale = _locale;
+			-- WHERE codice IN (SELECT A.codice
+			-- 				FROM Animale A );
 	END LOOP preleva;
 	CLOSE cursore;
   	

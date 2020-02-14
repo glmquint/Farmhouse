@@ -89,7 +89,7 @@ INSERT INTO AreaPascolo (codiceArea)
 INSERT INTO RecinzioneDivisoriaeZoneDiPascolo (codiceZona, codArea, longitudine, latitudine)
 	VALUES (default, 1, 62.948, 116.393);
 INSERT INTO AttivitaPascolo (codiceAttivita, giorno_orario, codLocale, codArea)
-	VALUES (default, '2019-05-12 07:50:44', 1, 1);
+	VALUES (default, '2019-06-12 07:50:44', 1, 1);
 INSERT INTO Mungitrice (codice, longitudine, latitudine, marca, modello)
 	VALUES (default, 121.995, 20.170, 'laoreet i. Sed id consectetur ipsu. Vivamus mollis magna in lectus finibu  quis vulputate turpis facilisi.Proin vitae imperdiet nequ. Pellentesque nisl veli  congue a consequat i  sollicitudin efficitur ero. Nulla facilis. Sed viverra velit eget velit vehicula loborti. Pellentesque semper ', 'ut ullamcorpe. Quisque sit amet augue eget purus tincidunt port. Vestibulum vel tortor molesti  ullamcorper felis i  aliquet ero. Morbi magna sapie  pharetra nec pretium i  sollicitudin quis metu. Sed porttitor condimentum nisl quis suscipi. Etiam et orci risu. Integer sed ');
 INSERT INTO Mungitura (codAnimale, codMungitrice, data_orario, quantità)
