@@ -807,7 +807,7 @@ END $$
 DELIMITER ;
 
 
-/*-------------------------------------------------------------
+/*-------------------------------------------------------------OK
 
 perazione 9: Registrazione nuovo account
 Descrizione:All’ inserimento di un nuovo account nello store online, viene 
@@ -829,6 +829,7 @@ BEGIN
 IF NEW.codiceCarta NOT IN (SELECT C.codCarta
 							FROM Cliente C) THEN
 	INSERT INTO Cliente (codCarta) VALUES (NEW.codiceCarta);
+COMMIT;
 END IF;
 END $$
 DELIMITER ;
