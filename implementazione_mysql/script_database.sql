@@ -468,7 +468,6 @@ CREATE TABLE  Formaggio
 	nomeAgriturismo	VARCHAR(30) NOT NULL,
 	deperibilita	INT, -- da intendere come giorni prima della deperibilità
 	codRicetta	INTEGER NOT NULL,
-	codLatte	INTEGER NOT NULL,
 	primary key (nome, nomeAgriturismo),
 	foreign key (nomeAgriturismo) references Agriturismo(nome)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
