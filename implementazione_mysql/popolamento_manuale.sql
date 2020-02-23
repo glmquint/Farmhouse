@@ -126,8 +126,8 @@ INSERT INTO Ricetta (codiceRicetta, collocazioneGeografica, ricetta, durataStagi
 	VALUES (default, 'Veneto', 'tempo  ligula nec ultricies finibu  ipsum risus eleifend arc  ac iaculis orci arcu vitae era. Nam tristique sem se  eu cursus eros iaculis faucibu. Cras nulla ant  rhoncus a nisl qui  placerat ullamcorper lectu. In aliquet est eli  gravida sollicitudin velit ', '20:33:55');
 INSERT INTO divisain (codRicetta, codFase)
 	VALUES (1, 1);
-INSERT INTO Formaggio (nome, nomeAgriturismo, deperibilita, codRicetta, codLatte)
-	VALUES ('Bitto', 'Settesoldi', 30, 1, 1);
+INSERT INTO Formaggio (nome, nomeAgriturismo, deperibilita, codRicetta)
+	VALUES ('Bitto', 'Settesoldi', 30, 1);
 INSERT INTO Indicisalute (codAnimale, dataRilevazione, tipologiaRespirazione, lucentezzaPelo, vigilanza, idratazione, deambulazione, fibre, proteine, glucidi, concentrazioneSali, concentrazioneVitamine)
 	VALUES (2, '2019-02-07', 12, 34, 95, 48, 82, 103, 967, 878, 10, 5);
 INSERT INTO Visita (codiceVisita, esito, descrizione, dataEffettiva, dataProgrammata, codAnimale, codVeterinario)
