@@ -62,15 +62,80 @@ INSERT INTO prodottocon (codLatte, codLotto)
 	VALUES (9, 11);
 INSERT INTO prodottocon (codLatte, codLotto)
 	VALUES (10, 12);
-/*
+
 INSERT INTO Fasi (codiceFase, nome, parametriProcesso, durata)
 	VALUES (50, 'Inizio', 57, '23:22:48');
+INSERT INTO Fasi (codiceFase, nome, parametriProcesso, durata)
+	VALUES (51, 'Svolgimento', 58, '23:22:48');
+INSERT INTO Fasi (codiceFase, nome, parametriProcesso, durata)
+	VALUES (52, 'Fine', 56, '23:22:48');
+
 INSERT INTO ControlloParametriFase (parametriEffettivi, codLotto, codFase)
-	VALUES (59, 1, 1);
+	VALUES (58, 10, 50);
+INSERT INTO ControlloParametriFase (parametriEffettivi, codLotto, codFase)
+	VALUES (57, 10, 51);
+INSERT INTO ControlloParametriFase (parametriEffettivi, codLotto, codFase)
+	VALUES (57, 10, 52);
+
+INSERT INTO ControlloParametriFase (parametriEffettivi, codLotto, codFase)
+	VALUES (18, 11, 50);
+INSERT INTO ControlloParametriFase (parametriEffettivi, codLotto, codFase)
+	VALUES (17, 11, 51);
+INSERT INTO ControlloParametriFase (parametriEffettivi, codLotto, codFase)
+	VALUES (17, 11, 52);
+
+INSERT INTO Fasi (codiceFase, nome, parametriProcesso, durata)
+	VALUES (60, 'prima meta', 37, '23:22:48');
+INSERT INTO Fasi (codiceFase, nome, parametriProcesso, durata)
+	VALUES (61, 'seconda meta', 38, '23:22:48');
+
+INSERT INTO ControlloParametriFase (parametriEffettivi, codLotto, codFase)
+	VALUES (18, 12, 60);
+INSERT INTO ControlloParametriFase (parametriEffettivi, codLotto, codFase)
+	VALUES (17, 12, 61);
+
+
 INSERT INTO Ricetta (codiceRicetta, collocazioneGeografica, ricetta, durataStagionatura)
 	VALUES (30, 'Veneto', 'ricetta prima', '20:33:55');
 INSERT INTO divisain (codRicetta, codFase)
-	VALUES (1, 1);
+	VALUES (30, 50);
+INSERT INTO divisain (codRicetta, codFase)
+	VALUES (30, 51);
+INSERT INTO divisain (codRicetta, codFase)
+	VALUES (30, 52);
+
+INSERT INTO Ricetta (codiceRicetta, collocazioneGeografica, ricetta, durataStagionatura)
+	VALUES (40, 'Puglia', 'ricetta seconda', '20:33:55');
+INSERT INTO divisain (codRicetta, codFase)
+	VALUES (40, 60);
+INSERT INTO divisain (codRicetta, codFase)
+	VALUES (40, 61);
+
+INSERT INTO Cantine (codice)
+	VALUES (17);
+INSERT INTO Cantine (codice)
+	VALUES (18);
+
+INSERT INTO stoccaggiocantine (codLotto, codCantina)
+	VALUES (12, 17);
+INSERT INTO stoccaggiocantine (codLotto, codCantina)
+	VALUES (12, 18);
+
+INSERT INTO Parametri (dataParametri, idSensore, temperatura, umidità, codCantina)
+	VALUES ('2019-01-05', 67, 26, 17, 17);
+INSERT INTO Parametri (dataParametri, idSensore, temperatura, umidità, codCantina)
+	VALUES ('2019-01-06', 68, 26, 17, 17);
+
+INSERT INTO Parametri (dataParametri, idSensore, temperatura, umidità, codCantina)
+	VALUES ('2019-01-07', 69, 16, 37, 18);
+INSERT INTO Parametri (dataParametri, idSensore, temperatura, umidità, codCantina)
+	VALUES ('2019-01-08', 70, 36, 27, 18);
+INSERT INTO Parametri (dataParametri, idSensore, temperatura, umidità, codCantina)
+	VALUES ('2019-01-09', 71, 26, 17, 18);
+
+
 INSERT INTO Formaggio (nome, nomeAgriturismo, deperibilita, codRicetta)
-	VALUES ('Parmigiano', 'Settesoldi', 30);
-*/
+	VALUES ('Parmigiano', 'Settesoldi', 15, 30);
+
+INSERT INTO Formaggio (nome, nomeAgriturismo, deperibilita, codRicetta)
+	VALUES ('Burrata', 'Settesoldi', 20, 40);
