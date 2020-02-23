@@ -1,5 +1,11 @@
+
+SET SESSION group_concat_max_len = 1000000;
+
+CREATE OR REPLACE VIEW Ranking AS
 WITH DevianzaFase AS (
-SELECT CPF.codLotto, F.codiceFase, 2*ABS(CAST(CPF.parametriEffettivi AS SIGNED) - CAST(F.parametriProcesso AS SIGNED))/(CPF.parametriEffettivi + F.parametriProcesso) AS DifferenzaRelativa -- TODO:da ripetere per ogni parametro da controllare!!
+SELECT CPF.codLotto, 
+		F.codiceFase, 
+        2*ABS(CAST(CPF.parametriEffettivi AS SIGNED) - CAST(F.parametriProcesso AS SIGNED))/(CPF.parametriEffettivi + F.parametriProcesso) AS DifferenzaRelativa -- TODO:da ripetere per ogni parametro da controllare!!
 FROM ControlloParametriFase CPF INNER JOIN Fasi F ON CPF.codFase = F.codiceFase),
 DevianzaParametriCantine AS (
 SELECT SC.codLotto, P.codCantina, STD(P.temperatura) AS temperatura, STD(P.umidità) AS umidità
@@ -24,15 +30,43 @@ SELECT Lo.codiceLotto,
     ROUND(STD(La.quantitàSostanzeDisciolte) / AVG(La.codiceLatte),3) AS Deviazione_standard_relativa_sostanza_latte, 
     ROUND(AVG(DPC.temperatura),3) AS Deviazione_standard_media_temperatura, 
     ROUND(AVG(DPC.umidità),3) AS Deviazione_standard_media_umidità, 
-    ROUND(AVG(SML.tipologiaRespirazione),3) AS tipologiaRespirazione_media, 
-    ROUND(AVG(SML.lucentezzaPelo),3) AS lucentezzaPelo_media, 
-    ROUND(AVG(SML.vigilanza),3) AS vigilanza_media, 
-    ROUND(AVG(SML.idratazione),3) AS idratazione_media, 
-    ROUND(AVG(SML.deambulazione),3) AS deambulazione_media,
-    IFNULL((DF.differenzaRelativa /AVG(DF.codiceFase)), 100) + IFNULL(STD(La.quantitàSostanzeDisciolte) / AVG(La.codiceLatte), 100) + IFNULL(AVG(DPC.temperatura), 100) + IFNULL(AVG(DPC.umidità),100) + IFNULL(100 - AVG(SML.tipologiaRespirazione), 100) + IFNULL(100 - AVG(SML.lucentezzaPelo), 100) + IFNULL(100 - AVG(SML.vigilanza), 100) + IFNULL(100 - AVG(SML.idratazione), 100) + IFNULL(100 - AVG(SML.deambulazione), 100) AS tot
+    ROUND(1 - AVG(SML.tipologiaRespirazione) / 100 ,3)AS Discostamento_medio_da_tipologiaRespirazione_ottimale, 
+    ROUND(1 - AVG(SML.lucentezzaPelo) / 100,3) AS Discostamento_medio_da_lucentezzaPelo_ottimale, 
+    ROUND(1 - AVG(SML.vigilanza) / 100,3) AS Discostamento_medio_da_vigilanza_ottimale, 
+    ROUND(1 - AVG(SML.idratazione) / 100,3) AS Discostamento_medio_da_idratazione_ottimale, 
+    ROUND(1 - AVG(SML.deambulazione) / 100,3) AS Discostamento_medio_da_deambulazione_ottimale,
+    IFNULL((DF.differenzaRelativa /AVG(DF.codiceFase)), 100) + IFNULL(STD(La.quantitàSostanzeDisciolte) / AVG(La.codiceLatte), 100) + IFNULL(AVG(DPC.temperatura), 100) + IFNULL(AVG(DPC.umidità),100) + IFNULL(1 - AVG(SML.tipologiaRespirazione) / 100, 100) + IFNULL(1 - AVG(SML.lucentezzaPelo) / 100, 100) + IFNULL(1 - AVG(SML.vigilanza) / 100, 100) + IFNULL(1 - AVG(SML.idratazione) / 100, 100) + IFNULL(1 - AVG(SML.deambulazione) / 100, 100) AS Generale
 FROM Lotto Lo INNER JOIN DevianzaFase DF ON Lo.codiceLotto = DF.codLotto
 	LEFT OUTER JOIN Latte La ON La.codiceLatte IN (SELECT PC.codLatte FROM prodottocon PC WHERE PC.codLotto = Lo.codiceLotto)
     LEFT OUTER JOIN DevianzaParametriCantine DPC ON Lo.codiceLotto = DPC.codLotto
     LEFT OUTER JOIN SaluteMediaLocale SML ON Lo.codiceLotto = SML.codLotto
 GROUP BY Lo.codiceLotto
-ORDER BY IFNULL((DF.differenzaRelativa /AVG(DF.codiceFase)), 100) + IFNULL(STD(La.quantitàSostanzeDisciolte) / AVG(La.codiceLatte), 100) + IFNULL(AVG(DPC.temperatura), 100) + IFNULL(AVG(DPC.umidità),100) + IFNULL(100 - AVG(SML.tipologiaRespirazione), 100) + IFNULL(100 - AVG(SML.lucentezzaPelo), 100) + IFNULL(100 - AVG(SML.vigilanza), 100) + IFNULL(100 - AVG(SML.idratazione), 100) + IFNULL(100 - AVG(SML.deambulazione), 100)
+ORDER BY IFNULL((DF.differenzaRelativa /AVG(DF.codiceFase)), 100) + IFNULL(STD(La.quantitàSostanzeDisciolte) / AVG(La.codiceLatte), 100) + IFNULL(AVG(DPC.temperatura), 100) + IFNULL(AVG(DPC.umidità),100) + IFNULL(1 - AVG(SML.tipologiaRespirazione) / 100, 100) + IFNULL(1 - AVG(SML.lucentezzaPelo) / 100, 100) + IFNULL(1 - AVG(SML.vigilanza) / 100, 100) + IFNULL(1 - AVG(SML.idratazione) / 100, 100) + IFNULL(1 - AVG(SML.deambulazione) / 100, 100);
+
+
+SELECT * FROM Ranking;
+
+/*
+SELECT GROUP_CONCAT('Discostamento_totale_medio_parametri_di_processo') AS Categoria, R.codiceLotto AS Miglior_lotto
+FROM Ranking R
+WHERE R.Discostamento_totale_medio_parametri_di_processo = (SELECT MAX(R1.Discostamento_totale_medio_parametri_di_processo)
+															FROM Ranking R1)
+GROUP BY R.Discostamento_totale_medio_parametri_di_processo
+UNION ... */
+
+SELECT GROUP_CONCAT(CONCAT("SELECT GROUP_CONCAT('", CN.COLUMN_NAME ,
+							"') AS Categoria, R.codiceLotto AS Miglior_lotto
+							FROM Ranking R
+							WHERE R.", CN.COLUMN_NAME ," IN (SELECT MIN(R1.", CN.COLUMN_NAME ,")
+															FROM Ranking R1)
+							GROUP BY ", CN.COLUMN_NAME)
+    SEPARATOR ' UNION ')
+FROM (SELECT COLUMN_NAME
+		FROM Information_Schema.columns
+		WHERE table_name = 'Ranking'
+			AND COLUMN_NAME <> 'codiceLotto') CN
+INTO @pivot_query;
+
+
+PREPARE sql_statement FROM @pivot_query;
+EXECUTE sql_statement;
