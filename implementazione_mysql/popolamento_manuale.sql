@@ -119,9 +119,9 @@ INSERT INTO Parametri (dataParametri, idSensore, temperatura, umidità, codCanti
 INSERT INTO Scaffali (codice, codMagazzino)
 	VALUES (0, 1);
 INSERT INTO Fasi (codiceFase, nome, parametriProcesso, durata)
-	VALUES (default, 'Maecenas mattis ex id elementum molesti. Donec in facilisis just. Nam vel leo a sem sodales vestibulu. Nulla pharetra erat a justo dignissi  quis volutpat nulla rutru. Proin convallis urna laoreet mollis matti. Vivamus id placerat ligul. Aliquam nunc nis  vestibulum et lorem ', 57, '23:22:48');
+	VALUES (default, 'Maecenas mattis ex id elementum molesti. Donec in facilisis just. Nam vel leo a sem sodales vestibulu. Nulla pharetra erat a justo dignissi  quis volutpat nulla rutru. Proin convallis urna laoreet mollis matti. Vivamus id placerat ligul. Aliquam nunc nis  vestibulum et lorem ', 'Duis consequat aliquet augu  non pulvinar eni. Suspendisse sagittis tellus vitae nibh sodales volutpa. Duis lobortis arcu dolo  in rhoncus magna dapibus maximu. Aliquam quis nisi eu ligula suscipit ultricies sit amet quis eni. Morbi nec lorem magn.Aliquam vestibulum risus metu  et ', '23:22:48');
 INSERT INTO ControlloParametriFase (parametriEffettivi, codLotto, codFase)
-	VALUES (59, 1, 1);
+	VALUES ('Class aptent taciti sociosqu ad litora torquent per conubia nostr  per inceptos himenaeo. Aliquam sit amet est mass. Proin eget accumsan dolo. Aliquam erat volutpa. Pellentesque lobortis lorem vel nisi iaculis euismod id quis mauri.Nullam tincidunt lorem eu dolor dapibus pretiu. In vehicula ', 1, 1);
 INSERT INTO Ricetta (codiceRicetta, collocazioneGeografica, ricetta, durataStagionatura)
 	VALUES (default, 'Veneto', 'tempo  ligula nec ultricies finibu  ipsum risus eleifend arc  ac iaculis orci arcu vitae era. Nam tristique sem se  eu cursus eros iaculis faucibu. Cras nulla ant  rhoncus a nisl qui  placerat ullamcorper lectu. In aliquet est eli  gravida sollicitudin velit ', '20:33:55');
 INSERT INTO divisain (codRicetta, codFase)
