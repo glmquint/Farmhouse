@@ -71,7 +71,6 @@ INSERT INTO Ricetta (codiceRicetta, collocazioneGeografica, ricetta, durataStagi
 	VALUES (30, 'Veneto', 'ricetta prima', '20:33:55');
 INSERT INTO divisain (codRicetta, codFase)
 	VALUES (1, 1);
-INSERT INTO Formaggio (nome, nomeAgriturismo, deperibilita, codRicetta, codLatte)
-	VALUES ('Parmigiano', 'Settesoldi', 30, 30);
-INSERT INTO composizioneformaggio ('Parmigiano', 'Settesoldi', 
+INSERT INTO Formaggio (nome, nomeAgriturismo, deperibilita, codRicetta)
+	VALUES ('Parmigiano', 'Settesoldi', 30);
 */
