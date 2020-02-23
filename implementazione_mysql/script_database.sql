@@ -454,8 +454,8 @@ CREATE TABLE  Ricetta
 DROP TABLE IF EXISTS  divisain ;
 CREATE TABLE  divisain 
 (
-	codRicetta	INTEGER UNSIGNED NOT NULL UNIQUE,
-	codFase	INTEGER UNSIGNED NOT NULL UNIQUE,
+	codRicetta	INTEGER UNSIGNED NOT NULL ,
+	codFase	INTEGER UNSIGNED NOT NULL ,
 	primary key (codRicetta, codFase),
 	foreign key (codRicetta) references Ricetta(codiceRicetta),
 	foreign key (codFase) references Fasi(codiceFase)
