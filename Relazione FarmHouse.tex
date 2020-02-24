@@ -5303,7 +5303,7 @@ Aggiornamento della relazione per il ricollocamento dei 200 animali tra i 5 loca
 \item Fasi(\underline{\smash{codiceFase}}, nome, parametriProcesso, durata)
 \item divisain(\underline{\smash{codRicetta}}, \underline{\smash{codFase}})
 \item Ricetta(\underline{\smash{codiceRicetta}}, collocazioneGeografica, ricetta, durataStagionatura)
-\item Formaggio(\underline{\smash{nome}}, \underline{\smash{nomeAgriturismo}}, deperibilita,  codRicetta,  codLatte)
+\item Formaggio(\underline{\smash{nome}}, \underline{\smash{nomeAgriturismo}}, deperibilita,  codRicetta)
 \item Indicisalute(\underline{\smash{codAnimale}}, \underline{\smash{dataRilevazione}}, tipologiaRespirazione, lucentezzaPelo, vigilanza, idratazione, deambulazione)
 \item Visita(\underline{\smash{codiceVisita}}, esito, descrizione, dataEffettiva, dataProgrammata,  codAnimale,  codVeterinario)
 \item Esame(\underline{\smash{codiceEsame}},  descrizione, data, macchinario, nome,  codAnimale,  codVeterinario)
@@ -5387,7 +5387,7 @@ Aggiornamento della relazione per il ricollocamento dei 200 animali tra i 5 loca
    \item Esiste un vincolo di integrità referenziale tra codFase in divisain e codiceFase in Fasi
    \item Esiste un vincolo di integrità referenziale tra nomeAgriturismo in Formaggio e nome in Agriturismo
    \item Esiste un vincolo di integrità referenziale tra codRicetta in Formaggio e codiceRicetta in Ricetta
-   \item Esiste un vincolo di integrità referenziale tra codLatte in Formaggio e codiceLatte in Latte
+   %\item Esiste un vincolo di integrità referenziale tra codLatte in Formaggio e codiceLatte in Latte
    \item Esiste un vincolo di integrità referenziale tra codAnimale in Indicisalute e codice in Animale
    \item Esiste un vincolo di integrità referenziale tra codAnimale in Visita con codice in Animale
    \item Esiste un vincolo di integrità referenziale tra codVeterinario in Visita e codiceVeterinario in Veterinario
@@ -5920,10 +5920,10 @@ Poichè la parte sinistra è superchiave, Ricetta è in BCNF
 
 \item[] \textbf{Tabella Formaggio:}
 
-Formaggio(\underline{\smash{nome}}, \underline{\smash{nomeAgriturismo}}, deperibilita,  codRicetta,  codLatte)
+Formaggio(\underline{\smash{nome}}, \underline{\smash{nomeAgriturismo}}, deperibilita,  codRicetta)
 \begin{itemize}
 \vspace{-5pt}
-\item nome, nomeAgriturismo $\Rightarrow$ deperibilità, codRicetta, codLatte
+\item nome, nomeAgriturismo $\Rightarrow$ deperibilità, codRicetta
 \vspace{-5pt}
 \end{itemize}
 Poichè la parte sinistra è superchiave, Formaggio è in BCNF
