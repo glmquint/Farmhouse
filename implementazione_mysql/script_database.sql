@@ -477,7 +477,7 @@ DROP TABLE IF EXISTS  Indicisalute ;
 CREATE TABLE  Indicisalute 
 (
 	codAnimale	SMALLINT UNSIGNED NOT NULL,
-	dataRilevazione	DATE NOT NULL UNIQUE,
+	dataRilevazione	DATE NOT NULL,
 	tipologiaRespirazione	SMALLINT UNSIGNED,
 	lucentezzaPelo	SMALLINT UNSIGNED,
 	vigilanza	SMALLINT UNSIGNED,
