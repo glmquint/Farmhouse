@@ -347,6 +347,9 @@ Pulizia Locale 		&  Richieste d'intervento di pulizia di un locale
 						\item dataRilevazione
 						\item stato
 						\item personale
+						\item concentrazioneMetano
+						\item concentrazioneAzoto
+						\item livelloSporcizia
 						\item codLocale
 					\end{itemize}
 					&  Locale \\
@@ -5275,7 +5278,7 @@ Aggiornamento della relazione per il ricollocamento dei 200 animali tra i 5 loca
 \item Visivi(\underline{\smash{codiceVisivo}}, livelloSporcizia,  orarioRilevazione,  codLocale)
 \item Ambientali(\underline{\smash{codiceAmbientale}}, temperatura, umidità,  orarioRilevazione,  codLocale)
 \item CompostiVolatili(\underline{\smash{codiceVolatili}}, concentrazioneMetano, concentrazioneAzoto,  orarioRilevazione, codLocale)
-\item PuliziaLocale(\underline{\smash{codLocale}}, \underline{\smash{orarioRilevazione}}, \underline{\smash{dataRilevazione}}, stato, personale)
+\item PuliziaLocale(\underline{\smash{codLocale}}, \underline{\smash{orarioRilevazione}}, \underline{\smash{dataRilevazione}}, stato, personale, concentrazioneMetano, concentrazioneAzoto, livelloSporcizia)
 \item PastoPerLocale(\underline{\smash{giorno}}, \underline{\smash{orario}},  \underline{\smash{codLocale}},  fibre,  proteine,  glucidi,  concentrazioneSali,  concentrazioneVitamine)
 \item Pasto(\underline{\smash{fibre}},\underline{\smash{ proteine}},\underline{\smash{ glucidi}}, \underline{\smash{concentrazioneSali}},\underline{\smash{ concentrazioneVitamine}})
 \item Foraggio(\underline{\smash{fibre}}, \underline{\smash{proteine}},\underline{\smash{ glucidi}}, cereali, frutta, piante, forma, kcalkg)
@@ -5604,10 +5607,10 @@ Poichè la parte sinistra è superchiave, CompostiVolatili è in BCNF
 
 \item[] \textbf{Tabella PuliziaLocale:}
 
-PuliziaLocale(\underline{\smash{codLocale}}, \underline{\smash{orarioRilevazione}}, \underline{\smash{dataRilevazione}}, stato, personale)
+PuliziaLocale(\underline{\smash{codLocale}}, \underline{\smash{orarioRilevazione}}, \underline{\smash{dataRilevazione}}, stato, personale, concentrazioneMetano, concentrazioneAzoto, livelloSporcizia)
 \begin{itemize}
 \vspace{-5pt}
-\item codLocale, orarioRilevazione, dataRilevazione $\Rightarrow$ stato, personale
+\item codLocale, orarioRilevazione, dataRilevazione $\Rightarrow$ stato, personale, concentrazioneMetano, concentrazioneAzoto, livelloSporcizia
 \vspace{-5pt}
 \end{itemize}
 Poichè la parte sinistra è superchiave, PuliziaLocale è in BCNF

@@ -582,8 +582,8 @@ preleva: LOOP
     /*se anche solo uno di questi valori supera la soglia consentita*/
     IF @media_azoto > @max_azoto OR @media_sporcizia > @max_sporcizia OR @media_metano > @max_metano THEN
 		/*effettua una nuova richiesta d'intervento di pulizia per il locale*/
-		INSERT INTO PuliziaLocale (codLocale, data_orarioRilevazione, stato, personale)
-        VALUES (locale, CURRENT_TIMESTAMP(), 'pendente', 'personale per la pulizia del locale');
+		INSERT INTO PuliziaLocale (codLocale, data_orarioRilevazione, stato, personale, concentrazioneMetano, concentrazioneAzoto, livelloSporcizia)
+        VALUES (locale, CURRENT_TIMESTAMP(), 'pendente', 'personale per la pulizia del locale', @media_metano, @media_azoto, @media_sporcizia);
     END IF;
     
 END LOOP preleva;

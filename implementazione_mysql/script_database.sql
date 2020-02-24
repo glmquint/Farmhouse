@@ -176,6 +176,9 @@ CREATE TABLE PuliziaLocale
 	data_orarioRilevazione	timestamp,
 	stato	ENUM('pendente', 'effettuato') NOT NULL,
 	personale	VARCHAR(255) NOT NULL,
+    concentrazioneMetano	TINYINT UNSIGNED, /*percentuale*/
+	concentrazioneAzoto	TINYINT UNSIGNED, /*percentuale*/
+    livelloSporcizia	TINYINT UNSIGNED, /*percentuale*/
 	primary key (codLocale, data_orarioRilevazione),
 	foreign key (codLocale) references Locale(codiceLocale)
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
