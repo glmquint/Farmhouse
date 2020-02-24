@@ -129,7 +129,11 @@ INSERT INTO divisain (codRicetta, codFase)
 INSERT INTO Formaggio (nome, nomeAgriturismo, deperibilita, codRicetta, codLatte)
 	VALUES ('Bitto', 'Settesoldi', 30, 1, 1);
 INSERT INTO Indicisalute (codAnimale, dataRilevazione, tipologiaRespirazione, lucentezzaPelo, vigilanza, idratazione, deambulazione, fibre, proteine, glucidi, concentrazioneSali, concentrazioneVitamine)
+	VALUES (1, '2019-02-07', 12, 34, 95, 48, 82, 103, 967, 878, 10, 5);
+INSERT INTO Indicisalute (codAnimale, dataRilevazione, tipologiaRespirazione, lucentezzaPelo, vigilanza, idratazione, deambulazione, fibre, proteine, glucidi, concentrazioneSali, concentrazioneVitamine)
 	VALUES (2, '2019-02-07', 12, 34, 95, 48, 82, 103, 967, 878, 10, 5);
+INSERT INTO Indicisalute (codAnimale, dataRilevazione, tipologiaRespirazione, lucentezzaPelo, vigilanza, idratazione, deambulazione, fibre, proteine, glucidi, concentrazioneSali, concentrazioneVitamine)
+	VALUES (3, '2019-02-07', 12, 34, 95, 48, 82, 103, 967, 878, 10, 5);
 INSERT INTO Visita (codiceVisita, esito, descrizione, dataEffettiva, dataProgrammata, codAnimale, codVeterinario)
 	VALUES (default, 'positiva', 'Sed auctor aliquam lacus sed elementu. Cras sed dictum tellu. Cras sed condimentum magn  eget molestie null. Sed a leo nun. In sollicitudin gravida vulputat. Fusce dapibus mollis tellu  quis consectetur urna auctor a. Pellentesque nec convallis ant  a pharetra ligul. ', '2019-05-20', '2019-03-06', 3, 'BLLDNC38A18E290R');
 INSERT INTO Esame (codiceEsame, descrizione, dataEsame, macchinario, nome, codAnimale, codVeterinario)
