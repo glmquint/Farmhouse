@@ -7,7 +7,7 @@ CREATE OR REPLACE VIEW Valori_prodotti_venduti AS
         AVG(CAST(Fa.durata_fase_ideale AS SIGNED) - CAST(CPF.durata_fase_effettiva AS SIGNED)) AS durata_fase,
         AVG(CAST(Fa.temperatura_latte_ideale  AS SIGNED)- CAST(CPF.temperatura_latte_effettiva AS SIGNED)) AS temperatura_latte,
         AVG(CAST(Fa.tempo_riposo_ideale AS SIGNED) - CAST(CPF.tempo_riposo_effettiva AS SIGNED))AS tempo_riposo,
-        STD(L.quantitàSostanzeDisciolte)/AVG(L.quantitàSostanzeDisciolte)AS quantitàSostanzeDisciolte,
+        100*STD(L.quantitàSostanzeDisciolte)/AVG(L.quantitàSostanzeDisciolte)AS quantitàSostanzeDisciolte,
         AVG(INS.lucentezzaPelo) AS lucentezzaPelo,
         AVG(INS.tipologiaRespirazione) AS tipologiaRespirazione,
         AVG(INS.vigilanza) AS vigilanza,
@@ -50,11 +50,11 @@ GROUP BY gradimentoGenerale
 UNION */
 
 SELECT GROUP_CONCAT(CONCAT("SELECT '", column_name, "' AS Prior, 'reso' AS reso, 'non reso' AS non_reso UNION
-SELECT ", column_name, ",
+SELECT ROUND(", column_name, ", 2),
 		CONCAT(ROUND(SUM(VPV.reso) * 100 / (SELECT COUNT(*) FROM Valori_prodotti_venduti VPV WHERE VPV.reso = 1), 2), '%') AS reso, 
 		CONCAT(ROUND(SUM(1 - VPV.reso) * 100 / (SELECT COUNT(*) FROM Valori_prodotti_venduti VPV WHERE VPV.reso = 0), 2), '%') AS Non_reso
         FROM Valori_prodotti_venduti VPV
-		GROUP BY gradimentoGenerale") SEPARATOR " UNION ") 
+		GROUP BY ROUND(", column_name, ", 2)") SEPARATOR " UNION ") 
 FROM Information_schema.columns 
 WHERE table_name = 'Valori_prodotti_venduti' 
 	AND column_name <> 'codOrdine' 
