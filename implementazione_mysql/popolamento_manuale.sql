@@ -118,10 +118,10 @@ INSERT INTO Parametri (dataParametri, idSensore, temperatura, umidità, codCanti
 	VALUES ('2019-01-04', 67, 26, 17, 1);
 INSERT INTO Scaffali (codice, codMagazzino)
 	VALUES (0, 1);
-INSERT INTO Fasi (codiceFase, nome, parametriProcesso, durata)
-	VALUES (default, 'Maecenas mattis ex id elementum molesti. Donec in facilisis just. Nam vel leo a sem sodales vestibulu. Nulla pharetra erat a justo dignissi  quis volutpat nulla rutru. Proin convallis urna laoreet mollis matti. Vivamus id placerat ligul. Aliquam nunc nis  vestibulum et lorem ', 57, '23:22:48');
-INSERT INTO ControlloParametriFase (parametriEffettivi, codLotto, codFase)
-	VALUES (59, 1, 1);
+INSERT INTO Fasi (codiceFase, nome, durata_fase_ideale, temperatura_latte_ideale, tempo_riposo_ideale, durata)
+	VALUES (default, 'Maecenas mattis ex id elementum molesti. Donec in facilisis just. Nam vel leo a sem sodales vestibulu. Nulla pharetra erat a justo dignissi  quis volutpat nulla rutru. Proin convallis urna laoreet mollis matti. Vivamus id placerat ligul. Aliquam nunc nis  vestibulum et lorem ', 35, 22, 96, '23:22:48');
+INSERT INTO ControlloParametriFase (durata_fase_effettiva, temperatura_latte_effettiva, tempo_riposo_effettiva, codLotto, codFase)
+	VALUES (36, 29, 49, 1, 1);
 INSERT INTO Ricetta (codiceRicetta, collocazioneGeografica, ricetta, durataStagionatura)
 	VALUES (default, 'Veneto', 'tempo  ligula nec ultricies finibu  ipsum risus eleifend arc  ac iaculis orci arcu vitae era. Nam tristique sem se  eu cursus eros iaculis faucibu. Cras nulla ant  rhoncus a nisl qui  placerat ullamcorper lectu. In aliquet est eli  gravida sollicitudin velit ', '20:33:55');
 INSERT INTO divisain (codRicetta, codFase)
