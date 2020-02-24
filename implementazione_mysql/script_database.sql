@@ -425,7 +425,9 @@ CREATE TABLE  Fasi
 (
 	codiceFase	INTEGER UNSIGNED NOT NULL UNIQUE AUTO_INCREMENT,
 	nome	VARCHAR(30),
-	parametriProcesso 	VARCHAR(200),
+	durata_fase_ideale INT UNSIGNED,
+    temperatura_latte_ideale INT UNSIGNED,
+    tempo_riposo_ideale INT UNSIGNED,
 	durata	TIME NOT NULL,
 	primary key(codiceFase)	 
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -433,10 +435,12 @@ CREATE TABLE  Fasi
 DROP TABLE IF EXISTS  ControlloParametriFase ;
 CREATE TABLE  ControlloParametriFase 
 (
-	parametriEffettivi	VARCHAR(200),
+	durata_fase_effettiva INT UNSIGNED,
+    temperatura_latte_effettiva INT UNSIGNED,
+    tempo_riposo_effettiva INT UNSIGNED,
 	codLotto	SMALLINT UNSIGNED NOT NULL,
 	codFase		INTEGER UNSIGNED NOT NULL,
-	primary key (parametriEffettivi, codLotto, codFase),
+	primary key (durata_fase_effettiva, temperatura_latte_effettiva, tempo_riposo_effettiva, codLotto, codFase),
 	foreign key (codFase) references Fasi(codiceFase),
 	foreign key (codLotto) references Lotto(codiceLotto)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -468,7 +472,6 @@ CREATE TABLE  Formaggio
 	nomeAgriturismo	VARCHAR(30) NOT NULL,
 	deperibilita	INT, -- da intendere come giorni prima della deperibilità
 	codRicetta	INTEGER NOT NULL,
-	codLatte	INTEGER NOT NULL,
 	primary key (nome, nomeAgriturismo),
 	foreign key (nomeAgriturismo) references Agriturismo(nome)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
