@@ -1171,16 +1171,16 @@ che munge 				&
 					\end{itemize}\\ 
 
 \hline
-composizione formaggio 				&   
-					& \begin{itemize}
-						\setlength{\itemindent}{-1em}
-						\vspace{-25pt}
-						\setlength\itemsep{-0.25em}
-						\item (1,1) con Formaggio: ogni tipo di formaggio è prodotto sempre con lo stesso tipo di latte
-						\item (1,N) con Latte: un tipo di latte può essere sfruttato per la produzione di più tipi di formaggio
-					\end{itemize}\\ 
-
-\hline
+%composizione formaggio 				&   
+%					& \begin{itemize}
+%						\setlength{\itemindent}{-1em}
+%						\vspace{-25pt}
+%						\setlength\itemsep{-0.25em}
+%						\item (1,1) con Formaggio: ogni tipo di formaggio è prodotto sempre con lo stesso tipo di latte
+%						\item (1,N) con Latte: un tipo di latte può essere sfruttato per la produzione di più tipi di formaggio
+%					\end{itemize}\\ 
+%
+%\hline
 con 				&   
 					& \begin{itemize}
 						\setlength{\itemindent}{-1em}
@@ -2623,14 +2623,14 @@ che munge 				& \begin{center}
 					&  Combinazione tra tutte le mungitrici e tutti i tipi di latte $2000\times 400= 800000$ \\ 
 
 \hline
-composizione formaggio 				& \begin{center}
-\vspace{-25pt}R
-\end{center}
-					& \begin{center}
-					\vspace{-25pt}400\end{center}
-					&  Cardinalità (1,1) con Formaggio \\ 
-
-\hline
+%composizione formaggio 				& \begin{center}
+%\vspace{-25pt}R
+%\end{center}
+%					& \begin{center}
+%					\vspace{-25pt}400\end{center}
+%					&  Cardinalità (1,1) con Formaggio \\ 
+%
+%\hline
 con 				& \begin{center}
 \vspace{-25pt}R
 \end{center}
@@ -5303,7 +5303,7 @@ Aggiornamento della relazione per il ricollocamento dei 200 animali tra i 5 loca
 \item Fasi(\underline{\smash{codiceFase}}, nome, parametriProcesso, durata)
 \item divisain(\underline{\smash{codRicetta}}, \underline{\smash{codFase}})
 \item Ricetta(\underline{\smash{codiceRicetta}}, collocazioneGeografica, ricetta, durataStagionatura)
-\item Formaggio(\underline{\smash{nome}}, \underline{\smash{nomeAgriturismo}}, deperibilita,  codRicetta,  codLatte)
+\item Formaggio(\underline{\smash{nome}}, \underline{\smash{nomeAgriturismo}}, deperibilita,  codRicetta)
 \item Indicisalute(\underline{\smash{codAnimale}}, \underline{\smash{dataRilevazione}}, tipologiaRespirazione, lucentezzaPelo, vigilanza, idratazione, deambulazione)
 \item Visita(\underline{\smash{codiceVisita}}, esito, descrizione, dataEffettiva, dataProgrammata,  codAnimale,  codVeterinario)
 \item Esame(\underline{\smash{codiceEsame}},  descrizione, data, macchinario, nome,  codAnimale,  codVeterinario)
@@ -5387,7 +5387,7 @@ Aggiornamento della relazione per il ricollocamento dei 200 animali tra i 5 loca
    \item Esiste un vincolo di integrità referenziale tra codFase in divisain e codiceFase in Fasi
    \item Esiste un vincolo di integrità referenziale tra nomeAgriturismo in Formaggio e nome in Agriturismo
    \item Esiste un vincolo di integrità referenziale tra codRicetta in Formaggio e codiceRicetta in Ricetta
-   \item Esiste un vincolo di integrità referenziale tra codLatte in Formaggio e codiceLatte in Latte
+   %\item Esiste un vincolo di integrità referenziale tra codLatte in Formaggio e codiceLatte in Latte
    \item Esiste un vincolo di integrità referenziale tra codAnimale in Indicisalute e codice in Animale
    \item Esiste un vincolo di integrità referenziale tra codAnimale in Visita con codice in Animale
    \item Esiste un vincolo di integrità referenziale tra codVeterinario in Visita e codiceVeterinario in Veterinario
@@ -5920,10 +5920,10 @@ Poichè la parte sinistra è superchiave, Ricetta è in BCNF
 
 \item[] \textbf{Tabella Formaggio:}
 
-Formaggio(\underline{\smash{nome}}, \underline{\smash{nomeAgriturismo}}, deperibilita,  codRicetta,  codLatte)
+Formaggio(\underline{\smash{nome}}, \underline{\smash{nomeAgriturismo}}, deperibilita,  codRicetta)
 \begin{itemize}
 \vspace{-5pt}
-\item nome, nomeAgriturismo $\Rightarrow$ deperibilità, codRicetta, codLatte
+\item nome, nomeAgriturismo $\Rightarrow$ deperibilità, codRicetta
 \vspace{-5pt}
 \end{itemize}
 Poichè la parte sinistra è superchiave, Formaggio è in BCNF

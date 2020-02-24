@@ -425,7 +425,7 @@ CREATE TABLE  Fasi
 (
 	codiceFase	INTEGER UNSIGNED NOT NULL UNIQUE AUTO_INCREMENT,
 	nome	VARCHAR(30),
-	parametriProcesso 	VARCHAR(200),
+	parametriProcesso 	INT UNSIGNED,
 	durata	TIME NOT NULL,
 	primary key(codiceFase)	 
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -433,7 +433,7 @@ CREATE TABLE  Fasi
 DROP TABLE IF EXISTS  ControlloParametriFase ;
 CREATE TABLE  ControlloParametriFase 
 (
-	parametriEffettivi	VARCHAR(200) UNIQUE,
+	parametriEffettivi	INT UNSIGNED,
 	codLotto	SMALLINT UNSIGNED NOT NULL,
 	codFase		INTEGER UNSIGNED NOT NULL,
 	primary key (parametriEffettivi, codLotto, codFase),
@@ -454,8 +454,8 @@ CREATE TABLE  Ricetta
 DROP TABLE IF EXISTS  divisain ;
 CREATE TABLE  divisain 
 (
-	codRicetta	INTEGER UNSIGNED NOT NULL UNIQUE,
-	codFase	INTEGER UNSIGNED NOT NULL UNIQUE,
+	codRicetta	INTEGER UNSIGNED NOT NULL ,
+	codFase	INTEGER UNSIGNED NOT NULL ,
 	primary key (codRicetta, codFase),
 	foreign key (codRicetta) references Ricetta(codiceRicetta),
 	foreign key (codFase) references Fasi(codiceFase)
@@ -468,7 +468,6 @@ CREATE TABLE  Formaggio
 	nomeAgriturismo	VARCHAR(30) NOT NULL,
 	deperibilita	INT, -- da intendere come giorni prima della deperibilità
 	codRicetta	INTEGER NOT NULL,
-	codLatte	INTEGER NOT NULL,
 	primary key (nome, nomeAgriturismo),
 	foreign key (nomeAgriturismo) references Agriturismo(nome)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -477,7 +476,7 @@ DROP TABLE IF EXISTS  Indicisalute ;
 CREATE TABLE  Indicisalute 
 (
 	codAnimale	SMALLINT UNSIGNED NOT NULL,
-	dataRilevazione	DATE NOT NULL UNIQUE,
+	dataRilevazione	DATE NOT NULL,
 	tipologiaRespirazione	SMALLINT UNSIGNED,
 	lucentezzaPelo	SMALLINT UNSIGNED,
 	vigilanza	SMALLINT UNSIGNED,
