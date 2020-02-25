@@ -52,11 +52,11 @@ GROUP BY gradimentoGenerale
 UNION */
 
 SELECT GROUP_CONCAT(CONCAT("SELECT '", column_name, "' AS Prior, 'reso' AS reso, 'non reso' AS non_reso UNION
-SELECT ROUND(", column_name, ", 2),
+SELECT ROUND(", column_name, ", 1),
 		CONCAT(ROUND(SUM(VPV.reso) * 100 / (SELECT COUNT(*) FROM Valori_prodotti_venduti VPV WHERE VPV.reso = 1), 2), '%') AS reso, 
 		CONCAT(ROUND(SUM(1 - VPV.reso) * 100 / (SELECT COUNT(*) FROM Valori_prodotti_venduti VPV WHERE VPV.reso = 0), 2), '%') AS Non_reso
         FROM Valori_prodotti_venduti VPV
-		GROUP BY ROUND(", column_name, ", 2)") SEPARATOR " UNION ") 
+		GROUP BY ROUND(", column_name, ", 1)") SEPARATOR " UNION ") 
 FROM Information_schema.columns 
 WHERE table_name = 'Valori_prodotti_venduti' 
 	AND column_name <> 'codOrdine' 
