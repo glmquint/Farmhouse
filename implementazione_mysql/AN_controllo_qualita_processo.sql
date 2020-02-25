@@ -1,11 +1,12 @@
-
+-- Ranking dei lotti che hanno saputo meglio rispettare le procedure di processo e la purezza degli ingredienti utilizzati
 SET SESSION group_concat_max_len = 1000000;
-
 CREATE OR REPLACE VIEW Ranking AS
 WITH DevianzaFase AS (
 SELECT CPF.codLotto, 
 		F.codiceFase, 
-        2*ABS(CAST(CPF.parametriEffettivi AS SIGNED) - CAST(F.parametriProcesso AS SIGNED))/(CPF.parametriEffettivi + F.parametriProcesso) AS DifferenzaRelativa -- TODO:da ripetere per ogni parametro da controllare!!
+        2*ABS(CAST(CPF.durata_fase_effettiva AS SIGNED) - CAST(F.durata_fase_ideale AS SIGNED))/(CPF.durata_fase_effettiva + F.durata_fase_ideale) AS DifferenzaDurataRelativa,
+		2*ABS(CAST(CPF.temperatura_latte_effettiva AS SIGNED) - CAST(F.temperatura_latte_ideale AS SIGNED))/(CPF.temperatura_latte_effettiva + F.temperatura_latte_ideale) AS DifferenzaTemperaturaLatteRelativa ,
+        2*ABS(CAST(CPF.tempo_riposo_effettiva AS SIGNED) - CAST(F.tempo_riposo_ideale AS SIGNED))/(CPF.tempo_riposo_effettiva + F.tempo_riposo_ideale) AS DifferenzaTempoRiposoRelativa
 FROM ControlloParametriFase CPF INNER JOIN Fasi F ON CPF.codFase = F.codiceFase),
 DevianzaParametriCantine AS (
 SELECT SC.codLotto, P.codCantina, STD(P.temperatura) AS temperatura, STD(P.umidità) AS umidità

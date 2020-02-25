@@ -63,7 +63,7 @@ INSERT INTO prodottocon (codLatte, codLotto)
 INSERT INTO prodottocon (codLatte, codLotto)
 	VALUES (10, 12);
 
-INSERT INTO Fasi (codiceFase, nome, parametriProcesso, durata)
+INSERT INTO Fasi (codiceFase, nome, dacambiare, durata)
 	VALUES (50, 'Inizio', 57, '23:22:48');
 INSERT INTO Fasi (codiceFase, nome, parametriProcesso, durata)
 	VALUES (51, 'Svolgimento', 58, '23:22:48');
