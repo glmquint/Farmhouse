@@ -63,36 +63,36 @@ INSERT INTO prodottocon (codLatte, codLotto)
 INSERT INTO prodottocon (codLatte, codLotto)
 	VALUES (10, 12);
 
-INSERT INTO Fasi (codiceFase, nome, dacambiare, durata)
-	VALUES (50, 'Inizio', 57, '23:22:48');
-INSERT INTO Fasi (codiceFase, nome, parametriProcesso, durata)
-	VALUES (51, 'Svolgimento', 58, '23:22:48');
-INSERT INTO Fasi (codiceFase, nome, parametriProcesso, durata)
-	VALUES (52, 'Fine', 56, '23:22:48');
+INSERT INTO Fasi (codiceFase, nome, durata_fase_ideale, temperatura_latte_ideale, tempo_riposo_ideale, durata)
+	VALUES (50, 'Inizio', 57, 65, 32, '23:22:48');
+INSERT INTO Fasi (codiceFase, nome, durata_fase_ideale, temperatura_latte_ideale, tempo_riposo_ideale, durata)
+	VALUES (51, 'Svolgimento', 58, 67, 31, '23:22:48');
+INSERT INTO Fasi (codiceFase, nome, durata_fase_ideale, temperatura_latte_ideale, tempo_riposo_ideale, durata)
+	VALUES (52, 'Fine', 56, 64, 33, '23:22:48');
 
-INSERT INTO ControlloParametriFase (parametriEffettivi, codLotto, codFase)
-	VALUES (58, 10, 50);
-INSERT INTO ControlloParametriFase (parametriEffettivi, codLotto, codFase)
-	VALUES (57, 10, 51);
-INSERT INTO ControlloParametriFase (parametriEffettivi, codLotto, codFase)
-	VALUES (57, 10, 52);
+INSERT INTO ControlloParametriFase (durata_fase_effettiva, temperatura_latte_effettiva, tempo_riposo_effettiva, codLotto, codFase)
+	VALUES (58, 66, 32, 10, 50);
+INSERT INTO ControlloParametriFase (durata_fase_effettiva, temperatura_latte_effettiva, tempo_riposo_effettiva, codLotto, codFase)
+	VALUES (57, 67, 30, 10, 51);
+INSERT INTO ControlloParametriFase (durata_fase_effettiva, temperatura_latte_effettiva, tempo_riposo_effettiva, codLotto, codFase)
+	VALUES (57, 62, 34, 10, 52);
 
-INSERT INTO ControlloParametriFase (parametriEffettivi, codLotto, codFase)
-	VALUES (18, 11, 50);
-INSERT INTO ControlloParametriFase (parametriEffettivi, codLotto, codFase)
-	VALUES (17, 11, 51);
-INSERT INTO ControlloParametriFase (parametriEffettivi, codLotto, codFase)
-	VALUES (17, 11, 52);
+INSERT INTO ControlloParametriFase (durata_fase_effettiva, temperatura_latte_effettiva, tempo_riposo_effettiva, codLotto, codFase)
+	VALUES (18, 23, 89, 11, 50);
+INSERT INTO ControlloParametriFase (durata_fase_effettiva, temperatura_latte_effettiva, tempo_riposo_effettiva, codLotto, codFase)
+	VALUES (17, 43, 82, 11, 51);
+INSERT INTO ControlloParametriFase (durata_fase_effettiva, temperatura_latte_effettiva, tempo_riposo_effettiva, codLotto, codFase)
+	VALUES (17, 44, 39, 11, 52);
 
-INSERT INTO Fasi (codiceFase, nome, parametriProcesso, durata)
-	VALUES (60, 'prima meta', 37, '23:22:48');
-INSERT INTO Fasi (codiceFase, nome, parametriProcesso, durata)
-	VALUES (61, 'seconda meta', 38, '23:22:48');
+INSERT INTO Fasi (codiceFase, nome, durata_fase_ideale, temperatura_latte_ideale, tempo_riposo_ideale, durata)
+	VALUES (60, 'prima meta', 37, 65, 29, '23:22:48');
+INSERT INTO Fasi (codiceFase, nome, durata_fase_ideale, temperatura_latte_ideale, tempo_riposo_ideale, durata)
+	VALUES (61, 'seconda meta', 38, 37, 11, '23:22:48');
 
-INSERT INTO ControlloParametriFase (parametriEffettivi, codLotto, codFase)
-	VALUES (18, 12, 60);
-INSERT INTO ControlloParametriFase (parametriEffettivi, codLotto, codFase)
-	VALUES (17, 12, 61);
+INSERT INTO ControlloParametriFase (durata_fase_effettiva, temperatura_latte_effettiva, tempo_riposo_effettiva, codLotto, codFase)
+	VALUES (18, 60, 40, 12, 60);
+INSERT INTO ControlloParametriFase (durata_fase_effettiva, temperatura_latte_effettiva, tempo_riposo_effettiva, codLotto, codFase)
+	VALUES (17, 40, 20, 12, 61);
 
 
 INSERT INTO Ricetta (codiceRicetta, collocazioneGeografica, ricetta, durataStagionatura)
