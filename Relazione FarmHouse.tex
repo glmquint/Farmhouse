@@ -6442,8 +6442,14 @@ Nota sugli attributi:
 Inoltre tutte le occorrenze di data sono state opportunamente ridenominate, affinchè non ci siano conflitti con la keyword omonima.
 \item Tutti gli attributi che riguardano una posizione geografica sono stati trasformati in due attributi latitudine e longitudine di tipo float.
 \end{itemize}
-\subsection{Triggers}
-\subsection{Data Analytics}
 
+\subsection{Data Analytics}
+Sono state sviluppate quattro funzionalità di data analytic capaci di aggregare ed evidenziare dati salienti per il corretto ed efficiente uso del database per la gestione delle imprese legate alla catena di agriturismi \textit{FarmHouse 4.0}\\
+\begin{description}
+\item[AN\_salute\_gruppi: ]Sfrutta le informazioni dei GPS per selezionare i capi di bestiame in gruppi di vicinanza; così facendo ricava la salute media di ogni gruppo tramite gli indici di salute associati e permette di verificare fenomeni di emarginamento o vicinanza tra animali di costituzione differente. Con sufficienti dati è possibile far emergere pattern ricorrenti, sopraturro in fase di pascolo, anche utili per prevenire il diffondersi di eventuali patologie.
+\item[AN\_tracciabilità\_filiera: ]Analizza i singoli prodotti venduti sullo store online ed affianca ad ognuno di essi un resoconto dei parametri di processo, la recensione media daparte dei clienti, oltre che l'informazione se il il prodotto è stato reso oppure no. Da ciò, sfrutta una tabella pivot per evidenziare quali caratteristiche del processo produttivo hanno un maggiore impatto sulla qualità percepita del prodotto.
+\item[AN\_controllo\_vendite: ]Classifica le tipologie di formaggio venduti sullo store in funzione delle vendite e degli incassi generati, tenendo conto anche degli eventuali resi. Inoltre affianca ad ognuno di essi la valutazione media da parte dei clienti che hanno recensito il prodotto, così da evidenziare i formaggi di tendenza, o al contrario, quelli ben apprezzati seppur poco conosciuti: questo permette ,tra l'altro, di proporre con maggior fiducia i prodotti che hanno generato minor guadagno.
+\item[AN\_controllo\_qualità\_del\_processo: ]Classifica i singoli lotti di produzione in base all'attinenza con i parametri ideali di produzione e l'omogeneità dei componenti utilizzati, dalla composizione chimico-fisica del latte agli sbalzi di salute degli animali, in funzione anche dell'apporto alimentare dei pasti somministrati.
+\end{description}
 \end{document}
 
