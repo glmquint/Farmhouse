@@ -118,6 +118,9 @@ Agrituri\-smo 			&  Struttura attrezzata per l'allevamento degli animali e l'acc
 						\vspace{-25pt}
 						\setlength\itemsep{-0.25em}
 						\item nome
+						\item indirizzo
+						\item indirizzo web
+						\item contatto
 					\end{itemize}
 					&  Cliente, Stanza, Stalla, Formaggio  \\
 
@@ -181,6 +184,7 @@ Area Pa\-sco\-lo 		&  Spazio dell'agriturismo destinato al pascolo degli animali
 						\vspace{-25pt}
 						\setlength\itemsep{-0.25em}
 						\item codiceArea
+						\item estensione
 					\end{itemize}
 					&  Attività Pascolo, Recinzione Divisoria e Zona Pascolo \\
 
@@ -217,6 +221,18 @@ Composti Volatili 	&  Sensore della concentrazione di azoto e metano nel locale
 						\setlength\itemsep{-0.25em}
 						\item concentrazioneMetano
 						\item concentrazioneAzoto
+					\end{itemize}
+					&  Locale \\
+
+\hline
+Condizio\-na\-to\-re aria 		&  Dispositivo di condizionamento dell'aria all'interno dei locali
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item codice
+						\item consumo energetico
+						
 					\end{itemize}
 					&  Locale \\
 
@@ -262,6 +278,18 @@ GPS 					&  Dispositivo di localizzazione per ogni animale
 						
 					\end{itemize}
 					&  Animale \\
+
+\hline
+Illuminazio\-ne 		&  Dispositivo di illuminazione artificiale dei locali
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item codice
+						\item consumo energetico
+						
+					\end{itemize}
+					&  Locale \\
 
 \hline
 Insuccesso				&  Riproduzioni non andate a buon fine 
@@ -551,6 +579,26 @@ divisione allestimanti 				&
 						\setlength\itemsep{-0.25em}
 						\item (1,N) con Locale: Ogni locale è dotato di uno o più allestimenti
 						\item (1,1) con Allestimento: un allestimento è associato ad un solo locale
+					\end{itemize}\\ 
+
+\hline
+divisione\ \ condizionatori 				&   
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item (1,N) con Locale: Ogni locale è dotato di uno o più condizionatori
+						\item (1,1) con Condizionatore aria: un condizionatore è associato ad un solo locale
+					\end{itemize}\\ 
+
+\hline
+divisione\ \ \ \ illuminazione 				&   
+					& \begin{itemize}
+						\setlength{\itemindent}{-1em}
+						\vspace{-25pt}
+						\setlength\itemsep{-0.25em}
+						\item (1,N) con Locale: Ogni locale è dotato di uno o più dispositivi di illuminazione
+						\item (1,1) con Illuminazione: un dispositivo di illuminazione è associato ad un solo locale
 					\end{itemize}\\ 
 
 \hline
@@ -2009,6 +2057,14 @@ Attività pascolo 				& \begin{center}
 					&  Mediamente, ogni agriturismo dispone delle proprie 3 aree di pascolo e altre 6 degli agriturismi limitrofi $500\times 9 = 4500$\\ 
 
 \hline
+Condizionatore aria 				& \begin{center}
+\vspace{-25pt}E
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}500\end{center}
+					&  Ogni locale è dotato di un condizionatore dell'aria \\ 
+
+\hline
 Composti volatili 				& \begin{center}
 \vspace{-25pt}E
 \end{center}
@@ -2039,6 +2095,14 @@ GPS 				& \begin{center}
 					& \begin{center}
 					\vspace{-25pt}20000\end{center}
 					&  Ogni animale è dotato di un dispositivo GPS \\ 
+
+\hline
+Illuminazione 				& \begin{center}
+\vspace{-25pt}E
+\end{center}
+					& \begin{center}
+					\vspace{-25pt}500\end{center}
+					&  Ogni locale è dotato di un dispositivo di illuminazione \\ 
 
 \hline
 Locale 				& \begin{center}
