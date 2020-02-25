@@ -70,6 +70,10 @@ INSERT INTO Ambientali (codiceAmbientale, temperatura, umidità, orarioRilevazio
 	VALUES (default, 1, 48, '2019-09-27 21:35:52', 1);
 INSERT INTO CompostiVolatili (codiceVolatili, concentrazioneMetano, concentrazioneAzoto, orarioRilevazione, codLocale)
 	VALUES (default, 1, 18, '2019-05-23 22:55:56', 1);
+INSERT INTO Illuminazione (codice, consumoEnergetico,codLocale)
+	VALUES (default, 43, 1);
+INSERT INTO CondizionatoreAria (codice, consumoEnergetico,codLocale)
+	VALUES (default, 43, 1);
 INSERT INTO PuliziaLocale (codLocale, data_orarioRilevazione, stato, personale, concentrazioneMetano, concentrazioneAzoto, livelloSporcizia)
 	VALUES (1, '2019-10-22 20:42:53', 'effettuato', 'Donec vulputate risus du  in faucibus libero tempor i. Proin quis erat condimentu  aliquet dolor eleifen  interdum dolo. Vivamus condimentum lorem nec libero convalli  sed auctor quam malesuad. Maecenas eget nibh sit amet ante efficitur aliqua. Mauris eu cursus sapie. Nulla sit ', 78, 81, 90);
 INSERT INTO Foraggio (fibre, proteine, glucidi, cereali, frutta, piante, forma, kcalkg)

@@ -169,6 +169,26 @@ CREATE TABLE CompostiVolatili
 	foreign key (codLocale) references Locale(codiceLocale)
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+DROP TABLE IF EXISTS Illuminazione;
+CREATE TABLE Illuminazione
+(
+	codice INT UNSIGNED NOT NULL unique auto_increment,
+	consumoEnergetico	SMALLINT UNSIGNED,
+	codLocale	SMALLINT UNSIGNED NOT NULL,
+	primary key (codice),
+	foreign key (codLocale) references Locale(codiceLocale)
+)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+DROP TABLE IF EXISTS CondizionatoreAria;
+CREATE TABLE CondizionatoreAria
+(
+	codice INT UNSIGNED NOT NULL unique auto_increment,
+	consumoEnergetico	SMALLINT UNSIGNED,
+	codLocale	SMALLINT UNSIGNED NOT NULL,
+	primary key (codice),
+	foreign key (codLocale) references Locale(codiceLocale)
+)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 DROP TABLE IF EXISTS PuliziaLocale;
 CREATE TABLE PuliziaLocale
 (
