@@ -5422,6 +5422,8 @@ Aggiornamento della relazione per il ricollocamento dei 200 animali tra i 5 loca
    \item Esiste un vincolo di integrità referenziale tra l'attributo codiceLocale in locale e codLocale in Ambientali
    \item Esiste un vincolo di integrità referenziale tra l'attributo codiceLocale in locale e codLocale in Composti Volatili
    \item Esiste un vincolo di integrità referenziale tra l'attributo codiceLocale in locale e codLocale in Visivi
+   \item Esiste un vincolo di integrità referenziale tra l'attributo codiceLocale in locale e codLocale in Illuminazione
+   \item Esiste un vincolo di integrità referenziale tra l'attributo codiceLocale in locale e codLocale in CondizionatoreAria
    \item Esiste un vincolo di integrità referenziale tra l'attributo codiceLocale in locale e codLocale in PuliziaLocale 
    \item Esiste un vincolo di integrità referenziale tra gli attributi fibre, proteine, glucidi in PastoPerLocale con fibre, proteine, glucidi in Foraggio
    \item Esiste un vincolo di integrità referenziale tra codLocale in PastoPerLocale e codiceLocale in Locale
@@ -5667,6 +5669,31 @@ CompostiVolatili(\underline{\smash{codiceVolatili}}, concentrazioneMetano, conce
 Poichè la parte sinistra è superchiave, CompostiVolatili è in BCNF
 \vspace{10pt}
 
+
+
+\item[] \textbf{Tabella Illuminazione:}
+
+CompostiVolatili(\underline{\smash{codice}}, consumoEnergetico, codLocale)
+\begin{itemize}
+\vspace{-5pt}
+\item codice $\Rightarrow$ consumoEnergetico, codLocale
+\vspace{-5pt}
+\end{itemize}
+Poichè la parte sinistra è superchiave, Illuminazione è in BCNF
+\vspace{10pt}
+
+
+
+\item[] \textbf{Tabella CondizionatoreAria:}
+
+CompostiVolatili(\underline{\smash{codice}}, consumoEnergetico, codLocale)
+\begin{itemize}
+\vspace{-5pt}
+\item codice $\Rightarrow$ consumoEnergetico, codLocale
+\vspace{-5pt}
+\end{itemize}
+Poichè la parte sinistra è superchiave, CondizionatoreAria è in BCNF
+\vspace{10pt}
 
 
 \item[] \textbf{Tabella PuliziaLocale:}
