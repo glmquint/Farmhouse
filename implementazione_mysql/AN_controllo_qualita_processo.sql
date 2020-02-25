@@ -27,7 +27,9 @@ SaluteMediaLocale AS (
 									ON SM.codAnimale = AnimaliProduttori.codAnimale
 )
 SELECT Lo.codiceLotto, 
-	ROUND(DF.differenzaRelativa /AVG(DF.codiceFase),3) AS Discostamento_totale_medio_parametri_di_processo, 
+	ROUND(SUM(DF.DifferenzaDurataRelativa),3) AS Discostamento_medio_totale_durata_fase, 
+	ROUND(SUM(DF.DifferenzaTemperaturaLatteRelativa),3) AS Discostamento_medio_totaleo_temperatura_latte, 
+	ROUND(SUM(DF.DifferenzaTempoRiposoRelativa) ,3) AS Discostamento_medio_totale_tempo_riposo, 
     ROUND(STD(La.quantitàSostanzeDisciolte) / AVG(La.codiceLatte),3) AS Deviazione_standard_relativa_sostanza_latte, 
     ROUND(AVG(DPC.temperatura),3) AS Deviazione_standard_media_temperatura, 
     ROUND(AVG(DPC.umidità),3) AS Deviazione_standard_media_umidità, 
@@ -36,13 +38,13 @@ SELECT Lo.codiceLotto,
     ROUND(1 - AVG(SML.vigilanza) / 100,3) AS Discostamento_medio_da_vigilanza_ottimale, 
     ROUND(1 - AVG(SML.idratazione) / 100,3) AS Discostamento_medio_da_idratazione_ottimale, 
     ROUND(1 - AVG(SML.deambulazione) / 100,3) AS Discostamento_medio_da_deambulazione_ottimale,
-    IFNULL((DF.differenzaRelativa /AVG(DF.codiceFase)), 100) + IFNULL(STD(La.quantitàSostanzeDisciolte) / AVG(La.codiceLatte), 100) + IFNULL(AVG(DPC.temperatura), 100) + IFNULL(AVG(DPC.umidità),100) + IFNULL(1 - AVG(SML.tipologiaRespirazione) / 100, 100) + IFNULL(1 - AVG(SML.lucentezzaPelo) / 100, 100) + IFNULL(1 - AVG(SML.vigilanza) / 100, 100) + IFNULL(1 - AVG(SML.idratazione) / 100, 100) + IFNULL(1 - AVG(SML.deambulazione) / 100, 100) AS Generale
+    IFNULL(ROUND(SUM(DF.DifferenzaDurataRelativa),3), 100) + IFNULL(ROUND(SUM(DF.DifferenzaTemperaturaLatteRelativa),3), 100) + IFNULL(ROUND(SUM(DF.DifferenzaTempoRiposoRelativa) ,3), 100) + IFNULL(STD(La.quantitàSostanzeDisciolte) / AVG(La.codiceLatte), 100) + IFNULL(AVG(DPC.temperatura), 100) + IFNULL(AVG(DPC.umidità),100) + IFNULL(1 - AVG(SML.tipologiaRespirazione) / 100, 100) + IFNULL(1 - AVG(SML.lucentezzaPelo) / 100, 100) + IFNULL(1 - AVG(SML.vigilanza) / 100, 100) + IFNULL(1 - AVG(SML.idratazione) / 100, 100) + IFNULL(1 - AVG(SML.deambulazione) / 100, 100) AS Generale
 FROM Lotto Lo INNER JOIN DevianzaFase DF ON Lo.codiceLotto = DF.codLotto
 	LEFT OUTER JOIN Latte La ON La.codiceLatte IN (SELECT PC.codLatte FROM prodottocon PC WHERE PC.codLotto = Lo.codiceLotto)
     LEFT OUTER JOIN DevianzaParametriCantine DPC ON Lo.codiceLotto = DPC.codLotto
     LEFT OUTER JOIN SaluteMediaLocale SML ON Lo.codiceLotto = SML.codLotto
 GROUP BY Lo.codiceLotto
-ORDER BY IFNULL((DF.differenzaRelativa /AVG(DF.codiceFase)), 100) + IFNULL(STD(La.quantitàSostanzeDisciolte) / AVG(La.codiceLatte), 100) + IFNULL(AVG(DPC.temperatura), 100) + IFNULL(AVG(DPC.umidità),100) + IFNULL(1 - AVG(SML.tipologiaRespirazione) / 100, 100) + IFNULL(1 - AVG(SML.lucentezzaPelo) / 100, 100) + IFNULL(1 - AVG(SML.vigilanza) / 100, 100) + IFNULL(1 - AVG(SML.idratazione) / 100, 100) + IFNULL(1 - AVG(SML.deambulazione) / 100, 100);
+ORDER BY IFNULL(ROUND(SUM(DF.DifferenzaDurataRelativa),3), 100) + IFNULL(ROUND(SUM(DF.DifferenzaTemperaturaLatteRelativa),3), 100) + IFNULL(ROUND(SUM(DF.DifferenzaTempoRiposoRelativa) ,3), 100) + IFNULL(STD(La.quantitàSostanzeDisciolte) / AVG(La.codiceLatte), 100) + IFNULL(AVG(DPC.temperatura), 100) + IFNULL(AVG(DPC.umidità),100) + IFNULL(1 - AVG(SML.tipologiaRespirazione) / 100, 100) + IFNULL(1 - AVG(SML.lucentezzaPelo) / 100, 100) + IFNULL(1 - AVG(SML.vigilanza) / 100, 100) + IFNULL(1 - AVG(SML.idratazione) / 100, 100) + IFNULL(1 - AVG(SML.deambulazione) / 100, 100);
 
 
 SELECT * FROM Ranking;

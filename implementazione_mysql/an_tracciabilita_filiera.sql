@@ -1,3 +1,5 @@
+-- Analisi dei singoli prodotti venduti alla ricerca di pattern per prevedere le caratteristiche fonte di reso
+
 SET SESSION group_concat_max_len = 1000000;
 
 CREATE OR REPLACE VIEW Valori_prodotti_venduti AS

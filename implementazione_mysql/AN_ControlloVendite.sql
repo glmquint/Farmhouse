@@ -1,4 +1,4 @@
-
+-- Ranking dei singoli formaggi venduti sullo store online sulla base delle vendite e degli incassi generati
 SELECT RANK() OVER (ORDER BY SUM(IF(CO.reso, 0, CO.quantità*FP.prezzo)) DESC) AS Ranking,F.nome,
 		F.nomeAgriturismo,
 		CONCAT(MIN(FP.prezzo), '-', MAX(FP.prezzo)) AS Fasciaprezzo,

@@ -1,3 +1,5 @@
+-- Analisi della salute generale dei gruppi di animali che si trovano in vicinanza
+
 USE FarmHouse;
 -- COMPORTAMENTO DEGLI ANIMALI
 -- la funzionalità comporta un analisi delle posizioni GPS atta a capire quali sono le zone più frequentate
