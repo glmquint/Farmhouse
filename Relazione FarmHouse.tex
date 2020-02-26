@@ -697,7 +697,7 @@ richiesta intervento 				&
 						\setlength{\itemindent}{-1em}
 						\vspace{-25pt}
 						\setlength\itemsep{-0.25em}
-						\item (1,N) con Locale: alcuni locali possono richiedere più interventi di pulizia
+						\item (0,N) con Locale: alcuni locali possono richiedere più interventi di pulizia
 						\item (1,1) con Pulizia locale: ogni intervento di pulizia si riferisce ad un solo locale dell'agriturismo
 					\end{itemize}\\ 
 
@@ -953,7 +953,7 @@ possiede terapia 				&
 						\setlength{\itemindent}{-1em}
 						\vspace{-25pt}
 						\setlength\itemsep{-0.25em}
-						\item (0,1) con Animale: ogni animale può possedere al massimo una terapia
+						\item (0,N) con Animale: alcuni animali possono possedere più terapie
 						\item (1,1) con Terapia: ogni terapia è associata ad un solo animale
 					\end{itemize}\\ 
 
@@ -1029,7 +1029,9 @@ Controllo Parametri Fase				 	&  Controlla, per ogni lotto, i parametri effettiv
 						\setlength{\itemindent}{-1em}
 						\vspace{-25pt}
 						\setlength\itemsep{-0.25em}
-						\item parametri effettivi
+						\item durataFaseEffettiva
+						\item temperaturaLatteEffettiva
+						\item tempoRiposoEffettivo
 						\item codiceLotto
 						\item codiceFase
 					\end{itemize}
@@ -1044,7 +1046,9 @@ Fasi				 	&  Singola istruzione con informazioni da seguire per la produzione ot
 						\item codiceFase
 						\item nome
 						\item durata
-						\item parametriProcesso
+						\item durataFaseIdeale
+						\item temperaturaLatteIdeale
+						\item tempoRiposoIdeale
 					\end{itemize}
 					&  Ricetta, Lotto  \\ 
 
@@ -1238,7 +1242,7 @@ con 				&
 						\vspace{-25pt}
 						\setlength\itemsep{-0.25em}
 						\item (1,1) con Mungitura: ogni mungitura viene effettuata con una sola mungitrice
-						\item (0,N) con Mungitrice: alcune mungitrici possono essere impiegate per diverse mungiture
+						\item (1,N) con Mungitrice: ogni mungitrice può essere impiegata per diverse mungiture
 					\end{itemize}\\ 
 
 \hline
@@ -1336,7 +1340,7 @@ stoccaggio cantine 				&
 						\setlength{\itemindent}{-1em}
 						\vspace{-25pt}
 						\setlength\itemsep{-0.25em}
-						\item (1,N) con Lotto: ogni lotto è stoccato in più cantine
+						\item (0,N) con Lotto: i lotti che richiedono stagionatura possono stoccare o propri formaggi in più cantine
 						\item (1,N) con Cantine: in ogni cantina possono essere stoccati più lotti
 					\end{itemize}\\ 
 
@@ -1600,7 +1604,7 @@ effettua 				&
 						\setlength{\itemindent}{-1em}
 						\vspace{-25pt}
 						\setlength\itemsep{-0.25em}
-						\item (1,N) con CLiente: ogni cliente può effettuare più pagamenti
+						\item (0,N) con Cliente: alcuni clienti possono effettuare più pagamenti
 						\item (1,1) con Pagamenti: ogni pagamento viene effettuato da un solo cliente
 					\end{itemize}\\ 
 
@@ -1957,7 +1961,7 @@ In questo capitolo vengono prese in esame tutte le informazioni ridondanti inter
 \item \`E stato eliminato \textit{codice neonato} da Riproduzione in quanto ricavabile dal confronto tra \textit{id\_madre} e \textit{id\_padre} con \textit{codice madre} e \textit{codice padre} su coinvolge, tenendo conto della \textit{data} della specifica Riproduzione 
 \item \`E stato eliminato \textit{stato} da Visita in quanto il valore di quest' attributo è ridondante rispetto alla presenza o no del valore NULL sull'attributo \textit{data effettiva}
 \item \`E stato eliminato \textit{interventi di controllo programmati} da Scheda gestazione in quanto ricavabile verificando che la \textit{data programmata} di Visita sia successiva alla \textit{data} della Riproduzione, e che \textit{data effettiva} sia NULL
-\item Si mantiene la ridondanza di \textit{capianza max} di Locale seppur possa essere ricavata dalla specie ospitata e dalle dimensioni dello stesso
+\item Si mantiene la ridondanza di \textit{capienza max} di Locale seppur possa essere ricavata dalla specie ospitata e dalle dimensioni dello stesso
 \item Si mantiene le ridondanza delle \textit{kcal/kg} del Foraggio seppur possa essere ricavata dalle quantità di fibre, proteine e glucidi contenute
 \item Si mantiene il \textit{nome} ed il \textit{cognome} dei Veterinari seppur possano essere ricavati dal \textit{codice fiscale}
 \item Si mantiene il \textit{nome} ed il \textit{cognome} degli Account seppur possano essere ricavati dal \textit{codice fiscale}
@@ -5336,7 +5340,7 @@ Aggiornamento della relazione per il ricollocamento dei 200 animali tra i 5 loca
 %\item coinvolge(\underline{\smash{codiceAnimale}},\underline{\smash{ codRiproduzione}}, codicePadre)
 \item Riproduzione(\underline{\smash{codiceRiproduzione}}, complicanza, orario, data, stato,  codVeterinario, codiceMadre, codicePadre)
 \item SchedaGestazione(\underline{\smash{codiceGestazione}},  codRiproduzione,  codVeterinario)
-\item Agriturismo(\underline{\smash{Nome}})
+\item Agriturismo(\underline{\smash{Nome}}, indirizzo, indirizzoWeb, contatto)
 \item Stalla(\underline{\smash{numProgressivo}},\underline{\smash{ nomeAgriturismo}})
 \item Locale(\underline{\smash{codiceLocale}}, pavimentazione, capienzaMax, temperatura, umidità, orientazioneFinestre, specieOspitata, altezza, lunghezza, larghezza, tollerabilitaAzoto, tollerabilitaSporcizia, tollerabilitaMetano, codiceStalle, nomeAgriturismo)
 \item Visivi(\underline{\smash{codiceVisivo}}, livelloSporcizia,  orarioRilevazione,  codLocale)
@@ -5349,7 +5353,7 @@ Aggiornamento della relazione per il ricollocamento dei 200 animali tra i 5 loca
 \item Pasto(\underline{\smash{fibre}},\underline{\smash{ proteine}},\underline{\smash{ glucidi}}, \underline{\smash{concentrazioneSali}},\underline{\smash{ concentrazioneVitamine}})
 \item Foraggio(\underline{\smash{fibre}}, \underline{\smash{proteine}},\underline{\smash{ glucidi}}, cereali, frutta, piante, forma, kcalkg)
 \item Acqua(\underline{\smash{concentrazioneSali}}, \underline{\smash{concentrazioneVitamine}})
-\item Mangiatoia(\underline{\smash{codice}}, quantitàRestante,  codLocale)
+j\item Mangiatoia(\underline{\smash{codice}}, quantitàRestante,  codLocale)
 \item Abberveratoio(\underline{\smash{codice}}, quantitàRestante,  codLocale)
 \item AttivitàPascolo(\underline{\smash{codiceAttivita}}, fasciaOraria,  codLocale,  codArea)
 \item AreaPascolo(\underline{\smash{codiceArea}})
@@ -5368,8 +5372,8 @@ Aggiornamento della relazione per il ricollocamento dei 200 animali tra i 5 loca
 \item Scaffalature(\underline{\smash{codCantina}}, \underline{\smash{codice}})
 \item Parametri(\underline{\smash{data}}, \underline{\smash{idSensore}}, temperatura, umidità,  codCantina)
 \item Scaffali(\underline{\smash{codice}}, \underline{\smash{codMagazzino}})
-\item ControlloParametriFase(\underline{\smash{parametriEffettivi}}, \underline{\smash{codLotto}}, \underline{\smash{codFase}})
-\item Fasi(\underline{\smash{codiceFase}}, nome, parametriProcesso, durata)
+\item ControlloParametriFase(\underline{\smash{durataFaseIdeale}}, \underline{\smash{temperaturaLatteIdeale}},\underline{\smash{tempoRiposoIdeale}},\underline{\smash{codLotto}}, \underline{\smash{codFase}})
+\item Fasi(\underline{\smash{codiceFase}}, nome, durataFaseEffettiva, temperaturaLatteEffettiva, tempoRiposoEffettivo, durata)
 \item divisain(\underline{\smash{codRicetta}}, \underline{\smash{codFase}})
 \item Ricetta(\underline{\smash{codiceRicetta}}, collocazioneGeografica, ricetta, durataStagionatura)
 \item Formaggio(\underline{\smash{nome}}, \underline{\smash{nomeAgriturismo}}, deperibilita,  codRicetta)
@@ -5529,7 +5533,7 @@ In questo capitolo viene affrontata la normalizzazione delle tabelle ricavate, a
 Animale(\underline{\smash{codice}}, sesso, specie, famiglia, idMadre, idPadre, dataDiNascita, altezza, peso, razza, posizione, orario,  codiceGps,  codLocale)
 \begin{itemize}
 \vspace{-5pt}
-\item codice $\Rightarrow$ sesso, specie, famiglia, idMadre, idPadre, dataDiNascita, altezza, altezza, peso, razza, posizione, orario, codiceGps, codLocale
+\item codice $\Rightarrow$ sesso, specie, famiglia, idMadre, idPadre, dataDiNascita, altezza, peso, razza, posizione, orario, codiceGps, codLocale
 \vspace{-5pt}
 \end{itemize}
 Poichè la parte sinistra è superchiave, Animale è in BCNF
@@ -5592,9 +5596,14 @@ Poichè la parte sinistra è superchiave, SchedaGestazione è in BCNF
 
 \item[] \textbf{Tabella Agriturismo:}
 
-Agriturismo(\underline{\smash{Nome}})
+Agriturismo(\underline{\smash{Nome}}, indirizzo, indirizzoWeb, contatto)
 
-Poichè non esistono dipendenze funzionali, Agriturismo è in BCNF
+\begin{itemize}
+\vspace{-5pt}
+\item Nome $\Rightarrow$ indirizzo, indirizzoWeb, contatto
+\vspace{-5pt}
+\end{itemize}
+Poichè la parte sinistra è superchiave, Agriturismo è in BCNF
 \vspace{10pt}
 
 
@@ -5972,7 +5981,7 @@ Poichè non esistono dipendenze funzionali, Scaffali è in BCNF
 
 \item[] \textbf{Tabella ControlloParametriFase:}
 
-ControlloParametriFase(\underline{\smash{parametriEffettivi}}, \underline{\smash{codLotto}}, \underline{\smash{codFase}})
+ControlloParametriFase(\underline{\smash{durataFaseEffettiva}}, \underline{\smash{temperaturaLatteEffettiva}},\underline{\smash{tempoRiposoEffettivo}},\underline{\smash{codLotto}}, \underline{\smash{codFase}})
 
 Poichè non esistono dipendenze funzionali, ControlloParametriFase è in BCNF
 \vspace{10pt}
@@ -5981,10 +5990,10 @@ Poichè non esistono dipendenze funzionali, ControlloParametriFase è in BCNF
 
 \item[] \textbf{Tabella Fasi:}
 
-Fasi(\underline{\smash{codiceFase}}, nome, parametriProcesso, durata)
+Fasi(\underline{\smash{codiceFase}}, nome, durataFaseIdeale, temperaturaLatteIdeale, tempoRiposoIdeale, durata)
 \begin{itemize}
 \vspace{-5pt}
-\item codiceFase $\Rightarrow$ nome, parametriProcesso, durata
+\item codiceFase $\Rightarrow$ nome, durataFaseIdeale, temperaturaLatteIdeale, tempoRiposoIdeale, durata
 \vspace{-5pt}
 \end{itemize}
 Poichè la parte sinistra è superchiave, Fasi è in BCNF
