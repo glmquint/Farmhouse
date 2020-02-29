@@ -2,19 +2,13 @@
 
 USE FarmHouse;
 -- COMPORTAMENTO DEGLI ANIMALI
--- la funzionalità comporta un' analisi delle posizioni GPS atta a capire quali sono le zone più frequentate
--- dagli animali.(si ordinano le posizioni (rank in un certo range) e si contano gli animali in ogni zona) 
--- Si valuta poi effettivamente lo stato di salute degli animali che hanno pascolato in quelle zone
--- (si estraggono poi gli animali suddetti ed i loro indici di salute e si fa un ranking anche di questi) 
--- e si calcola la probabilità (come numero degli animali che effettivamente ci pascolano più volte in
--- un anno sugli animali totali) con la quale un animale pascolerà in quella zona per capire se effettivamente
--- convenga cercare di convogliare i pascoli in quella zona.
-
-/*
-INSERT INTO Animale VALUES(1,'M','SDC','SDS',NULL,NULL,'1999/12/27',27,27,'ghh',30.2,30.3,NULL,0,0);
-INSERT INTO Locale VALUES(0,NULL,NULL,'N',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
-INSERT INTO Stalla VALUES(1,NULL,NULL,'N',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
-*/
+-- la seguente funzione evidenzia pattern comportamentali degli animali a partire dalla loro posizione.
+-- Prima si ordinano le posizioni per latitudine e longitudine crescente, successivamente si formano
+-- dei gruppi attraverso un cursore che comprendono animali tutti in un certo range di distanza l'uno dall'altro,
+-- si estraggogno gli indici di salute di ogni animale in ogni gruppo 
+-- si calcolano degli indici di salute medi per ogni gruppo, così da osservare se ricorrono condizioni 
+-- di buona o cattiva salute dopo la frequentazione di una determinata zona oppure se eventualmente può 
+-- convenire spostare delle recinzioni nella suddetta zone previo evitare la diffusione delle malattie
 
 -- creo le tabelle di appoggio
 DROP TABLE IF EXISTS Indici_per_gruppo;
@@ -35,7 +29,6 @@ BEGIN
 	DECLARE previous_value_long	FLOAT DEFAULT 0.0;
     DECLARE finished INTEGER DEFAULT 0;
 	DECLARE counter INTEGER DEFAULT 0;
-	DECLARE counter_prev INTEGER DEFAULT 0;
     
     DECLARE valore_medio FLOAT DEFAULT 0;
     
@@ -51,22 +44,11 @@ BEGIN
      -- declare NOT FOUND handler
     DECLARE CONTINUE HANDLER FOR NOT FOUND SET finished = 1;
 
-	-- WITH ordered_pos AS (
-	--    ) -- ordino gli animali per posizione crescente*/
-
    
-    -- CALL LOG("Inizio While");
+
     OPEN currecord;
-   --  WHILE finished=0 DO  -- apro il ciclo che mi consente di individuare più di un gruppo
-   --      OPEN currecord;
-			/*WHILE  counter<counter_prev DO -- riparto dal punto in cui mi ero fermato al punto precedente
-				FETCH currecord INTO codice,lat,longi; -- faccio avanzare il cursore
-                CALL LOG(CONCAT("dopo fetch: ", codice));
-				SET counter=counter+1; 
-			END WHILE;
-	*/
+
     FETCH currecord INTO codice ,lat,longi;
-	-- CALL LOG(CONCAT("dopo primo fetch codice: ", IFNULL(codice, 'niente'), " lat: ", IFNULL(lat, 'niente'), " longi: ", IFNULL(longi, 'niente')));
 
     SET previous_value_lat=lat;
 	SET previous_value_long=longi;
@@ -75,7 +57,6 @@ BEGIN
     
 	getgroup: LOOP -- apro il ciclo per formare il nuovo gruppo
 		FETCH currecord INTO codice ,lat,longi; -- carico i valori dell'animale da cercare
-		-- CALL LOG(CONCAT("dopo secondo fetch codice: ", IFNULL(codice, 'niente'), " lat: ", IFNULL(lat, 'niente'), " longi: ", IFNULL(longi, 'niente')));
 
 		IF finished = 1 THEN 
 			LEAVE getgroup;
@@ -85,7 +66,6 @@ BEGIN
 		IF (previous_value_lat<=lat+dist_range AND previous_value_lat>lat-dist_range) 
 				AND  
 			(previous_value_long<=longi+dist_range AND previous_value_long>longi-dist_range) THEN
-            CALL LOG("primo branch");
 			SET previous_value_lat=lat;
 			SET previous_value_long=longi;
 
@@ -98,11 +78,8 @@ BEGIN
 			SET valore_medio=valore_medio+
             (SELECT AVG((I.vigilanza+I.idratazione+I.deambulazione)/3) AS AVG_value FROM IndiciSalute I WHERE codAnimale=codice GROUP BY I.codAnimale)/counter;
 			SET counter=counter+1;
-            -- CALL LOG(CONCAT("now valore_medio: ", IFNULL(valore_medio, 'niente'), " couter: ", IFNULL(counter, 'niente')));
 			-- se i valori sono in un certo range carico in una delle tabelle d'appoggio gli indici di salute medi e il codice di ogni animale
 		ELSE 
-			-- CALL LOG("else branch");
-			-- SET counter_prev=counter;
 			SET counter=1;
             REPLACE INTO Valori_medi_per_gruppo VALUES(DEFAULT,valore_medio); -- dopo aver separato un gruppo inserisco il valore medio per quel gruppo in una tabella d'appoggio
 			SET valore_medio=0;
@@ -115,17 +92,6 @@ BEGIN
 	END LOOP getgroup;
     REPLACE INTO Valori_medi_per_gruppo VALUES(DEFAULT,valore_medio);
 	CLOSE currecord;
-	-- CALL LOG(CONCAT("NUOVO WHILE codice: ", codice, " lat: ", lat, " longi: ", longi));
-  -- END WHILE;  -- e riparto
-  /*
-  IF tipo=TRUE THEN  -- stampa una delle due tabelle a seconda del tipo di richiesta
-    SELECT *
-	FROM Indici_per_gruppo;
-  ELSE
-    SELECT *
-	FROM Valori_medi_per_gruppo;
-  END IF;
-  */
 END $$
 DELIMITER ;
 	
