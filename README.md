@@ -1,13 +1,13 @@
 ------------------------------------------------------------------------
 
-![image](logo_titolo_unipi){height="35mm"}\
-**Relazione per il Progetto di Base Dati 2019**\
-*FarmHouse 4.0*\
-[Guillaume Quint,\
-Francesco Bonciani]{.smallcaps}
+<img src="logo_titolo_unipi" alt="image" style="height:35mm" />  
+**Relazione per il Progetto di Base Dati 2019**  
+*FarmHouse 4.0*  
+<span class="smallcaps">Guillaume Quint,  
+Francesco Bonciani</span>
 
-Università di Pisa, Ingegneria Informatica\
-\
+Università di Pisa, Ingegneria Informatica  
+  
 
 Glossario
 =========
@@ -18,1552 +18,1570 @@ relativi attributi e collegamenti con le altre parti del database.
 Questo glossario è stato realizzato prima della progettazione del
 diagramma Entità-Relazioni: ogni modifica dovuta al processo di
 ristrutturazione verrà indicata nella relativa sezione
-[2](#sec:ristrutturazione){reference-type="ref"
-reference="sec:ristrutturazione"} a pag. , oppure, nel caso di
-ridondanze tra entità e relazioni, anche nel paragrafo
-[3.2](#subsec:ridondanze-ent-rel){reference-type="ref"
-reference="subsec:ridondanze-ent-rel"} a pag.
+<a href="#sec:ristrutturazione" data-reference-type="ref" data-reference="sec:ristrutturazione">2</a>
+a pag. , oppure, nel caso di ridondanze tra entità e relazioni, anche
+nel paragrafo
+<a href="#subsec:ridondanze-ent-rel" data-reference-type="ref" data-reference="subsec:ridondanze-ent-rel">3.2</a>
+a pag.
 
 Area Allevamento
 ----------------
 
-### Entità {#Allevamento Entita}
+### Entità
 
-+---------+-------------+------------------------+-------------+
-| **Nome  | **Descrizio | **Attributi**          | **Collegame |
-| entità* | ne**        |                        | nti**       |
-| *       |             |                        |             |
-+:========+:============+:=======================+:============+
-| Abbever | Dispositivo | -   acquaRestante      | Locale,     |
-| atoio   | per la      |                        | Pasto per   |
-|         | distribuzio |                        | Locale      |
-|         | ne          |                        |             |
-|         | dell'acqua  |                        |             |
-|         | agli        |                        |             |
-|         | animali nei |                        |             |
-|         | locali      |                        |             |
-+---------+-------------+------------------------+-------------+
-| Acqua   | Acqua       | -   codiceAcqua        | Pasto       |
-|         | eventualmen |                        |             |
-|         | te          |                        |             |
-|         | arricchita  |                        |             |
-|         | per         |                        |             |
-|         | l'idratazio |                        |             |
-|         | ne          |                        |             |
-|         | degli       |                        |             |
-|         | animali     |                        |             |
-+---------+-------------+------------------------+-------------+
-| Agritur | Struttura   | -   nome               | Cliente,    |
-| ismo    | attrezzata  |                        | Stanza,     |
-|         | per         | -   indirizzo          | Stalla,     |
-|         | l'allevamen |                        | Formaggio   |
-|         | to          | -   indirizzo web      |             |
-|         | degli       |                        |             |
-|         | animali e   | -   contatto           |             |
-|         | l'accoglien |                        |             |
-|         | za          |                        |             |
-|         | dei clienti |                        |             |
-|         | conforme    |                        |             |
-|         | agli        |                        |             |
-|         | standard di |                        |             |
-|         | *Industry   |                        |             |
-|         | 4.0*        |                        |             |
-+---------+-------------+------------------------+-------------+
-| Allesti | Mangiatoie, | -   codice             | Locale      |
-| mento   | Abbeveratoi |                        |             |
-|         | ,           |                        |             |
-|         | e           |                        |             |
-|         | dispositivi |                        |             |
-|         | di          |                        |             |
-|         | illuminazio |                        |             |
-|         | ne          |                        |             |
-|         | e           |                        |             |
-|         | condizionam |                        |             |
-|         | ento        |                        |             |
-|         | aria di     |                        |             |
-|         | ogni locale |                        |             |
-+---------+-------------+------------------------+-------------+
-| Ambient | Sensore di  | -   temperatura        | Locale      |
-| ali     | temperatura |                        |             |
-|         | ed umidità  | -   umidità            |             |
-|         | del locale  |                        |             |
-+---------+-------------+------------------------+-------------+
-| Animale | Anagrafica  | -   codice             | Mungitura,  |
-|         | degli       |                        | Latte,      |
-|         | animali di  | -   dataNascita        | Scheda      |
-|         | *FarmHouse  |                        | Medica,     |
-|         | 4.0*        | -   peso               | Animale     |
-|         |             |                        | Acquisito,  |
-|         |             | -   altezza            | Terapia,    |
-|         |             |                        | GPS, Indici |
-|         |             | -   razza              | Salute,     |
-|         |             |                        | Riproduzion |
-|         |             | -   sesso              | e,          |
-|         |             |                        | Visita      |
-|         |             | -   specie             |             |
-|         |             |                        |             |
-|         |             | -   famiglia           |             |
-+---------+-------------+------------------------+-------------+
-| Animale | Generalizza | -   codAcquisizione    | Animale,    |
-| Acquisi | zione       |                        | Fornitore   |
-| to      | di un       | -   dataAcquisto       |             |
-|         | Animale non |                        |             |
-|         | nato        | -   dataArrivo         |             |
-|         | all'interno |                        |             |
-|         | di un       |                        |             |
-|         | agriturismo |                        |             |
-|         | ,           |                        |             |
-|         | bensì       |                        |             |
-|         | acquisito   |                        |             |
-|         | da un       |                        |             |
-|         | fornitore   |                        |             |
-|         | esterno     |                        |             |
-+---------+-------------+------------------------+-------------+
-| Area    | Spazio      | -   codiceArea         | Attività    |
-| Pascolo | dell'agritu |                        | Pascolo,    |
-|         | rismo       | -   estensione         | Recinzione  |
-|         | destinato   |                        | Divisoria e |
-|         | al pascolo  |                        | Zona        |
-|         | degli       |                        | Pascolo     |
-|         | animali     |                        |             |
-+---------+-------------+------------------------+-------------+
-| Arricch | Variante di | -   concentrazioneSali | Pasto       |
-| ita     | Acqua       |                        |             |
-|         | arricchita  | -   concentrazioneVita |             |
-|         | di sali     | mine                   |             |
-|         | minerali    |                        |             |
-|         | e/o         |                        |             |
-|         | vitamine    |                        |             |
-+---------+-------------+------------------------+-------------+
-| Attivit | Esercizio   | -   codAttività        | Locale,     |
-| à       | di pascolo  |                        | Area        |
-| Pascolo | che         | -   giorno             | Pascolo     |
-|         | coinvolge   |                        |             |
-|         | tutti gli   | -   orario             |             |
-|         | animali di  |                        |             |
-|         | un locale   |                        |             |
-+---------+-------------+------------------------+-------------+
-| Compost | Sensore     | -   concentrazioneMeta | Locale      |
-| i       | della       | no                     |             |
-| Volatil | concentrazi |                        |             |
-| i       | one         | -   concentrazioneAzot |             |
-|         | di azoto e  | o                      |             |
-|         | metano nel  |                        |             |
-|         | locale      |                        |             |
-+---------+-------------+------------------------+-------------+
-| Condizi | Dispositivo | -   codice             | Locale      |
-| onatore | di          |                        |             |
-| aria    | condizionam | -   consumo energetico |             |
-|         | ento        |                        |             |
-|         | dell'aria   |                        |             |
-|         | all'interno |                        |             |
-|         | dei locali  |                        |             |
-+---------+-------------+------------------------+-------------+
-| Foraggi | Alimentazio | -   fibre              | Pasto       |
-| o       | ne          |                        |             |
-|         | degli       | -   proteine           |             |
-|         | animali     |                        |             |
-|         | identificat | -   glucidi            |             |
-|         | o           |                        |             |
-|         | dai suoi    | -   cereali            |             |
-|         | ingredienti |                        |             |
-|         | vegetali    | -   frutta             |             |
-|         |             |                        |             |
-|         |             | -   piante             |             |
-|         |             |                        |             |
-|         |             | -   kcal/kg            |             |
-|         |             |                        |             |
-|         |             | -   forma              |             |
-|         |             |     (fieno/insilato)   |             |
-+---------+-------------+------------------------+-------------+
-| Fornito | Fornitore   | -   ragioneSociale     | Animale     |
-| re      | di capi di  |                        | Acquisito   |
-|         | bestiame    | -   nome               |             |
-|         | per la rete |                        |             |
-|         | di          | -   indirizzo          |             |
-|         | agriturismi |                        |             |
-|         |             | -   partitaIVA         |             |
-+---------+-------------+------------------------+-------------+
-| GPS     | Dispositivo | -   codiceGPS          | Animale     |
-|         | di          |                        |             |
-|         | localizzazi | -   posizione          |             |
-|         | one         |                        |             |
-|         | per ogni    | -   orario             |             |
-|         | animale     |                        |             |
-+---------+-------------+------------------------+-------------+
-| Illumin | Dispositivo | -   codice             | Locale      |
-| azione  | di          |                        |             |
-|         | illuminazio | -   consumo energetico |             |
-|         | ne          |                        |             |
-|         | artificiale |                        |             |
-|         | dei locali  |                        |             |
-+---------+-------------+------------------------+-------------+
-| Insucce | Riproduzion | -   complicanza        | Animale,    |
-| sso     | i           |                        | Veterinario |
-|         | non andate  |                        |             |
-|         | a buon fine |                        |             |
-+---------+-------------+------------------------+-------------+
-| Locale  | Divisione   | -   codice             | Stalla,     |
-|         | della       |                        | Sensori,    |
-|         | stalla per  | -   pavimentazione     | Pulizia     |
-|         | specie      |                        | Locale,     |
-|         | ospitata e  | -   capienzaMax        | Allestiment |
-|         | tipo di     |                        | o,          |
-|         | allestiment | -   specieOspitata     | Attività    |
-|         | o           |                        | Pascolo,    |
-|         |             | -   orientazioneFinest | Animale,    |
-|         |             | re                     | Pasto per   |
-|         |             |                        | Locale      |
-|         |             | -   altezza            |             |
-|         |             |                        |             |
-|         |             | -   lunghezza          |             |
-|         |             |                        |             |
-|         |             | -   larghezza          |             |
-|         |             |                        |             |
-|         |             | -   temperatura        |             |
-|         |             |                        |             |
-|         |             | -   umidità            |             |
-|         |             |                        |             |
-|         |             | -   tollerabilitàSporc |             |
-|         |             | izia                   |             |
-|         |             |                        |             |
-|         |             | -   tollerabilitàAzoto |             |
-|         |             |                        |             |
-|         |             | -   tollerabilitàMetan |             |
-|         |             | o                      |             |
-+---------+-------------+------------------------+-------------+
-| Mangiat | Dispositivo | -   foraggioRestante   | Locale,     |
-| oia     | per la      |                        | Pasto per   |
-|         | distribuzio |                        | Locale      |
-|         | ne          |                        |             |
-|         | del         |                        |             |
-|         | foraggio    |                        |             |
-|         | agli        |                        |             |
-|         | animali nei |                        |             |
-|         | locali      |                        |             |
-+---------+-------------+------------------------+-------------+
-| Pasto   | Alimentazio | -   fibre              | Pasto per   |
-|         | ne          |                        | Locale,     |
-|         | somministra | -   proteine           | Acqua,      |
-|         | ta          |                        | Foraggio    |
-|         | automaticam | -   glucidi            |             |
-|         | ente        |                        |             |
-|         | nelle       | -   codAcqua           |             |
-|         | mangiatoie  |                        |             |
-|         | e negli     |                        |             |
-|         | abbeveratoi |                        |             |
-|         | di ogni     |                        |             |
-|         | locale      |                        |             |
-+---------+-------------+------------------------+-------------+
-| Pasto   | Pasto       | -   giorno             | Locale,     |
-| per     | specifico   |                        | Pasto       |
-| Locale  | che viene   | -   orario             |             |
-|         | somministra |                        |             |
-|         | to          |                        |             |
-|         | in un       |                        |             |
-|         | locale in   |                        |             |
-|         | una certa   |                        |             |
-|         | data con un |                        |             |
-|         | certo       |                        |             |
-|         | orario      |                        |             |
-+---------+-------------+------------------------+-------------+
-| Pulizia | Richieste   | -   orarioRilevazione  | Locale      |
-| Locale  | d'intervent |                        |             |
-|         | o           | -   dataRilevazione    |             |
-|         | di pulizia  |                        |             |
-|         | di un       | -   stato              |             |
-|         | locale      |                        |             |
-|         |             | -   personale          |             |
-|         |             |                        |             |
-|         |             | -   concentrazioneMeta |             |
-|         |             | no                     |             |
-|         |             |                        |             |
-|         |             | -   concentrazioneAzot |             |
-|         |             | o                      |             |
-|         |             |                        |             |
-|         |             | -   livelloSporcizia   |             |
-|         |             |                        |             |
-|         |             | -   codLocale          |             |
-+---------+-------------+------------------------+-------------+
-| Recinzi | Ogni Area   | -   codiceZona         | Area        |
-| one     | di pascolo  |                        | Pascolo     |
-| Divisor | è divisa in | -   posizione          |             |
-| ia      | zone        |                        |             |
-| e Zona  | recintate   |                        |             |
-| Pascolo | dinamicamen |                        |             |
-|         | te          |                        |             |
-+---------+-------------+------------------------+-------------+
-| Riprodu | Storico dei | -   codiceRiproduzione | Animale,    |
-| zione   | tentativi   |                        | Veterinario |
-|         | di          | -   stato              |             |
-|         | riproduzion |                        |             |
-|         | e           | -   orario             |             |
-|         | effettuati, |                        |             |
-|         | sia         | -   data               |             |
-|         | riusciti    |                        |             |
-|         | che non     |                        |             |
-+---------+-------------+------------------------+-------------+
-| Scheda  | Descrive i  | -   codiceGestazione   | Riproduzion |
-| Gestazi | diversi     |                        | e,          |
-| one     | interventi  | -   interventiControll | Visita,     |
-|         | di          | oProgrammati           | Veterinario |
-|         | controllo   |                        |             |
-|         | decisi dal  |                        |             |
-|         | veterinario |                        |             |
-|         | in fase di  |                        |             |
-|         | gestazione  |                        |             |
-+---------+-------------+------------------------+-------------+
-| Sensori | Generalizza | -   codice             | Locale      |
-|         | zione       |                        |             |
-|         | dei sensori | -   orario             |             |
-|         | visivi,     |                        |             |
-|         | ambientali  | -   tipoSensore        |             |
-|         | e dei       |                        |             |
-|         | composti    |                        |             |
-|         | volatili    |                        |             |
-|         | del locale  |                        |             |
-+---------+-------------+------------------------+-------------+
-| Stalla  | Insieme di  | -   numProgressivo     | Agriturismo |
-|         | locali      |                        | ,           |
-|         | adibiti     | -   nomeAgriturismo    | Locale      |
-|         | all'alloggi |                        |             |
-|         | o           |                        |             |
-|         | e alla      |                        |             |
-|         | nutrizione  |                        |             |
-|         | degli       |                        |             |
-|         | animali     |                        |             |
-+---------+-------------+------------------------+-------------+
-| Success | Riproduzion | -   codiceNeonato      | Animale,    |
-| o       | i           |                        | Veterinario |
-|         | andate a    | -   esitoVisitaControl | ,           |
-|         | buon fine   | lo                     | Scheda      |
-|         |             |                        | Gestazione  |
-+---------+-------------+------------------------+-------------+
-| Visivi  | Sensore     | -   livelloSporcizia   | Locale      |
-|         | visivo del  |                        |             |
-|         | livello di  |                        |             |
-|         | sporcizia   |                        |             |
-|         | del locale  |                        |             |
-+---------+-------------+------------------------+-------------+
+<table style="width:90%;">
+<colgroup>
+<col style="width: 14%" />
+<col style="width: 20%" />
+<col style="width: 36%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Nome entità</strong></th>
+<th style="text-align: left;"><strong>Descrizione</strong></th>
+<th style="text-align: left;"><strong>Attributi</strong></th>
+<th style="text-align: left;"><strong>Collegamenti</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Abbeveratoio</td>
+<td style="text-align: left;">Dispositivo per la distribuzione dell’acqua agli animali nei locali</td>
+<td style="text-align: left;"><ul>
+<li><p>acquaRestante</p></li>
+</ul></td>
+<td style="text-align: left;">Locale, Pasto per Locale</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Acqua</td>
+<td style="text-align: left;">Acqua eventualmente arricchita per l’idratazione degli animali</td>
+<td style="text-align: left;"><ul>
+<li><p>codiceAcqua</p></li>
+</ul></td>
+<td style="text-align: left;">Pasto</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Agriturismo</td>
+<td style="text-align: left;">Struttura attrezzata per l’allevamento degli animali e l’accoglienza dei clienti conforme agli standard di <em>Industry 4.0</em></td>
+<td style="text-align: left;"><ul>
+<li><p>nome</p></li>
+<li><p>indirizzo</p></li>
+<li><p>indirizzo web</p></li>
+<li><p>contatto</p></li>
+</ul></td>
+<td style="text-align: left;">Cliente, Stanza, Stalla, Formaggio</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Allestimento</td>
+<td style="text-align: left;">Mangiatoie, Abbeveratoi, e dispositivi di illuminazione e condizionamento aria di ogni locale</td>
+<td style="text-align: left;"><ul>
+<li><p>codice</p></li>
+</ul></td>
+<td style="text-align: left;">Locale</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Ambientali</td>
+<td style="text-align: left;">Sensore di temperatura ed umidità del locale</td>
+<td style="text-align: left;"><ul>
+<li><p>temperatura</p></li>
+<li><p>umidità</p></li>
+</ul></td>
+<td style="text-align: left;">Locale</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Animale</td>
+<td style="text-align: left;">Anagrafica degli animali di <em>FarmHouse 4.0</em></td>
+<td style="text-align: left;"><ul>
+<li><p>codice</p></li>
+<li><p>dataNascita</p></li>
+<li><p>peso</p></li>
+<li><p>altezza</p></li>
+<li><p>razza</p></li>
+<li><p>sesso</p></li>
+<li><p>specie</p></li>
+<li><p>famiglia</p></li>
+</ul></td>
+<td style="text-align: left;">Mungitura, Latte, Scheda Medica, Animale Acquisito, Terapia, GPS, Indici Salute, Riproduzione, Visita</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Animale Acquisito</td>
+<td style="text-align: left;">Generalizzazione di un Animale non nato all’interno di un agriturismo, bensì acquisito da un fornitore esterno</td>
+<td style="text-align: left;"><ul>
+<li><p>codAcquisizione</p></li>
+<li><p>dataAcquisto</p></li>
+<li><p>dataArrivo</p></li>
+</ul></td>
+<td style="text-align: left;">Animale, Fornitore</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Area Pascolo</td>
+<td style="text-align: left;">Spazio dell’agriturismo destinato al pascolo degli animali</td>
+<td style="text-align: left;"><ul>
+<li><p>codiceArea</p></li>
+<li><p>estensione</p></li>
+</ul></td>
+<td style="text-align: left;">Attività Pascolo, Recinzione Divisoria e Zona Pascolo</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Arricchita</td>
+<td style="text-align: left;">Variante di Acqua arricchita di sali minerali e/o vitamine</td>
+<td style="text-align: left;"><ul>
+<li><p>concentrazioneSali</p></li>
+<li><p>concentrazioneVitamine</p></li>
+</ul></td>
+<td style="text-align: left;">Pasto</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Attività Pascolo</td>
+<td style="text-align: left;">Esercizio di pascolo che coinvolge tutti gli animali di un locale</td>
+<td style="text-align: left;"><ul>
+<li><p>codAttività</p></li>
+<li><p>giorno</p></li>
+<li><p>orario</p></li>
+</ul></td>
+<td style="text-align: left;">Locale, Area Pascolo</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Composti Volatili</td>
+<td style="text-align: left;">Sensore della concentrazione di azoto e metano nel locale</td>
+<td style="text-align: left;"><ul>
+<li><p>concentrazioneMetano</p></li>
+<li><p>concentrazioneAzoto</p></li>
+</ul></td>
+<td style="text-align: left;">Locale</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Condizionatore aria</td>
+<td style="text-align: left;">Dispositivo di condizionamento dell’aria all’interno dei locali</td>
+<td style="text-align: left;"><ul>
+<li><p>codice</p></li>
+<li><p>consumo energetico</p></li>
+</ul></td>
+<td style="text-align: left;">Locale</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Foraggio</td>
+<td style="text-align: left;">Alimentazione degli animali identificato dai suoi ingredienti vegetali</td>
+<td style="text-align: left;"><ul>
+<li><p>fibre</p></li>
+<li><p>proteine</p></li>
+<li><p>glucidi</p></li>
+<li><p>cereali</p></li>
+<li><p>frutta</p></li>
+<li><p>piante</p></li>
+<li><p>kcal/kg</p></li>
+<li><p>forma (fieno/insilato)</p></li>
+</ul></td>
+<td style="text-align: left;">Pasto</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Fornitore</td>
+<td style="text-align: left;">Fornitore di capi di bestiame per la rete di agriturismi</td>
+<td style="text-align: left;"><ul>
+<li><p>ragioneSociale</p></li>
+<li><p>nome</p></li>
+<li><p>indirizzo</p></li>
+<li><p>partitaIVA</p></li>
+</ul></td>
+<td style="text-align: left;">Animale Acquisito</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">GPS</td>
+<td style="text-align: left;">Dispositivo di localizzazione per ogni animale</td>
+<td style="text-align: left;"><ul>
+<li><p>codiceGPS</p></li>
+<li><p>posizione</p></li>
+<li><p>orario</p></li>
+</ul></td>
+<td style="text-align: left;">Animale</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Illuminazione</td>
+<td style="text-align: left;">Dispositivo di illuminazione artificiale dei locali</td>
+<td style="text-align: left;"><ul>
+<li><p>codice</p></li>
+<li><p>consumo energetico</p></li>
+</ul></td>
+<td style="text-align: left;">Locale</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Insuccesso</td>
+<td style="text-align: left;">Riproduzioni non andate a buon fine</td>
+<td style="text-align: left;"><ul>
+<li><p>complicanza</p></li>
+</ul></td>
+<td style="text-align: left;">Animale, Veterinario</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Locale</td>
+<td style="text-align: left;">Divisione della stalla per specie ospitata e tipo di allestimento</td>
+<td style="text-align: left;"><ul>
+<li><p>codice</p></li>
+<li><p>pavimentazione</p></li>
+<li><p>capienzaMax</p></li>
+<li><p>specieOspitata</p></li>
+<li><p>orientazioneFinestre</p></li>
+<li><p>altezza</p></li>
+<li><p>lunghezza</p></li>
+<li><p>larghezza</p></li>
+<li><p>temperatura</p></li>
+<li><p>umidità</p></li>
+<li><p>tollerabilitàSporcizia</p></li>
+<li><p>tollerabilitàAzoto</p></li>
+<li><p>tollerabilitàMetano</p></li>
+</ul></td>
+<td style="text-align: left;">Stalla, Sensori, Pulizia Locale, Allestimento, Attività Pascolo, Animale, Pasto per Locale</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Mangiatoia</td>
+<td style="text-align: left;">Dispositivo per la distribuzione del foraggio agli animali nei locali</td>
+<td style="text-align: left;"><ul>
+<li><p>foraggioRestante</p></li>
+</ul></td>
+<td style="text-align: left;">Locale, Pasto per Locale</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Pasto</td>
+<td style="text-align: left;">Alimentazione somministrata automaticamente nelle mangiatoie e negli abbeveratoi di ogni locale</td>
+<td style="text-align: left;"><ul>
+<li><p>fibre</p></li>
+<li><p>proteine</p></li>
+<li><p>glucidi</p></li>
+<li><p>codAcqua</p></li>
+</ul></td>
+<td style="text-align: left;">Pasto per Locale, Acqua, Foraggio</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Pasto per Locale</td>
+<td style="text-align: left;">Pasto specifico che viene somministrato in un locale in una certa data con un certo orario</td>
+<td style="text-align: left;"><ul>
+<li><p>giorno</p></li>
+<li><p>orario</p></li>
+</ul></td>
+<td style="text-align: left;">Locale, Pasto</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Pulizia Locale</td>
+<td style="text-align: left;">Richieste d’intervento di pulizia di un locale</td>
+<td style="text-align: left;"><ul>
+<li><p>orarioRilevazione</p></li>
+<li><p>dataRilevazione</p></li>
+<li><p>stato</p></li>
+<li><p>personale</p></li>
+<li><p>concentrazioneMetano</p></li>
+<li><p>concentrazioneAzoto</p></li>
+<li><p>livelloSporcizia</p></li>
+<li><p>codLocale</p></li>
+</ul></td>
+<td style="text-align: left;">Locale</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Recinzione Divisoria e Zona Pascolo</td>
+<td style="text-align: left;">Ogni Area di pascolo è divisa in zone recintate dinamicamente</td>
+<td style="text-align: left;"><ul>
+<li><p>codiceZona</p></li>
+<li><p>posizione</p></li>
+</ul></td>
+<td style="text-align: left;">Area Pascolo</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Riproduzione</td>
+<td style="text-align: left;">Storico dei tentativi di riproduzione effettuati, sia riusciti che non</td>
+<td style="text-align: left;"><ul>
+<li><p>codiceRiproduzione</p></li>
+<li><p>stato</p></li>
+<li><p>orario</p></li>
+<li><p>data</p></li>
+</ul></td>
+<td style="text-align: left;">Animale, Veterinario</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Scheda Gestazione</td>
+<td style="text-align: left;">Descrive i diversi interventi di controllo decisi dal veterinario in fase di gestazione</td>
+<td style="text-align: left;"><ul>
+<li><p>codiceGestazione</p></li>
+<li><p>interventiControlloProgrammati</p></li>
+</ul></td>
+<td style="text-align: left;">Riproduzione, Visita, Veterinario</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Sensori</td>
+<td style="text-align: left;">Generalizzazione dei sensori visivi, ambientali e dei composti volatili del locale</td>
+<td style="text-align: left;"><ul>
+<li><p>codice</p></li>
+<li><p>orario</p></li>
+<li><p>tipoSensore</p></li>
+</ul></td>
+<td style="text-align: left;">Locale</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Stalla</td>
+<td style="text-align: left;">Insieme di locali adibiti all’alloggio e alla nutrizione degli animali</td>
+<td style="text-align: left;"><ul>
+<li><p>numProgressivo</p></li>
+<li><p>nomeAgriturismo</p></li>
+</ul></td>
+<td style="text-align: left;">Agriturismo, Locale</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Successo</td>
+<td style="text-align: left;">Riproduzioni andate a buon fine</td>
+<td style="text-align: left;"><ul>
+<li><p>codiceNeonato</p></li>
+<li><p>esitoVisitaControllo</p></li>
+</ul></td>
+<td style="text-align: left;">Animale, Veterinario, Scheda Gestazione</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Visivi</td>
+<td style="text-align: left;">Sensore visivo del livello di sporcizia del locale</td>
+<td style="text-align: left;"><ul>
+<li><p>livelloSporcizia</p></li>
+</ul></td>
+<td style="text-align: left;">Locale</td>
+</tr>
+</tbody>
+</table>
 
-### Relazioni {#Allevamento Relazioni}
+### Relazioni
 
-+----------+----------------+-----------------------------------+
-| **Nome   | **Attributi**  | **Cardinalità**                   |
-|     rela |                |                                   |
-| zione**  |                |                                   |
-+:=========+:===============+:==================================+
-| abita    |                | -   (1,1) con Animale: ogni       |
-|          |                |     animale abita un solo locale  |
-|          |                |     dell'agriturismo              |
-|          |                |                                   |
-|          |                | -   (1,N) con Locale: ogni locale |
-|          |                |     può ospitare diversi animali  |
-+----------+----------------+-----------------------------------+
-| acqua    |                | -   (1,N) con Abbeveratoio: un    |
-| contenut |                |     abbeveratoio può essere       |
-| a        |                |     impiegato per più pasti       |
-|          |                |                                   |
-|          |                | -   (1,N) con Pasto per Locale:   |
-|          |                |     uno specifico pasto può       |
-|          |                |     essere distribuito su più     |
-|          |                |     abbeveratoi dello stesso      |
-|          |                |     locale                        |
-+----------+----------------+-----------------------------------+
-| acquisto |                | -   (1,1) con Animale Acquisito:  |
-| animale  |                |     un animale, se acquistato,    |
-|          |                |     può provenire da un solo      |
-|          |                |     fornitore                     |
-|          |                |                                   |
-|          |                | -   (1,N) con Fornitore: un       |
-|          |                |     fornitore può vendere più di  |
-|          |                |     un animale                    |
-+----------+----------------+-----------------------------------+
-| attività |                | -   (1,N) con Locale: gli animali |
-| locale   |                |     di un locale possono          |
-|          |                |     effettuare più attività di    |
-|          |                |     pascolo                       |
-|          |                |                                   |
-|          |                | -   (1,1) con Attività pascolo:   |
-|          |                |     ogni attività di pascolo      |
-|          |                |     coinvolge tutti gli animali   |
-|          |                |     di un solo locale             |
-+----------+----------------+-----------------------------------+
-| coinvolg | codicePadre    | -   (0,N) con Animale: ogni       |
-| e        |                |     coppia di animale può         |
-|          |                |     intraprendere o no più di una |
-|          |                |     riproduzione                  |
-|          |                |                                   |
-|          |                | -   (1,1) con Riproduzione: ogni  |
-|          |                |     riproduzione richiede un      |
-|          |                |     animale madre e un animale    |
-|          |                |     padre                         |
-+----------+----------------+-----------------------------------+
-| collocaz |                | -   (1,1) con Attività pascolo:   |
-| ione     |                |     ogni attività di pascolo      |
-| attività |                |     viene svolta in una sola area |
-|          |                |     dedicata                      |
-|          |                |                                   |
-|          |                | -   (1,N) con Area pascolo: ogni  |
-|          |                |     area di pascolo di un         |
-|          |                |     agriturismo può essere        |
-|          |                |     impiegata per più attività di |
-|          |                |     pascolo                       |
-+----------+----------------+-----------------------------------+
-| composiz |                | -   (1,1) con Pasto: ad un pasto  |
-| ione     |                |     è associato un solo tipo di   |
-| acqua    |                |     acqua                         |
-|          |                |                                   |
-|          |                | -   (1,N) con Acqua: un tipo di   |
-|          |                |     acqua può andare a comporre   |
-|          |                |     più pasti                     |
-+----------+----------------+-----------------------------------+
-| composiz |                | -   (1,1) con Pasto: ad un pasto  |
-| ione     |                |     è associato un solo tipo di   |
-| foraggio |                |     foraggio                      |
-|          |                |                                   |
-|          |                | -   (1,N) con Foraggio: un tipo   |
-|          |                |     di foraggio può andare a      |
-|          |                |     comporre più pasti            |
-+----------+----------------+-----------------------------------+
-| determin |                | -   (1,1) con Scheda gestazione:  |
-| a        |                |     ogni scheda di gestazione è   |
-|          |                |     associata ad una sola         |
-|          |                |     gravidanza che ha successo    |
-|          |                |                                   |
-|          |                | -   (1,1) con Successo: per ogni  |
-|          |                |     gravidanza che ha successo si |
-|          |                |     compila una sola scheda di    |
-|          |                |     gestazione                    |
-+----------+----------------+-----------------------------------+
-| division |                | -   (1,N) con Locale: Ogni locale |
-| e        |                |     è dotato di uno o più         |
-| allestim |                |     allestimenti                  |
-| anti     |                |                                   |
-|          |                | -   (1,1) con Allestimento: un    |
-|          |                |     allestimento è associato ad   |
-|          |                |     un solo locale                |
-+----------+----------------+-----------------------------------+
-| division |                | -   (1,N) con Locale: Ogni locale |
-| e  condi |                |     è dotato di uno o più         |
-| zionator |                |     condizionatori                |
-| i        |                |                                   |
-|          |                | -   (1,1) con Condizionatore      |
-|          |                |     aria: un condizionatore è     |
-|          |                |     associato ad un solo locale   |
-+----------+----------------+-----------------------------------+
-| division |                | -   (1,N) con Locale: Ogni locale |
-| e    ill |                |     è dotato di uno o più         |
-| uminazio |                |     dispositivi di illuminazione  |
-| ne       |                |                                   |
-|          |                | -   (1,1) con Illuminazione: un   |
-|          |                |     dispositivo di illuminazione  |
-|          |                |     è associato ad un solo locale |
-+----------+----------------+-----------------------------------+
-| division |                | -   (1,N) con Stalla: ogni stalla |
-| e        |                |     è divisa in più locali        |
-| locali   |                |                                   |
-|          |                | -   (1,1) con Locale: un Locale   |
-|          |                |     appartiene ad una sola stalla |
-+----------+----------------+-----------------------------------+
-| division |                | -   (1,N) con Area pascolo: ogni  |
-| e        |                |     area di pascolo è divisa in   |
-| pascolo  |                |     più zone recintate            |
-|          |                |                                   |
-|          |                | -   (1,1) con Recinzione          |
-|          |                |     divisoria e zona di pascolo:  |
-|          |                |     ogni zona recintata           |
-|          |                |     appartiene ad una sola area   |
-|          |                |     di pascolo                    |
-+----------+----------------+-----------------------------------+
-| division |                | -   (1,N) con Agriturismo: un     |
-| e        |                |     agriturismo è diviso in più   |
-| stalle   |                |     stalle                        |
-|          |                |                                   |
-|          |                | -   (1,1) con Stalle: ogni stalla |
-|          |                |     appartiene ad un solo         |
-|          |                |     Agriturismo                   |
-+----------+----------------+-----------------------------------+
-| foraggio |                | -   (1,N) con Mangiatoia: una     |
-| contenut |                |     mangiatoia può essere         |
-| o        |                |     impiegata per più pasti       |
-|          |                |                                   |
-|          |                | -   (1,N) con Pasto per Locale:   |
-|          |                |     uno specifico pasto può       |
-|          |                |     essere distribuito su più     |
-|          |                |     mangiatoie dello stesso       |
-|          |                |     locale                        |
-+----------+----------------+-----------------------------------+
-| locale   |                | -   (1,N) con Locale: un locale   |
-| assegnat |                |     può contenere più pasti       |
-| o        |                |                                   |
-|          |                | -   (1,1) con Pasto per Locale:   |
-|          |                |     uno specifico pasto deve      |
-|          |                |     essere distribuito su un solo |
-|          |                |     locale                        |
-+----------+----------------+-----------------------------------+
-| localizz |                | -   (1,1) con Animale: ogni GPS   |
-| ato      |                |     localizza un solo animale     |
-|          |                |                                   |
-|          |                | -   (1,1) con GPS: ogni animale   |
-|          |                |     viene localizzato da un solo  |
-|          |                |     GPS                           |
-+----------+----------------+-----------------------------------+
-| madre    |                | -   (0,N) con Animale: ogni       |
-|          |                |     animale può o no essere madre |
-|          |                |     di più figli                  |
-|          |                |                                   |
-|          |                | -   (0,1) con Animale: ogni       |
-|          |                |     animale è figlio di al        |
-|          |                |     massimo una madre: se è stato |
-|          |                |     acquisito, la madre può non   |
-|          |                |     essere registrata             |
-+----------+----------------+-----------------------------------+
-| padre    |                | -   (0,N) con Animale: ogni       |
-|          |                |     animale può o no essere padre |
-|          |                |     di più figli                  |
-|          |                |                                   |
-|          |                | -   (0,1) con Animale: ogni       |
-|          |                |     animale è figlio di al        |
-|          |                |     massimo un padre: se è stato  |
-|          |                |     acquisito, il padre può non   |
-|          |                |     essere registrato             |
-+----------+----------------+-----------------------------------+
-| pasto    |                | -   (1,N) con Pasto: un Pasto può |
-| assegnat |                |     essere somministrato allo     |
-| o        |                |     stesso locale in giorni       |
-|          |                |     differenti                    |
-|          |                |                                   |
-|          |                | -   (1,1) con Pasto per Locale:   |
-|          |                |     per ogni locale, ogni giorno  |
-|          |                |     viene assegnato uno specifico |
-|          |                |     pasto                         |
-+----------+----------------+-----------------------------------+
-| richiest |                | -   (0,N) con Locale: alcuni      |
-| a        |                |     locali possono richiedere più |
-| interven |                |     interventi di pulizia         |
-| to       |                |                                   |
-|          |                | -   (1,1) con Pulizia locale:     |
-|          |                |     ogni intervento di pulizia si |
-|          |                |     riferisce ad un solo locale   |
-|          |                |     dell'agriturismo              |
-+----------+----------------+-----------------------------------+
-| rilievo  |                | -   (1,N) con Locale: ogni locale |
-| parametr |                |     è dotato di uno o più sensori |
-| i        |                |                                   |
-| locale   |                | -   (1,1) con Sensori: ogni       |
-|          |                |     sensore monitora un solo      |
-|          |                |     locale                        |
-+----------+----------------+-----------------------------------+
-| scrive   |                | -   (0,N) con Veterinario: alcuni |
-|          |                |     veterinari possono compilare  |
-|          |                |     più schede di gestazione      |
-|          |                |                                   |
-|          |                | -   (1,1) con Scheda gestazione:  |
-|          |                |     ogni scheda viene compilata   |
-|          |                |     da un solo veterinario        |
-+----------+----------------+-----------------------------------+
-| supervis |                | -   (0,N) con Veterinario: alcuni |
-| iona     |                |     veterinari possono            |
-|          |                |     supervisionare più gestazioni |
-|          |                |                                   |
-|          |                | -   (1,1) con Riproduzione: ogni  |
-|          |                |     riproduzione ha un solo       |
-|          |                |     veterinario supervisore       |
-+----------+----------------+-----------------------------------+
+<table style="width:90%;">
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 24%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Nome     relazione</strong></th>
+<th style="text-align: left;"><strong>Attributi</strong></th>
+<th style="text-align: left;"><strong>Cardinalità</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">abita</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><ul>
+<li><p>(1,1) con Animale: ogni animale abita un solo locale dell’agriturismo</p></li>
+<li><p>(1,N) con Locale: ogni locale può ospitare diversi animali</p></li>
+</ul></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">acqua contenuta</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><ul>
+<li><p>(1,N) con Abbeveratoio: un abbeveratoio può essere impiegato per più pasti</p></li>
+<li><p>(1,N) con Pasto per Locale: uno specifico pasto può essere distribuito su più abbeveratoi dello stesso locale</p></li>
+</ul></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">acquisto animale</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><ul>
+<li><p>(1,1) con Animale Acquisito: un animale, se acquistato, può provenire da un solo fornitore</p></li>
+<li><p>(1,N) con Fornitore: un fornitore può vendere più di un animale</p></li>
+</ul></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">attività locale</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><ul>
+<li><p>(1,N) con Locale: gli animali di un locale possono effettuare più attività di pascolo</p></li>
+<li><p>(1,1) con Attività pascolo: ogni attività di pascolo coinvolge tutti gli animali di un solo locale</p></li>
+</ul></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">coinvolge</td>
+<td style="text-align: left;">codicePadre</td>
+<td style="text-align: left;"><ul>
+<li><p>(0,N) con Animale: ogni coppia di animale può intraprendere o no più di una riproduzione</p></li>
+<li><p>(1,1) con Riproduzione: ogni riproduzione richiede un animale madre e un animale padre</p></li>
+</ul></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">collocazione attività</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><ul>
+<li><p>(1,1) con Attività pascolo: ogni attività di pascolo viene svolta in una sola area dedicata</p></li>
+<li><p>(1,N) con Area pascolo: ogni area di pascolo di un agriturismo può essere impiegata per più attività di pascolo</p></li>
+</ul></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">composizione acqua</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><ul>
+<li><p>(1,1) con Pasto: ad un pasto è associato un solo tipo di acqua</p></li>
+<li><p>(1,N) con Acqua: un tipo di acqua può andare a comporre più pasti</p></li>
+</ul></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">composizione foraggio</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><ul>
+<li><p>(1,1) con Pasto: ad un pasto è associato un solo tipo di foraggio</p></li>
+<li><p>(1,N) con Foraggio: un tipo di foraggio può andare a comporre più pasti</p></li>
+</ul></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">determina</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><ul>
+<li><p>(1,1) con Scheda gestazione: ogni scheda di gestazione è associata ad una sola gravidanza che ha successo</p></li>
+<li><p>(1,1) con Successo: per ogni gravidanza che ha successo si compila una sola scheda di gestazione</p></li>
+</ul></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">divisione allestimanti</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><ul>
+<li><p>(1,N) con Locale: Ogni locale è dotato di uno o più allestimenti</p></li>
+<li><p>(1,1) con Allestimento: un allestimento è associato ad un solo locale</p></li>
+</ul></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">divisione  condizionatori</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><ul>
+<li><p>(1,N) con Locale: Ogni locale è dotato di uno o più condizionatori</p></li>
+<li><p>(1,1) con Condizionatore aria: un condizionatore è associato ad un solo locale</p></li>
+</ul></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">divisione    illuminazione</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><ul>
+<li><p>(1,N) con Locale: Ogni locale è dotato di uno o più dispositivi di illuminazione</p></li>
+<li><p>(1,1) con Illuminazione: un dispositivo di illuminazione è associato ad un solo locale</p></li>
+</ul></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">divisione locali</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><ul>
+<li><p>(1,N) con Stalla: ogni stalla è divisa in più locali</p></li>
+<li><p>(1,1) con Locale: un Locale appartiene ad una sola stalla</p></li>
+</ul></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">divisione pascolo</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><ul>
+<li><p>(1,N) con Area pascolo: ogni area di pascolo è divisa in più zone recintate</p></li>
+<li><p>(1,1) con Recinzione divisoria e zona di pascolo: ogni zona recintata appartiene ad una sola area di pascolo</p></li>
+</ul></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">divisione stalle</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><ul>
+<li><p>(1,N) con Agriturismo: un agriturismo è diviso in più stalle</p></li>
+<li><p>(1,1) con Stalle: ogni stalla appartiene ad un solo Agriturismo</p></li>
+</ul></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">foraggio contenuto</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><ul>
+<li><p>(1,N) con Mangiatoia: una mangiatoia può essere impiegata per più pasti</p></li>
+<li><p>(1,N) con Pasto per Locale: uno specifico pasto può essere distribuito su più mangiatoie dello stesso locale</p></li>
+</ul></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">locale assegnato</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><ul>
+<li><p>(1,N) con Locale: un locale può contenere più pasti</p></li>
+<li><p>(1,1) con Pasto per Locale: uno specifico pasto deve essere distribuito su un solo locale</p></li>
+</ul></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">localizzato</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><ul>
+<li><p>(1,1) con Animale: ogni GPS localizza un solo animale</p></li>
+<li><p>(1,1) con GPS: ogni animale viene localizzato da un solo GPS</p></li>
+</ul></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">madre</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><ul>
+<li><p>(0,N) con Animale: ogni animale può o no essere madre di più figli</p></li>
+<li><p>(0,1) con Animale: ogni animale è figlio di al massimo una madre: se è stato acquisito, la madre può non essere registrata</p></li>
+</ul></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">padre</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><ul>
+<li><p>(0,N) con Animale: ogni animale può o no essere padre di più figli</p></li>
+<li><p>(0,1) con Animale: ogni animale è figlio di al massimo un padre: se è stato acquisito, il padre può non essere registrato</p></li>
+</ul></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">pasto assegnato</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><ul>
+<li><p>(1,N) con Pasto: un Pasto può essere somministrato allo stesso locale in giorni differenti</p></li>
+<li><p>(1,1) con Pasto per Locale: per ogni locale, ogni giorno viene assegnato uno specifico pasto</p></li>
+</ul></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">richiesta intervento</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><ul>
+<li><p>(0,N) con Locale: alcuni locali possono richiedere più interventi di pulizia</p></li>
+<li><p>(1,1) con Pulizia locale: ogni intervento di pulizia si riferisce ad un solo locale dell’agriturismo</p></li>
+</ul></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">rilievo parametri locale</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><ul>
+<li><p>(1,N) con Locale: ogni locale è dotato di uno o più sensori</p></li>
+<li><p>(1,1) con Sensori: ogni sensore monitora un solo locale</p></li>
+</ul></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">scrive</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><ul>
+<li><p>(0,N) con Veterinario: alcuni veterinari possono compilare più schede di gestazione</p></li>
+<li><p>(1,1) con Scheda gestazione: ogni scheda viene compilata da un solo veterinario</p></li>
+</ul></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">supervisiona</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><ul>
+<li><p>(0,N) con Veterinario: alcuni veterinari possono supervisionare più gestazioni</p></li>
+<li><p>(1,1) con Riproduzione: ogni riproduzione ha un solo veterinario supervisore</p></li>
+</ul></td>
+</tr>
+</tbody>
+</table>
 
 Area Healthcare
 ---------------
 
-### Entità {#Healthcare Entita}
+### Entità
 
-+---------+-------------+------------------------+-------------+
-| **Nome  | **Descrizio | **Attributi**          | **Collegame |
-| entità* | ne**        |                        | nti**       |
-| *       |             |                        |             |
-+:========+:============+:=======================+:============+
-| Disturb | Informazion | -   nome               | Animale,    |
-| i       | i           |                        | Veterinario |
-| Comport | su          | -   entità             |             |
-| amental | abitudini   |                        |             |
-| i       | fuori dal   |                        |             |
-|         | comune di   |                        |             |
-|         | un animale  |                        |             |
-+---------+-------------+------------------------+-------------+
-| Esame   | Esame       | -   codiceEsame        | Veterinario |
-|         | medico      |                        | ,           |
-|         | prescritto  | -   nome               | Animale     |
-|         | da un       |                        |             |
-|         | veterinario | -   descrizione        |             |
-|         | effettuato  |                        |             |
-|         | con un      | -   macchinario        |             |
-|         | determinato |                        |             |
-|         | macchinario | -   data               |             |
-+---------+-------------+------------------------+-------------+
-| Farmaco | Medicinale  | -   nome               | Terapia     |
-|         | prescritto  |                        |             |
-|         | da un       | -   dosaggio           |             |
-|         | veterinario |                        |             |
-|         | da assumere | -   principioAttivo    |             |
-|         | durante una |                        |             |
-|         | terapia     |                        |             |
-+---------+-------------+------------------------+-------------+
-| Indici  | Informazion | -   dataRilevazione    | Animale     |
-| Salute  | i           |                        |             |
-|         | relative    | -   lucentezzaPelo     |             |
-|         | alle        |                        |             |
-|         | condizioni  | -   vigilanza          |             |
-|         | di salute   |                        |             |
-|         | di un       | -   idratazione        |             |
-|         | animale     |                        |             |
-|         |             | -   deambulazione      |             |
-|         |             |                        |             |
-|         |             | -   tipologiaRespirazi |             |
-|         |             | one                    |             |
-+---------+-------------+------------------------+-------------+
-| Lesioni | Ferite      | -   tipologia          | Animale,    |
-|         | riportate   |                        | Veterinario |
-|         | da un       | -   parteDelCorpo      |             |
-|         | animale     |                        |             |
-|         |             | -   entità             |             |
-+---------+-------------+------------------------+-------------+
-| Scheda  | Documento   | -   codiceScheda       | Animale,    |
-| Medica  | contenente  |                        | Veterinario |
-|         | tutte le    | -   massaMagra         |             |
-|         | informazion |                        |             |
-|         | i           | -   massaGrassa        |             |
-|         | relative ad |                        |             |
-|         | una visita  | -   rispostaOculare    |             |
-|         | effettuata  |                        |             |
-|         | da un       | -   emocromo           |             |
-|         | veterinario |                        |             |
-|         | su un       | -   spessoreZoccolo    |             |
-|         | animale     |                        |             |
-|         |             | -   fegato             |             |
-|         |             |                        |             |
-|         |             | -   cuore              |             |
-|         |             |                        |             |
-|         |             | -   pancreas           |             |
-|         |             |                        |             |
-|         |             | -   data               |             |
-|         |             |                        |             |
-|         |             | -   patologie          |             |
-|         |             |                        |             |
-|         |             | -   carenze            |             |
-+---------+-------------+------------------------+-------------+
-| Terapia | Trattamento | -   codiceTerapia      | Veterinario |
-|         | prescritto  |                        | ,           |
-|         | da un       | -   dataInizio         | Farmaco     |
-|         | veterinario |                        |             |
-|         | conseguente | -   durata             |             |
-|         | mente       |                        |             |
-|         | alla        | -   secondaTerapiaCons |             |
-|         | rilevazione | ecutiva                |             |
-|         | di malattie |                        |             |
-|         | in un       | -   codAnimale         |             |
-|         | animale     |                        |             |
-+---------+-------------+------------------------+-------------+
-| Veterin | Medico      | -   codiceFiscale      | Scheda      |
-| ario    | specializza |                        | Medica,     |
-|         | to          | -   nome               | Terapia,    |
-|         | per la      |                        | Esame,      |
-|         | visita      | -   cognome            | Riproduzion |
-|         | degli       |                        | e,          |
-|         | animali     | -   contatto           | Visita      |
-+---------+-------------+------------------------+-------------+
-| Visita  | Visita di   | -   codiceVisita       | Veterinario |
-|         | controllo   |                        | ,           |
-|         | effettuata  | -   esito              | Scheda      |
-|         | per         |                        | gestazione  |
-|         | rilevare    | -   dataProgrammata    |             |
-|         | valori      |                        |             |
-|         | anomali     | -   dataEffettiva      |             |
-|         | negli       |                        |             |
-|         | indici di   | -   stato              |             |
-|         | salute di   |                        |             |
-|         | un animale  |                        |             |
-+---------+-------------+------------------------+-------------+
+<table style="width:90%;">
+<colgroup>
+<col style="width: 14%" />
+<col style="width: 20%" />
+<col style="width: 36%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Nome entità</strong></th>
+<th style="text-align: left;"><strong>Descrizione</strong></th>
+<th style="text-align: left;"><strong>Attributi</strong></th>
+<th style="text-align: left;"><strong>Collegamenti</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Disturbi Comportamentali</td>
+<td style="text-align: left;">Informazioni su abitudini fuori dal comune di un animale</td>
+<td style="text-align: left;"><ul>
+<li><p>nome</p></li>
+<li><p>entità</p></li>
+</ul></td>
+<td style="text-align: left;">Animale, Veterinario</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Esame</td>
+<td style="text-align: left;">Esame medico prescritto da un veterinario effettuato con un determinato macchinario</td>
+<td style="text-align: left;"><ul>
+<li><p>codiceEsame</p></li>
+<li><p>nome</p></li>
+<li><p>descrizione</p></li>
+<li><p>macchinario</p></li>
+<li><p>data</p></li>
+</ul></td>
+<td style="text-align: left;">Veterinario, Animale</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Farmaco</td>
+<td style="text-align: left;">Medicinale prescritto da un veterinario da assumere durante una terapia</td>
+<td style="text-align: left;"><ul>
+<li><p>nome</p></li>
+<li><p>dosaggio</p></li>
+<li><p>principioAttivo</p></li>
+</ul></td>
+<td style="text-align: left;">Terapia</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Indici Salute</td>
+<td style="text-align: left;">Informazioni relative alle condizioni di salute di un animale</td>
+<td style="text-align: left;"><ul>
+<li><p>dataRilevazione</p></li>
+<li><p>lucentezzaPelo</p></li>
+<li><p>vigilanza</p></li>
+<li><p>idratazione</p></li>
+<li><p>deambulazione</p></li>
+<li><p>tipologiaRespirazione</p></li>
+</ul></td>
+<td style="text-align: left;">Animale</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Lesioni</td>
+<td style="text-align: left;">Ferite riportate da un animale</td>
+<td style="text-align: left;"><ul>
+<li><p>tipologia</p></li>
+<li><p>parteDelCorpo</p></li>
+<li><p>entità</p></li>
+</ul></td>
+<td style="text-align: left;">Animale, Veterinario</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Scheda Medica</td>
+<td style="text-align: left;">Documento contenente tutte le informazioni relative ad una visita effettuata da un veterinario su un animale</td>
+<td style="text-align: left;"><ul>
+<li><p>codiceScheda</p></li>
+<li><p>massaMagra</p></li>
+<li><p>massaGrassa</p></li>
+<li><p>rispostaOculare</p></li>
+<li><p>emocromo</p></li>
+<li><p>spessoreZoccolo</p></li>
+<li><p>fegato</p></li>
+<li><p>cuore</p></li>
+<li><p>pancreas</p></li>
+<li><p>data</p></li>
+<li><p>patologie</p></li>
+<li><p>carenze</p></li>
+</ul></td>
+<td style="text-align: left;">Animale, Veterinario</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Terapia</td>
+<td style="text-align: left;">Trattamento prescritto da un veterinario conseguentemente alla rilevazione di malattie in un animale</td>
+<td style="text-align: left;"><ul>
+<li><p>codiceTerapia</p></li>
+<li><p>dataInizio</p></li>
+<li><p>durata</p></li>
+<li><p>secondaTerapiaConsecutiva</p></li>
+<li><p>codAnimale</p></li>
+</ul></td>
+<td style="text-align: left;">Veterinario, Farmaco </td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Veterinario</td>
+<td style="text-align: left;">Medico specializzato per la visita degli animali</td>
+<td style="text-align: left;"><ul>
+<li><p>codiceFiscale</p></li>
+<li><p>nome</p></li>
+<li><p>cognome</p></li>
+<li><p>contatto</p></li>
+</ul></td>
+<td style="text-align: left;">Scheda Medica, Terapia, Esame, Riproduzione, Visita</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Visita</td>
+<td style="text-align: left;">Visita di controllo effettuata per rilevare valori anomali negli indici di salute di un animale</td>
+<td style="text-align: left;"><ul>
+<li><p>codiceVisita</p></li>
+<li><p>esito</p></li>
+<li><p>dataProgrammata</p></li>
+<li><p>dataEffettiva</p></li>
+<li><p>stato</p></li>
+</ul></td>
+<td style="text-align: left;">Veterinario, Scheda gestazione</td>
+</tr>
+</tbody>
+</table>
 
-### Relazioni {#Healthcare Relazioni}
+### Relazioni
 
-+----------+----------------+-----------------------------------+
-| **Nome   | **Attributi**  | **Cardinalità**                   |
-|     rela |                |                                   |
-| zione**  |                |                                   |
-+:=========+:===============+:==================================+
-| compila  |                | -   (1,1) con Scheda medica: ogni |
-|          |                |     scheda è compilata da un solo |
-|          |                |     veterinario                   |
-|          |                |                                   |
-|          |                | -   (0,N) con Veterinario: alcuni |
-|          |                |     veterinari possono compilare  |
-|          |                |     più di una scheda medica      |
-+----------+----------------+-----------------------------------+
-| composta | posologia      | -   (1,N) con Terapia: ogni       |
-| da       |                |     terapia è composta da almeno  |
-|          |                |     un farmaco                    |
-|          |                |                                   |
-|          |                | -   (1,N) con Farmaco: ogni       |
-|          |                |     farmaco è impiegato in almeno |
-|          |                |     una terapia, altrimenti non è |
-|          |                |     memorizzato nel database      |
-+----------+----------------+-----------------------------------+
-| esegue   |                | -   (0,N) con Veterinario: alcuni |
-|          |                |     veterinari possono eseguire   |
-|          |                |     più visite di controllo       |
-|          |                |                                   |
-|          |                | -   (1,1) con Visita: ogni visita |
-|          |                |     è effettuata da un solo       |
-|          |                |     veterinario                   |
-+----------+----------------+-----------------------------------+
-| possiede |                | -   (0,N) con Animale: alcuni     |
-|          |                |     animali possono avere più di  |
-|          |                |     una scheda                    |
-|          |                |                                   |
-|          |                | -   (1,1) con Scheda medica: ogni |
-|          |                |     scheda è assocata ad un solo  |
-|          |                |     animale                       |
-+----------+----------------+-----------------------------------+
-| possiede |                | -   (1,N) con Animale: ogni       |
-| esame    |                |     animale possiede almeno un    |
-|          |                |     esame diagnostico, sia che    |
-|          |                |     sia nato nell'agriturismo,    |
-|          |                |     sia che sia stato acquisito   |
-|          |                |                                   |
-|          |                | -   (1,1) con Esame: ogni esame   |
-|          |                |     veterinario si riferisce ad   |
-|          |                |     un solo animale               |
-+----------+----------------+-----------------------------------+
-| possiede |                | -   (0,N) con Animale: alcuni     |
-| terapia  |                |     animali possono possedere più |
-|          |                |     terapie                       |
-|          |                |                                   |
-|          |                | -   (1,1) con Terapia: ogni       |
-|          |                |     terapia è associata ad un     |
-|          |                |     solo animale                  |
-+----------+----------------+-----------------------------------+
-| possiede |                | -   (1,N) con Animale: ogni       |
-| visita   |                |     animale può possedere più     |
-|          |                |     visite                        |
-|          |                |                                   |
-|          |                | -   (1,1) con Visita: ogni visita |
-|          |                |     è associata ad un solo        |
-|          |                |     animale                       |
-+----------+----------------+-----------------------------------+
-| prescriv |                | -   (0,N) con Veterinario: alcuni |
-| e        |                |     veterinari possono            |
-| esame    |                |     prescrivere più di un esame   |
-|          |                |                                   |
-|          |                | -   (1,1) con Esame: ogni esame è |
-|          |                |     prescritto da un solo         |
-|          |                |     veterinario                   |
-+----------+----------------+-----------------------------------+
-| prescriv |                | -   (0,N) con Veterinario: alcuni |
-| e        |                |     veterinari possono            |
-| terapia  |                |     prescrivere più di un terapia |
-|          |                |                                   |
-|          |                | -   (1,1) con Terapia: ogni       |
-|          |                |     terapia è prescritta da un    |
-|          |                |     solo veterinario              |
-+----------+----------------+-----------------------------------+
-| stato    |                | -   (1,N) con Animale: ogni       |
-| salute   |                |     animale può avere più indici  |
-|          |                |     di salute in diverse date     |
-|          |                |                                   |
-|          |                | -   (1,1) con Indici salute: ogni |
-|          |                |     set di indici di salute si    |
-|          |                |     riferisce ad un solo animale  |
-+----------+----------------+-----------------------------------+
+<table style="width:90%;">
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 24%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Nome     relazione</strong></th>
+<th style="text-align: left;"><strong>Attributi</strong></th>
+<th style="text-align: left;"><strong>Cardinalità</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">compila</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><ul>
+<li><p>(1,1) con Scheda medica: ogni scheda è compilata da un solo veterinario</p></li>
+<li><p>(0,N) con Veterinario: alcuni veterinari possono compilare più di una scheda medica</p></li>
+</ul></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">composta da</td>
+<td style="text-align: left;">posologia</td>
+<td style="text-align: left;"><ul>
+<li><p>(1,N) con Terapia: ogni terapia è composta da almeno un farmaco</p></li>
+<li><p>(1,N) con Farmaco: ogni farmaco è impiegato in almeno una terapia, altrimenti non è memorizzato nel database</p></li>
+</ul></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">esegue</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><ul>
+<li><p>(0,N) con Veterinario: alcuni veterinari possono eseguire più visite di controllo</p></li>
+<li><p>(1,1) con Visita: ogni visita è effettuata da un solo veterinario</p></li>
+</ul></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">possiede</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><ul>
+<li><p>(0,N) con Animale: alcuni animali possono avere più di una scheda</p></li>
+<li><p>(1,1) con Scheda medica: ogni scheda è assocata ad un solo animale</p></li>
+</ul></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">possiede esame</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><ul>
+<li><p>(1,N) con Animale: ogni animale possiede almeno un esame diagnostico, sia che sia nato nell’agriturismo, sia che sia stato acquisito</p></li>
+<li><p>(1,1) con Esame: ogni esame veterinario si riferisce ad un solo animale</p></li>
+</ul></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">possiede terapia</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><ul>
+<li><p>(0,N) con Animale: alcuni animali possono possedere più terapie</p></li>
+<li><p>(1,1) con Terapia: ogni terapia è associata ad un solo animale</p></li>
+</ul></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">possiede visita</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><ul>
+<li><p>(1,N) con Animale: ogni animale può possedere più visite</p></li>
+<li><p>(1,1) con Visita: ogni visita è associata ad un solo animale</p></li>
+</ul></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">prescrive esame</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><ul>
+<li><p>(0,N) con Veterinario: alcuni veterinari possono prescrivere più di un esame</p></li>
+<li><p>(1,1) con Esame: ogni esame è prescritto da un solo veterinario</p></li>
+</ul></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">prescrive terapia</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><ul>
+<li><p>(0,N) con Veterinario: alcuni veterinari possono prescrivere più di un terapia</p></li>
+<li><p>(1,1) con Terapia: ogni terapia è prescritta da un solo veterinario</p></li>
+</ul></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">stato salute</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><ul>
+<li><p>(1,N) con Animale: ogni animale può avere più indici di salute in diverse date</p></li>
+<li><p>(1,1) con Indici salute: ogni set di indici di salute si riferisce ad un solo animale</p></li>
+</ul></td>
+</tr>
+</tbody>
+</table>
 
 Area Produzione
 ---------------
 
-### Entità {#Produzione Entita}
+### Entità
 
-+---------+-------------+------------------------+-------------+
-| **Nome  | **Descrizio | **Attributi**          | **Collegame |
-| entità* | ne**        |                        | nti**       |
-| *       |             |                        |             |
-+:========+:============+:=======================+:============+
-| Cantine | Spazio      | -   codice             | Lotto,      |
-|         | dell'agritu |                        | Scaffalatur |
-|         | rismo       |                        | e,          |
-|         | dedicato    |                        | Parametri   |
-|         | alla        |                        |             |
-|         | stagionatur |                        |             |
-|         | a           |                        |             |
-|         | dei         |                        |             |
-|         | formaggi    |                        |             |
-|         | prodotti da |                        |             |
-|         | un lotto    |                        |             |
-+---------+-------------+------------------------+-------------+
-| Control | Controlla,  | -   durataFaseEffettiv | Ricetta,    |
-| lo      | per ogni    | a                      | Lotto       |
-| Paramet | lotto, i    |                        |             |
-| ri      | parametri   | -   temperaturaLatteEf |             |
-| Fase    | effettivi   | fettiva                |             |
-|         | relativi ad |                        |             |
-|         | ogni        | -   tempoRiposoEffetti |             |
-|         | singola     | vo                     |             |
-|         | fase di     |                        |             |
-|         | produzione  | -   codiceLotto        |             |
-|         | del         |                        |             |
-|         | formaggio   | -   codiceFase         |             |
-+---------+-------------+------------------------+-------------+
-| Fasi    | Singola     | -   codiceFase         | Ricetta,    |
-|         | istruzione  |                        | Lotto       |
-|         | con         | -   nome               |             |
-|         | informazion |                        |             |
-|         | i           | -   durata             |             |
-|         | da seguire  |                        |             |
-|         | per la      | -   durataFaseIdeale   |             |
-|         | produzione  |                        |             |
-|         | ottimale    | -   temperaturaLatteId |             |
-|         | del         | eale                   |             |
-|         | formaggio   |                        |             |
-|         | da produrre | -   tempoRiposoIdeale  |             |
-+---------+-------------+------------------------+-------------+
-| Formagg | Nutrimento  | -   nome               | Formaggio   |
-| io      | somministra |                        | Prodotto,   |
-|         | to          | -   deperibilità       | Agriturismo |
-|         | agli        |                        | ,           |
-|         | animali     | -   nomeAgriturismo    | Latte,      |
-|         | sotto forma |                        | Ricetta     |
-|         | di fieno o  | -   codLatte           |             |
-|         | insilato    |                        |             |
-|         |             | -   codRicetta         |             |
-+---------+-------------+------------------------+-------------+
-| Latte   | Composto    | -   codLatte           | Mungitrice, |
-|         | fondamental |                        | Lotto,      |
-|         | e           | -   quantitàSostanzeDi | Silos,      |
-|         | per i       | sciolte                | Formaggio   |
-|         | prodotti    |                        |             |
-|         | lattiero    |                        |             |
-|         | caseari di  |                        |             |
-|         | ogni        |                        |             |
-|         | agriturismo |                        |             |
-|         | ,           |                        |             |
-|         | ottenuto    |                        |             |
-|         | durante le  |                        |             |
-|         | varie       |                        |             |
-|         | mungiture   |                        |             |
-|         | in vari     |                        |             |
-|         | momenti     |                        |             |
-|         | della       |                        |             |
-|         | giornata    |                        |             |
-+---------+-------------+------------------------+-------------+
-| Lotto   | Laboratorio | -   codLotto           | Formaggio   |
-|         | di un       |                        | Prodotto,   |
-|         | agriturismo | -   codDipendenti      | Fasi,       |
-|         | che produce |                        | Magazzini,  |
-|         | formaggi    | -   dataProd           | Cantine,    |
-|         | con la      |                        | Latte       |
-|         | stessa (o   | -   codLab             |             |
-|         | simile)     |                        |             |
-|         | composizion | -   durata             |             |
-|         | e           |                        |             |
-|         | chimico-fis |                        |             |
-|         | ica         |                        |             |
-+---------+-------------+------------------------+-------------+
-| Magazzi | Spazio      | -   codice             | Lotto,      |
-| ni      | dell'agritu |                        | Scaffali    |
-|         | rismo       |                        |             |
-|         | dedicato    |                        |             |
-|         | allo        |                        |             |
-|         | stoccaggio  |                        |             |
-|         | dei         |                        |             |
-|         | formaggi    |                        |             |
-|         | che non     |                        |             |
-|         | necessitano |                        |             |
-|         | di          |                        |             |
-|         | stagionatur |                        |             |
-|         | a           |                        |             |
-+---------+-------------+------------------------+-------------+
-| Mungitr | Macchinario | -   codice             | Mungitura,  |
-| ice     | *hi-tech*   |                        | Latte       |
-|         | impiegato   | -   marca              |             |
-|         | durante le  |                        |             |
-|         | mungiture,  | -   modello            |             |
-|         | capace di   |                        |             |
-|         | rilevare    | -   posizione          |             |
-|         | l'animale a |                        |             |
-|         | cui è       |                        |             |
-|         | associato   |                        |             |
-|         | oltre che   |                        |             |
-|         | la quantità |                        |             |
-|         | e la        |                        |             |
-|         | composizion |                        |             |
-|         | e           |                        |             |
-|         | del latte   |                        |             |
-|         | munto       |                        |             |
-+---------+-------------+------------------------+-------------+
-| Mungitu | Attività di | -   data               | Animale,    |
-| ra      | mungitura   |                        | Mungitrice  |
-|         | quotidiana  | -   ora                |             |
-|         | degli       |                        |             |
-|         | animali     | -   quantità           |             |
-|         | dopo il     |                        |             |
-|         | pascolo     | -   codAnimale         |             |
-|         |             |                        |             |
-|         |             | -   codMungitrice      |             |
-+---------+-------------+------------------------+-------------+
-| Paramet | Parametri   | -   idSensore          | Cantine     |
-| ri      | ambientali  |                        |             |
-|         | rilevati    | -   data               |             |
-|         | nelle       |                        |             |
-|         | cantine per | -   temperatura        |             |
-|         | garantire   |                        |             |
-|         | una         | -   umidità            |             |
-|         | stagionatur |                        |             |
-|         | a           |                        |             |
-|         | ottimale    |                        |             |
-|         | del         |                        |             |
-|         | prodotto    |                        |             |
-+---------+-------------+------------------------+-------------+
-| Ricetta | Insieme di  | -   codiceRicetta      | Formaggio,  |
-|         | fasi da     |                        | Fasi        |
-|         | seguire per | -   collocazioneGeogra |             |
-|         | la          | fica                   |             |
-|         | produzione  |                        |             |
-|         | di uno      | -   durataStagionatura |             |
-|         | specifico   |                        |             |
-|         | tipo di     | -   ricetta            |             |
-|         | formaggio   |                        |             |
-+---------+-------------+------------------------+-------------+
-| Scaffal | Ripiani di  | -   codice             | Cantine     |
-| ature   | un          |                        |             |
-|         | magazzino   | -   codCantina         |             |
-|         | su cui sono |                        |             |
-|         | fisicamente |                        |             |
-|         | tenuti i    |                        |             |
-|         | prodotti    |                        |             |
-+---------+-------------+------------------------+-------------+
-| Scaffal | Ripiani di  | -   codice             | Magazzini   |
-| i       | una cantina |                        |             |
-|         | su cui sono | -   codMagazzino       |             |
-|         | fisicamente |                        |             |
-|         | tenuti i    |                        |             |
-|         | formaggi    |                        |             |
-|         | durante la  |                        |             |
-|         | stagionatur |                        |             |
-|         | a           |                        |             |
-+---------+-------------+------------------------+-------------+
-| Silos   | Profondi    | -   codice             | Latte       |
-|         | recipienti  |                        |             |
-|         | destinati   | -   capacità           |             |
-|         | alla        |                        |             |
-|         | raccolta di | -   livello            |             |
-|         | latte con   |                        |             |
-|         | composizion |                        |             |
-|         | e           |                        |             |
-|         | chimico-fis |                        |             |
-|         | ica         |                        |             |
-|         | simile      |                        |             |
-+---------+-------------+------------------------+-------------+
+<table style="width:90%;">
+<colgroup>
+<col style="width: 14%" />
+<col style="width: 20%" />
+<col style="width: 36%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Nome entità</strong></th>
+<th style="text-align: left;"><strong>Descrizione</strong></th>
+<th style="text-align: left;"><strong>Attributi</strong></th>
+<th style="text-align: left;"><strong>Collegamenti</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Cantine</td>
+<td style="text-align: left;">Spazio dell’agriturismo dedicato alla stagionatura dei formaggi prodotti da un lotto</td>
+<td style="text-align: left;"><ul>
+<li><p>codice</p></li>
+</ul></td>
+<td style="text-align: left;">Lotto, Scaffalature, Parametri</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Controllo Parametri Fase</td>
+<td style="text-align: left;">Controlla, per ogni lotto, i parametri effettivi relativi ad ogni singola fase di produzione del formaggio</td>
+<td style="text-align: left;"><ul>
+<li><p>durataFaseEffettiva</p></li>
+<li><p>temperaturaLatteEffettiva</p></li>
+<li><p>tempoRiposoEffettivo</p></li>
+<li><p>codiceLotto</p></li>
+<li><p>codiceFase</p></li>
+</ul></td>
+<td style="text-align: left;">Ricetta, Lotto</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Fasi</td>
+<td style="text-align: left;">Singola istruzione con informazioni da seguire per la produzione ottimale del formaggio da produrre</td>
+<td style="text-align: left;"><ul>
+<li><p>codiceFase</p></li>
+<li><p>nome</p></li>
+<li><p>durata</p></li>
+<li><p>durataFaseIdeale</p></li>
+<li><p>temperaturaLatteIdeale</p></li>
+<li><p>tempoRiposoIdeale</p></li>
+</ul></td>
+<td style="text-align: left;">Ricetta, Lotto</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Formaggio</td>
+<td style="text-align: left;">Nutrimento somministrato agli animali sotto forma di fieno o insilato</td>
+<td style="text-align: left;"><ul>
+<li><p>nome</p></li>
+<li><p>deperibilità</p></li>
+<li><p>nomeAgriturismo</p></li>
+<li><p>codLatte</p></li>
+<li><p>codRicetta</p></li>
+</ul></td>
+<td style="text-align: left;">Formaggio Prodotto, Agriturismo, Latte, Ricetta</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Latte</td>
+<td style="text-align: left;">Composto fondamentale per i prodotti lattiero caseari di ogni agriturismo, ottenuto durante le varie mungiture in vari momenti della giornata</td>
+<td style="text-align: left;"><ul>
+<li><p>codLatte</p></li>
+<li><p>quantitàSostanzeDisciolte</p></li>
+</ul></td>
+<td style="text-align: left;">Mungitrice, Lotto, Silos, Formaggio</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Lotto</td>
+<td style="text-align: left;">Laboratorio di un agriturismo che produce formaggi con la stessa (o simile) composizione chimico-fisica</td>
+<td style="text-align: left;"><ul>
+<li><p>codLotto</p></li>
+<li><p>codDipendenti</p></li>
+<li><p>dataProd</p></li>
+<li><p>codLab</p></li>
+<li><p>durata</p></li>
+</ul></td>
+<td style="text-align: left;">Formaggio Prodotto, Fasi, Magazzini, Cantine, Latte</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Magazzini</td>
+<td style="text-align: left;">Spazio dell’agriturismo dedicato allo stoccaggio dei formaggi che non necessitano di stagionatura</td>
+<td style="text-align: left;"><ul>
+<li><p>codice</p></li>
+</ul></td>
+<td style="text-align: left;">Lotto, Scaffali</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Mungitrice</td>
+<td style="text-align: left;">Macchinario <em>hi-tech</em> impiegato durante le mungiture, capace di rilevare l’animale a cui è associato oltre che la quantità e la composizione del latte munto</td>
+<td style="text-align: left;"><ul>
+<li><p>codice</p></li>
+<li><p>marca</p></li>
+<li><p>modello</p></li>
+<li><p>posizione</p></li>
+</ul></td>
+<td style="text-align: left;">Mungitura, Latte</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Mungitura</td>
+<td style="text-align: left;">Attività di mungitura quotidiana degli animali dopo il pascolo</td>
+<td style="text-align: left;"><ul>
+<li><p>data</p></li>
+<li><p>ora</p></li>
+<li><p>quantità</p></li>
+<li><p>codAnimale</p></li>
+<li><p>codMungitrice</p></li>
+</ul></td>
+<td style="text-align: left;">Animale, Mungitrice</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Parametri</td>
+<td style="text-align: left;">Parametri ambientali rilevati nelle cantine per garantire una stagionatura ottimale del prodotto</td>
+<td style="text-align: left;"><ul>
+<li><p>idSensore</p></li>
+<li><p>data</p></li>
+<li><p>temperatura</p></li>
+<li><p>umidità</p></li>
+</ul></td>
+<td style="text-align: left;">Cantine</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Ricetta</td>
+<td style="text-align: left;">Insieme di fasi da seguire per la produzione di uno specifico tipo di formaggio</td>
+<td style="text-align: left;"><ul>
+<li><p>codiceRicetta</p></li>
+<li><p>collocazioneGeografica</p></li>
+<li><p>durataStagionatura</p></li>
+<li><p>ricetta</p></li>
+</ul></td>
+<td style="text-align: left;">Formaggio, Fasi</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Scaffalature</td>
+<td style="text-align: left;">Ripiani di un magazzino su cui sono fisicamente tenuti i prodotti</td>
+<td style="text-align: left;"><ul>
+<li><p>codice</p></li>
+<li><p>codCantina</p></li>
+</ul></td>
+<td style="text-align: left;">Cantine</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Scaffali</td>
+<td style="text-align: left;">Ripiani di una cantina su cui sono fisicamente tenuti i formaggi durante la stagionatura</td>
+<td style="text-align: left;"><ul>
+<li><p>codice</p></li>
+<li><p>codMagazzino</p></li>
+</ul></td>
+<td style="text-align: left;">Magazzini</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Silos</td>
+<td style="text-align: left;">Profondi recipienti destinati alla raccolta di latte con composizione chimico-fisica simile</td>
+<td style="text-align: left;"><ul>
+<li><p>codice</p></li>
+<li><p>capacità</p></li>
+<li><p>livello</p></li>
+</ul></td>
+<td style="text-align: left;">Latte</td>
+</tr>
+</tbody>
+</table>
 
-### Relazioni {#Produzione Relazioni}
+### Relazioni
 
-+----------+----------------+-----------------------------------+
-| **Nome   | **Attributi**  | **Cardinalità**                   |
-|     rela |                |                                   |
-| zione**  |                |                                   |
-+:=========+:===============+:==================================+
-| apparten |                | -   (1,1) con Formaggio prodotto: |
-| ente     |                |     ogni formaggio viene prodotto |
-| a        |                |     da uno specifico lotto        |
-|          |                |     dell'agriturismo              |
-|          |                |                                   |
-|          |                | -   (1,N) con Lotto: uno stesso   |
-|          |                |     lotto è adibito alla          |
-|          |                |     produzione di diversi         |
-|          |                |     formaggi                      |
-+----------+----------------+-----------------------------------+
-| che      |                | -   (1,N) con Mungitrice: ogni    |
-| munge    |                |     mungitrice può mungere        |
-|          |                |     diverse quantità di latte     |
-|          |                |                                   |
-|          |                | -   (1,N) con Latte: ogni         |
-|          |                |     quantità di latte può         |
-|          |                |     provenire da diverse          |
-|          |                |     mungitrici                    |
-+----------+----------------+-----------------------------------+
-| con      |                | -   (1,1) con Mungitura: ogni     |
-|          |                |     mungitura viene effettuata    |
-|          |                |     con una sola mungitrice       |
-|          |                |                                   |
-|          |                | -   (1,N) con Mungitrice: ogni    |
-|          |                |     mungitrice può essere         |
-|          |                |     impiegata per diverse         |
-|          |                |     mungiture                     |
-+----------+----------------+-----------------------------------+
-| contengo |                | -   (1,N) con Cantine: ogni       |
-| no       |                |     cantina è suddivisa in più    |
-| scaffala |                |     scaffalature                  |
-| ture     |                |                                   |
-|          |                | -   (1,1) con Scaffalature: ogni  |
-|          |                |     scaffalatura può appartenere  |
-|          |                |     ad una sola cantina           |
-+----------+----------------+-----------------------------------+
-| contengo |                | -   (1,N) con Magazzini: ogni     |
-| no       |                |     magazzino è suddiviso in più  |
-| scaffali |                |     scaffali                      |
-|          |                |                                   |
-|          |                | -   (1,1) con Scaffali: ogni      |
-|          |                |     scaffale può appartenere ad   |
-|          |                |     un solo magazzino             |
-+----------+----------------+-----------------------------------+
-| controll |                | -   (1,1) con Controllo Parametri |
-| o        |                |     Fase: i parametri rilevati si |
-| fasi     |                |     riferiscono ad una fase       |
-|          |                |     specifica                     |
-|          |                |                                   |
-|          |                | -   (1,N) con Fasi: la stessa     |
-|          |                |     fase può essere controllata   |
-|          |                |     più volte                     |
-+----------+----------------+-----------------------------------+
-| controll |                | -   (1,1) con Controllo Parametri |
-| o        |                |     Fase: ogni controllo possiede |
-| lotti    |                |     un set di parametri effettivi |
-|          |                |     rilevati                      |
-|          |                |                                   |
-|          |                | -   (1,N) con Lotto: il controllo |
-|          |                |     sulla stessa fase può essere  |
-|          |                |     effettuato più volte dallo    |
-|          |                |     stesso lotto                  |
-+----------+----------------+-----------------------------------+
-| divisa   |                | -   (1,N) con Ricetta: ogni       |
-| in       |                |     ricetta è suddivisa in più    |
-|          |                |     fasi                          |
-|          |                |                                   |
-|          |                | -   (1,N) con Fasi: la stessa     |
-|          |                |     fase può essere impiegata in  |
-|          |                |     più ricette                   |
-+----------+----------------+-----------------------------------+
-| prodotto |                | -   (1,N) con Lotto: uno stesso   |
-| con      |                |     lotto può impiegare più tipi  |
-|          |                |     di latte                      |
-|          |                |                                   |
-|          |                | -   (1,N) con Latte: lo stesso    |
-|          |                |     tipo di latte può essere      |
-|          |                |     utilizzato da più lotti       |
-+----------+----------------+-----------------------------------+
-| produce  |                | -   (1,1) con Latte: una quantità |
-|          |                |     di latte viene munta da un    |
-|          |                |     solo animale                  |
-|          |                |                                   |
-|          |                | -   (0,N) con Animale: ogni       |
-|          |                |     animale che può essere munto  |
-|          |                |     può produrre diverse quantità |
-|          |                |     di latte                      |
-+----------+----------------+-----------------------------------+
-| produce  |                | -   (1,N) con Agriturismo: ogni   |
-|          |                |     agriturismo produce i propri  |
-|          |                |     formaggi                      |
-|          |                |                                   |
-|          |                | -   (1,1) con Formaggio: ogni     |
-|          |                |     tipo di formaggio è           |
-|          |                |     univocamente legato           |
-|          |                |     all'agriturismo che lo        |
-|          |                |     produce                       |
-+----------+----------------+-----------------------------------+
-| rilievo  |                | -   (1,N) con Cantine: ad ogni    |
-| parametr |                |     cantina possono corrispondere |
-| i        |                |     diverse rilevazioni di        |
-|          |                |     parametri                     |
-|          |                |                                   |
-|          |                | -   (1,1) con Parametri: ogni     |
-|          |                |     rilevazione è relativa ad una |
-|          |                |     sola cantina                  |
-+----------+----------------+-----------------------------------+
-| stoccagg |                | -   (0,N) con Lotto: i lotti che  |
-| io       |                |     richiedono stagionatura       |
-| cantine  |                |     possono stoccare o propri     |
-|          |                |     formaggi in più cantine       |
-|          |                |                                   |
-|          |                | -   (1,N) con Cantine: in ogni    |
-|          |                |     cantina possono essere        |
-|          |                |     stoccati più lotti            |
-+----------+----------------+-----------------------------------+
-| stoccagg |                | -   (1,N) con Lotto: ogni lotto è |
-| io       |                |     stoccato in più magazzini     |
-| magazzin |                |                                   |
-| i        |                | -   (1,N) con Magazzini: in ogni  |
-|          |                |     magazzino possono essere      |
-|          |                |     stoccati più lotti            |
-+----------+----------------+-----------------------------------+
-| stoccato |                | -   (1,1) con Latte: una quantità |
-| in       |                |     di latte munto deve essere    |
-|          |                |     stoccata in un solo silos     |
-|          |                |                                   |
-|          |                | -   (1,N) con Silos: ogni silos   |
-|          |                |     accoglie diverse quantità di  |
-|          |                |     latte, purchè abbiano         |
-|          |                |     quantità di sostanze          |
-|          |                |     disciolte simili              |
-+----------+----------------+-----------------------------------+
-| utilizza |                | -   (1,1) con Formaggio: ogni     |
-| ndo      |                |     formaggio ha una sola ricetta |
-|          |                |     di produzione                 |
-|          |                |                                   |
-|          |                | -   (1,N) con Ricetta: la stessa  |
-|          |                |     ricetta può essere utilizzata |
-|          |                |     per più formaggi di diversi   |
-|          |                |     agriturismi                   |
-+----------+----------------+-----------------------------------+
-| è munto  |                | -   (0,N) con Animale: solo gli   |
-| durante  |                |     animali femmina e adulti      |
-|          |                |     possono essere munti          |
-|          |                |                                   |
-|          |                | -   (1,1) con Mungitura: ogni     |
-|          |                |     mungitura è riferita ad un    |
-|          |                |     solo animale                  |
-+----------+----------------+-----------------------------------+
+<table style="width:90%;">
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 24%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Nome     relazione</strong></th>
+<th style="text-align: left;"><strong>Attributi</strong></th>
+<th style="text-align: left;"><strong>Cardinalità</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">appartenente a</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><ul>
+<li><p>(1,1) con Formaggio prodotto: ogni formaggio viene prodotto da uno specifico lotto dell’agriturismo</p></li>
+<li><p>(1,N) con Lotto: uno stesso lotto è adibito alla produzione di diversi formaggi</p></li>
+</ul></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">che munge</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><ul>
+<li><p>(1,N) con Mungitrice: ogni mungitrice può mungere diverse quantità di latte</p></li>
+<li><p>(1,N) con Latte: ogni quantità di latte può provenire da diverse mungitrici</p></li>
+</ul></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">con</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><ul>
+<li><p>(1,1) con Mungitura: ogni mungitura viene effettuata con una sola mungitrice</p></li>
+<li><p>(1,N) con Mungitrice: ogni mungitrice può essere impiegata per diverse mungiture</p></li>
+</ul></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">contengono scaffalature</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><ul>
+<li><p>(1,N) con Cantine: ogni cantina è suddivisa in più scaffalature</p></li>
+<li><p>(1,1) con Scaffalature: ogni scaffalatura può appartenere ad una sola cantina</p></li>
+</ul></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">contengono scaffali</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><ul>
+<li><p>(1,N) con Magazzini: ogni magazzino è suddiviso in più scaffali</p></li>
+<li><p>(1,1) con Scaffali: ogni scaffale può appartenere ad un solo magazzino</p></li>
+</ul></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">controllo fasi</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><ul>
+<li><p>(1,1) con Controllo Parametri Fase: i parametri rilevati si riferiscono ad una fase specifica</p></li>
+<li><p>(1,N) con Fasi: la stessa fase può essere controllata più volte</p></li>
+</ul></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">controllo lotti</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><ul>
+<li><p>(1,1) con Controllo Parametri Fase: ogni controllo possiede un set di parametri effettivi rilevati</p></li>
+<li><p>(1,N) con Lotto: il controllo sulla stessa fase può essere effettuato più volte dallo stesso lotto</p></li>
+</ul></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">divisa in</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><ul>
+<li><p>(1,N) con Ricetta: ogni ricetta è suddivisa in più fasi</p></li>
+<li><p>(1,N) con Fasi: la stessa fase può essere impiegata in più ricette</p></li>
+</ul></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">prodotto con</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><ul>
+<li><p>(1,N) con Lotto: uno stesso lotto può impiegare più tipi di latte</p></li>
+<li><p>(1,N) con Latte: lo stesso tipo di latte può essere utilizzato da più lotti</p></li>
+</ul></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">produce</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><ul>
+<li><p>(1,1) con Latte: una quantità di latte viene munta da un solo animale</p></li>
+<li><p>(0,N) con Animale: ogni animale che può essere munto può produrre diverse quantità di latte</p></li>
+</ul></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">produce</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><ul>
+<li><p>(1,N) con Agriturismo: ogni agriturismo produce i propri formaggi</p></li>
+<li><p>(1,1) con Formaggio: ogni tipo di formaggio è univocamente legato all’agriturismo che lo produce</p></li>
+</ul></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">rilievo parametri</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><ul>
+<li><p>(1,N) con Cantine: ad ogni cantina possono corrispondere diverse rilevazioni di parametri</p></li>
+<li><p>(1,1) con Parametri: ogni rilevazione è relativa ad una sola cantina</p></li>
+</ul></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">stoccaggio cantine</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><ul>
+<li><p>(0,N) con Lotto: i lotti che richiedono stagionatura possono stoccare o propri formaggi in più cantine</p></li>
+<li><p>(1,N) con Cantine: in ogni cantina possono essere stoccati più lotti</p></li>
+</ul></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">stoccaggio magazzini</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><ul>
+<li><p>(1,N) con Lotto: ogni lotto è stoccato in più magazzini</p></li>
+<li><p>(1,N) con Magazzini: in ogni magazzino possono essere stoccati più lotti</p></li>
+</ul></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">stoccato in</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><ul>
+<li><p>(1,1) con Latte: una quantità di latte munto deve essere stoccata in un solo silos</p></li>
+<li><p>(1,N) con Silos: ogni silos accoglie diverse quantità di latte, purchè abbiano quantità di sostanze disciolte simili</p></li>
+</ul></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">utilizzando</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><ul>
+<li><p>(1,1) con Formaggio: ogni formaggio ha una sola ricetta di produzione</p></li>
+<li><p>(1,N) con Ricetta: la stessa ricetta può essere utilizzata per più formaggi di diversi agriturismi</p></li>
+</ul></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">è munto durante</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><ul>
+<li><p>(0,N) con Animale: solo gli animali femmina e adulti possono essere munti</p></li>
+<li><p>(1,1) con Mungitura: ogni mungitura è riferita ad un solo animale</p></li>
+</ul></td>
+</tr>
+</tbody>
+</table>
 
 Area Soggiorno
 --------------
 
-### Entità {#Soggiorno Entita}
+### Entità
 
-+---------+-------------+------------------------+-------------+
-| **Nome  | **Descrizio | **Attributi**          | **Collegame |
-| entità* | ne**        |                        | nti**       |
-| *       |             |                        |             |
-+:========+:============+:=======================+:============+
-| Cliente | Acquirente  | -   codCarta           | Account,    |
-|         | di prodotti |                        | Agriturismo |
-|         | o servizi   |                        | ,           |
-|         | proposti da |                        | Pagamenti,  |
-|         | un          |                        | Stanza,     |
-|         | agriturismo |                        | Escursione  |
-|         | :           |                        |             |
-|         | può essere  |                        |             |
-|         | registrato  |                        |             |
-|         | o meno      |                        |             |
-+---------+-------------+------------------------+-------------+
-| Escursi | Ulteriore   | -   codice             | Cliente,    |
-| one     | servizio    |                        | Itinerario, |
-|         | offerto ai  | -   giorno             | Guida       |
-|         | clienti,    |                        |             |
-|         | prevede un  | -   orario             |             |
-|         | itinerario  |                        |             |
-|         | composto    |                        |             |
-|         | dalla       |                        |             |
-|         | visita di   |                        |             |
-|         | una serie   |                        |             |
-|         | di aree     |                        |             |
-|         | della       |                        |             |
-|         | tenuta      |                        |             |
-|         | dell'agritu |                        |             |
-|         | rismo       |                        |             |
-+---------+-------------+------------------------+-------------+
-| Guida   | Accompagnat | -   codFisc            | Escursione  |
-|         | ore         |                        |             |
-|         | degli       | -   nome               |             |
-|         | escursionis |                        |             |
-|         | ti          | -   cognome            |             |
-|         | lungo       |                        |             |
-|         | l'itinerari | -   contatto           |             |
-|         | o           |                        |             |
-|         | previsto    |                        |             |
-+---------+-------------+------------------------+-------------+
-| Itinera | Percorso di | -   codice             | Escursione, |
-| rio     | un'escursio |                        | Tappe       |
-|         | ne,         | -   numSentieri        |             |
-|         | prevede la  |                        |             |
-|         | sosta lungo |                        |             |
-|         | più tappe   |                        |             |
-+---------+-------------+------------------------+-------------+
-| Non     | Insieme dei | -   anticipo           | Account,    |
-| registr | clienti che |                        | Agriturismo |
-| ato     | non hanno   |                        | ,           |
-|         | un account  |                        | Pagamenti,  |
-|         | registrato  |                        | Stanza,     |
-|         | nel sito    |                        | Escursione  |
-+---------+-------------+------------------------+-------------+
-| Pagamen | Storico dei | -   codPagamento       | Cliente     |
-| ti      | pagamenti   |                        |             |
-|         | effettuati  | -   tipoPagamento      |             |
-|         | dai clienti |                        |             |
-|         | per         | -   totaleCosto        |             |
-|         | l'acquisto  |                        |             |
-|         | di prodotti | -   data               |             |
-|         | o servizi   |                        |             |
-|         |             | -   ora                |             |
-|         |             |                        |             |
-|         |             | -   codCarta           |             |
-+---------+-------------+------------------------+-------------+
-| Prenota | Effettiva   | -   dataPrenotazione   | Account,    |
-| zione   | prenotazion |                        | Agriturismo |
-| Escursi | e           |                        | ,           |
-| one     | di un       |                        | Pagamenti,  |
-|         | escursione  |                        | Stanza,     |
-|         | da parte di |                        | Escursione  |
-|         | un cliente  |                        |             |
-+---------+-------------+------------------------+-------------+
-| Prenota | Effettiva   | -   dataPartenza       | Account,    |
-| zione   | prenotazion |                        | Agriturismo |
-| Stanza  | e           | -   dataArivo          | ,           |
-|         | di una      |                        | Pagamenti,  |
-|         | stanza da   |                        | Stanza,     |
-|         | parte di un |                        | Escursione, |
-|         | cliente     |                        | Servizio    |
-|         |             |                        | per Stanza  |
-+---------+-------------+------------------------+-------------+
-| Servizi | Ogni        | -   tipoServizio       | Stanza      |
-| o       | cliente che |                        |             |
-| Aggiunt | soggiorna   | -   costo              |             |
-| ivo     | in una      |                        |             |
-|         | stanza può  |                        |             |
-|         | usufruire   |                        |             |
-|         | di servizi  |                        |             |
-|         | aggiuntivi  |                        |             |
-|         | quali       |                        |             |
-|         | idromassagg |                        |             |
-|         | io,         |                        |             |
-|         | accesso al  |                        |             |
-|         | centro      |                        |             |
-|         | benessere,  |                        |             |
-|         | accesso     |                        |             |
-|         | piscina     |                        |             |
-|         | etc.        |                        |             |
-+---------+-------------+------------------------+-------------+
-| Servizi | Servizio    | -   dataInizioUtilizzo | Account,    |
-| o       | effettivame |                        | Agriturismo |
-| per     | nte         | -   dataFineUtilizzo   | ,           |
-| Stanza  | aggiunto    |                        | Pagamenti,  |
-|         | alla        |                        | Prenotazion |
-|         | prenotazion |                        | e           |
-|         | e           |                        | Stanza,     |
-|         | della       |                        | Escursione  |
-|         | stanza di   |                        |             |
-|         | un cliente  |                        |             |
-+---------+-------------+------------------------+-------------+
-| Stanza  | Una camera  | -   numStanza          | Cliente,    |
-|         | singola o   |                        | Agriturismo |
-|         | suite che   | -   costoGiornaliero   | ,           |
-|         | può essere  |                        | Servizio    |
-|         | prenotata   | -   numLetti           | Aggiuntivo  |
-|         | per il      |                        |             |
-|         | soggiorno   | -   tipoLetti          |             |
-|         | dei clienti |                        |             |
-|         |             | -   suite              |             |
-+---------+-------------+------------------------+-------------+
-| Tappe   | Area        | -   nome               | Itinerario  |
-|         | dell'agritu |                        |             |
-|         | rismo       | -   tempoPermanenza    |             |
-|         | dedicata    |                        |             |
-|         | alla visita |                        |             |
-|         | e al riposo |                        |             |
-|         | durante le  |                        |             |
-|         | escursioni  |                        |             |
-+---------+-------------+------------------------+-------------+
+<table style="width:90%;">
+<colgroup>
+<col style="width: 14%" />
+<col style="width: 20%" />
+<col style="width: 36%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Nome entità</strong></th>
+<th style="text-align: left;"><strong>Descrizione</strong></th>
+<th style="text-align: left;"><strong>Attributi</strong></th>
+<th style="text-align: left;"><strong>Collegamenti</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Cliente</td>
+<td style="text-align: left;">Acquirente di prodotti o servizi proposti da un agriturismo: può essere registrato o meno</td>
+<td style="text-align: left;"><ul>
+<li><p>codCarta</p></li>
+</ul></td>
+<td style="text-align: left;">Account, Agriturismo, Pagamenti, Stanza, Escursione</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Escursione</td>
+<td style="text-align: left;">Ulteriore servizio offerto ai clienti, prevede un itinerario composto dalla visita di una serie di aree della tenuta dell’agriturismo</td>
+<td style="text-align: left;"><ul>
+<li><p>codice</p></li>
+<li><p>giorno</p></li>
+<li><p>orario</p></li>
+</ul></td>
+<td style="text-align: left;">Cliente, Itinerario, Guida</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Guida</td>
+<td style="text-align: left;">Accompagnatore degli escursionisti lungo l’itinerario previsto</td>
+<td style="text-align: left;"><ul>
+<li><p>codFisc</p></li>
+<li><p>nome</p></li>
+<li><p>cognome</p></li>
+<li><p>contatto</p></li>
+</ul></td>
+<td style="text-align: left;">Escursione</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Itinerario</td>
+<td style="text-align: left;">Percorso di un’escursione, prevede la sosta lungo più tappe</td>
+<td style="text-align: left;"><ul>
+<li><p>codice</p></li>
+<li><p>numSentieri</p></li>
+</ul></td>
+<td style="text-align: left;">Escursione, Tappe</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Non registrato</td>
+<td style="text-align: left;">Insieme dei clienti che non hanno un account registrato nel sito</td>
+<td style="text-align: left;"><ul>
+<li><p>anticipo</p></li>
+</ul></td>
+<td style="text-align: left;">Account, Agriturismo, Pagamenti, Stanza, Escursione</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Pagamenti</td>
+<td style="text-align: left;">Storico dei pagamenti effettuati dai clienti per l’acquisto di prodotti o servizi</td>
+<td style="text-align: left;"><ul>
+<li><p>codPagamento</p></li>
+<li><p>tipoPagamento</p></li>
+<li><p>totaleCosto</p></li>
+<li><p>data</p></li>
+<li><p>ora</p></li>
+<li><p>codCarta</p></li>
+</ul></td>
+<td style="text-align: left;">Cliente</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Prenotazione Escursione</td>
+<td style="text-align: left;">Effettiva prenotazione di un escursione da parte di un cliente</td>
+<td style="text-align: left;"><ul>
+<li><p>dataPrenotazione</p></li>
+</ul></td>
+<td style="text-align: left;">Account, Agriturismo, Pagamenti, Stanza, Escursione</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Prenotazione Stanza</td>
+<td style="text-align: left;">Effettiva prenotazione di una stanza da parte di un cliente</td>
+<td style="text-align: left;"><ul>
+<li><p>dataPartenza</p></li>
+<li><p>dataArivo</p></li>
+</ul></td>
+<td style="text-align: left;">Account, Agriturismo, Pagamenti, Stanza, Escursione, Servizio per Stanza</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Servizio Aggiuntivo</td>
+<td style="text-align: left;">Ogni cliente che soggiorna in una stanza può usufruire di servizi aggiuntivi quali idromassaggio, accesso al centro benessere, accesso piscina etc.</td>
+<td style="text-align: left;"><ul>
+<li><p>tipoServizio</p></li>
+<li><p>costo</p></li>
+</ul></td>
+<td style="text-align: left;">Stanza</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Servizio per Stanza</td>
+<td style="text-align: left;">Servizio effettivamente aggiunto alla prenotazione della stanza di un cliente</td>
+<td style="text-align: left;"><ul>
+<li><p>dataInizioUtilizzo</p></li>
+<li><p>dataFineUtilizzo</p></li>
+</ul></td>
+<td style="text-align: left;">Account, Agriturismo, Pagamenti, Prenotazione Stanza, Escursione</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Stanza</td>
+<td style="text-align: left;">Una camera singola o suite che può essere prenotata per il soggiorno dei clienti</td>
+<td style="text-align: left;"><ul>
+<li><p>numStanza</p></li>
+<li><p>costoGiornaliero</p></li>
+<li><p>numLetti</p></li>
+<li><p>tipoLetti</p></li>
+<li><p>suite</p></li>
+</ul></td>
+<td style="text-align: left;">Cliente, Agriturismo, Servizio Aggiuntivo</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Tappe</td>
+<td style="text-align: left;">Area dell’agriturismo dedicata alla visita e al riposo durante le escursioni</td>
+<td style="text-align: left;"><ul>
+<li><p>nome</p></li>
+<li><p>tempoPermanenza</p></li>
+</ul></td>
+<td style="text-align: left;">Itinerario</td>
+</tr>
+</tbody>
+</table>
 
-### Relazioni {#Soggiono Relazioni}
+### Relazioni
 
-+----------+----------------+-----------------------------------+
-| **Nome   | **Attributi**  | **Cardinalità**                   |
-|     rela |                |                                   |
-| zione**  |                |                                   |
-+:=========+:===============+:==================================+
-| assegnaz |                | -   (0,N) con Cliente: un cliente |
-| ione     |                |     può prenotare o no più stanze |
-| cliente  |                |                                   |
-|          |                | -   (1,1) con Prenotazione        |
-|          |                |     Stanza: ogni prenotazione è   |
-|          |                |     effettuata da un solo cliente |
-+----------+----------------+-----------------------------------+
-| assegnaz |                | -   (1,1) con Prenotazione        |
-| ione     |                |     Stanza: ogni prenotazione si  |
-| stanza   |                |     riferisce ad una sola stanza  |
-|          |                |                                   |
-|          |                | -   (0,N) con Stanza: ogni stanza |
-|          |                |     può essere prenotata o no più |
-|          |                |     volte                         |
-+----------+----------------+-----------------------------------+
-| composto |                | -   (1,N) con Itinerario: ogni    |
-| da       |                |     itinerario è composto da più  |
-|          |                |     tappe                         |
-|          |                |                                   |
-|          |                | -   (1,N) con Tappe: ogni tappa   |
-|          |                |     può appartenere a più         |
-|          |                |     itinerari                     |
-+----------+----------------+-----------------------------------+
-| division |                | -   (1,1) con Stanza: ogni stanza |
-| e        |                |     appartiene ad un solo         |
-| stanza   |                |     agriturismo                   |
-|          |                |                                   |
-|          |                | -   (1,N) con Agriturismo: ad     |
-|          |                |     ogni agriturismo appartengono |
-|          |                |     più stanze                    |
-+----------+----------------+-----------------------------------+
-| effettua |                | -   (0,N) con Cliente: alcuni     |
-|          |                |     clienti possono effettuare    |
-|          |                |     più pagamenti                 |
-|          |                |                                   |
-|          |                | -   (1,1) con Pagamenti: ogni     |
-|          |                |     pagamento viene effettuato da |
-|          |                |     un solo cliente               |
-+----------+----------------+-----------------------------------+
-| effettua |                | -   (1,1) con Escursione: ogni    |
-| ta       |                |     escursione è effettuata da    |
-| da       |                |     una sola guida                |
-|          |                |                                   |
-|          |                | -   (0,N) con Guida: ogni guida   |
-|          |                |     può effettuare o no più       |
-|          |                |     escursioni                    |
-+----------+----------------+-----------------------------------+
-| legata a |                | -   (1,N) con Escursione: ogni    |
-|          |                |     escursione può essere legata  |
-|          |                |     a più itinerari               |
-|          |                |                                   |
-|          |                | -   (1,N) con Itinerario: ogni    |
-|          |                |     itinerario può comporre più   |
-|          |                |     escursioni                    |
-+----------+----------------+-----------------------------------+
-| ospita   |                | -   (0,N) con Cliente: ogni       |
-|          |                |     cliente può non essere        |
-|          |                |     ospitato da nessun            |
-|          |                |     agriturismo (effettua solo    |
-|          |                |     acquisti), oppure risiedere   |
-|          |                |     in più agriturismi            |
-|          |                |                                   |
-|          |                | -   (1,N) con Agriturismo: in     |
-|          |                |     ogni agriturismo risiedono    |
-|          |                |     più clienti                   |
-+----------+----------------+-----------------------------------+
-| possiede |                | -   (0,1) con Cliente: ogni       |
-|          |                |     cliente può essere registrato |
-|          |                |     o no, e quindi possedere al   |
-|          |                |     massimo un account            |
-|          |                |                                   |
-|          |                | -   (1,1) con Account: ogni       |
-|          |                |     account è associato ad un     |
-|          |                |     solo cliente                  |
-+----------+----------------+-----------------------------------+
-| prenotaz |                | -   (0,N) con Cliente: un cliente |
-| ione     |                |     può prenotare o no più        |
-| cliente  |                |     escursioni                    |
-|          |                |                                   |
-|          |                | -   (1,1) con Prenotazione        |
-|          |                |     Escursione: ogni prenotazione |
-|          |                |     si riferisce ad una sola      |
-|          |                |     escursione                    |
-+----------+----------------+-----------------------------------+
-| prenotaz |                | -   (1,1) con Prenotazione        |
-| ione     |                |     Escursione: ogni prenotazione |
-| escursio |                |     si riferisce ad una sola      |
-| ne       |                |     escursione                    |
-|          |                |                                   |
-|          |                | -   (0,N) con Escursione: ogni    |
-|          |                |     escursione può o no essere    |
-|          |                |     prenotata più volte           |
-+----------+----------------+-----------------------------------+
-| servizio |                | -   (1,1) con Servizio per        |
-| associat |                |     Stanza: ogni servizio         |
-| o        |                |     aggiunto ad una stanza        |
-|          |                |     comprende un solo set di      |
-|          |                |     servizi                       |
-|          |                |                                   |
-|          |                | -   (1,N) con Servizio            |
-|          |                |     Aggiuntivo: ogni servizio     |
-|          |                |     aggiuntivo può essere         |
-|          |                |     associato a più stanze        |
-|          |                |     prenotate                     |
-+----------+----------------+-----------------------------------+
-| stanza   |                | -   (1,1) con Servizio per        |
-| associat |                |     Stanza: ad ogni stanza        |
-| a        |                |     prenotta con servizio         |
-|          |                |     corrisponde un solo set di    |
-|          |                |     servizi                       |
-|          |                |                                   |
-|          |                | -   (0,N) con Prenotazione        |
-|          |                |     Stanza: ogni servizio offerto |
-|          |                |     può essere associato a più    |
-|          |                |     stanze prenotate              |
-+----------+----------------+-----------------------------------+
+<table style="width:90%;">
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 24%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Nome     relazione</strong></th>
+<th style="text-align: left;"><strong>Attributi</strong></th>
+<th style="text-align: left;"><strong>Cardinalità</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">assegnazione cliente</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><ul>
+<li><p>(0,N) con Cliente: un cliente può prenotare o no più stanze</p></li>
+<li><p>(1,1) con Prenotazione Stanza: ogni prenotazione è effettuata da un solo cliente</p></li>
+</ul></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">assegnazione stanza</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><ul>
+<li><p>(1,1) con Prenotazione Stanza: ogni prenotazione si riferisce ad una sola stanza</p></li>
+<li><p>(0,N) con Stanza: ogni stanza può essere prenotata o no più volte</p></li>
+</ul></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">composto da</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><ul>
+<li><p>(1,N) con Itinerario: ogni itinerario è composto da più tappe</p></li>
+<li><p>(1,N) con Tappe: ogni tappa può appartenere a più itinerari</p></li>
+</ul></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">divisione stanza</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><ul>
+<li><p>(1,1) con Stanza: ogni stanza appartiene ad un solo agriturismo</p></li>
+<li><p>(1,N) con Agriturismo: ad ogni agriturismo appartengono più stanze</p></li>
+</ul></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">effettua</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><ul>
+<li><p>(0,N) con Cliente: alcuni clienti possono effettuare più pagamenti</p></li>
+<li><p>(1,1) con Pagamenti: ogni pagamento viene effettuato da un solo cliente</p></li>
+</ul></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">effettuata da</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><ul>
+<li><p>(1,1) con Escursione: ogni escursione è effettuata da una sola guida</p></li>
+<li><p>(0,N) con Guida: ogni guida può effettuare o no più escursioni</p></li>
+</ul></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">legata a</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><ul>
+<li><p>(1,N) con Escursione: ogni escursione può essere legata a più itinerari</p></li>
+<li><p>(1,N) con Itinerario: ogni itinerario può comporre più escursioni</p></li>
+</ul></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ospita</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><ul>
+<li><p>(0,N) con Cliente: ogni cliente può non essere ospitato da nessun agriturismo (effettua solo acquisti), oppure risiedere in più agriturismi</p></li>
+<li><p>(1,N) con Agriturismo: in ogni agriturismo risiedono più clienti</p></li>
+</ul></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">possiede</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><ul>
+<li><p>(0,1) con Cliente: ogni cliente può essere registrato o no, e quindi possedere al massimo un account</p></li>
+<li><p>(1,1) con Account: ogni account è associato ad un solo cliente</p></li>
+</ul></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">prenotazione cliente</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><ul>
+<li><p>(0,N) con Cliente: un cliente può prenotare o no più escursioni</p></li>
+<li><p>(1,1) con Prenotazione Escursione: ogni prenotazione si riferisce ad una sola escursione</p></li>
+</ul></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">prenotazione escursione</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><ul>
+<li><p>(1,1) con Prenotazione Escursione: ogni prenotazione si riferisce ad una sola escursione</p></li>
+<li><p>(0,N) con Escursione: ogni escursione può o no essere prenotata più volte</p></li>
+</ul></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">servizio associato</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><ul>
+<li><p>(1,1) con Servizio per Stanza: ogni servizio aggiunto ad una stanza comprende un solo set di servizi</p></li>
+<li><p>(1,N) con Servizio Aggiuntivo: ogni servizio aggiuntivo può essere associato a più stanze prenotate</p></li>
+</ul></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">stanza associata</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><ul>
+<li><p>(1,1) con Servizio per Stanza: ad ogni stanza prenotta con servizio corrisponde un solo set di servizi</p></li>
+<li><p>(0,N) con Prenotazione Stanza: ogni servizio offerto può essere associato a più stanze prenotate</p></li>
+</ul></td>
+</tr>
+</tbody>
+</table>
 
 Area Store
 ----------
 
-### Entità {#Store Entita}
+### Entità
 
-+---------+-------------+------------------------+-------------+
-| **Nome  | **Descrizio | **Attributi**          | **Collegame |
-| entità* | ne**        |                        | nti**       |
-| *       |             |                        |             |
-+:========+:============+:=======================+:============+
-| Account | Identità    | -   utente             | Cliente,    |
-|         | digitale    |                        | Recensione, |
-|         | legata ad   | -   password           | Ordine      |
-|         | un cliente: |                        | Prodotti    |
-|         | permette    | -   domandaRec         |             |
-|         | l'acquisto  |                        |             |
-|         | e la        | -   rispostaRec        |             |
-|         | recensione  |                        |             |
-|         | sullo store | -   numTelefono        |             |
-|         | online dei  |                        |             |
-|         | prodotti    | -   codFiscale         |             |
-|         | caseari     |                        |             |
-|         |             | -   dataIscrizione     |             |
-|         |             |                        |             |
-|         |             | -   tipoDoc            |             |
-|         |             |                        |             |
-|         |             | -   numDoc             |             |
-|         |             |                        |             |
-|         |             | -   codDoc             |             |
-|         |             |                        |             |
-|         |             | -   scadenzaDoc        |             |
-|         |             |                        |             |
-|         |             | -   enteRilascio       |             |
-|         |             |                        |             |
-|         |             | -   cognome            |             |
-|         |             |                        |             |
-|         |             | -   nome               |             |
-|         |             |                        |             |
-|         |             | -   indirizzo          |             |
-+---------+-------------+------------------------+-------------+
-| Centri  | La          | -   codice             | Spedizione  |
-| Smistam | spedizione  |                        |             |
-| ento    | di un       | -   contatto           |             |
-|         | prodotto    |                        |             |
-|         | attraversa  | -   indirizzo          |             |
-|         | numerosi    |                        |             |
-|         | centri di   | -   nome               |             |
-|         | smistamento |                        |             |
-|         | prima di    |                        |             |
-|         | raggiungere |                        |             |
-|         | la propria  |                        |             |
-|         | destinazion |                        |             |
-|         | e           |                        |             |
-+---------+-------------+------------------------+-------------+
-| Formagg | L'effettivo | -   codiceProdotto     | Recensione, |
-| io      | formaggio   |                        | Formaggio,  |
-| Prodott | prodotto in | -   peso               | Ordine      |
-| o       | una certa   |                        | Prodotti,   |
-|         | data e con  | -   scadenza           | Lotto       |
-|         | una         |                        |             |
-|         | determinata | -   prezzo             |             |
-|         | data di     |                        |             |
-|         | scadenza    | -   rimastiInStock     |             |
-|         |             |                        |             |
-|         |             | -   lottoAppartenenza  |             |
-+---------+-------------+------------------------+-------------+
-| Ordine  | Lista dei   | -   codiceOrdine       | Cliente,    |
-| Prodott | prodotti    |                        | Formaggio   |
-| i       | ordinati    | -   tipoConsegnaReso   | Prodotto,   |
-|         | sullo store |                        | Spedizione  |
-|         | online da   | -   stato              |             |
-|         | un cliente  |                        |             |
-|         |             | -   data               |             |
-+---------+-------------+------------------------+-------------+
-| Recensi | Opinione    | -   codiceRecensione   | Account,    |
-| one     | dei clienti |                        | Formaggio   |
-|         | sulla       | -   gradimentoGenerale | Prodotto    |
-|         | qualità di  |                        |             |
-|         | uno         | -   qualitàPercepita   |             |
-|         | specifico   |                        |             |
-|         | prodotto    | -   gusto              |             |
-|         | acquistato  |                        |             |
-|         |             | -   campoTestuale      |             |
-|         |             |                        |             |
-|         |             | -   conservazione      |             |
-+---------+-------------+------------------------+-------------+
-| Spedizi | Storico     | -   codice             | Ordine      |
-| one     | delle       |                        | Prodotti,   |
-|         | spedizioni  | -   dataConsegnaEffett | Centri      |
-|         | effettuate  | iva                    | Smistamento |
-|         | per l'invio |                        |             |
-|         | dei         | -   dataConsegnaPrevis |             |
-|         | prodotti    | ta                     |             |
-|         | agli        |                        |             |
-|         | acquirenti  | -   percorso           |             |
-|         |             |                        |             |
-|         |             | -   stato              |             |
-+---------+-------------+------------------------+-------------+
+<table style="width:90%;">
+<colgroup>
+<col style="width: 14%" />
+<col style="width: 20%" />
+<col style="width: 36%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Nome entità</strong></th>
+<th style="text-align: left;"><strong>Descrizione</strong></th>
+<th style="text-align: left;"><strong>Attributi</strong></th>
+<th style="text-align: left;"><strong>Collegamenti</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Account</td>
+<td style="text-align: left;">Identità digitale legata ad un cliente: permette l’acquisto e la recensione sullo store online dei prodotti caseari</td>
+<td style="text-align: left;"><ul>
+<li><p>utente</p></li>
+<li><p>password</p></li>
+<li><p>domandaRec</p></li>
+<li><p>rispostaRec</p></li>
+<li><p>numTelefono</p></li>
+<li><p>codFiscale</p></li>
+<li><p>dataIscrizione</p></li>
+<li><p>tipoDoc</p></li>
+<li><p>numDoc</p></li>
+<li><p>codDoc</p></li>
+<li><p>scadenzaDoc</p></li>
+<li><p>enteRilascio</p></li>
+<li><p>cognome</p></li>
+<li><p>nome</p></li>
+<li><p>indirizzo</p></li>
+</ul></td>
+<td style="text-align: left;">Cliente, Recensione, Ordine Prodotti</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Centri Smistamento</td>
+<td style="text-align: left;">La spedizione di un prodotto attraversa numerosi centri di smistamento prima di raggiungere la propria destinazione</td>
+<td style="text-align: left;"><ul>
+<li><p>codice</p></li>
+<li><p>contatto</p></li>
+<li><p>indirizzo</p></li>
+<li><p>nome</p></li>
+</ul></td>
+<td style="text-align: left;">Spedizione</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Formaggio Prodotto</td>
+<td style="text-align: left;">L’effettivo formaggio prodotto in una certa data e con una determinata data di scadenza</td>
+<td style="text-align: left;"><ul>
+<li><p>codiceProdotto</p></li>
+<li><p>peso</p></li>
+<li><p>scadenza</p></li>
+<li><p>prezzo</p></li>
+<li><p>rimastiInStock</p></li>
+<li><p>lottoAppartenenza</p></li>
+</ul></td>
+<td style="text-align: left;">Recensione, Formaggio, Ordine Prodotti, Lotto</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Ordine Prodotti</td>
+<td style="text-align: left;">Lista dei prodotti ordinati sullo store online da un cliente</td>
+<td style="text-align: left;"><ul>
+<li><p>codiceOrdine</p></li>
+<li><p>tipoConsegnaReso</p></li>
+<li><p>stato</p></li>
+<li><p>data</p></li>
+</ul></td>
+<td style="text-align: left;">Cliente, Formaggio Prodotto, Spedizione</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Recensione</td>
+<td style="text-align: left;">Opinione dei clienti sulla qualità di uno specifico prodotto acquistato</td>
+<td style="text-align: left;"><ul>
+<li><p>codiceRecensione</p></li>
+<li><p>gradimentoGenerale</p></li>
+<li><p>qualitàPercepita</p></li>
+<li><p>gusto</p></li>
+<li><p>campoTestuale</p></li>
+<li><p>conservazione</p></li>
+</ul></td>
+<td style="text-align: left;">Account, Formaggio Prodotto</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Spedizione</td>
+<td style="text-align: left;">Storico delle spedizioni effettuate per l’invio dei prodotti agli acquirenti</td>
+<td style="text-align: left;"><ul>
+<li><p>codice</p></li>
+<li><p>dataConsegnaEffettiva</p></li>
+<li><p>dataConsegnaPrevista</p></li>
+<li><p>percorso</p></li>
+<li><p>stato</p></li>
+</ul></td>
+<td style="text-align: left;">Ordine Prodotti, Centri Smistamento</td>
+</tr>
+</tbody>
+</table>
 
-### Relazioni {#Store Relazioni}
+### Relazioni
 
-+----------+----------------+-----------------------------------+
-| **Nome   | **Attributi**  | **Cardinalità**                   |
-|     rela |                |                                   |
-| zione**  |                |                                   |
-+:=========+:===============+:==================================+
-| consegna |                | -   (1,1) con Ordine Prodotti:    |
-| to       |                |     ogni ordine è associato da    |
-| da       |                |     una sola spedizione           |
-|          |                |                                   |
-|          |                | -   (1,N) con Spedizione: ogni    |
-|          |                |     spedizione può consegnare più |
-|          |                |     ordini                        |
-+----------+----------------+-----------------------------------+
-| contenut | quantità, reso | -   (0,N) con Formaggio Prodotto: |
-| o        |                |     ogni formaggio può            |
-| ordine   |                |     appartenere o no a più ordini |
-|          |                |                                   |
-|          |                | -   (1,N) con Ordine Prodotti:    |
-|          |                |     ogni ordine è composto da uno |
-|          |                |     o più formaggi                |
-+----------+----------------+-----------------------------------+
-| esegue   |                | -   (0,N) con Account: ogni       |
-| ordine   |                |     account può può effettuare o  |
-|          |                |     no più ordini                 |
-|          |                |                                   |
-|          |                | -   (1,1) con Ordine Prodotti:    |
-|          |                |     ogni ordine è effettuato da   |
-|          |                |     un solo account               |
-+----------+----------------+-----------------------------------+
-| processa |                | -   (1,N) con Spedizioni: ogni    |
-| ta       |                |     spedizione può essere         |
-| da       |                |     processata da più centri di   |
-|          |                |     smistamento                   |
-|          |                |                                   |
-|          |                | -   (1,N) con Centri Smistamento: |
-|          |                |     ogni hub può processare più   |
-|          |                |     spedizioni                    |
-+----------+----------------+-----------------------------------+
-| scrive   |                | -   (0,N) con Account: ogni       |
-|          |                |     account può scrivere o no una |
-|          |                |     o più recensioni              |
-|          |                |                                   |
-|          |                | -   (1,1) con Recensione: ogni    |
-|          |                |     recensione è stata scritta da |
-|          |                |     un solo account               |
-+----------+----------------+-----------------------------------+
-| valuta   |                | -   (1,1) con Recensione: ogni    |
-|          |                |     recensione valuta un solo     |
-|          |                |     formaggio                     |
-|          |                |                                   |
-|          |                | -   (0,N) con Formaggio Prodotto: |
-|          |                |     ogni formaggio può essere     |
-|          |                |     valutato o no da più          |
-|          |                |     recensioni                    |
-+----------+----------------+-----------------------------------+
+<table style="width:90%;">
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 24%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Nome     relazione</strong></th>
+<th style="text-align: left;"><strong>Attributi</strong></th>
+<th style="text-align: left;"><strong>Cardinalità</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">consegnato da</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><ul>
+<li><p>(1,1) con Ordine Prodotti: ogni ordine è associato da una sola spedizione</p></li>
+<li><p>(1,N) con Spedizione: ogni spedizione può consegnare più ordini</p></li>
+</ul></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">contenuto ordine</td>
+<td style="text-align: left;">quantità, reso</td>
+<td style="text-align: left;"><ul>
+<li><p>(0,N) con Formaggio Prodotto: ogni formaggio può appartenere o no a più ordini</p></li>
+<li><p>(1,N) con Ordine Prodotti: ogni ordine è composto da uno o più formaggi</p></li>
+</ul></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">esegue ordine</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><ul>
+<li><p>(0,N) con Account: ogni account può può effettuare o no più ordini</p></li>
+<li><p>(1,1) con Ordine Prodotti: ogni ordine è effettuato da un solo account</p></li>
+</ul></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">processata da</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><ul>
+<li><p>(1,N) con Spedizioni: ogni spedizione può essere processata da più centri di smistamento</p></li>
+<li><p>(1,N) con Centri Smistamento: ogni hub può processare più spedizioni</p></li>
+</ul></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">scrive</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><ul>
+<li><p>(0,N) con Account: ogni account può scrivere o no una o più recensioni</p></li>
+<li><p>(1,1) con Recensione: ogni recensione è stata scritta da un solo account</p></li>
+</ul></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">valuta</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><ul>
+<li><p>(1,1) con Recensione: ogni recensione valuta un solo formaggio</p></li>
+<li><p>(0,N) con Formaggio Prodotto: ogni formaggio può essere valutato o no da più recensioni</p></li>
+</ul></td>
+</tr>
+</tbody>
+</table>
 
-Ristrutturazione generalizzazioni {#sec:ristrutturazione}
+Ristrutturazione generalizzazioni
 =================================
 
 animale
 -------
 
-![generalizzazione dell'entità Animale
-Acquisito](ridondanze/animale.png){width="115%"}
+<figure>
+<img src="ridondanze/animale.png" alt="generalizzazione dell’entità Animale Acquisito" style="width:115.0%" /><figcaption>generalizzazione dell’entità Animale Acquisito</figcaption>
+</figure>
 
-La generalizzazione dell'entità Animale Acquisito viene risolta
-sostituendo l'entità stessa con una relazione che mantiene gli stessi
-attributi ad eccezione del codice di acquisizione; essendo questa un'
+La generalizzazione dell’entità Animale Acquisito viene risolta
+sostituendo l’entità stessa con una relazione che mantiene gli stessi
+attributi ad eccezione del codice di acquisizione; essendo questa un’
 associazione con cardinalità (0,1)-(1,N), viene usata come chiave
-l'identificatore di animale. Inoltre, vengono eliminate le relazioni
-ricorsive padre e madre tramite l'inserimento degli attributi *idMadre*
+l’identificatore di animale. Inoltre, vengono eliminate le relazioni
+ricorsive padre e madre tramite l’inserimento degli attributi *idMadre*
 e *idPadre* con vincoli di integrità generici.
 
 sensori
 -------
 
-![generalizzazione dell'entità
-Sensori](ridondanze/sensori.png){width="115%"}
+<figure>
+<img src="ridondanze/sensori.png" alt="generalizzazione dell’entità Sensori" style="width:115.0%" /><figcaption>generalizzazione dell’entità Sensori</figcaption>
+</figure>
 
 Si è preferito eliminare la generalizzazione di Sensori dividendo
-l'entità in tre nuove entità indipendenti, in quanto ogni sensore
+l’entità in tre nuove entità indipendenti, in quanto ogni sensore
 raccoglie informazioni di tipo diverso, e ciò riempirebbe
 alternativamente la tabella di valori NULL. Con questa soluzione, ogni
 tipologia di sensore compila record completi e contenenti solamente i
@@ -1572,24 +1590,26 @@ dati raccolti.
 acqua
 -----
 
-![generalizzazione dell'entità Acqua
-Arricchita](ridondanze/acqua.png){width="115%"}
+<figure>
+<img src="ridondanze/acqua.png" alt="generalizzazione dell’entità Acqua Arricchita" style="width:115.0%" /><figcaption>generalizzazione dell’entità Acqua Arricchita</figcaption>
+</figure>
 
 La generalizzazione parziale di Acqua Arricchita è stata eliminata
 considerando il fatto che trasformandola in una relazione si ottiene una
 tabella che contiene un solo attributo come chiave primaria. Questo non
-consente di avere informazioni dettagliate sull'acqua da fornire agli
-animali. Il problema si risolve utilizzando un'unica tabella che ha come
+consente di avere informazioni dettagliate sull’acqua da fornire agli
+animali. Il problema si risolve utilizzando un’unica tabella che ha come
 identificatore primario le concentrazioni di vitamine e sali,
-considerando l'acqua non arricchita come avente concentrazioni pari a
+considerando l’acqua non arricchita come avente concentrazioni pari a
 zero su entrambi gli attributi. Ciò consente di evitare valori NULL
 sulla chiave primaria.
 
 riproduzione
 ------------
 
-![generalizzazione dell'entità
-Riproduzione](ridondanze/riproduzione.png){width="115%"}
+<figure>
+<img src="ridondanze/riproduzione.png" alt="generalizzazione dell’entità Riproduzione" style="width:115.0%" /><figcaption>generalizzazione dell’entità Riproduzione</figcaption>
+</figure>
 
 La generalizzazione sulla tabella Riproduzione è stata ristrutturata
 considerando che entrambi gli attributi *codiceNeonato* e
@@ -1603,36 +1623,39 @@ ulteriori entità nel database.
 allestimento
 ------------
 
-![generalizzazione dell'entità
-Allestimento](ridondanze/allestimento.png){width="115%"}
+<figure>
+<img src="ridondanze/allestimento.png" alt="generalizzazione dell’entità Allestimento" style="width:115.0%" /><figcaption>generalizzazione dell’entità Allestimento</figcaption>
+</figure>
 
-La generalizzazione dell'entità Allestimento è stata risolta separando
+La generalizzazione dell’entità Allestimento è stata risolta separando
 le varie entità figlie. Facendo ciò si eliminano i valori NULL
-sull'attributo *quantitàRestante* per gli impianti di illuminazione e di
+sull’attributo *quantitàRestante* per gli impianti di illuminazione e di
 condizionamento, inoltre si evita di controllare che i pasti vengano
 assegnati ad allestimenti non consoni (condizionamento e illuminazione).
 
 cliente
 -------
 
-![generalizzazione dell'entità Cliente
-Registrato](ridondanze/cliente.png){width="115%"}
+<figure>
+<img src="ridondanze/cliente.png" alt="generalizzazione dell’entità Cliente Registrato" style="width:115.0%" /><figcaption>generalizzazione dell’entità Cliente Registrato</figcaption>
+</figure>
 
-La generalizzazione sulla registrazione dell'entità Cliente è stata
-risolta considerando solo l'entità stessa a cui è stato aggiunto
-l'attributo *anticipo* derivato dall'entità figlia Non Registrato.
+La generalizzazione sulla registrazione dell’entità Cliente è stata
+risolta considerando solo l’entità stessa a cui è stato aggiunto
+l’attributo *anticipo* derivato dall’entità figlia Non Registrato.
 Questo consente di ridurre il numero di tabelle nel database e di
-mantenere l'informazione inerente la registrazione del cliente azzerando
+mantenere l’informazione inerente la registrazione del cliente azzerando
 il valore di *anticipo* per tutti i clienti registrati.
 
 formaggio
 ---------
 
-![generalizzazione dell'entità Formaggio
-Prodotto](ridondanze/formaggio.png){width="115%"}
+<figure>
+<img src="ridondanze/formaggio.png" alt="generalizzazione dell’entità Formaggio Prodotto" style="width:115.0%" /><figcaption>generalizzazione dell’entità Formaggio Prodotto</figcaption>
+</figure>
 
 Si è scelto di mantenere distinte le tabelle nella generalizzazione di
-Formaggio, in quanto risulta importante la distinzione tra l'ipotetico
+Formaggio, in quanto risulta importante la distinzione tra l’ipotetico
 prodotto di un singolo agriturismo e il formaggio effettivo (Formaggio
 Prodotto), che gode così di uno specifico lotto di appartenenza e una
 data di scadenza. Il prodotto potrà così essere fisicamente ordinato e
@@ -1641,25 +1664,26 @@ recensito dai clienti.
 scheda medica
 -------------
 
-![generalizzazione dell'entità Scheda
-Medica](ridondanze/scheda_medica.png){width="115%"}
+<figure>
+<img src="ridondanze/scheda_medica.png" alt="generalizzazione dell’entità Scheda Medica" style="width:115.0%" /><figcaption>generalizzazione dell’entità Scheda Medica</figcaption>
+</figure>
 
 Si è scelto di mantenere distinte le entità figlie di Scheda Medica per
 mantenere le informazioni dei Disturbi Comportamentali e delle Lesioni
-separate. Così facendo si è evitata l'introduzione di molteplici valori
-NULL all'interno della tabella Scheda Medica.
+separate. Così facendo si è evitata l’introduzione di molteplici valori
+NULL all’interno della tabella Scheda Medica.
 
-Individuazione delle Ridondanze {#sec:ridondanze}
+Individuazione delle Ridondanze
 ===============================
 
 In questo capitolo vengono prese in esame tutte le informazioni
 ridondanti interne al database. Viene mostrato, inoltre, come è
 possibile eliminare le ridondanze superflue con la modifica o
-l'inserimento di nuovi attributi, oppure mantenere quelle utili per
+l’inserimento di nuovi attributi, oppure mantenere quelle utili per
 ricavare in modo semplice informazioni rilevanti e di frequente
 utilizzo, altrimenti difficilmente ricavabili.
 
-Ridondanze degli Attributi {#subsec:ridondanze-attr}
+Ridondanze degli Attributi
 --------------------------
 
 -   È stato tolto *nome* da Fornitore in quanto ricavabile da *ragione
@@ -1670,9 +1694,9 @@ Ridondanze degli Attributi {#subsec:ridondanze-attr}
     madre* e *codice padre* su coinvolge, tenendo conto della *data*
     della specifica Riproduzione
 
--   È stato eliminato *stato* da Visita in quanto il valore di quest'
+-   È stato eliminato *stato* da Visita in quanto il valore di quest’
     attributo è ridondante rispetto alla presenza o no del valore NULL
-    sull'attributo *data effettiva*
+    sull’attributo *data effettiva*
 
 -   È stato eliminato *interventi di controllo programmati* da Scheda
     gestazione in quanto ricavabile verificando che la *data
@@ -1699,10 +1723,10 @@ Ridondanze degli Attributi {#subsec:ridondanze-attr}
 
 -   Si mantiene il *totale da pagare* nei Pagamenti seppur ricavabile
     come somma di tutti i costi delle camere, delle escursioni e dei
-    servizi aggiuntivi: ciò permette di centralizzare l'informazione del
+    servizi aggiuntivi: ciò permette di centralizzare l’informazione del
     pagamento totale in un unica tabella
 
-Ridondanze E-R {#subsec:ridondanze-ent-rel}
+Ridondanze E-R
 --------------
 
 1.  È stata introdotta la ridondanza *qualità pasto* tra *Pasto* e
@@ -1717,500 +1741,898 @@ Ridondanze E-R {#subsec:ridondanze-ent-rel}
     *Animale* e *Attività pascolo*: questo permette di ricavare
     velocemente a quale attività di pascolo stia partecipando uno
     specifico animale e permette di rilevare immediatamente quando un
-    animale non rientra nell'area destinata alla sua attività. La stessa
+    animale non rientra nell’area destinata alla sua attività. La stessa
     informazione è ricavabile controllando il locale abitato
-    dall'animale e l'attività ad esso assegnata.
+    dall’animale e l’attività ad esso assegnata.
 
-Tavole dei Volumi {#sec:volumi}
+Tavole dei Volumi
 =================
 
 Area Allevamento
 ----------------
 
-  ----------------------------------------------------------------------
-  **Nome**         **E/R**   **Numero    **Motivazione**
-                             Istanze**   
-  ---------------- --------- ----------- -------------------------------
-  Abbeveratoio     E         1000        Un quarto degli allestimenti
-                                         sono abbeveratoi
-
-  Acqua            E         20          Si considerano circa 20
-                                         tipologie uniche di acqua
-
-  Agriturismo      E         20          Ipotesi iniziale
-
-  Allestimento     E         4000        Ogni locale è provvisto
-                                         mediamente di otto
-                                         allestimenti: due mangiatoie,
-                                         due abbeveratoi, due
-                                         dispositivi per il
-                                         condizionamento dell'aria e due
-                                         sistemi di illuminazione
-                                         $8\times 500 = 4000$
-
-  Ambientali       E         500         Ogni locale è dotato di un
-                                         sensore per i parametri
-                                         ambientali
-
-  Animale          E         20000       Ogni agriturismo ospita 1000
-                                         animali $20\times 1000=20000$
-
-  Area pascolo     E         60          Ogni agriturismo dispone di 3
-                                         aree di pascolo
-                                         $3\times 20= 60$
-
-  Attività pascolo E         4500        Mediamente, ogni agriturismo
-                                         dispone delle proprie 3 aree di
-                                         pascolo e altre 6 degli
-                                         agriturismi limitrofi
-                                         $500\times 9 = 4500$
-
-  Condizionatore   E         500         Ogni locale è dotato di un
-  aria                                   condizionatore dell'aria
-
-  Composti         E         500         Ogni locale è dotato di un
-  volatili                               sensore per i composti volatili
-
-  Foraggio         E         50          Si considerano circa 50
-                                         tipologie uniche di foraggio
-
-  Fornitore        E         20          Si assume una media di un
-                                         fornitore per agriturismo
-
-  GPS              E         20000       Ogni animale è dotato di un
-                                         dispositivo GPS
-
-  Illuminazione    E         500         Ogni locale è dotato di un
-                                         dispositivo di illuminazione
-
-  Locale           E         500         Ogni stalla ha in media 5
-                                         locali
-
-  Mangiatoia       E         1000        Un quarto degli allestimenti
-                                         sono mangiatoie
-
-  Pasto            E         1000        Combinazione tra tutti i tipi
-                                         di acqua e di foraggio
-                                         $20\times 50= 1000$
-
-  Pasto per Locale R         547500      Tre pasti al giorno per un anno
-                                         per ogni locale
-                                         $3\times365\times500=547500$
-
-  Pulizia locale   E         580         Ogni agriturismo effettua due
-                                         richieste al giorno, per un
-                                         totale di $2\times 365=730$
-                                         richieste annue[^1]. Quindi i
-                                         20 agriturismi compilano
-                                         $730\times 20=14600$ record
-                                         all'anno.
-
-  Recinzione       E         180         Ogni area di pascolo è divisa
-  divisoria e zona                       in 3 recinsioni
-  di pascolo                             $60\times 3= 180$
-
-  Riproduzione     E         12900       Secondo l'Istat circa il $75\%$
-                                         degli animali è femmina, nel
-                                         nostro caso
-                                         $20000\times0.75=15000$. Di
-                                         queste, il $14\%$ non è
-                                         destinato all'allevamento,
-                                         quindi in un anno il restante
-                                         $86\%$ si riproduce
-                                         $15000\times 0.86=12900$
-
-  Scheda           E         11610       Viene generata una nuova scheda
-  gestazione                             di gestazione per ogni
-                                         riproduzione andata a buon
-                                         fine, ossia il $90\%$ delle
-                                         riproduzioni
-                                         $12900\times 0.9= 11610$
-
-  Stalla           E         100         Ogni agriturismo possiede in
-                                         media 5 stalle
-
-  Visivi           E         500         Ogni locale è dotato di un
-                                         sensore per i parametri visivi
-
-  abita            R         20000       Cardinalità (1,1) con Animale
-
-  acquisto animale R         10000       Cardinalità (1,1) con ogni
-                                         animale acquisito, ossia con il
-                                         $50\%$ del voume di Animali
-
-  attività locale  R         4500        Cardinalità (1,1) con Attività
-                                         pascolo
-
-  coinvolge        R         12900       Cardinalità (1,1) con
-                                         Riproduzione
-
-  collocazione     R         4500        Cardinalità (1,1) con Attività
-  attività                               pascolo
-
-  composizione     R         1000        Cardinalità (1,1) con Pasto
-  acqua                                  
-
-  composizione     R         1000        Cardinalità (1,1) con Pasto
-  foraggio                               
-
-  determina        R         11610       Cardinalità (1,1) con Scheda
-                                         gestazione
-
-  divisione        R         4000        Cardinalità (1,1) con
-  allestimento                           Allestimento
-
-  divisione locale R         500         Cardinalità (1,1) con Locale
-
-  divisione        R         180         Cardinalità (1,1) con
-  pascolo                                Recinzione divisoria e zona di
-                                         pascolo
-
-  divisione stalle R         100         Cardinalità (1,1) con Stalla
-
-  locale assegnato R         547500      Cardinalità (1,1) con Pasto per
-                                         Locale
-
-  localizzato      R         20000       Cardinalità (1,1) con Animale e
-                                         con GPS
-
-  pasto assegnato  R         547500      Cardinalità (1,1) con Pasto per
-                                         Locale
-
-  richiesta        R         580         Cardinalità (1,1) con Pulizia
-  intervento                             locale
-
-  rilievo composti R         500         Cardinalità (1,1) con Composti
-  volatili                               volatili
-
-  rilievo          R         500         Cardinalità (1,1) con rilievo
-  parametri                              parametri ambientali
-  ambientali                             
-
-  rilievo          R         500         Cardinalità (1,1) con Visivi
-  parametri visivi                       
-
-  scrive           R         11610       Cardinalità (1,1) con Scheda
-                                         gestazione
-
-  supervisiona     R         12900       Cardinalità (1,1) con
-                                         Riproduzione
-  ----------------------------------------------------------------------
+<table style="width:89%;">
+<colgroup>
+<col style="width: 23%" />
+<col style="width: 10%" />
+<col style="width: 11%" />
+<col style="width: 45%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Nome</strong></th>
+<th style="text-align: left;"><strong>E/R</strong></th>
+<th style="text-align: left;"><strong>Numero Istanze</strong></th>
+<th style="text-align: left;"><strong>Motivazione</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Abbeveratoio</td>
+<td style="text-align: left;">E</td>
+<td style="text-align: left;">1000</td>
+<td style="text-align: left;">Un quarto degli allestimenti sono abbeveratoi</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Acqua</td>
+<td style="text-align: left;">E</td>
+<td style="text-align: left;">20</td>
+<td style="text-align: left;">Si considerano circa 20 tipologie uniche di acqua</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Agriturismo</td>
+<td style="text-align: left;">E</td>
+<td style="text-align: left;">20</td>
+<td style="text-align: left;">Ipotesi iniziale</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Allestimento</td>
+<td style="text-align: left;">E</td>
+<td style="text-align: left;">4000</td>
+<td style="text-align: left;">Ogni locale è provvisto mediamente di otto allestimenti: due mangiatoie, due abbeveratoi, due dispositivi per il condizionamento dell’aria e due sistemi di illuminazione <span class="math inline">8 × 500 = 4000</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Ambientali</td>
+<td style="text-align: left;">E</td>
+<td style="text-align: left;">500</td>
+<td style="text-align: left;">Ogni locale è dotato di un sensore per i parametri ambientali</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Animale</td>
+<td style="text-align: left;">E</td>
+<td style="text-align: left;">20000</td>
+<td style="text-align: left;">Ogni agriturismo ospita 1000 animali <span class="math inline">20 × 1000 = 20000</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Area pascolo</td>
+<td style="text-align: left;">E</td>
+<td style="text-align: left;">60</td>
+<td style="text-align: left;">Ogni agriturismo dispone di 3 aree di pascolo <span class="math inline">3 × 20 = 60</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Attività pascolo</td>
+<td style="text-align: left;">E</td>
+<td style="text-align: left;">4500</td>
+<td style="text-align: left;">Mediamente, ogni agriturismo dispone delle proprie 3 aree di pascolo e altre 6 degli agriturismi limitrofi <span class="math inline">500 × 9 = 4500</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Condizionatore aria</td>
+<td style="text-align: left;">E</td>
+<td style="text-align: left;">500</td>
+<td style="text-align: left;">Ogni locale è dotato di un condizionatore dell’aria</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Composti volatili</td>
+<td style="text-align: left;">E</td>
+<td style="text-align: left;">500</td>
+<td style="text-align: left;">Ogni locale è dotato di un sensore per i composti volatili</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Foraggio</td>
+<td style="text-align: left;">E</td>
+<td style="text-align: left;">50</td>
+<td style="text-align: left;">Si considerano circa 50 tipologie uniche di foraggio</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Fornitore</td>
+<td style="text-align: left;">E</td>
+<td style="text-align: left;">20</td>
+<td style="text-align: left;">Si assume una media di un fornitore per agriturismo</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">GPS</td>
+<td style="text-align: left;">E</td>
+<td style="text-align: left;">20000</td>
+<td style="text-align: left;">Ogni animale è dotato di un dispositivo GPS</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Illuminazione</td>
+<td style="text-align: left;">E</td>
+<td style="text-align: left;">500</td>
+<td style="text-align: left;">Ogni locale è dotato di un dispositivo di illuminazione</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Locale</td>
+<td style="text-align: left;">E</td>
+<td style="text-align: left;">500</td>
+<td style="text-align: left;">Ogni stalla ha in media 5 locali</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Mangiatoia</td>
+<td style="text-align: left;">E</td>
+<td style="text-align: left;">1000</td>
+<td style="text-align: left;">Un quarto degli allestimenti sono mangiatoie</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Pasto</td>
+<td style="text-align: left;">E</td>
+<td style="text-align: left;">1000</td>
+<td style="text-align: left;">Combinazione tra tutti i tipi di acqua e di foraggio <span class="math inline">20 × 50 = 1000</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Pasto per Locale</td>
+<td style="text-align: left;">R</td>
+<td style="text-align: left;">547500</td>
+<td style="text-align: left;">Tre pasti al giorno per un anno per ogni locale <span class="math inline">3 × 365 × 500 = 547500</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Pulizia locale</td>
+<td style="text-align: left;">E</td>
+<td style="text-align: left;">580</td>
+<td style="text-align: left;">Ogni agriturismo effettua due richieste al giorno, per un totale di <span class="math inline">2 × 365 = 730</span> richieste annue<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. Quindi i 20 agriturismi compilano <span class="math inline">730 × 20 = 14600</span> record all’anno.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Recinzione divisoria e zona di pascolo</td>
+<td style="text-align: left;">E</td>
+<td style="text-align: left;">180</td>
+<td style="text-align: left;">Ogni area di pascolo è divisa in 3 recinsioni <span class="math inline">60 × 3 = 180</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Riproduzione</td>
+<td style="text-align: left;">E</td>
+<td style="text-align: left;">12900</td>
+<td style="text-align: left;">Secondo l’Istat circa il <span class="math inline">75%</span> degli animali è femmina, nel nostro caso <span class="math inline">20000 × 0.75 = 15000</span>. Di queste, il <span class="math inline">14%</span> non è destinato all’allevamento, quindi in un anno il restante <span class="math inline">86%</span> si riproduce <span class="math inline">15000 × 0.86 = 12900</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Scheda gestazione</td>
+<td style="text-align: left;">E</td>
+<td style="text-align: left;">11610</td>
+<td style="text-align: left;">Viene generata una nuova scheda di gestazione per ogni riproduzione andata a buon fine, ossia il <span class="math inline">90%</span> delle riproduzioni <span class="math inline">12900 × 0.9 = 11610</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Stalla</td>
+<td style="text-align: left;">E</td>
+<td style="text-align: left;">100</td>
+<td style="text-align: left;">Ogni agriturismo possiede in media 5 stalle</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Visivi</td>
+<td style="text-align: left;">E</td>
+<td style="text-align: left;">500</td>
+<td style="text-align: left;">Ogni locale è dotato di un sensore per i parametri visivi</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">abita</td>
+<td style="text-align: left;">R</td>
+<td style="text-align: left;">20000</td>
+<td style="text-align: left;">Cardinalità (1,1) con Animale</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">acquisto animale</td>
+<td style="text-align: left;">R</td>
+<td style="text-align: left;">10000</td>
+<td style="text-align: left;">Cardinalità (1,1) con ogni animale acquisito, ossia con il <span class="math inline">50%</span> del voume di Animali</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">attività locale</td>
+<td style="text-align: left;">R</td>
+<td style="text-align: left;">4500</td>
+<td style="text-align: left;">Cardinalità (1,1) con Attività pascolo</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">coinvolge</td>
+<td style="text-align: left;">R</td>
+<td style="text-align: left;">12900</td>
+<td style="text-align: left;">Cardinalità (1,1) con Riproduzione</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">collocazione attività</td>
+<td style="text-align: left;">R</td>
+<td style="text-align: left;">4500</td>
+<td style="text-align: left;">Cardinalità (1,1) con Attività pascolo</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">composizione acqua</td>
+<td style="text-align: left;">R</td>
+<td style="text-align: left;">1000</td>
+<td style="text-align: left;">Cardinalità (1,1) con Pasto</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">composizione foraggio</td>
+<td style="text-align: left;">R</td>
+<td style="text-align: left;">1000</td>
+<td style="text-align: left;">Cardinalità (1,1) con Pasto</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">determina</td>
+<td style="text-align: left;">R</td>
+<td style="text-align: left;">11610</td>
+<td style="text-align: left;">Cardinalità (1,1) con Scheda gestazione</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">divisione allestimento</td>
+<td style="text-align: left;">R</td>
+<td style="text-align: left;">4000</td>
+<td style="text-align: left;">Cardinalità (1,1) con Allestimento</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">divisione locale</td>
+<td style="text-align: left;">R</td>
+<td style="text-align: left;">500</td>
+<td style="text-align: left;">Cardinalità (1,1) con Locale</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">divisione pascolo</td>
+<td style="text-align: left;">R</td>
+<td style="text-align: left;">180</td>
+<td style="text-align: left;">Cardinalità (1,1) con Recinzione divisoria e zona di pascolo</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">divisione stalle</td>
+<td style="text-align: left;">R</td>
+<td style="text-align: left;">100</td>
+<td style="text-align: left;">Cardinalità (1,1) con Stalla</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">locale assegnato</td>
+<td style="text-align: left;">R</td>
+<td style="text-align: left;">547500</td>
+<td style="text-align: left;">Cardinalità (1,1) con Pasto per Locale</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">localizzato</td>
+<td style="text-align: left;">R</td>
+<td style="text-align: left;">20000</td>
+<td style="text-align: left;">Cardinalità (1,1) con Animale e con GPS</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">pasto assegnato</td>
+<td style="text-align: left;">R</td>
+<td style="text-align: left;">547500</td>
+<td style="text-align: left;">Cardinalità (1,1) con Pasto per Locale</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">richiesta intervento</td>
+<td style="text-align: left;">R</td>
+<td style="text-align: left;">580</td>
+<td style="text-align: left;">Cardinalità (1,1) con Pulizia locale</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">rilievo composti volatili</td>
+<td style="text-align: left;">R</td>
+<td style="text-align: left;">500</td>
+<td style="text-align: left;">Cardinalità (1,1) con Composti volatili</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">rilievo parametri ambientali</td>
+<td style="text-align: left;">R</td>
+<td style="text-align: left;">500</td>
+<td style="text-align: left;">Cardinalità (1,1) con rilievo parametri ambientali</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">rilievo parametri visivi</td>
+<td style="text-align: left;">R</td>
+<td style="text-align: left;">500</td>
+<td style="text-align: left;">Cardinalità (1,1) con Visivi</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">scrive</td>
+<td style="text-align: left;">R</td>
+<td style="text-align: left;">11610</td>
+<td style="text-align: left;">Cardinalità (1,1) con Scheda gestazione</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">supervisiona</td>
+<td style="text-align: left;">R</td>
+<td style="text-align: left;">12900</td>
+<td style="text-align: left;">Cardinalità (1,1) con Riproduzione</td>
+</tr>
+</tbody>
+</table>
+<section class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>In questo modo, ognuno dei 25 locali viene pulito <span class="math inline">${730\over 25}=29$</span> volte l’anno<a href="#fnref1" class="footnote-back">↩</a></p></li>
+</ol>
+</section>
 
 Area Healthcare
 ---------------
 
-  ----------------------------------------------------------------------
-  **Nome**         **E/R**   **Numero    **Motivazione**
-                             Istanze**   
-  ---------------- --------- ----------- -------------------------------
-  Esame                                  Per ogni agriturismo vengono
-                                         prescritti una media di 400
-                                         esami l'anno per un totale di
-                                         8000 esami
-
-  Farmaco                                Si suppone che le malattie
-                                         vengano curate con l'utilizzo
-                                         di 100 farmaci diversi
-                                         utilizzati in tutta la rete di
-                                         *Farmhouse 4.0*
-
-  Indici Salute                          Per ogni visita vengono
-                                         rilevati nuovamente gli indici
-                                         di salute
-
-  Scheda Medica                          Si suppone che in un anno siano
-                                         registrate 40000 schede
-
-  Terapia                                Si suppone che ogni anno
-                                         vengano prescritte 2 terapie
-                                         per ogni animale
-                                         $2\times 20000= 40000$
-
-  Veterinario                            Si suppone che ogni agriturismo
-                                         sia controllato da cinque
-                                         veterinari $20\times 5= 100$
-
-  Visita                                 Si suppone che per ogni
-                                         agriturismo vengano eseguite
-                                         1100 visite all'anno per poter
-                                         controllare almeno una volta
-                                         tutti gli animali
-                                         $1100\times 20= 22000$
-
-  compila                                Cardinalità (1,1) con Scheda
-                                         Medica
-
-  composta da                            Ogni terapia impiega circa 3
-                                         farmaci diversi
-                                         $2000\times 3 = 6000$
-
-  controlli                              Viene effettuata una visita di
-  effettuati                             controllo per ogni riproduzione
-                                         con successo o insuccesso
-
-  esegue                                 Cardinalità (1,1) con Visita
-
-  possiede                               Cardinalità (1,1) con Scheda
-                                         Medica
-
-  possiede esame                         Cardinalità (1,1) con Esame
-
-  possiede terapia                       Cardinalità (1,1) con Terapia
-
-  possiede visita                        Cardinalità (1,1) con Visita
-
-  prescrive                              Cardinalità (1,1) con Terapia
-
-  prescrive esame                        Cardinalità (1,1) con Esame
-
-  stato salute                           Cardinalità (1,1) con Indici
-                                         Salute
-  ----------------------------------------------------------------------
+<table style="width:89%;">
+<colgroup>
+<col style="width: 23%" />
+<col style="width: 10%" />
+<col style="width: 11%" />
+<col style="width: 45%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Nome</strong></th>
+<th style="text-align: left;"><strong>E/R</strong></th>
+<th style="text-align: left;"><strong>Numero Istanze</strong></th>
+<th style="text-align: left;"><strong>Motivazione</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Esame</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Per ogni agriturismo vengono prescritti una media di 400 esami l’anno per un totale di 8000 esami</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Farmaco</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Si suppone che le malattie vengano curate con l’utilizzo di 100 farmaci diversi utilizzati in tutta la rete di <em>Farmhouse 4.0</em></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Indici Salute</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Per ogni visita vengono rilevati nuovamente gli indici di salute</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Scheda Medica</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Si suppone che in un anno siano registrate 40000 schede</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Terapia</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Si suppone che ogni anno vengano prescritte 2 terapie per ogni animale <span class="math inline">2 × 20000 = 40000</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Veterinario</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Si suppone che ogni agriturismo sia controllato da cinque veterinari <span class="math inline">20 × 5 = 100</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Visita</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Si suppone che per ogni agriturismo vengano eseguite 1100 visite all’anno per poter controllare almeno una volta tutti gli animali <span class="math inline">1100 × 20 = 22000</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">compila</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Cardinalità (1,1) con Scheda Medica</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">composta da</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Ogni terapia impiega circa 3 farmaci diversi <span class="math inline">2000 × 3 = 6000</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">controlli effettuati</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Viene effettuata una visita di controllo per ogni riproduzione con successo o insuccesso</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">esegue</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Cardinalità (1,1) con Visita</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">possiede</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Cardinalità (1,1) con Scheda Medica</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">possiede esame</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Cardinalità (1,1) con Esame</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">possiede terapia</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Cardinalità (1,1) con Terapia</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">possiede visita</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Cardinalità (1,1) con Visita</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">prescrive</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Cardinalità (1,1) con Terapia</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">prescrive esame</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Cardinalità (1,1) con Esame</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">stato salute</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Cardinalità (1,1) con Indici Salute</td>
+</tr>
+</tbody>
+</table>
 
 Area Produzione
 ---------------
 
-  --------------------------------------------------------------------------------
-  **Nome**         **E/R**   **Numero    **Motivazione**
-                             Istanze**   
-  ---------------- --------- ----------- -----------------------------------------
-  Cantine          E         100         Mediamente sono disponibili 5 cantine per
-                                         ogni agriturismo $20\times 5=100$
-
-  Fasi             E         4000        Ogni ricetta è divisa mediamente in 10
-                                         fasi $400\times 10 = 4000$
-
-  Formaggio        E         400         Ogni agriturismo produce circa 20
-                                         formaggi differenti
-
-  Latte            E         400         Ogni agriturismo produce 20 tipologie di
-                                         latte differente $20\times 20 = 400$
-
-  Lotto            E         400         Ogni agriturismo produce 20 lotti di
-                                         formaggio all'anno
-
-  Magazzini        E         100         Mediamente sono disponibili 5 magazzini
-                                         per ogni agriturismo $20\times 5 = 100$
-
-  Mungitrice       E         2000        Ogni agriturismo dispone di circa 100
-                                         mungitrici $20\times 100= 2000$
-
-  Mungitura        E         5475000     Si suppone che ogni giorno dell'anno ogni
-                                         animale femmina di un agriturismo venga
-                                         munto una volta
-                                         $20000\times 0.75 \times 365 = 5475000$
-
-  Parametri        E         36500       Ogni giorno dell'anno vengono prelevati i
-                                         parametri di tutte le cantine
-                                         $365\times 100= 36500$
-
-  Ricetta          E         400         Si considerano circa 400 ricette
-                                         differenti
-
-  Scaffalature     E         1000        Ogni cantina è suddivisa in 10
-                                         scaffalature
-
-  Scaffali         E         1000        Ogni magazzino è suddiviso in 10 scaffali
-                                         $100\times 10=1000$
-
-  Silos            E         200         Sono disponibili circa 10 silos per ogni
-                                         agriturismo $10\times 20=200$
-
-  appartenente a   R         3000000     Cardinalità (1,1) con Formaggio Prodotto
-
-  che munge        R         800000      Combinazione tra tutte le mungitrici e
-                                         tutti i tipi di latte
-                                         $2000\times 400= 800000$
-
-  con              R         5475000     Cardinalità (1,1) con Mungitura
-
-  contengono       R         1000        Cardinalità (1,1) con Scaffalature
-  scaffalature                           
-
-  contengono       R         1000        Cardinalità (1,1) con Scaffali
-  scaffali                               
-
-  controllo fasi   R         4000        Combinazione tra tutti i lotti e le
-                                         proprie 10 fasi di produzione
-                                         $400\times 10=4000$
-
-  divisa in        R         4000        Ogni ricetta è divisa in 10 fasi
-                                         $400\times 10= 4000$
-
-  prodotto con     R         160000      Combinazione tra tutti i tipi di latte e
-                                         tutti i lotti $400\times 400 = 160000$
-
-  produce          R         400         Cardinalità (1,1) con Formaggio
-
-  produce          R         400         Cardinalità (1,1) con Latte
-
-  rilievo          R         36500       Cardinalità (1,1) con Parametri
-  parametri                              
-
-  stoccaggio       R         2000        Ogni agriturismo stocca 20 lotti nelle
-  cantine                                proprie 5 cantine
-                                         $20\times 20 \times 5 = 2000$
-
-  stoccaggio       R         2000        Ogni agriturismo stocca 20 lotti nei
-  magazzini                              propri 5 magazzini
-                                         $20\times 20 \times 5 = 2000$
-
-  stoccato in      R         400         Cardinalità (1,1) con Latte
-
-  utilizzando      R         400         Cardinalità (1,1) con Formaggio
-
-  è munto durante  R         5475000     Cardinalità (1,1) con Mungitura
-  --------------------------------------------------------------------------------
+<table style="width:89%;">
+<colgroup>
+<col style="width: 23%" />
+<col style="width: 10%" />
+<col style="width: 11%" />
+<col style="width: 45%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Nome</strong></th>
+<th style="text-align: left;"><strong>E/R</strong></th>
+<th style="text-align: left;"><strong>Numero Istanze</strong></th>
+<th style="text-align: left;"><strong>Motivazione</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Cantine</td>
+<td style="text-align: left;">E</td>
+<td style="text-align: left;">100</td>
+<td style="text-align: left;">Mediamente sono disponibili 5 cantine per ogni agriturismo <span class="math inline">20 × 5 = 100</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Fasi</td>
+<td style="text-align: left;">E</td>
+<td style="text-align: left;">4000</td>
+<td style="text-align: left;">Ogni ricetta è divisa mediamente in 10 fasi <span class="math inline">400 × 10 = 4000</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Formaggio</td>
+<td style="text-align: left;">E</td>
+<td style="text-align: left;">400</td>
+<td style="text-align: left;">Ogni agriturismo produce circa 20 formaggi differenti</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Latte</td>
+<td style="text-align: left;">E</td>
+<td style="text-align: left;">400</td>
+<td style="text-align: left;">Ogni agriturismo produce 20 tipologie di latte differente <span class="math inline">20 × 20 = 400</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Lotto</td>
+<td style="text-align: left;">E</td>
+<td style="text-align: left;">400</td>
+<td style="text-align: left;">Ogni agriturismo produce 20 lotti di formaggio all’anno</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Magazzini</td>
+<td style="text-align: left;">E</td>
+<td style="text-align: left;">100</td>
+<td style="text-align: left;">Mediamente sono disponibili 5 magazzini per ogni agriturismo <span class="math inline">20 × 5 = 100</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Mungitrice</td>
+<td style="text-align: left;">E</td>
+<td style="text-align: left;">2000</td>
+<td style="text-align: left;">Ogni agriturismo dispone di circa 100 mungitrici <span class="math inline">20 × 100 = 2000</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Mungitura</td>
+<td style="text-align: left;">E</td>
+<td style="text-align: left;">5475000</td>
+<td style="text-align: left;">Si suppone che ogni giorno dell’anno ogni animale femmina di un agriturismo venga munto una volta <span class="math inline">20000 × 0.75 × 365 = 5475000</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Parametri</td>
+<td style="text-align: left;">E</td>
+<td style="text-align: left;">36500</td>
+<td style="text-align: left;">Ogni giorno dell’anno vengono prelevati i parametri di tutte le cantine <span class="math inline">365 × 100 = 36500</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Ricetta</td>
+<td style="text-align: left;">E</td>
+<td style="text-align: left;">400</td>
+<td style="text-align: left;">Si considerano circa 400 ricette differenti</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Scaffalature</td>
+<td style="text-align: left;">E</td>
+<td style="text-align: left;">1000</td>
+<td style="text-align: left;">Ogni cantina è suddivisa in 10 scaffalature</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Scaffali</td>
+<td style="text-align: left;">E</td>
+<td style="text-align: left;">1000</td>
+<td style="text-align: left;">Ogni magazzino è suddiviso in 10 scaffali <span class="math inline">100 × 10 = 1000</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Silos</td>
+<td style="text-align: left;">E</td>
+<td style="text-align: left;">200</td>
+<td style="text-align: left;">Sono disponibili circa 10 silos per ogni agriturismo <span class="math inline">10 × 20 = 200</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">appartenente a</td>
+<td style="text-align: left;">R</td>
+<td style="text-align: left;">3000000</td>
+<td style="text-align: left;">Cardinalità (1,1) con Formaggio Prodotto</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">che munge</td>
+<td style="text-align: left;">R</td>
+<td style="text-align: left;">800000</td>
+<td style="text-align: left;">Combinazione tra tutte le mungitrici e tutti i tipi di latte <span class="math inline">2000 × 400 = 800000</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">con</td>
+<td style="text-align: left;">R</td>
+<td style="text-align: left;">5475000</td>
+<td style="text-align: left;">Cardinalità (1,1) con Mungitura</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">contengono scaffalature</td>
+<td style="text-align: left;">R</td>
+<td style="text-align: left;">1000</td>
+<td style="text-align: left;">Cardinalità (1,1) con Scaffalature</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">contengono scaffali</td>
+<td style="text-align: left;">R</td>
+<td style="text-align: left;">1000</td>
+<td style="text-align: left;">Cardinalità (1,1) con Scaffali</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">controllo fasi</td>
+<td style="text-align: left;">R</td>
+<td style="text-align: left;">4000</td>
+<td style="text-align: left;">Combinazione tra tutti i lotti e le proprie 10 fasi di produzione <span class="math inline">400 × 10 = 4000</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">divisa in</td>
+<td style="text-align: left;">R</td>
+<td style="text-align: left;">4000</td>
+<td style="text-align: left;">Ogni ricetta è divisa in 10 fasi <span class="math inline">400 × 10 = 4000</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">prodotto con</td>
+<td style="text-align: left;">R</td>
+<td style="text-align: left;">160000</td>
+<td style="text-align: left;">Combinazione tra tutti i tipi di latte e tutti i lotti <span class="math inline">400 × 400 = 160000</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">produce</td>
+<td style="text-align: left;">R</td>
+<td style="text-align: left;">400</td>
+<td style="text-align: left;">Cardinalità (1,1) con Formaggio</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">produce</td>
+<td style="text-align: left;">R</td>
+<td style="text-align: left;">400</td>
+<td style="text-align: left;">Cardinalità (1,1) con Latte</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">rilievo parametri</td>
+<td style="text-align: left;">R</td>
+<td style="text-align: left;">36500</td>
+<td style="text-align: left;">Cardinalità (1,1) con Parametri</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">stoccaggio cantine</td>
+<td style="text-align: left;">R</td>
+<td style="text-align: left;">2000</td>
+<td style="text-align: left;">Ogni agriturismo stocca 20 lotti nelle proprie 5 cantine <span class="math inline">20 × 20 × 5 = 2000</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">stoccaggio magazzini</td>
+<td style="text-align: left;">R</td>
+<td style="text-align: left;">2000</td>
+<td style="text-align: left;">Ogni agriturismo stocca 20 lotti nei propri 5 magazzini <span class="math inline">20 × 20 × 5 = 2000</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">stoccato in</td>
+<td style="text-align: left;">R</td>
+<td style="text-align: left;">400</td>
+<td style="text-align: left;">Cardinalità (1,1) con Latte</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">utilizzando</td>
+<td style="text-align: left;">R</td>
+<td style="text-align: left;">400</td>
+<td style="text-align: left;">Cardinalità (1,1) con Formaggio</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">è munto durante</td>
+<td style="text-align: left;">R</td>
+<td style="text-align: left;">5475000</td>
+<td style="text-align: left;">Cardinalità (1,1) con Mungitura</td>
+</tr>
+</tbody>
+</table>
 
 Area Soggiorno
 --------------
 
-  -------------------------------------------------------------------------
-  **Nome**         **E/R**   **Numero    **Motivazione**
-                             Istanze**   
-  ---------------- --------- ----------- ----------------------------------
-  Cliente                                Ogni agriturismo ha in media 500
-                                         clienti all'anno
-
-  Escursione                             Ogni agriturismo dispone di cinque
-                                         escursioni
-
-  Guida                                  Si suppone che ogni agriturismo
-                                         disponga di tre guide
-                                         $20\times 3= 60$
-
-  Itinerario                             Ogni escursione può comprendere al
-                                         massimo 5 itinerari
-                                         $100\times 5= 500$
-
-  Pagamenti                              Si considera la somma dei
-                                         pagamenti per gli ordini sullo
-                                         store online, per la prenotazione
-                                         delle stanze e delle escursioni
-                                         $146000+2\times 10000= 166000$
-
-  Prenotazione                           Si stima che in un anno ogni
-  Escursione                             cliente prenoti un'escursione
-
-  Prenotazione                           Si stima che mediamente in un anno
-  Stanza                                 ogni cliente prenoti una stanza
-
-  Servizio                               Ogni agriturismo dispone delle
-  Aggiuntivo                             stesse 10 tipologie di servizi
-                                         aggiuntivi
-
-  Servizio per                           Si considera che la metà delle
-  Stanza                                 stanze prenotate abbia usufruito
-                                         di tre servizi aggiuntivi
-                                         $1000\times 0.5 \times 3 = 1500$
-
-  Stanza                                 Ogni agriturismo ha in media 10
-                                         stanze
-
-  Tappe                                  Ogni itinerario ha al massimo
-                                         dieci tappe $500\times 10= 5000$
-
-  assegnazione                           Cardinalità (1,1) con Prenotazione
-  cliente                                Stanza
-
-  assegnazione                           Cardinalità (1,1) con Prenotazione
-  stanza                                 Stanza
-
-  composto da                            Tutte le possibili combinazioni di
-                                         itinerari e tappe disponibili per
-                                         ogni agriturismo
-                                         $10\times 5 \times 20 = 1000$
-
-  divisione stanza                       Cardinalità (1,1) con Stanza
-
-  effettua                               Cardinalità (1,1) con Pagamenti
-
-  effettuata da                          Cardinalità (1,1) con escursione
-
-  legata a                               Tutte le possibili combinazioni
-                                         tra escursioni e itinerari
-                                         disponibili per ogni agriturismo
-                                         $5\times 5 \times 20= 500$
-
-  possiede                               Cardinalità (1,1) con Account
-
-  prenotazione                           Cardinalità (1,1) con Prenotazione
-  cliente                                Escursione
-
-  prenotazione                           Cardinalità (1,1) con Prenotazione
-  escursione                             Escursione
-
-  servizio                               Cardinalità (1,1) con Servizio per
-  associato                              Stanza
-
-  stanza associata                       Cardinalità (1,1) con Servizio per
-                                         Stanza
-  -------------------------------------------------------------------------
+<table style="width:89%;">
+<colgroup>
+<col style="width: 23%" />
+<col style="width: 10%" />
+<col style="width: 11%" />
+<col style="width: 45%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Nome</strong></th>
+<th style="text-align: left;"><strong>E/R</strong></th>
+<th style="text-align: left;"><strong>Numero Istanze</strong></th>
+<th style="text-align: left;"><strong>Motivazione</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Cliente</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Ogni agriturismo ha in media 500 clienti all’anno</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Escursione</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Ogni agriturismo dispone di cinque escursioni</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Guida</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Si suppone che ogni agriturismo disponga di tre guide <span class="math inline">20 × 3 = 60</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Itinerario</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Ogni escursione può comprendere al massimo 5 itinerari <span class="math inline">100 × 5 = 500</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Pagamenti</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Si considera la somma dei pagamenti per gli ordini sullo store online, per la prenotazione delle stanze e delle escursioni <span class="math inline">146000 + 2 × 10000 = 166000</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Prenotazione Escursione</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Si stima che in un anno ogni cliente prenoti un’escursione</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Prenotazione Stanza</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Si stima che mediamente in un anno ogni cliente prenoti una stanza</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Servizio Aggiuntivo</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Ogni agriturismo dispone delle stesse 10 tipologie di servizi aggiuntivi</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Servizio per Stanza</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Si considera che la metà delle stanze prenotate abbia usufruito di tre servizi aggiuntivi <span class="math inline">1000 × 0.5 × 3 = 1500</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Stanza</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Ogni agriturismo ha in media 10 stanze</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Tappe</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Ogni itinerario ha al massimo dieci tappe <span class="math inline">500 × 10 = 5000</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">assegnazione cliente</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Cardinalità (1,1) con Prenotazione Stanza</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">assegnazione stanza</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Cardinalità (1,1) con Prenotazione Stanza</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">composto da</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Tutte le possibili combinazioni di itinerari e tappe disponibili per ogni agriturismo <span class="math inline">10 × 5 × 20 = 1000</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">divisione stanza</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Cardinalità (1,1) con Stanza</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">effettua</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Cardinalità (1,1) con Pagamenti</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">effettuata da</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Cardinalità (1,1) con escursione</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">legata a</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Tutte le possibili combinazioni tra escursioni e itinerari disponibili per ogni agriturismo <span class="math inline">5 × 5 × 20 = 500</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">possiede</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Cardinalità (1,1) con Account</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">prenotazione cliente</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Cardinalità (1,1) con Prenotazione Escursione</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">prenotazione escursione</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Cardinalità (1,1) con Prenotazione Escursione</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">servizio associato</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Cardinalità (1,1) con Servizio per Stanza</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">stanza associata</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Cardinalità (1,1) con Servizio per Stanza</td>
+</tr>
+</tbody>
+</table>
 
 Area Store
 ----------
 
-  -------------------------------------------------------------------------
-  **Nome**         **E/R**   **Numero    **Motivazione**
-                             Istanze**   
-  ---------------- --------- ----------- ----------------------------------
-  Formaggio                              Per far fronte alle richieste
-  Prodotto                               della clientela, si decide di
-                                         mantenere una produzione
-                                         lievemente superiore alle vendite
-                                         stimate (circa 80000 prodotti in
-                                         più rispetto al volume di
-                                         contenuto ordine)
+<table style="width:89%;">
+<colgroup>
+<col style="width: 23%" />
+<col style="width: 10%" />
+<col style="width: 11%" />
+<col style="width: 45%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Nome</strong></th>
+<th style="text-align: left;"><strong>E/R</strong></th>
+<th style="text-align: left;"><strong>Numero Istanze</strong></th>
+<th style="text-align: left;"><strong>Motivazione</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Formaggio Prodotto</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Per far fronte alle richieste della clientela, si decide di mantenere una produzione lievemente superiore alle vendite stimate (circa 80000 prodotti in più rispetto al volume di contenuto ordine)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Account</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Si suppone che il 70% degli utenti sia registrato, e possegga di conseguenza un account</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Centri Smistamento</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Si suppone che le spedizioni vengano processate da un totale di 100 centri di smistamento</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Ordine Prodotti</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Ogni agriturismo gestisce in media 20 ordini al giorno <span class="math inline">20 × 20 × 365 = 146000</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Recensione</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Si suppone che il 50% dei clienti recensisca il proprio ordine, quindi, ogni anno, la metà dei formaggi venduti riceve una recensione <span class="math inline">2920000 × 0.5 = 1460000</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Spedizione</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Ogni spedizione consegnerà circa 50 ordini collocati per area geografica simile <span class="math inline">${146000\over 50}=2920$</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">consegnato da</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Cardinalità (1,1) con Ordine Prodotti</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">contenuto ordine</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Se si suppone che ogni ordine contenga 20 prodotti al massimo, si ottiene un numero totale di record pari a <span class="math inline">20 × 146000 = 2920000</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">esegue ordine</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Cardinalità (1,1) con Ordine Prodotti</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">istanza formaggio</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Cardinalità (1,1) con Formaggio Prodotto</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">processata da</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Si suppone che ogni spedizione sia processata da circa 5 centri di smistamento <span class="math inline">2920 × 5 = 14600</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">scrive</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Cardinalità (1,1) con Recensione</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">valuta</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Cardinalità (1,1) con Recensione</td>
+</tr>
+</tbody>
+</table>
 
-  Account                                Si suppone che il 70% degli utenti
-                                         sia registrato, e possegga di
-                                         conseguenza un account
-
-  Centri                                 Si suppone che le spedizioni
-  Smistamento                            vengano processate da un totale di
-                                         100 centri di smistamento
-
-  Ordine Prodotti                        Ogni agriturismo gestisce in media
-                                         20 ordini al giorno
-                                         $20\times 20\times 365 = 146000$
-
-  Recensione                             Si suppone che il 50% dei clienti
-                                         recensisca il proprio ordine,
-                                         quindi, ogni anno, la metà dei
-                                         formaggi venduti riceve una
-                                         recensione
-                                         $2920000\times0.5=1460000$
-
-  Spedizione                             Ogni spedizione consegnerà circa
-                                         50 ordini collocati per area
-                                         geografica simile
-                                         ${146000\over 50}=2920$
-
-  consegnato da                          Cardinalità (1,1) con Ordine
-                                         Prodotti
-
-  contenuto ordine                       Se si suppone che ogni ordine
-                                         contenga 20 prodotti al massimo,
-                                         si ottiene un numero totale di
-                                         record pari a
-                                         $20\times146000=2920000$
-
-  esegue ordine                          Cardinalità (1,1) con Ordine
-                                         Prodotti
-
-  istanza                                Cardinalità (1,1) con Formaggio
-  formaggio                              Prodotto
-
-  processata da                          Si suppone che ogni spedizione sia
-                                         processata da circa 5 centri di
-                                         smistamento $2920\times 5=14600$
-
-  scrive                                 Cardinalità (1,1) con Recensione
-
-  valuta                                 Cardinalità (1,1) con Recensione
-  -------------------------------------------------------------------------
-
-Analisi delle Operazioni {#sec:operazioni}
+Analisi delle Operazioni
 ========================
 
 Sono qui illustrate le principali operazioni significative capaci di
@@ -2220,20 +2642,23 @@ frequenza giornaliera con cui verranno svolte. Questo permetterà,
 assieme ai volumi stimati per ogni entità e relazione nel sistema
 (riportati a partire da pag. ), di derivare il carico effettivo che il
 database dovrà gestire in termini di operazioni elementari, quali
-scritture e letture.\
-Legenda per il calcolo delle operazioni elementari:\
-frequenza giornaliera: $f^T$\
-numero di operazioni elementari: $o^T$\
-numero di operazioni giornaliere: $n^T = f^T\cdot o^T$\
-numero di operazioni elementari con ridondanza: $o^T_{RID}$\
+scritture e letture.  
+Legenda per il calcolo delle operazioni elementari:  
+frequenza giornaliera: *f*<sup>*T*</sup>  
+numero di operazioni elementari: *o*<sup>*T*</sup>  
+numero di operazioni giornaliere:
+*n*<sup>*T*</sup> = *f*<sup>*T*</sup> ⋅ *o*<sup>*T*</sup>  
+numero di operazioni elementari con ridondanza:
+*o*<sub>*R**I**D*</sub><sup>*T*</sup>  
 numero di operazioni giornaliere con ridondanza:
-$n^T_{RID}=f^T\cdot o^T_{RID}$\
-frequenza di aggiornamento della ridondanza: $f^A$\
-numero di operazioni per l'aggiornamento della ridondanza: $o^A$\
+*n*<sub>*R**I**D*</sub><sup>*T*</sup> = *f*<sup>*T*</sup> ⋅ *o*<sub>*R**I**D*</sub><sup>*T*</sup>  
+frequenza di aggiornamento della ridondanza: *f*<sup>*A*</sup>  
+numero di operazioni per l’aggiornamento della ridondanza:
+*o*<sup>*A*</sup>  
 numero di operazioni giornaliere per aggiornare la ridondanza:
-$n^A = f^A\cdot o^A$
+*n*<sup>*A*</sup> = *f*<sup>*A*</sup> ⋅ *o*<sup>*A*</sup>
 
-Operazione : Controllo qualità del pasto {#operazione-controllo-qualità-del-pasto .unnumbered}
+Operazione : Controllo qualità del pasto
 ----------------------------------------
 
 *Descrizione:* Viene controllato che il pasto che viene somministrato
@@ -2246,149 +2671,272 @@ in esame
 
 *Output:* media degli indici di salute
 
-*Frequenza giornaliera:* 33[^2]
+*Frequenza giornaliera:* 33[1]
 
-### Porzione del diagramma interessata: {#porzione-del-diagramma-interessata .unnumbered}
+### Porzione del diagramma interessata:
 
-![image](operazioni/schemi_parziali/operazione-\thecounterAccessi.png){width="100%"}
+<img src="operazioni/schemi_parziali/operazione-\thecounterAccessi.png" alt="image" style="width:100.0%" />
 
-### Porzione della tavola dei volumi interessata: {#porzione-della-tavola-dei-volumi-interessata .unnumbered}
+### Porzione della tavola dei volumi interessata:
 
-  ----------------------------------------------------------------------
-  **Nome**         **E/R**   **Numero    **Motivazione**
-                             Istanze**   
-  ---------------- --------- ----------- -------------------------------
-  pasto assegnato  R         547500      Cardinalità (1,1) con Pasto per
-                                         Locale
+<table style="width:89%;">
+<colgroup>
+<col style="width: 23%" />
+<col style="width: 10%" />
+<col style="width: 11%" />
+<col style="width: 45%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Nome</strong></th>
+<th style="text-align: left;"><strong>E/R</strong></th>
+<th style="text-align: left;"><strong>Numero Istanze</strong></th>
+<th style="text-align: left;"><strong>Motivazione</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">pasto assegnato</td>
+<td style="text-align: left;">R</td>
+<td style="text-align: left;">547500</td>
+<td style="text-align: left;">Cardinalità (1,1) con Pasto per Locale</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Pasto per Locale</td>
+<td style="text-align: left;">R</td>
+<td style="text-align: left;">547500</td>
+<td style="text-align: left;">Tre pasti al giorno per un anno per ogni locale <span class="math inline">3 × 365 × 500 = 547500</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">locale assegnato</td>
+<td style="text-align: left;">R</td>
+<td style="text-align: left;">547500</td>
+<td style="text-align: left;">Cardinalità (1,1) con Pasto per Locale</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">abita</td>
+<td style="text-align: left;">R</td>
+<td style="text-align: left;">20000</td>
+<td style="text-align: left;">Cardinalità (1,1) con Animale</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">stato salute</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Cardinalità (1,1) con Indici Salute</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Indici Salute</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Per ogni visita vengono rilevati nuovamente gli indici di salute</td>
+</tr>
+</tbody>
+</table>
 
-  Pasto per Locale R         547500      Tre pasti al giorno per un anno
-                                         per ogni locale
-                                         $3\times365\times500=547500$
+### Tavola degli accessi:
 
-  locale assegnato R         547500      Cardinalità (1,1) con Pasto per
-                                         Locale
-
-  abita            R         20000       Cardinalità (1,1) con Animale
-
-  stato salute                           Cardinalità (1,1) con Indici
-                                         Salute
-
-  Indici Salute                          Per ogni visita vengono
-                                         rilevati nuovamente gli indici
-                                         di salute
-  ----------------------------------------------------------------------
-
-### Tavola degli accessi: {#tavola-degli-accessi .unnumbered}
-
-E' presente la ridondanza *qualità pasto* tra Pasto e Indici Salute che
+E’ presente la ridondanza *qualità pasto* tra Pasto e Indici Salute che
 influenza la tavola degli accessi
 
-  -------------- ------- -------------- ------- ----------------------------------
-  **Nome                 **Numero               **Descrizione**
-  costrutto**            operazioni             
-                         elementari**           
+<table style="width:88%;">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 10%" />
+<col style="width: 17%" />
+<col style="width: 10%" />
+<col style="width: 30%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Nome costrutto</strong></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>Numero operazioni elementari</strong></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>Descrizione</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">pasto assegnato</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Sui 3 pasti giornalieri nelle ultime 2 settimane dei 500 locali (<span class="math inline">3 × 14 × 500 = 21000</span>) si vogliono distribuire i 1000 possibili pasti: quindi ogni pasto compare su <span class="math inline">$\frac{21000}{1000}=21$</span> pasti per locale</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Pasto per Locale</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Si ricavano data e orario dell’ultima somministrazione del pasto</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">locale assegnato</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">I 21 pasti per locale possono appartenere a minimo 2, massimo 21 locali: quindi mediamente si devono controllare 12 locali</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">abita</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Si leggono le chiavi di 40 animali per ognuno dei 12 locali</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">stato salute</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Sono registrati 11 indici di salute ogni 10 animali (<span class="math inline">480 × 1.1 = 528</span>)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Indici salute</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Lettura dei dati relativi agli indici di salute degli animali</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
 
-  pasto                                         Sui 3 pasti giornalieri nelle
-  assegnato                                     ultime 2 settimane dei 500 locali
-                                                ($3\times 14 \times 500= 21000$)
-                                                si vogliono distribuire i 1000
-                                                possibili pasti: quindi ogni pasto
-                                                compare su $\frac{21000}{1000}=21$
-                                                pasti per locale
+<table style="width:88%;">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 10%" />
+<col style="width: 17%" />
+<col style="width: 10%" />
+<col style="width: 30%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Nome costrutto</strong></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>Numero operazioni elementari</strong></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>Descrizione</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">qualità pasto</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Si ricavano gli indici di salute associati al pasto somministrato</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Indici salute</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Lettura dei dati relativi alla salute degli animali</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
 
-  Pasto per                                     Si ricavano data e orario
-  Locale                                        dell'ultima somministrazione del
-                                                pasto
+<table style="width:88%;">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 10%" />
+<col style="width: 17%" />
+<col style="width: 10%" />
+<col style="width: 30%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Nome costrutto</strong></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>Numero operazioni elementari</strong></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>Descrizione</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">stato salute</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Lettura del codice dell’animale associato alla visita</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">abita</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Lettura del locale abitato dall’animale</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">locale assegnato</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Si ricavano i pasti assegnati al locale nelle ultime 2 settimane</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">pasto assegnato</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Si ricavano i dati del pasto somministrato in quel locale</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">qualità pasto</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Aggiornamento della ridondanza</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
 
-  locale                                        I 21 pasti per locale possono
-  assegnato                                     appartenere a minimo 2, massimo 21
-                                                locali: quindi mediamente si
-                                                devono controllare 12 locali
-
-  abita                                         Si leggono le chiavi di 40 animali
-                                                per ognuno dei 12 locali
-
-  stato salute                                  Sono registrati 11 indici di
-                                                salute ogni 10 animali
-                                                ($480\times 1.1 = 528$)
-
-  Indici salute                                 Lettura dei dati relativi agli
-                                                indici di salute degli animali
-
-                                                
-  -------------- ------- -------------- ------- ----------------------------------
-
-  -------------- ------- -------------- ------- ---------------------
-  **Nome                 **Numero               **Descrizione**
-  costrutto**            operazioni             
-                         elementari**           
-
-  qualità pasto                                 Si ricavano gli
-                                                indici di salute
-                                                associati al pasto
-                                                somministrato
-
-  Indici salute                                 Lettura dei dati
-                                                relativi alla salute
-                                                degli animali
-
-                                                
-  -------------- ------- -------------- ------- ---------------------
-
-  -------------- ------- -------------- ------- ---------------------
-  **Nome                 **Numero               **Descrizione**
-  costrutto**            operazioni             
-                         elementari**           
-
-  stato salute                                  Lettura del codice
-                                                dell'animale
-                                                associato alla visita
-
-  abita                                         Lettura del locale
-                                                abitato dall'animale
-
-  locale                                        Si ricavano i pasti
-  assegnato                                     assegnati al locale
-                                                nelle ultime 2
-                                                settimane
-
-  pasto                                         Si ricavano i dati
-  assegnato                                     del pasto
-                                                somministrato in quel
-                                                locale
-
-  qualità pasto                                 Aggiornamento della
-                                                ridondanza
-
-                                                
-  -------------- ------- -------------- ------- ---------------------
-
-In sintesi: $$\begin{aligned}
-\\ 
+In sintesi:
+$$\\begin{aligned}
+\\\\ 
 &f^T=33
-\\ 
+\\\\ 
 &o^T = 1590
-\\ 
-&n^T = 1590\times33= 52470
-\\
-&o^T_{RID}= 1056
-\\
-&n^T_{RID} = 1056\times 33 = 34848
-\\
+\\\\ 
+&n^T = 1590\\times33= 52470
+\\\\
+&o^T\_{RID}= 1056
+\\\\
+&n^T\_{RID} = 1056\\times 33 = 34848
+\\\\
 &f^A= 60
-\\
+\\\\
 &o^A= 26
-\\
-&n^A = 60\times 26 = 1560\end{aligned}$$
+\\\\
+&n^A = 60\\times 26 = 1560\\end{aligned}$$
 
-Quindi poichè $n^T - n^T_{RID} > n^A$, in quanto
-$52470 - 34848 = 17622 > 1560$, conviene mantenere la ridondanza
+Quindi poichè
+*n*<sup>*T*</sup> − *n*<sub>*R**I**D*</sub><sup>*T*</sup> &gt; *n*<sup>*A*</sup>,
+in quanto 52470 − 34848 = 17622 &gt; 1560, conviene mantenere la
+ridondanza
 
-Operazione : Registrazione di una ripoduzione con successo {#operazione-registrazione-di-una-ripoduzione-con-successo .unnumbered}
+Operazione : Registrazione di una ripoduzione con successo
 ----------------------------------------------------------
 
 *Descrizione:* Al completamento di una riproduzione terminata con
-succeso, viene compilata l'anagrafica del neonato, viene aggiornato lo
+succeso, viene compilata l’anagrafica del neonato, viene aggiornato lo
 stato della riproduzione e viene programmata una visita per il nuovo
 nato
 
@@ -2398,95 +2946,142 @@ appartenenti al neonato (sesso, specie, famiglia, razza, peso, altezza)
 *Output:* registrazione del neonato con programmazione di una nuova
 visita
 
-*Frequenza giornaliera:* 32[^3]
+*Frequenza giornaliera:* 32[2]
 
-### Porzione del diagramma interessata: {#porzione-del-diagramma-interessata-1 .unnumbered}
+### Porzione del diagramma interessata:
 
-![image](operazioni/schemi_parziali/operazione-\thecounterAccessi.png){width="100%"}
+<img src="operazioni/schemi_parziali/operazione-\thecounterAccessi.png" alt="image" style="width:100.0%" />
 
-### Porzione della tavola dei volumi interessata: {#porzione-della-tavola-dei-volumi-interessata-1 .unnumbered}
+### Porzione della tavola dei volumi interessata:
 
-  ----------------------------------------------------------------------
-  **Nome**         **E/R**   **Numero    **Motivazione**
-                             Istanze**   
-  ---------------- --------- ----------- -------------------------------
-  Riproduzione     E         12900       Secondo l'Istat circa il $75\%$
-                                         degli animali è femmina, nel
-                                         nostro caso
-                                         $20000\times0.75=15000$. Di
-                                         queste, il $14\%$ non è
-                                         destinato all'allevamento,
-                                         quindi in un anno il restante
-                                         $86\%$ si riproduce
-                                         $15000\times 0.86=12900$
+<table style="width:89%;">
+<colgroup>
+<col style="width: 23%" />
+<col style="width: 10%" />
+<col style="width: 11%" />
+<col style="width: 45%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Nome</strong></th>
+<th style="text-align: left;"><strong>E/R</strong></th>
+<th style="text-align: left;"><strong>Numero Istanze</strong></th>
+<th style="text-align: left;"><strong>Motivazione</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Riproduzione</td>
+<td style="text-align: left;">E</td>
+<td style="text-align: left;">12900</td>
+<td style="text-align: left;">Secondo l’Istat circa il <span class="math inline">75%</span> degli animali è femmina, nel nostro caso <span class="math inline">20000 × 0.75 = 15000</span>. Di queste, il <span class="math inline">14%</span> non è destinato all’allevamento, quindi in un anno il restante <span class="math inline">86%</span> si riproduce <span class="math inline">15000 × 0.86 = 12900</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">coinvolge</td>
+<td style="text-align: left;">R</td>
+<td style="text-align: left;">12900</td>
+<td style="text-align: left;">Cardinalità (1,1) con Riproduzione</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Riproduzione</td>
+<td style="text-align: left;">E</td>
+<td style="text-align: left;">12900</td>
+<td style="text-align: left;">Secondo l’Istat circa il <span class="math inline">75%</span> degli animali è femmina, nel nostro caso <span class="math inline">20000 × 0.75 = 15000</span>. Di queste, il <span class="math inline">14%</span> non è destinato all’allevamento, quindi in un anno il restante <span class="math inline">86%</span> si riproduce <span class="math inline">15000 × 0.86 = 12900</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Animale</td>
+<td style="text-align: left;">E</td>
+<td style="text-align: left;">20000</td>
+<td style="text-align: left;">Ogni agriturismo ospita 1000 animali <span class="math inline">20 × 1000 = 20000</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Visita</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Si suppone che per ogni agriturismo vengano eseguite 1100 visite all’anno per poter controllare almeno una volta tutti gli animali <span class="math inline">1100 × 20 = 22000</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">possiede visita</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Cardinalità (1,1) con Visita</td>
+</tr>
+</tbody>
+</table>
 
-  coinvolge        R         12900       Cardinalità (1,1) con
-                                         Riproduzione
+### Tavola degli accessi:
 
-  Riproduzione     E         12900       Secondo l'Istat circa il $75\%$
-                                         degli animali è femmina, nel
-                                         nostro caso
-                                         $20000\times0.75=15000$. Di
-                                         queste, il $14\%$ non è
-                                         destinato all'allevamento,
-                                         quindi in un anno il restante
-                                         $86\%$ si riproduce
-                                         $15000\times 0.86=12900$
+<table style="width:88%;">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 10%" />
+<col style="width: 17%" />
+<col style="width: 10%" />
+<col style="width: 30%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Nome costrutto</strong></th>
+<th style="text-align: left;"></th>
+<th style="text-align: left;"><strong>Numero operazioni elementari</strong></th>
+<th style="text-align: left;"></th>
+<th style="text-align: left;"><strong>Descrizione</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Riproduzione</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Si ricavano i dati relativi alla riproduzione, in particolare viene letta la data di nascita</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">coinvolge</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Si ricavano il codice della madre e del padre del neonato</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Riproduzione</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Aggiornamento dello stato della riproduzione a <code>sucesso</code> e della data di completamento</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Animale</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Registrazione del nuovo nato con i dati a disposizione</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Visita</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Programmazione di una nuova visita per il neonato</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">possiede visita</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Aggiornamento della relazione tra l’animale neonato e la visita programmata</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
 
-  Animale          E         20000       Ogni agriturismo ospita 1000
-                                         animali $20\times 1000=20000$
-
-  Visita                                 Si suppone che per ogni
-                                         agriturismo vengano eseguite
-                                         1100 visite all'anno per poter
-                                         controllare almeno una volta
-                                         tutti gli animali
-                                         $1100\times 20= 22000$
-
-  possiede visita                        Cardinalità (1,1) con Visita
-  ----------------------------------------------------------------------
-
-### Tavola degli accessi: {#tavola-degli-accessi-1 .unnumbered}
-
-  -------------------------------------------------------------------
-  **Nome                 **Numero               **Descrizione**
-  costrutto**            operazioni             
-                         elementari**           
-  -------------- ------- -------------- ------- ---------------------
-  Riproduzione                                  Si ricavano i dati
-                                                relativi alla
-                                                riproduzione, in
-                                                particolare viene
-                                                letta la data di
-                                                nascita
-
-  coinvolge                                     Si ricavano il codice
-                                                della madre e del
-                                                padre del neonato
-
-  Riproduzione                                  Aggiornamento dello
-                                                stato della
-                                                riproduzione a
-                                                `sucesso` e della
-                                                data di completamento
-
-  Animale                                       Registrazione del
-                                                nuovo nato con i dati
-                                                a disposizione
-
-  Visita                                        Programmazione di una
-                                                nuova visita per il
-                                                neonato
-
-  possiede                                      Aggiornamento della
-  visita                                        relazione tra
-                                                l'animale neonato e
-                                                la visita programmata
-
-                                                
-  -------------------------------------------------------------------
-
-Operazione : Pagamento delle stanze {#operazione-pagamento-delle-stanze .unnumbered}
+Operazione : Pagamento delle stanze
 -----------------------------------
 
 *Descrizione:* Ogni giorno viene registrato il pagamento cumulativo di
@@ -2499,120 +3094,205 @@ aggiuntivo utilizzato
 
 *Frequenza giornaliera:* 1
 
-### Porzione del diagramma interessata: {#porzione-del-diagramma-interessata-2 .unnumbered}
+### Porzione del diagramma interessata:
 
-![image](operazioni/schemi_parziali/operazione-\thecounterAccessi.png){width="110%"}
+<img src="operazioni/schemi_parziali/operazione-\thecounterAccessi.png" alt="image" style="width:110.0%" />
 
-### Porzione della tavola dei volumi interessata: {#porzione-della-tavola-dei-volumi-interessata-2 .unnumbered}
+### Porzione della tavola dei volumi interessata:
 
-  -------------------------------------------------------------------------
-  **Nome**         **E/R**   **Numero    **Motivazione**
-                             Istanze**   
-  ---------------- --------- ----------- ----------------------------------
-  Prenotazione                           Si stima che mediamente in un anno
-  Stanza                                 ogni cliente prenoti una stanza
+<table style="width:89%;">
+<colgroup>
+<col style="width: 23%" />
+<col style="width: 10%" />
+<col style="width: 11%" />
+<col style="width: 45%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Nome</strong></th>
+<th style="text-align: left;"><strong>E/R</strong></th>
+<th style="text-align: left;"><strong>Numero Istanze</strong></th>
+<th style="text-align: left;"><strong>Motivazione</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Prenotazione Stanza</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Si stima che mediamente in un anno ogni cliente prenoti una stanza</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">assegnazione stanza</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Cardinalità (1,1) con Prenotazione Stanza</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">stanza associata</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Cardinalità (1,1) con Servizio per Stanza</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">stanza associata</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Cardinalità (1,1) con Servizio per Stanza</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Servizio per Stanza</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Si considera che la metà delle stanze prenotate abbia usufruito di tre servizi aggiuntivi <span class="math inline">1000 × 0.5 × 3 = 1500</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">servizio associato</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Cardinalità (1,1) con Servizio per Stanza</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Servizio Aggiuntivo</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Ogni agriturismo dispone delle stesse 10 tipologie di servizi aggiuntivi</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">assegnazione cliente</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Cardinalità (1,1) con Prenotazione Stanza</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Cliente</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Ogni agriturismo ha in media 500 clienti all’anno</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Pagamenti</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Si considera la somma dei pagamenti per gli ordini sullo store online, per la prenotazione delle stanze e delle escursioni <span class="math inline">146000 + 2 × 10000 = 166000</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">effettua</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Cardinalità (1,1) con Pagamenti</td>
+</tr>
+</tbody>
+</table>
 
-  assegnazione                           Cardinalità (1,1) con Prenotazione
-  stanza                                 Stanza
+### Tavola degli accessi:
 
-  stanza associata                       Cardinalità (1,1) con Servizio per
-                                         Stanza
+<table style="width:88%;">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 10%" />
+<col style="width: 17%" />
+<col style="width: 10%" />
+<col style="width: 30%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Nome costrutto</strong></th>
+<th style="text-align: left;"></th>
+<th style="text-align: left;"><strong>Numero operazioni elementari</strong></th>
+<th style="text-align: left;"></th>
+<th style="text-align: left;"><strong>Descrizione</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Prenotazione Stanza</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Vengono lette tutte le prenotazioni che scandono in questo giorno</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">assegnazione stanza</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Si passa dalla relazione per ottenere la stanza prenotata</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Stanza</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Si leggono i dati relativi alla stanza</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">stanza associata</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Si passa dalla relazione per ricavare i servizia aggiuntivi associati alla prenotazione</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Servizio per Stanza</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Lettura dei servizi utilizzati assieme alla prenotazione</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">servizio associato</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Si passa dalla relazione per ricavare le informazioni sugli specifici servizi</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Servizio Aggiuntivo</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Lettura dei dati relativi al servizio utilizzato, ivi compreso il prezzo</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">assegnazione cliente</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Si passa dalla relazione per ottenere i dati relativi al cliente</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Cliente</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Lettura dei dati relativi al cliente, ivi compreso il codice della carta e se è già stato pagato un anticipo</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Pagamenti</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Inserimento di un nuovo pagamento</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">effettua</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Aggiornamento della relazione tra il cliente ed il pagamento</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
 
-  stanza associata                       Cardinalità (1,1) con Servizio per
-                                         Stanza
-
-  Servizio per                           Si considera che la metà delle
-  Stanza                                 stanze prenotate abbia usufruito
-                                         di tre servizi aggiuntivi
-                                         $1000\times 0.5 \times 3 = 1500$
-
-  servizio                               Cardinalità (1,1) con Servizio per
-  associato                              Stanza
-
-  Servizio                               Ogni agriturismo dispone delle
-  Aggiuntivo                             stesse 10 tipologie di servizi
-                                         aggiuntivi
-
-  assegnazione                           Cardinalità (1,1) con Prenotazione
-  cliente                                Stanza
-
-  Cliente                                Ogni agriturismo ha in media 500
-                                         clienti all'anno
-
-  Pagamenti                              Si considera la somma dei
-                                         pagamenti per gli ordini sullo
-                                         store online, per la prenotazione
-                                         delle stanze e delle escursioni
-                                         $146000+2\times 10000= 166000$
-
-  effettua                               Cardinalità (1,1) con Pagamenti
-  -------------------------------------------------------------------------
-
-### Tavola degli accessi: {#tavola-degli-accessi-2 .unnumbered}
-
-  -------------------------------------------------------------------
-  **Nome                 **Numero               **Descrizione**
-  costrutto**            operazioni             
-                         elementari**           
-  -------------- ------- -------------- ------- ---------------------
-  Prenotazione                                  Vengono lette tutte
-  Stanza                                        le prenotazioni che
-                                                scandono in questo
-                                                giorno
-
-  assegnazione                                  Si passa dalla
-  stanza                                        relazione per
-                                                ottenere la stanza
-                                                prenotata
-
-  Stanza                                        Si leggono i dati
-                                                relativi alla stanza
-
-  stanza                                        Si passa dalla
-  associata                                     relazione per
-                                                ricavare i servizia
-                                                aggiuntivi associati
-                                                alla prenotazione
-
-  Servizio per                                  Lettura dei servizi
-  Stanza                                        utilizzati assieme
-                                                alla prenotazione
-
-  servizio                                      Si passa dalla
-  associato                                     relazione per
-                                                ricavare le
-                                                informazioni sugli
-                                                specifici servizi
-
-  Servizio                                      Lettura dei dati
-  Aggiuntivo                                    relativi al servizio
-                                                utilizzato, ivi
-                                                compreso il prezzo
-
-  assegnazione                                  Si passa dalla
-  cliente                                       relazione per
-                                                ottenere i dati
-                                                relativi al cliente
-
-  Cliente                                       Lettura dei dati
-                                                relativi al cliente,
-                                                ivi compreso il
-                                                codice della carta e
-                                                se è già stato pagato
-                                                un anticipo
-
-  Pagamenti                                     Inserimento di un
-                                                nuovo pagamento
-
-  effettua                                      Aggiornamento della
-                                                relazione tra il
-                                                cliente ed il
-                                                pagamento
-
-                                                
-  -------------------------------------------------------------------
-
-Operazione : Stoccaggio del latte munto {#operazione-stoccaggio-del-latte-munto .unnumbered}
+Operazione : Stoccaggio del latte munto
 ---------------------------------------
 
 *Descrizione:* Il latte munto viene conservato in appositi silos
@@ -2622,176 +3302,317 @@ contenenti tutti latte con composizione chimico-fisica simile
 
 *Output:* Aggiornamento della quntità stoccata nel corretto silos
 
-*Frequenza giornaliera:* 15000 [^4]
+*Frequenza giornaliera:* 15000 [3]
 
-### Porzione del diagramma interessata: {#porzione-del-diagramma-interessata-3 .unnumbered}
+### Porzione del diagramma interessata:
 
-![image](operazioni/schemi_parziali/operazione-\thecounterAccessi.png){width="80%"}
+<img src="operazioni/schemi_parziali/operazione-\thecounterAccessi.png" alt="image" style="width:80.0%" />
 
-### Porzione della tavola dei volumi interessata: {#porzione-della-tavola-dei-volumi-interessata-3 .unnumbered}
+### Porzione della tavola dei volumi interessata:
 
-  --------------------------------------------------------------------------------
-  **Nome**         **E/R**   **Numero    **Motivazione**
-                             Istanze**   
-  ---------------- --------- ----------- -----------------------------------------
-  Mungitura        E         5475000     Si suppone che ogni giorno dell'anno ogni
-                                         animale femmina di un agriturismo venga
-                                         munto una volta
-                                         $20000\times 0.75 \times 365 = 5475000$
+<table style="width:89%;">
+<colgroup>
+<col style="width: 23%" />
+<col style="width: 10%" />
+<col style="width: 11%" />
+<col style="width: 45%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Nome</strong></th>
+<th style="text-align: left;"><strong>E/R</strong></th>
+<th style="text-align: left;"><strong>Numero Istanze</strong></th>
+<th style="text-align: left;"><strong>Motivazione</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Mungitura</td>
+<td style="text-align: left;">E</td>
+<td style="text-align: left;">5475000</td>
+<td style="text-align: left;">Si suppone che ogni giorno dell’anno ogni animale femmina di un agriturismo venga munto una volta <span class="math inline">20000 × 0.75 × 365 = 5475000</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Latte</td>
+<td style="text-align: left;">E</td>
+<td style="text-align: left;">400</td>
+<td style="text-align: left;">Ogni agriturismo produce 20 tipologie di latte differente <span class="math inline">20 × 20 = 400</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Silos</td>
+<td style="text-align: left;">E</td>
+<td style="text-align: left;">200</td>
+<td style="text-align: left;">Sono disponibili circa 10 silos per ogni agriturismo <span class="math inline">10 × 20 = 200</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">stoccato in</td>
+<td style="text-align: left;">R</td>
+<td style="text-align: left;">400</td>
+<td style="text-align: left;">Cardinalità (1,1) con Latte</td>
+</tr>
+</tbody>
+</table>
 
-  Latte            E         400         Ogni agriturismo produce 20 tipologie di
-                                         latte differente $20\times 20 = 400$
+### Tavola degli accessi:
 
-  Silos            E         200         Sono disponibili circa 10 silos per ogni
-                                         agriturismo $10\times 20=200$
+<table style="width:88%;">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 10%" />
+<col style="width: 17%" />
+<col style="width: 10%" />
+<col style="width: 30%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Nome costrutto</strong></th>
+<th style="text-align: left;"></th>
+<th style="text-align: left;"><strong>Numero operazioni elementari</strong></th>
+<th style="text-align: left;"></th>
+<th style="text-align: left;"><strong>Descrizione</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Mungitura</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Lettura della quantità di latte munto</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Latte</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Lettura delle quantità di sostanze disciolte nel latte</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Silos</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Aggiornamento del livello presente nel silos di destinazione</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">stoccato in</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Aggiornamento della relazione tra il latte ed il silos nel quale è stoccato</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
 
-  stoccato in      R         400         Cardinalità (1,1) con Latte
-  --------------------------------------------------------------------------------
-
-### Tavola degli accessi: {#tavola-degli-accessi-3 .unnumbered}
-
-  -------------------------------------------------------------------
-  **Nome                 **Numero               **Descrizione**
-  costrutto**            operazioni             
-                         elementari**           
-  -------------- ------- -------------- ------- ---------------------
-  Mungitura                                     Lettura della
-                                                quantità di latte
-                                                munto
-
-  Latte                                         Lettura delle
-                                                quantità di sostanze
-                                                disciolte nel latte
-
-  Silos                                         Aggiornamento del
-                                                livello presente nel
-                                                silos di destinazione
-
-  stoccato in                                   Aggiornamento della
-                                                relazione tra il
-                                                latte ed il silos nel
-                                                quale è stoccato
-
-                                                
-  -------------------------------------------------------------------
-
-Operazione : Controllo igiene dei locali {#operazione-controllo-igiene-dei-locali .unnumbered}
+Operazione : Controllo igiene dei locali
 ----------------------------------------
 
 *Descrizione:* Per garantire il rispetto delle condizioni di benessere
-degli animali all'interno dei locali, viene frequentemente controllato
+degli animali all’interno dei locali, viene frequentemente controllato
 che i parametri rilevati rientrino nelle soglie di tollerabilità, ed
 eventualmente viene inviata una richiesta di intervento di pulizia,
-insieme all'aggiornamento dei parametri del locale con i valori più
+insieme all’aggiornamento dei parametri del locale con i valori più
 recenti raccolti
 
 *Input:* Il codice del locale da controllare
 
-*Output:* Richiesta d'intervento di pulizia
+*Output:* Richiesta d’intervento di pulizia
 
-*Frequenza giornaliera:* 40[^5]
+*Frequenza giornaliera:* 40[4]
 
-### Porzione del diagramma interessata: {#porzione-del-diagramma-interessata-4 .unnumbered}
+### Porzione del diagramma interessata:
 
-![image](operazioni/schemi_parziali/operazione-\thecounterAccessi.png){width="100%"}
+<img src="operazioni/schemi_parziali/operazione-\thecounterAccessi.png" alt="image" style="width:100.0%" />
 
-### Porzione della tavola dei volumi interessata: {#porzione-della-tavola-dei-volumi-interessata-4 .unnumbered}
+### Porzione della tavola dei volumi interessata:
 
-  ----------------------------------------------------------------------
-  **Nome**         **E/R**   **Numero    **Motivazione**
-                             Istanze**   
-  ---------------- --------- ----------- -------------------------------
-  rilievo          R         500         Cardinalità (1,1) con Visivi
-  parametri visivi                       
+<table style="width:89%;">
+<colgroup>
+<col style="width: 23%" />
+<col style="width: 10%" />
+<col style="width: 11%" />
+<col style="width: 45%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Nome</strong></th>
+<th style="text-align: left;"><strong>E/R</strong></th>
+<th style="text-align: left;"><strong>Numero Istanze</strong></th>
+<th style="text-align: left;"><strong>Motivazione</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">rilievo parametri visivi</td>
+<td style="text-align: left;">R</td>
+<td style="text-align: left;">500</td>
+<td style="text-align: left;">Cardinalità (1,1) con Visivi</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Visivi</td>
+<td style="text-align: left;">E</td>
+<td style="text-align: left;">500</td>
+<td style="text-align: left;">Ogni locale è dotato di un sensore per i parametri visivi</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">rilievo parametri ambientali</td>
+<td style="text-align: left;">R</td>
+<td style="text-align: left;">500</td>
+<td style="text-align: left;">Cardinalità (1,1) con rilievo parametri ambientali</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Ambientali</td>
+<td style="text-align: left;">E</td>
+<td style="text-align: left;">500</td>
+<td style="text-align: left;">Ogni locale è dotato di un sensore per i parametri ambientali</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">rilievo composti volatili</td>
+<td style="text-align: left;">R</td>
+<td style="text-align: left;">500</td>
+<td style="text-align: left;">Cardinalità (1,1) con Composti volatili</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Composti volatili</td>
+<td style="text-align: left;">E</td>
+<td style="text-align: left;">500</td>
+<td style="text-align: left;">Ogni locale è dotato di un sensore per i composti volatili</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Locale</td>
+<td style="text-align: left;">E</td>
+<td style="text-align: left;">500</td>
+<td style="text-align: left;">Ogni stalla ha in media 5 locali</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Pulizia locale</td>
+<td style="text-align: left;">E</td>
+<td style="text-align: left;">580</td>
+<td style="text-align: left;">Ogni agriturismo effettua due richieste al giorno, per un totale di <span class="math inline">2 × 365 = 730</span> richieste annue<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. Quindi i 20 agriturismi compilano <span class="math inline">730 × 20 = 14600</span> record all’anno.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">richiesta intervento</td>
+<td style="text-align: left;">R</td>
+<td style="text-align: left;">580</td>
+<td style="text-align: left;">Cardinalità (1,1) con Pulizia locale</td>
+</tr>
+</tbody>
+</table>
+<section class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>In questo modo, ognuno dei 25 locali viene pulito <span class="math inline">${730\over 25}=29$</span> volte l’anno<a href="#fnref1" class="footnote-back">↩</a></p></li>
+</ol>
+</section>
 
-  Visivi           E         500         Ogni locale è dotato di un
-                                         sensore per i parametri visivi
+### Tavola degli accessi:
 
-  rilievo          R         500         Cardinalità (1,1) con rilievo
-  parametri                              parametri ambientali
-  ambientali                             
+<table style="width:88%;">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 10%" />
+<col style="width: 17%" />
+<col style="width: 10%" />
+<col style="width: 30%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Nome costrutto</strong></th>
+<th style="text-align: left;"></th>
+<th style="text-align: left;"><strong>Numero operazioni elementari</strong></th>
+<th style="text-align: left;"></th>
+<th style="text-align: left;"><strong>Descrizione</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">rilievo parametri visivi</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Si passa dalla relazione per ottenere i dati dei sensori visivi</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Visivi</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Lettura dei dati rilevati dai sensori visivi</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">rilievo parametri ambientali</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Si passa dalla relazione per ottenere i dati dei sensori ambientali</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Ambientali</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Lettura dei dati rilevati dai sensori ambientali</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">rilievo composti volatili</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Si passa dalla relazione per ottenere i dati dei sensori dei composti volatili</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Composti volatili</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Lettura dei dati rilevati dai sensori di composti volatili</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Locale</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Aggiornamento dei parametri del locale</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Locale</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Lettura delle soglie di tollerabilità per il locale</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Pulizia locale</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Scrittura di una nuova richiesta d’intervento di pulizia</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">richiesta intervento</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Aggiornamento della relazione tra il locale e l’intervento di pulizia</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
 
-  Ambientali       E         500         Ogni locale è dotato di un
-                                         sensore per i parametri
-                                         ambientali
-
-  rilievo composti R         500         Cardinalità (1,1) con Composti
-  volatili                               volatili
-
-  Composti         E         500         Ogni locale è dotato di un
-  volatili                               sensore per i composti volatili
-
-  Locale           E         500         Ogni stalla ha in media 5
-                                         locali
-
-  Pulizia locale   E         580         Ogni agriturismo effettua due
-                                         richieste al giorno, per un
-                                         totale di $2\times 365=730$
-                                         richieste annue[^6]. Quindi i
-                                         20 agriturismi compilano
-                                         $730\times 20=14600$ record
-                                         all'anno.
-
-  richiesta        R         580         Cardinalità (1,1) con Pulizia
-  intervento                             locale
-  ----------------------------------------------------------------------
-
-### Tavola degli accessi: {#tavola-degli-accessi-4 .unnumbered}
-
-  -------------------------------------------------------------------
-  **Nome                 **Numero               **Descrizione**
-  costrutto**            operazioni             
-                         elementari**           
-  -------------- ------- -------------- ------- ---------------------
-  rilievo                                       Si passa dalla
-  parametri                                     relazione per
-  visivi                                        ottenere i dati dei
-                                                sensori visivi
-
-  Visivi                                        Lettura dei dati
-                                                rilevati dai sensori
-                                                visivi
-
-  rilievo                                       Si passa dalla
-  parametri                                     relazione per
-  ambientali                                    ottenere i dati dei
-                                                sensori ambientali
-
-  Ambientali                                    Lettura dei dati
-                                                rilevati dai sensori
-                                                ambientali
-
-  rilievo                                       Si passa dalla
-  composti                                      relazione per
-  volatili                                      ottenere i dati dei
-                                                sensori dei composti
-                                                volatili
-
-  Composti                                      Lettura dei dati
-  volatili                                      rilevati dai sensori
-                                                di composti volatili
-
-  Locale                                        Aggiornamento dei
-                                                parametri del locale
-
-  Locale                                        Lettura delle soglie
-                                                di tollerabilità per
-                                                il locale
-
-  Pulizia locale                                Scrittura di una
-                                                nuova richiesta
-                                                d'intervento di
-                                                pulizia
-
-  richiesta                                     Aggiornamento della
-  intervento                                    relazione tra il
-                                                locale e l'intervento
-                                                di pulizia
-
-                                                
-  -------------------------------------------------------------------
-
-Operazione : Processamento degli ordini {#operazione-processamento-degli-ordini .unnumbered}
+Operazione : Processamento degli ordini
 ---------------------------------------
 
 *Descrizione:* Gli utenti che si sono registrati nello store online
@@ -2801,175 +3622,269 @@ tramite le spedizioni gestite dal database
 *Input:* Il codice del nuovo ordine effettuato dal cliente sullo store
 online
 
-*Output:* Processamento ed invio dell'ordine
+*Output:* Processamento ed invio dell’ordine
 
-*Frequenza giornaliera:* 400[^7]
+*Frequenza giornaliera:* 400[5]
 
-### Porzione del diagramma interessata: {#porzione-del-diagramma-interessata-5 .unnumbered}
+### Porzione del diagramma interessata:
 
-![image](operazioni/schemi_parziali/operazione-\thecounterAccessi.png){width="115%"}
+<img src="operazioni/schemi_parziali/operazione-\thecounterAccessi.png" alt="image" style="width:115.0%" />
 
-### Porzione della tavola dei volumi interessata: {#porzione-della-tavola-dei-volumi-interessata-5 .unnumbered}
+### Porzione della tavola dei volumi interessata:
 
-  -------------------------------------------------------------------------
-  **Nome**         **E/R**   **Numero    **Motivazione**
-                             Istanze**   
-  ---------------- --------- ----------- ----------------------------------
-  Ordine Prodotti                        Ogni agriturismo gestisce in media
-                                         20 ordini al giorno
-                                         $20\times 20\times 365 = 146000$
+<table style="width:89%;">
+<colgroup>
+<col style="width: 23%" />
+<col style="width: 10%" />
+<col style="width: 11%" />
+<col style="width: 45%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Nome</strong></th>
+<th style="text-align: left;"><strong>E/R</strong></th>
+<th style="text-align: left;"><strong>Numero Istanze</strong></th>
+<th style="text-align: left;"><strong>Motivazione</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Ordine Prodotti</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Ogni agriturismo gestisce in media 20 ordini al giorno <span class="math inline">20 × 20 × 365 = 146000</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">contenuto ordine</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Se si suppone che ogni ordine contenga 20 prodotti al massimo, si ottiene un numero totale di record pari a <span class="math inline">20 × 146000 = 2920000</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Formaggio Prodotto</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Per far fronte alle richieste della clientela, si decide di mantenere una produzione lievemente superiore alle vendite stimate (circa 80000 prodotti in più rispetto al volume di contenuto ordine)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Ordine Prodotti</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Ogni agriturismo gestisce in media 20 ordini al giorno <span class="math inline">20 × 20 × 365 = 146000</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">esegue ordine</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Cardinalità (1,1) con Ordine Prodotti</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Account</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Si suppone che il 70% degli utenti sia registrato, e possegga di conseguenza un account</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">possiede visita</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Cardinalità (1,1) con Visita</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Cliente</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Ogni agriturismo ha in media 500 clienti all’anno</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Pagamenti</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Si considera la somma dei pagamenti per gli ordini sullo store online, per la prenotazione delle stanze e delle escursioni <span class="math inline">146000 + 2 × 10000 = 166000</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">effettua</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Cardinalità (1,1) con Pagamenti</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Spedizione</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Ogni spedizione consegnerà circa 50 ordini collocati per area geografica simile <span class="math inline">${146000\over 50}=2920$</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">consegnato da</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Cardinalità (1,1) con Ordine Prodotti</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">processata da</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Si suppone che ogni spedizione sia processata da circa 5 centri di smistamento <span class="math inline">2920 × 5 = 14600</span></td>
+</tr>
+</tbody>
+</table>
 
-  contenuto ordine                       Se si suppone che ogni ordine
-                                         contenga 20 prodotti al massimo,
-                                         si ottiene un numero totale di
-                                         record pari a
-                                         $20\times146000=2920000$
+### Tavola degli accessi:
 
-  Formaggio                              Per far fronte alle richieste
-  Prodotto                               della clientela, si decide di
-                                         mantenere una produzione
-                                         lievemente superiore alle vendite
-                                         stimate (circa 80000 prodotti in
-                                         più rispetto al volume di
-                                         contenuto ordine)
+<table style="width:88%;">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 10%" />
+<col style="width: 17%" />
+<col style="width: 10%" />
+<col style="width: 30%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Nome costrutto</strong></th>
+<th style="text-align: left;"></th>
+<th style="text-align: left;"><strong>Numero operazioni elementari</strong></th>
+<th style="text-align: left;"></th>
+<th style="text-align: left;"><strong>Descrizione</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Ordine Prodotti</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Aggiornamento dello stato dell’odine che passa a <code>in processazione</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">contenuto ordine</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Si passa dalla relazione per conoscere il contenuto dell’ordine oltre che la quantità dei prodotti acquistati<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Formaggio prodotto</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Lettura dei dati relativi al formaggio acquistato, in particolare viene controllato che ve ne sia rimasto in stock</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Ordine Prodotti</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Aggiornamento dello stato dell’ordine che passa a <code>in preparazione</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">esegue ordine</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Si passa dalla relazione per ottenere i dati dell’account che ha effettuato l’ordine</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Account</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Lettura dei dati relativi all’account acquirente</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">possiede</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Si passa dalla relazione per ottenere il cliente associato all’account</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Cliente</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Lettura dei dati del cliente che possiede l’account, in particolare viene controllato il codice della carta</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Pagamenti</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Scrittura del pagamento intestato al cliente</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">effettua</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Aggiornamento della relazione tra il cliente ed il pagamento</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Spedizione</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Scrittura di una nuova spedizione con stato <code>spedita</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">consegnato da</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Aggiornamento della relazione tra la spedizione e l’ordine a cui è associata</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Ordine Prodotti</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Aggiornamento dello stato dell’ordine a <code>spedito</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">processata da</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Aggiornamento della relazione tra l’ordine ed il centro di smistamento per cui attraversa</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Spedizione</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Aggiornamento dello stato della spedizione a <code>in consegna</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Spedizione</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Aggiornamento dello stato della spedizione a <code>consegnata</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Ordine Prodotti</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Aggiornamento dello stato dell’ordine a <code>evaso</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
+<section class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Per ipotesi, ogni ordine è composto da 20 prodotti<a href="#fnref1" class="footnote-back">↩</a></p></li>
+</ol>
+</section>
 
-  Ordine Prodotti                        Ogni agriturismo gestisce in media
-                                         20 ordini al giorno
-                                         $20\times 20\times 365 = 146000$
-
-  esegue ordine                          Cardinalità (1,1) con Ordine
-                                         Prodotti
-
-  Account                                Si suppone che il 70% degli utenti
-                                         sia registrato, e possegga di
-                                         conseguenza un account
-
-  possiede visita                        Cardinalità (1,1) con Visita
-
-  Cliente                                Ogni agriturismo ha in media 500
-                                         clienti all'anno
-
-  Pagamenti                              Si considera la somma dei
-                                         pagamenti per gli ordini sullo
-                                         store online, per la prenotazione
-                                         delle stanze e delle escursioni
-                                         $146000+2\times 10000= 166000$
-
-  effettua                               Cardinalità (1,1) con Pagamenti
-
-  Spedizione                             Ogni spedizione consegnerà circa
-                                         50 ordini collocati per area
-                                         geografica simile
-                                         ${146000\over 50}=2920$
-
-  consegnato da                          Cardinalità (1,1) con Ordine
-                                         Prodotti
-
-  processata da                          Si suppone che ogni spedizione sia
-                                         processata da circa 5 centri di
-                                         smistamento $2920\times 5=14600$
-  -------------------------------------------------------------------------
-
-### Tavola degli accessi: {#tavola-degli-accessi-5 .unnumbered}
-
-  -------------------------------------------------------------------
-  **Nome                 **Numero               **Descrizione**
-  costrutto**            operazioni             
-                         elementari**           
-  -------------- ------- -------------- ------- ---------------------
-  Ordine                                        Aggiornamento dello
-  Prodotti                                      stato dell'odine che
-                                                passa a
-                                                `in processazione`
-
-  contenuto                                     Si passa dalla
-  ordine                                        relazione per
-                                                conoscere il
-                                                contenuto dell'ordine
-                                                oltre che la quantità
-                                                dei prodotti
-                                                acquistati[^8]
-
-  Formaggio                                     Lettura dei dati
-  prodotto                                      relativi al formaggio
-                                                acquistato, in
-                                                particolare viene
-                                                controllato che ve ne
-                                                sia rimasto in stock
-
-  Ordine                                        Aggiornamento dello
-  Prodotti                                      stato dell'ordine che
-                                                passa a
-                                                `in preparazione`
-
-  esegue ordine                                 Si passa dalla
-                                                relazione per
-                                                ottenere i dati
-                                                dell'account che ha
-                                                effettuato l'ordine
-
-  Account                                       Lettura dei dati
-                                                relativi all'account
-                                                acquirente
-
-  possiede                                      Si passa dalla
-                                                relazione per
-                                                ottenere il cliente
-                                                associato all'account
-
-  Cliente                                       Lettura dei dati del
-                                                cliente che possiede
-                                                l'account, in
-                                                particolare viene
-                                                controllato il codice
-                                                della carta
-
-  Pagamenti                                     Scrittura del
-                                                pagamento intestato
-                                                al cliente
-
-  effettua                                      Aggiornamento della
-                                                relazione tra il
-                                                cliente ed il
-                                                pagamento
-
-  Spedizione                                    Scrittura di una
-                                                nuova spedizione con
-                                                stato `spedita`
-
-  consegnato da                                 Aggiornamento della
-                                                relazione tra la
-                                                spedizione e l'ordine
-                                                a cui è associata
-
-  Ordine                                        Aggiornamento dello
-  Prodotti                                      stato dell'ordine a
-                                                `spedito`
-
-  processata da                                 Aggiornamento della
-                                                relazione tra
-                                                l'ordine ed il centro
-                                                di smistamento per
-                                                cui attraversa
-
-  Spedizione                                    Aggiornamento dello
-                                                stato della
-                                                spedizione a
-                                                `in consegna`
-
-  Spedizione                                    Aggiornamento dello
-                                                stato della
-                                                spedizione a
-                                                `consegnata`
-
-  Ordine                                        Aggiornamento dello
-  Prodotti                                      stato dell'ordine a
-                                                `evaso`
-
-                                                
-  -------------------------------------------------------------------
-
-Operazione : Prescrizione delle terapie {#operazione-prescrizione-delle-terapie .unnumbered}
+Operazione : Prescrizione delle terapie
 ---------------------------------------
 
 *Descrizione:* Alla registrazione di una nuova terapia da parte di un
@@ -2977,54 +3892,94 @@ veterinario, viene controllato se questa è la terza consecutiva sullo
 stesso animale, nel qual caso viene effettuato un ricollocamento in una
 zona di quarantena
 
-*Input:* la nuova terapia e l'animale a cui è assegnata
+*Input:* la nuova terapia e l’animale a cui è assegnata
 
-*Output:* Trasferimanto dell'animale in un nuovo locale di quarantena
+*Output:* Trasferimanto dell’animale in un nuovo locale di quarantena
 
-*Frequenza giornaliera:* 110[^9]
+*Frequenza giornaliera:* 110[6]
 
-### Porzione del diagramma interessata: {#porzione-del-diagramma-interessata-6 .unnumbered}
+### Porzione del diagramma interessata:
 
-![image](operazioni/schemi_parziali/operazione-\thecounterAccessi.png){width="115%"}
+<img src="operazioni/schemi_parziali/operazione-\thecounterAccessi.png" alt="image" style="width:115.0%" />
 
-### Porzione della tavola dei volumi interessata: {#porzione-della-tavola-dei-volumi-interessata-6 .unnumbered}
+### Porzione della tavola dei volumi interessata:
 
-  ----------------------------------------------------------------------
-  **Nome**         **E/R**   **Numero    **Motivazione**
-                             Istanze**   
-  ---------------- --------- ----------- -------------------------------
-  Terapia                                Si suppone che ogni anno
-                                         vengano prescritte 2 terapie
-                                         per ogni animale
-                                         $2\times 20000= 40000$
+<table style="width:89%;">
+<colgroup>
+<col style="width: 23%" />
+<col style="width: 10%" />
+<col style="width: 11%" />
+<col style="width: 45%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Nome</strong></th>
+<th style="text-align: left;"><strong>E/R</strong></th>
+<th style="text-align: left;"><strong>Numero Istanze</strong></th>
+<th style="text-align: left;"><strong>Motivazione</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Terapia</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Si suppone che ogni anno vengano prescritte 2 terapie per ogni animale <span class="math inline">2 × 20000 = 40000</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">abita</td>
+<td style="text-align: left;">R</td>
+<td style="text-align: left;">20000</td>
+<td style="text-align: left;">Cardinalità (1,1) con Animale</td>
+</tr>
+</tbody>
+</table>
 
-  abita            R         20000       Cardinalità (1,1) con Animale
-  ----------------------------------------------------------------------
+### Tavola degli accessi:
 
-### Tavola degli accessi: {#tavola-degli-accessi-6 .unnumbered}
+<table style="width:88%;">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 10%" />
+<col style="width: 17%" />
+<col style="width: 10%" />
+<col style="width: 30%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Nome costrutto</strong></th>
+<th style="text-align: left;"></th>
+<th style="text-align: left;"><strong>Numero operazioni elementari</strong></th>
+<th style="text-align: left;"></th>
+<th style="text-align: left;"><strong>Descrizione</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Terapia</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Controllo se l’ultima terapia che non si è conclusa è marcata come la seconda consecutiva</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">abita</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Ricollocamento del locale abitato dall’animale tramite l’aggiornamento della relazione con un locale di quarantena</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
 
-  -------------------------------------------------------------------
-  **Nome                 **Numero               **Descrizione**
-  costrutto**            operazioni             
-                         elementari**           
-  -------------- ------- -------------- ------- ---------------------
-  Terapia                                       Controllo se l'ultima
-                                                terapia che non si è
-                                                conclusa è marcata
-                                                come la seconda
-                                                consecutiva
-
-  abita                                         Ricollocamento del
-                                                locale abitato
-                                                dall'animale tramite
-                                                l'aggiornamento della
-                                                relazione con un
-                                                locale di quarantena
-
-                                                
-  -------------------------------------------------------------------
-
-Operazione : Controllo degli animali dispersi {#operazione-controllo-degli-animali-dispersi .unnumbered}
+Operazione : Controllo degli animali dispersi
 ---------------------------------------------
 
 *Descrizione:* Durante le attività di pascolo viene monitorato ad
@@ -3032,192 +3987,302 @@ intervalli regolari il segnale GPS di ogni singolo animale affinchè ci
 si assicuri che rientri negli spazi delimitati dalle recinzioni per le
 zone dedicate al pascolo
 
-*Input:* codice dell'attività di pascolo
+*Input:* codice dell’attività di pascolo
 
-*Output:* segnalazione se l'animale è disperso
+*Output:* segnalazione se l’animale è disperso
 
-*Frequenza giornaliera:* 3968[^10]
+*Frequenza giornaliera:* 3968[7]
 
-### Porzione del diagramma interessata: {#porzione-del-diagramma-interessata-7 .unnumbered}
+### Porzione del diagramma interessata:
 
-![image](operazioni/schemi_parziali/operazione-\thecounterAccessi.png){width="115%"}
+<img src="operazioni/schemi_parziali/operazione-\thecounterAccessi.png" alt="image" style="width:115.0%" />
 
-### Porzione della tavola dei volumi interessata: {#porzione-della-tavola-dei-volumi-interessata-7 .unnumbered}
+### Porzione della tavola dei volumi interessata:
 
-  ----------------------------------------------------------------------
-  **Nome**         **E/R**   **Numero    **Motivazione**
-                             Istanze**   
-  ---------------- --------- ----------- -------------------------------
-  attività locale  R         90000       Cardinalità (1,1) con Attività
-                                         pascolo
+<table style="width:89%;">
+<colgroup>
+<col style="width: 23%" />
+<col style="width: 10%" />
+<col style="width: 11%" />
+<col style="width: 45%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Nome</strong></th>
+<th style="text-align: left;"><strong>E/R</strong></th>
+<th style="text-align: left;"><strong>Numero Istanze</strong></th>
+<th style="text-align: left;"><strong>Motivazione</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">attività locale</td>
+<td style="text-align: left;">R</td>
+<td style="text-align: left;">90000</td>
+<td style="text-align: left;">Cardinalità (1,1) con Attività pascolo</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">abita</td>
+<td style="text-align: left;">R</td>
+<td style="text-align: left;">20000</td>
+<td style="text-align: left;">Cardinalità (1,1) con Animale</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">localizzato</td>
+<td style="text-align: left;">R</td>
+<td style="text-align: left;">20000</td>
+<td style="text-align: left;">Cardinalità (1,1) con Animale e con GPS</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">GPS</td>
+<td style="text-align: left;">E</td>
+<td style="text-align: left;">20000</td>
+<td style="text-align: left;">Ogni animale è dotato di un dispositivo GPS</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">collocazione attività</td>
+<td style="text-align: left;">R</td>
+<td style="text-align: left;">90000</td>
+<td style="text-align: left;">Cardinalità (1,1) con Attività pascolo</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">divisione pascolo</td>
+<td style="text-align: left;">R</td>
+<td style="text-align: left;">180</td>
+<td style="text-align: left;">Cardinalità (1,1) con Recinzione divisoria e zona di pascolo</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Recinzione divisoria e zona di pascolo</td>
+<td style="text-align: left;">E</td>
+<td style="text-align: left;">180</td>
+<td style="text-align: left;">Ogni area di pascolo è divisa in 3 recinsioni <span class="math inline">60 × 3 = 180</span></td>
+</tr>
+</tbody>
+</table>
 
-  abita            R         20000       Cardinalità (1,1) con Animale
+### Tavola degli accessi:
 
-  localizzato      R         20000       Cardinalità (1,1) con Animale e
-                                         con GPS
-
-  GPS              E         20000       Ogni animale è dotato di un
-                                         dispositivo GPS
-
-  collocazione     R         90000       Cardinalità (1,1) con Attività
-  attività                               pascolo
-
-  divisione        R         180         Cardinalità (1,1) con
-  pascolo                                Recinzione divisoria e zona di
-                                         pascolo
-
-  Recinzione       E         180         Ogni area di pascolo è divisa
-  divisoria e zona                       in 3 recinsioni
-  di pascolo                             $60\times 3= 180$
-  ----------------------------------------------------------------------
-
-### Tavola degli accessi: {#tavola-degli-accessi-7 .unnumbered}
-
-E' presente la ridondanza *partecipazione attività* tra Attività pascolo
+E’ presente la ridondanza *partecipazione attività* tra Attività pascolo
 e Animale che influenza la tavola degli accessi
 
-  -------------- ------- -------------- ------- ---------------------
-  **Nome                 **Numero               **Descrizione**
-  costrutto**            operazioni             
-                         elementari**           
+<table style="width:88%;">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 10%" />
+<col style="width: 17%" />
+<col style="width: 10%" />
+<col style="width: 30%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Nome costrutto</strong></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>Numero operazioni elementari</strong></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>Descrizione</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">attività locale</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Si passa dalla relazione per ottenere il codice del locale che svolge l’attività di pascolo</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">abita</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Si passa dalla relazione per ottenere i codici degli animali che abitano il locale</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">localizzato</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Si passa dalla relazione per ottenere il codice del GPS associato agli animali</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">GPS</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Lettura delle coordinate posizionali dei GPS</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">collocazione attività</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Si passa dalla relazione per ottenere la collocazione dell’attività di pascolo</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">divisione pascolo</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Si passa dalla relazione per ottenere le zone appartenenti all’area di pascolo</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Recinzione divisoria e zona di pascolo</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Lettura della posizione delle recinzioni delle zone di pascolo</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
 
-  attività                                      Si passa dalla
-  locale                                        relazione per
-                                                ottenere il codice
-                                                del locale che svolge
-                                                l'attività di pascolo
+<table style="width:88%;">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 10%" />
+<col style="width: 17%" />
+<col style="width: 10%" />
+<col style="width: 30%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Nome costrutto</strong></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>Numero operazioni elementari</strong></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>Descrizione</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">partecipazioine attività</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Si passa dalla relazione per ottenere i codici degli animali che partecipano all’attività</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">localizzato</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Si passa dalla relazione per ottenere il codice del GPS associato agli animali</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">GPS</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Lettura delle coordinate posizionali dei GPS</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">collocazione attività</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Si passa dalla relazione per ottenere la collocazione dell’attività di pascolo</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">divisione pascolo</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Si passa dalla relazione per ottenere le zone appartenenti all’area di pascolo</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Recinzione divisoria e zona di pascolo</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Lettura della posizione delle recinzioni delle zone di pascolo</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
 
-  abita                                         Si passa dalla
-                                                relazione per
-                                                ottenere i codici
-                                                degli animali che
-                                                abitano il locale
+<table style="width:88%;">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 10%" />
+<col style="width: 17%" />
+<col style="width: 10%" />
+<col style="width: 30%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Nome costrutto</strong></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>Numero operazioni elementari</strong></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>Descrizione</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">attività locale</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Si passa dalla relazione per ottenere il codice del locale che svolge l’attività di pascolo</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">abita</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Si passa dalla relazione per ottenere i codici degli animali che abitano il locale</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">partecipazione attività</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Aggiornamento della relazione tra l’animale e l’attività di pascolo a cui partecipa</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
 
-  localizzato                                   Si passa dalla
-                                                relazione per
-                                                ottenere il codice
-                                                del GPS associato
-                                                agli animali
-
-  GPS                                           Lettura delle
-                                                coordinate
-                                                posizionali dei GPS
-
-  collocazione                                  Si passa dalla
-  attività                                      relazione per
-                                                ottenere la
-                                                collocazione
-                                                dell'attività di
-                                                pascolo
-
-  divisione                                     Si passa dalla
-  pascolo                                       relazione per
-                                                ottenere le zone
-                                                appartenenti all'area
-                                                di pascolo
-
-  Recinzione                                    Lettura della
-  divisoria e                                   posizione delle
-  zona di                                       recinzioni delle zone
-  pascolo                                       di pascolo
-
-                                                
-  -------------- ------- -------------- ------- ---------------------
-
-  ----------------- ------- -------------- ------- ---------------------
-  **Nome                    **Numero               **Descrizione**
-  costrutto**               operazioni             
-                            elementari**           
-
-  partecipazioine                                  Si passa dalla
-  attività                                         relazione per
-                                                   ottenere i codici
-                                                   degli animali che
-                                                   partecipano
-                                                   all'attività
-
-  localizzato                                      Si passa dalla
-                                                   relazione per
-                                                   ottenere il codice
-                                                   del GPS associato
-                                                   agli animali
-
-  GPS                                              Lettura delle
-                                                   coordinate
-                                                   posizionali dei GPS
-
-  collocazione                                     Si passa dalla
-  attività                                         relazione per
-                                                   ottenere la
-                                                   collocazione
-                                                   dell'attività di
-                                                   pascolo
-
-  divisione pascolo                                Si passa dalla
-                                                   relazione per
-                                                   ottenere le zone
-                                                   appartenenti all'area
-                                                   di pascolo
-
-  Recinzione                                       Lettura della
-  divisoria e zona                                 posizione delle
-  di pascolo                                       recinzioni delle zone
-                                                   di pascolo
-
-                                                   
-  ----------------- ------- -------------- ------- ---------------------
-
-  ---------------- ------- -------------- ------- ---------------------
-  **Nome                   **Numero               **Descrizione**
-  costrutto**              operazioni             
-                           elementari**           
-
-  attività locale                                 Si passa dalla
-                                                  relazione per
-                                                  ottenere il codice
-                                                  del locale che svolge
-                                                  l'attività di pascolo
-
-  abita                                           Si passa dalla
-                                                  relazione per
-                                                  ottenere i codici
-                                                  degli animali che
-                                                  abitano il locale
-
-  partecipazione                                  Aggiornamento della
-  attività                                        relazione tra
-                                                  l'animale e
-                                                  l'attività di pascolo
-                                                  a cui partecipa
-
-                                                  
-  ---------------- ------- -------------- ------- ---------------------
-
-In sintesi: $$\begin{aligned}
+In sintesi:
+$$\\begin{aligned}
 &f^T=3968
-\\
+\\\\
 &o^T = 128
-\\
-&n^T = 3968\times128= 507904
-\\
-&o^T_{RID}= 127
-\\
-&n^T_{RID} = 3968\times 127 = 503936
-\\
+\\\\
+&n^T = 3968\\times128= 507904
+\\\\
+&o^T\_{RID}= 127
+\\\\
+&n^T\_{RID} = 3968\\times 127 = 503936
+\\\\
 &f^A= 247
-\\
+\\\\
 &o^A= 42
-\\
-&n^A = 247\times 42 = 10374
-\\\end{aligned}$$
+\\\\
+&n^A = 247\\times 42 = 10374
+\\\\\\end{aligned}$$
 
-Quindi poichè $n^T - n^T_{RID} < n^A$, in quanto
-$507904 - 503936 = 3968 < 10374$, non conviene mantenere la ridondanza
+Quindi poichè
+*n*<sup>*T*</sup> − *n*<sub>*R**I**D*</sub><sup>*T*</sup> &lt; *n*<sup>*A*</sup>,
+in quanto 507904 − 503936 = 3968 &lt; 10374, non conviene mantenere la
+ridondanza
 
-Operazione : Registrazione nuovo account {#operazione-registrazione-nuovo-account .unnumbered}
+Operazione : Registrazione nuovo account
 ----------------------------------------
 
-*Descrizione:* All' inserimento di un nuovo account nello store online,
+*Descrizione:* All’ inserimento di un nuovo account nello store online,
 viene controllato se i dati inseriti corrispondono a quelli di un
 cliente già registrato ma senza un account. Nel caso viene aggiunto un
 record in Account con i dati forniti durante la registrazione,
@@ -3225,64 +4290,115 @@ altrimenti viene prima registrato il nuovo cliente a partire dal codice
 della sua carta
 
 *Input:* anagrafica del cliente, dati dei documenti e informazioni
-sull'account da registrare
+sull’account da registrare
 
 *Output:* aggiunta di un account e del cliente che lo possiede
 
-*Frequenza giornaliera:* 19 [^11]
+*Frequenza giornaliera:* 19 [8]
 
-### Porzione del diagramma interessata: {#porzione-del-diagramma-interessata-8 .unnumbered}
+### Porzione del diagramma interessata:
 
-![image](operazioni/schemi_parziali/operazione-\thecounterAccessi.png){width="115%"}
+<img src="operazioni/schemi_parziali/operazione-\thecounterAccessi.png" alt="image" style="width:115.0%" />
 
-### Porzione della tavola dei volumi interessata: {#porzione-della-tavola-dei-volumi-interessata-8 .unnumbered}
+### Porzione della tavola dei volumi interessata:
 
-  ----------------------------------------------------------------------
-  **Nome**         **E/R**   **Numero    **Motivazione**
-                             Istanze**   
-  ---------------- --------- ----------- -------------------------------
-  Cliente                                Ogni agriturismo ha in media
-                                         500 clienti all'anno
+<table style="width:89%;">
+<colgroup>
+<col style="width: 23%" />
+<col style="width: 10%" />
+<col style="width: 11%" />
+<col style="width: 45%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Nome</strong></th>
+<th style="text-align: left;"><strong>E/R</strong></th>
+<th style="text-align: left;"><strong>Numero Istanze</strong></th>
+<th style="text-align: left;"><strong>Motivazione</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Cliente</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Ogni agriturismo ha in media 500 clienti all’anno</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Account</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Si suppone che il 70% degli utenti sia registrato, e possegga di conseguenza un account</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">possiede</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Cardinalità (1,1) con Scheda Medica</td>
+</tr>
+</tbody>
+</table>
 
-  Account                                Si suppone che il 70% degli
-                                         utenti sia registrato, e
-                                         possegga di conseguenza un
-                                         account
+<table style="width:88%;">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 10%" />
+<col style="width: 17%" />
+<col style="width: 10%" />
+<col style="width: 30%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Nome costrutto</strong></th>
+<th style="text-align: left;"></th>
+<th style="text-align: left;"><strong>Numero operazioni elementari</strong></th>
+<th style="text-align: left;"></th>
+<th style="text-align: left;"><strong>Descrizione</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Cliente</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Si ricava, se è presente, il cliente già registrato con questo codice di carta</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Cliente</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Aggiunta di un record in Cliente</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Account</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Aggiunta di un nuovo account nello store online</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">possiede</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Aggiornamento della relazione tra il cliente e il suo nuovo account</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
 
-  possiede                               Cardinalità (1,1) con Scheda
-                                         Medica
-  ----------------------------------------------------------------------
-
-  -------------------------------------------------------------------
-  **Nome                 **Numero               **Descrizione**
-  costrutto**            operazioni             
-                         elementari**           
-  -------------- ------- -------------- ------- ---------------------
-  Cliente                                       Si ricava, se è
-                                                presente, il cliente
-                                                già registrato con
-                                                questo codice di
-                                                carta
-
-  Cliente                                       Aggiunta di un record
-                                                in Cliente
-
-  Account                                       Aggiunta di un nuovo
-                                                account nello store
-                                                online
-
-  possiede                                      Aggiornamento della
-                                                relazione tra il
-                                                cliente e il suo
-                                                nuovo account
-
-                                                
-  -------------------------------------------------------------------
-
-Operazione : Ridistribuzione degli animali all'aggiunta di un nuovo locale {#operazione-ridistribuzione-degli-animali-allaggiunta-di-un-nuovo-locale .unnumbered}
+Operazione : Ridistribuzione degli animali all’aggiunta di un nuovo locale
 --------------------------------------------------------------------------
 
-*Descrizione:* All'aggiunta di un nuovo locale, vengono smistati gli
+*Descrizione:* All’aggiunta di un nuovo locale, vengono smistati gli
 animali già presenti nella stalla affinchè sia mantenuto costante il
 numero di animali per locale
 
@@ -3291,94 +4407,184 @@ numero di animali per locale
 *Output:* ridistribuzione degli animali nel nuovo locale aggiunto e
 registrazione dei nuovi sensori
 
-*Frequenza giornaliera:* 0.27[^12]
+*Frequenza giornaliera:* 0.27[9]
 
-### Porzione del diagramma interessata: {#porzione-del-diagramma-interessata-9 .unnumbered}
+### Porzione del diagramma interessata:
 
-![image](operazioni/schemi_parziali/operazione-\thecounterAccessi.png){width="115%"}
+<img src="operazioni/schemi_parziali/operazione-\thecounterAccessi.png" alt="image" style="width:115.0%" />
 
-### Porzione della tavola dei volumi interessata: {#porzione-della-tavola-dei-volumi-interessata-9 .unnumbered}
+### Porzione della tavola dei volumi interessata:
 
-  ----------------------------------------------------------------------
-  **Nome**         **E/R**   **Numero    **Motivazione**
-                             Istanze**   
-  ---------------- --------- ----------- -------------------------------
-  divisione locale R         500         Cardinalità (1,1) con Locale
+<table style="width:89%;">
+<colgroup>
+<col style="width: 23%" />
+<col style="width: 10%" />
+<col style="width: 11%" />
+<col style="width: 45%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Nome</strong></th>
+<th style="text-align: left;"><strong>E/R</strong></th>
+<th style="text-align: left;"><strong>Numero Istanze</strong></th>
+<th style="text-align: left;"><strong>Motivazione</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">divisione locale</td>
+<td style="text-align: left;">R</td>
+<td style="text-align: left;">500</td>
+<td style="text-align: left;">Cardinalità (1,1) con Locale</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">abita</td>
+<td style="text-align: left;">R</td>
+<td style="text-align: left;">20000</td>
+<td style="text-align: left;">Cardinalità (1,1) con Animale</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Locale</td>
+<td style="text-align: left;">E</td>
+<td style="text-align: left;">500</td>
+<td style="text-align: left;">Ogni stalla ha in media 5 locali</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Visivi</td>
+<td style="text-align: left;">E</td>
+<td style="text-align: left;">500</td>
+<td style="text-align: left;">Ogni locale è dotato di un sensore per i parametri visivi</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">rilievo parametri visivi</td>
+<td style="text-align: left;">R</td>
+<td style="text-align: left;">500</td>
+<td style="text-align: left;">Cardinalità (1,1) con Visivi</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Ambientali</td>
+<td style="text-align: left;">E</td>
+<td style="text-align: left;">500</td>
+<td style="text-align: left;">Ogni locale è dotato di un sensore per i parametri ambientali</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">rilievo parametri ambientali</td>
+<td style="text-align: left;">R</td>
+<td style="text-align: left;">500</td>
+<td style="text-align: left;">Cardinalità (1,1) con rilievo parametri ambientali</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Composti volatili</td>
+<td style="text-align: left;">E</td>
+<td style="text-align: left;">500</td>
+<td style="text-align: left;">Ogni locale è dotato di un sensore per i composti volatili</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">rilievo composti volatili</td>
+<td style="text-align: left;">R</td>
+<td style="text-align: left;">500</td>
+<td style="text-align: left;">Cardinalità (1,1) con Composti volatili</td>
+</tr>
+</tbody>
+</table>
 
-  abita            R         20000       Cardinalità (1,1) con Animale
-
-  Locale           E         500         Ogni stalla ha in media 5
-                                         locali
-
-  Visivi           E         500         Ogni locale è dotato di un
-                                         sensore per i parametri visivi
-
-  rilievo          R         500         Cardinalità (1,1) con Visivi
-  parametri visivi                       
-
-  Ambientali       E         500         Ogni locale è dotato di un
-                                         sensore per i parametri
-                                         ambientali
-
-  rilievo          R         500         Cardinalità (1,1) con rilievo
-  parametri                              parametri ambientali
-  ambientali                             
-
-  Composti         E         500         Ogni locale è dotato di un
-  volatili                               sensore per i composti volatili
-
-  rilievo composti R         500         Cardinalità (1,1) con Composti
-  volatili                               volatili
-  ----------------------------------------------------------------------
-
-  ---------------------------------------------------------------------------
-  **Nome                 **Numero               **Descrizione**
-  costrutto**            operazioni             
-                         elementari**           
-  -------------- ------- -------------- ------- -----------------------------
-  divisione                                     Si passa dalla relazione per
-  locale                                        ricavare i 5 locali in cui
-                                                abitano gli animali da
-                                                ridistribuire
-
-  abita                                         Si passa dalla relazione per
-                                                ottenere gli animali da
-                                                ridistribuire
-
-  Locale                                        Registrazione del nuovo
-                                                locale
-
-  Visivi                                        Registrazione dei nuovi
-                                                sensori visivi per il locale
-
-  rilievo                                       Aggiornamento della relazione
-  parametri                                     tra i sensori ed il locale
-  visivi                                        
-
-  Ambientali                                    Registrazione dei nuovi
-                                                sensori ambientali per il
-                                                locale
-
-  rilievo                                       Aggiornamento della relazione
-  parametri                                     tra i sensori ed il locale
-  ambientali                                    
-
-  Composti                                      Registrazione dei nuovi
-  volatili                                      sensori ambientali per il
-                                                locale
-
-  rilievo                                       Aggiornamento della relazione
-  composti                                      tra i sensori ed il locale
-  volatili                                      
-
-  abita                                         Aggiornamento della relazione
-                                                per il ricollocamento dei 200
-                                                animali tra i 5 locali più
-                                                quello appena registrato
-                                                $\frac{200}{5+1}\approx 33$
-
-                                                
-  ---------------------------------------------------------------------------
+<table style="width:88%;">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 10%" />
+<col style="width: 17%" />
+<col style="width: 10%" />
+<col style="width: 30%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Nome costrutto</strong></th>
+<th style="text-align: left;"></th>
+<th style="text-align: left;"><strong>Numero operazioni elementari</strong></th>
+<th style="text-align: left;"></th>
+<th style="text-align: left;"><strong>Descrizione</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">divisione locale</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Si passa dalla relazione per ricavare i 5 locali in cui abitano gli animali da ridistribuire</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">abita</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Si passa dalla relazione per ottenere gli animali da ridistribuire</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Locale</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Registrazione del nuovo locale</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Visivi</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Registrazione dei nuovi sensori visivi per il locale</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">rilievo parametri visivi</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Aggiornamento della relazione tra i sensori ed il locale</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Ambientali</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Registrazione dei nuovi sensori ambientali per il locale</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">rilievo parametri ambientali</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Aggiornamento della relazione tra i sensori ed il locale</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Composti volatili</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Registrazione dei nuovi sensori ambientali per il locale</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">rilievo composti volatili</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Aggiornamento della relazione tra i sensori ed il locale</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">abita</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Aggiornamento della relazione per il ricollocamento dei 200 animali tra i 5 locali più quello appena registrato <span class="math inline">$\frac{200}{5+1}\approx 33$</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
 
 Progettazione logica
 ====================
@@ -3552,62 +4758,62 @@ Schema logico
 
 -   CentridiSmistamento(, nome, indirizzo, contatto)
 
-Vincoli d'integrità
+Vincoli d’integrità
 -------------------
 
 ### Vincoli di integrità referenziale
 
--   Esiste un vincolo di integrità referenziale tra l'attributo codice
-    in Animale e l'attributo codiceAnimale in acquistoanimale
+-   Esiste un vincolo di integrità referenziale tra l’attributo codice
+    in Animale e l’attributo codiceAnimale in acquistoanimale
 
--   Esiste un vincolo di integrità referenziale tra l'attributo
+-   Esiste un vincolo di integrità referenziale tra l’attributo
     codiceLocale in Locale e codLocale in Animale
 
--   Esiste un vincolo di integrità referenziale tra l'attributo
-    ragioneSociale in Fornitore e l'attributo ragioneSocialeFornitore in
+-   Esiste un vincolo di integrità referenziale tra l’attributo
+    ragioneSociale in Fornitore e l’attributo ragioneSocialeFornitore in
     acquistoanimale
 
--   Esiste un vincolo di integrità referenziale tra l'attributo codice
+-   Esiste un vincolo di integrità referenziale tra l’attributo codice
     in Animale e codiceAnimale in coinvolge
 
--   Esiste un vincolo di integrità referenziale tra l'attributo
+-   Esiste un vincolo di integrità referenziale tra l’attributo
     codiceRiproduzione in Riproduzione e codRiproduzione in coinvolge
 
--   Esiste un vincolo di integrità referenziale tra l'attributo
+-   Esiste un vincolo di integrità referenziale tra l’attributo
     codVeterinario in Riproduzione e codiceFiscale in Veterinario
 
--   Esiste un vincolo di integrità referenziale tra l'attributo
+-   Esiste un vincolo di integrità referenziale tra l’attributo
     codVeterinario in SchedaGestazione e codiceFiscale in Veterinario
 
--   Esiste un vincolo di integrità referenziale tra l'attributo
+-   Esiste un vincolo di integrità referenziale tra l’attributo
     codRiproduzione in SchedaGestazione e codiceRiproduzione in
     Riproduzione
 
--   Esiste un vincolo di integrità referenziale tra l'attributo nome in
+-   Esiste un vincolo di integrità referenziale tra l’attributo nome in
     Agriturismo e nomeAgriturismo in Stalla
 
--   Esiste un vincolo di integrità referenziale tra l'attributo nome in
+-   Esiste un vincolo di integrità referenziale tra l’attributo nome in
     Agriturismo e nomeAgriturismo in Locale
 
--   Esiste un vincolo di integrità referenziale tra l'attributo
+-   Esiste un vincolo di integrità referenziale tra l’attributo
     numeroProgressivo in Stalla e numProgressivo in Locale
 
--   Esiste un vincolo di integrità referenziale tra l'attributo
+-   Esiste un vincolo di integrità referenziale tra l’attributo
     codiceLocale in locale e codLocale in Ambientali
 
--   Esiste un vincolo di integrità referenziale tra l'attributo
+-   Esiste un vincolo di integrità referenziale tra l’attributo
     codiceLocale in locale e codLocale in Composti Volatili
 
--   Esiste un vincolo di integrità referenziale tra l'attributo
+-   Esiste un vincolo di integrità referenziale tra l’attributo
     codiceLocale in locale e codLocale in Visivi
 
--   Esiste un vincolo di integrità referenziale tra l'attributo
+-   Esiste un vincolo di integrità referenziale tra l’attributo
     codiceLocale in locale e codLocale in Illuminazione
 
--   Esiste un vincolo di integrità referenziale tra l'attributo
+-   Esiste un vincolo di integrità referenziale tra l’attributo
     codiceLocale in locale e codLocale in CondizionatoreAria
 
--   Esiste un vincolo di integrità referenziale tra l'attributo
+-   Esiste un vincolo di integrità referenziale tra l’attributo
     codiceLocale in locale e codLocale in PuliziaLocale
 
 -   Esiste un vincolo di integrità referenziale tra gli attributi fibre,
@@ -3822,11 +5028,11 @@ Vincoli d'integrità
 -   Esiste un vincolo di integrità che lega il codice di un animale al
     codice della madre e del padre (idMadre,idPadre)
 
--   Esiste un vincolo di integrità che lega l'attributo data in
-    diproduzione con l'attributo dataDiNascita in Animale
+-   Esiste un vincolo di integrità che lega l’attributo data in
+    diproduzione con l’attributo dataDiNascita in Animale
 
--   Esiste un vincolo di integrità che lega l'attributo codicePadre in
-    coinvolge con l'attributo codice in Animale
+-   Esiste un vincolo di integrità che lega l’attributo codicePadre in
+    coinvolge con l’attributo codice in Animale
 
 -   Esiste un vincolo di integrità che lega gli attributi temperatura e
     umidità in Locale con temperatura e umidità in Ambientali
@@ -3873,7 +5079,7 @@ tabelle in Forma normale di Boyce-Codd.
     Animale(, sesso, specie, famiglia, idMadre, idPadre, dataDiNascita,
     altezza, peso, razza, posizione, orario, codiceGps, codLocale)
 
-    -   codice $\Rightarrow$ sesso, specie, famiglia, idMadre, idPadre,
+    -   codice ⇒ sesso, specie, famiglia, idMadre, idPadre,
         dataDiNascita, altezza, peso, razza, posizione, orario,
         codiceGps, codLocale
 
@@ -3883,7 +5089,7 @@ tabelle in Forma normale di Boyce-Codd.
 
     acquistoanimale(, ragioneSocialeFornitore, dataAcquisto, dataArrivo)
 
-    -   codiceAnimale $\Rightarrow$ dataAcquisto, dataArrivo,
+    -   codiceAnimale ⇒ dataAcquisto, dataArrivo,
         ragioneSocialeFornitore
 
     Poichè la parte sinistra è superchiave, acquistoanimale è in BCNF
@@ -3892,19 +5098,19 @@ tabelle in Forma normale di Boyce-Codd.
 
     Fornitore(, indirizzo, partitaIva)
 
-    -   ragioneSociale $\Rightarrow$ indirizzo, partitaIva
+    -   ragioneSociale ⇒ indirizzo, partitaIva
 
-    -   partitaIva $\Rightarrow$ ragioneSociale, indirizzo
+    -   partitaIva ⇒ ragioneSociale, indirizzo
 
-    Poichè la parte sinistra è superchiave, Fornitore è in BCNF[^13]
+    Poichè la parte sinistra è superchiave, Fornitore è in BCNF[10]
 
 4.  **Tabella Riproduzione:**
 
     Riproduzione(, complicanza, orario, data, stato, codVeterinario,
     codiceMadre, codicePadre)
 
-    -   codiceRiproduzione $\Rightarrow$ complicanza, orario, data,
-        stato, codVeterinario, codiceMadre, codicePadre
+    -   codiceRiproduzione ⇒ complicanza, orario, data, stato,
+        codVeterinario, codiceMadre, codicePadre
 
     Poichè la parte sinistra è superchiave, Riproduzione è in BCNF
 
@@ -3912,7 +5118,7 @@ tabelle in Forma normale di Boyce-Codd.
 
     SchedaGestazione(, codRiproduzione, codVeterinario)
 
-    -   codiceGestazione $\Rightarrow$ codRiproduzione, codVeterinario
+    -   codiceGestazione ⇒ codRiproduzione, codVeterinario
 
     Poichè la parte sinistra è superchiave, SchedaGestazione è in BCNF
 
@@ -3920,7 +5126,7 @@ tabelle in Forma normale di Boyce-Codd.
 
     Agriturismo(, indirizzo, indirizzoWeb, contatto)
 
-    -   Nome $\Rightarrow$ indirizzo, indirizzoWeb, contatto
+    -   Nome ⇒ indirizzo, indirizzoWeb, contatto
 
     Poichè la parte sinistra è superchiave, Agriturismo è in BCNF
 
@@ -3937,19 +5143,18 @@ tabelle in Forma normale di Boyce-Codd.
     tollerabilitaAzoto, tollerabilitaSporcizia, tollerabilitaMetano,
     codiceStalla, nomeAgriturismo)
 
-    -   codiceLocale $\Rightarrow$ pavimentazione, capienzaMax,
-        temperatura, umidità, orientazioneFinestre, specieOspitata,
-        altezza, lunghezza, larghezza, tollerabilitaAzoto,
+    -   codiceLocale ⇒ pavimentazione, capienzaMax, temperatura,
+        umidità, orientazioneFinestre, specieOspitata, altezza,
+        lunghezza, larghezza, tollerabilitaAzoto,
         tollerabilitaSporcizia, tollerabilitaMetano, numProgressivo,
         codiceStalla, nomeAgriturismo
 
-    -   altezza, lunghezza, larghezza, specieOspitata $\Rightarrow$
-        capienzaMax
+    -   altezza, lunghezza, larghezza, specieOspitata ⇒ capienzaMax
 
-    -   specieOspitata $\Rightarrow$ pavimentazione
+    -   specieOspitata ⇒ pavimentazione
 
     Poichè sono presenti dipendenze funzionali non banali, è necessario
-    dividere la relazione in due tabelle. Seguendo l'algoritmo di
+    dividere la relazione in due tabelle. Seguendo l’algoritmo di
     decomposizione senza perdite, otteniamo due tabelle in BCNF così
     formate:
 
@@ -3965,8 +5170,7 @@ tabelle in Forma normale di Boyce-Codd.
 
     Visivi(, livelloSporcizia, orarioRilevazione, codLocale)
 
-    -   codiceVisivo $\Rightarrow$ livelloSporcizia, orarioRilevazione,
-        codLocale
+    -   codiceVisivo ⇒ livelloSporcizia, orarioRilevazione, codLocale
 
     Poichè la parte sinistra è superchiave, Visivi è in BCNF
 
@@ -3974,8 +5178,8 @@ tabelle in Forma normale di Boyce-Codd.
 
     Ambientali(, temperatura, umidità, orarioRilevazione, codLocale)
 
-    -   codiceAmbientale $\Rightarrow$ temperatura, unidità,
-        orarioRilevazione, codLocale
+    -   codiceAmbientale ⇒ temperatura, unidità, orarioRilevazione,
+        codLocale
 
     Poichè la parte sinistra è superchiave, Ambientali è in BCNF
 
@@ -3984,8 +5188,8 @@ tabelle in Forma normale di Boyce-Codd.
     CompostiVolatili(, concentrazioneMetano, concentrazioneAzoto,
     orarioRilevazione, codLocale)
 
-    -   codiceVolatili $\Rightarrow$ concentrazioneMetano,
-        concentrazioneAzoto, orarioRilevazione, codLocale
+    -   codiceVolatili ⇒ concentrazioneMetano, concentrazioneAzoto,
+        orarioRilevazione, codLocale
 
     Poichè la parte sinistra è superchiave, CompostiVolatili è in BCNF
 
@@ -3993,7 +5197,7 @@ tabelle in Forma normale di Boyce-Codd.
 
     CompostiVolatili(, consumoEnergetico, codLocale)
 
-    -   codice $\Rightarrow$ consumoEnergetico, codLocale
+    -   codice ⇒ consumoEnergetico, codLocale
 
     Poichè la parte sinistra è superchiave, Illuminazione è in BCNF
 
@@ -4001,7 +5205,7 @@ tabelle in Forma normale di Boyce-Codd.
 
     CompostiVolatili(, consumoEnergetico, codLocale)
 
-    -   codice $\Rightarrow$ consumoEnergetico, codLocale
+    -   codice ⇒ consumoEnergetico, codLocale
 
     Poichè la parte sinistra è superchiave, CondizionatoreAria è in BCNF
 
@@ -4010,8 +5214,8 @@ tabelle in Forma normale di Boyce-Codd.
     PuliziaLocale(, , , stato, personale, concentrazioneMetano,
     concentrazioneAzoto, livelloSporcizia)
 
-    -   codLocale, orarioRilevazione, dataRilevazione $\Rightarrow$
-        stato, personale, concentrazioneMetano, concentrazioneAzoto,
+    -   codLocale, orarioRilevazione, dataRilevazione ⇒ stato,
+        personale, concentrazioneMetano, concentrazioneAzoto,
         livelloSporcizia
 
     Poichè la parte sinistra è superchiave, PuliziaLocale è in BCNF
@@ -4021,8 +5225,8 @@ tabelle in Forma normale di Boyce-Codd.
     PastoPerLocale(, , , fibre, proteine, glucidi, concentrazioneSali,
     concentrazioneVitamine)
 
-    -   giorno, orario, codLocale $\Rightarrow$ fibre, proteine,
-        glucidi, concentrazioneSali, concentrazioneVitamine
+    -   giorno, orario, codLocale ⇒ fibre, proteine, glucidi,
+        concentrazioneSali, concentrazioneVitamine
 
     Poichè la parte sinistra è superchiave, PastoPerLocale è in BCNF
 
@@ -4036,8 +5240,8 @@ tabelle in Forma normale di Boyce-Codd.
 
     Foraggio(, ,, cereali, frutta, piante, forma, kcalkg)
 
-    -   fibre, proteine, glucidi $\Rightarrow$ cereali, frutta, piante,
-        forma, kcalkg
+    -   fibre, proteine, glucidi ⇒ cereali, frutta, piante, forma,
+        kcalkg
 
     Poichè la parte sinistra è superchiave, Foraggio è in BCNF
 
@@ -4051,7 +5255,7 @@ tabelle in Forma normale di Boyce-Codd.
 
     Mangiatoia(, quantitàRestante, codLocale)
 
-    -   codice $\Rightarrow$ quantitàRestante, codLocale
+    -   codice ⇒ quantitàRestante, codLocale
 
     Poichè la parte sinistra è superchiave, Mangiatoia è in BCNF
 
@@ -4059,7 +5263,7 @@ tabelle in Forma normale di Boyce-Codd.
 
     Abberveratoio(, quantitàRestante, codLocale)
 
-    -   codice $\Rightarrow$ quantitàRestante, codLocale
+    -   codice ⇒ quantitàRestante, codLocale
 
     Poichè la parte sinistra è superchiave, Abberveratoio è in BCNF
 
@@ -4067,7 +5271,7 @@ tabelle in Forma normale di Boyce-Codd.
 
     AttivitàPascolo(, fasciaOraria, codLocale, codArea)
 
-    -   codiceAttività $\Rightarrow$ fasciaOraria, codLocale, codArea
+    -   codiceAttività ⇒ fasciaOraria, codLocale, codArea
 
     Poichè la parte sinistra è superchiave, Pascolo è in BCNF
 
@@ -4081,7 +5285,7 @@ tabelle in Forma normale di Boyce-Codd.
 
     RecinsioneDivisoriaeZoneDiPascolo(,, posizione)
 
-    -   codiceZona, codArea $\Rightarrow$ posizione
+    -   codiceZona, codArea ⇒ posizione
 
     Poichè la parte sinistra è superchiave,
     RecinsioneDivisoriaeZoneDiPascolo è in BCNF
@@ -4090,7 +5294,7 @@ tabelle in Forma normale di Boyce-Codd.
 
     Mungitura(, ,, , quantità)
 
-    -   codAnimale, codMungitrice, data, ora $\Rightarrow$ quantità
+    -   codAnimale, codMungitrice, data, ora ⇒ quantità
 
     Poichè la parte sinistra è superchiave, Mungitura è in BCNF
 
@@ -4098,7 +5302,7 @@ tabelle in Forma normale di Boyce-Codd.
 
     Mungitrice(, posizione, marca, modello)
 
-    -   codice $\Rightarrow$ posizione, marca, modello
+    -   codice ⇒ posizione, marca, modello
 
     Poichè la parte sinistra è superchiave, Mungitrice è in BCNF
 
@@ -4112,8 +5316,7 @@ tabelle in Forma normale di Boyce-Codd.
 
     Latte(, quantitàSostanzeDisciolte, codAnimale, codSilos)
 
-    -   codiceLatte $\Rightarrow$ quantitàSostanzeDisciolte, codAnimale,
-        codSilos
+    -   codiceLatte ⇒ quantitàSostanzeDisciolte, codAnimale, codSilos
 
     Poichè la parte sinistra è superchiave, Latte è in BCNF
 
@@ -4121,7 +5324,7 @@ tabelle in Forma normale di Boyce-Codd.
 
     Silos(, capacità, livello)
 
-    -   codice $\Rightarrow$ capacità, livello
+    -   codice ⇒ capacità, livello
 
     Poichè la parte sinistra è superchiave, Silos è in BCNF
 
@@ -4135,8 +5338,7 @@ tabelle in Forma normale di Boyce-Codd.
 
     Lotto(, codDipendenti, dataProd, codLab, durata)
 
-    -   codiceLotto $\Rightarrow$ codDipendenti, dataProd, codLab,
-        durata
+    -   codiceLotto ⇒ codDipendenti, dataProd, codLab, durata
 
     Poichè la parte sinistra è superchiave, Lotto è in BCNF
 
@@ -4176,7 +5378,7 @@ tabelle in Forma normale di Boyce-Codd.
 
     Parametri(, , temperatura, umidità, codCantina)
 
-    -   data, idSensore $\Rightarrow$ temperatura, umidità, codCantina
+    -   data, idSensore ⇒ temperatura, umidità, codCantina
 
     Poichè la parte sinistra è superchiave, Parametri è in BCNF
 
@@ -4198,8 +5400,8 @@ tabelle in Forma normale di Boyce-Codd.
     Fasi(, nome, durataFaseIdeale, temperaturaLatteIdeale,
     tempoRiposoIdeale, durata)
 
-    -   codiceFase $\Rightarrow$ nome, durataFaseIdeale,
-        temperaturaLatteIdeale, tempoRiposoIdeale, durata
+    -   codiceFase ⇒ nome, durataFaseIdeale, temperaturaLatteIdeale,
+        tempoRiposoIdeale, durata
 
     Poichè la parte sinistra è superchiave, Fasi è in BCNF
 
@@ -4213,7 +5415,7 @@ tabelle in Forma normale di Boyce-Codd.
 
     Ricetta(, collocazioneGeografica, ricetta, durataStagionatura)
 
-    -   codiceRicetta $\Rightarrow$ collocazioneGeografica, ricetta,
+    -   codiceRicetta ⇒ collocazioneGeografica, ricetta,
         durataStagionatura
 
     Poichè la parte sinistra è superchiave, Ricetta è in BCNF
@@ -4222,7 +5424,7 @@ tabelle in Forma normale di Boyce-Codd.
 
     Formaggio(, , deperibilita, codRicetta)
 
-    -   nome, nomeAgriturismo $\Rightarrow$ deperibilità, codRicetta
+    -   nome, nomeAgriturismo ⇒ deperibilità, codRicetta
 
     Poichè la parte sinistra è superchiave, Formaggio è in BCNF
 
@@ -4231,9 +5433,8 @@ tabelle in Forma normale di Boyce-Codd.
     Indicisalute(, , tipologiaRespirazione, lucentezzaPelo, vigilanza,
     idratazione, deambulazione)
 
-    -   codiceAnimale, dataRilevazione $\Rightarrow$
-        tipologiaRespirazione, lucentezzaPelo, vigilanza, idratazione,
-        deambulazione
+    -   codiceAnimale, dataRilevazione ⇒ tipologiaRespirazione,
+        lucentezzaPelo, vigilanza, idratazione, deambulazione
 
     Poichè la parte sinistra è superchiave, Indicisalute è in BCNF
 
@@ -4242,7 +5443,7 @@ tabelle in Forma normale di Boyce-Codd.
     Visita(, esito, descrizione, dataEffettiva, dataProgrammata,
     codAnimale, codVeterinario)
 
-    -   codiceVisita $\Rightarrow$ esito, descrizione, dataEffettiva,
+    -   codiceVisita ⇒ esito, descrizione, dataEffettiva,
         dataProgrammata, codAnimale, codVeterinario
 
     Poichè la parte sinistra è superchiave, Visita è in BCNF
@@ -4252,8 +5453,8 @@ tabelle in Forma normale di Boyce-Codd.
     Esame(, descrizione, data, macchinario, nome, codAnimale,
     codVeterinario)
 
-    -   codiceEsame $\Rightarrow$ descrizione, data, macchinario, nome,
-        codAnimale, codVeterinario
+    -   codiceEsame ⇒ descrizione, data, macchinario, nome, codAnimale,
+        codVeterinario
 
     Poichè la parte sinistra è superchiave, Esame è in BCNF
 
@@ -4261,7 +5462,7 @@ tabelle in Forma normale di Boyce-Codd.
 
     Veterinario(, nome, cognome, contatto)
 
-    -   codFiscale $\Rightarrow$ nome, cognome, contatto
+    -   codFiscale ⇒ nome, cognome, contatto
 
     Poichè la parte sinistra è superchiave, Veterinario è in BCNF
 
@@ -4269,8 +5470,8 @@ tabelle in Forma normale di Boyce-Codd.
 
     Terapia(, dataInizio, durata, secondaTerapiaConsecutiva, codAnimale)
 
-    -   codiceTerapia $\Rightarrow$ dataInizio, durata,
-        secondaTerapiaConsecutiva, codAnimale
+    -   codiceTerapia ⇒ dataInizio, durata, secondaTerapiaConsecutiva,
+        codAnimale
 
     Poichè la parte sinistra è superchiave, Terapia è in BCNF
 
@@ -4278,7 +5479,7 @@ tabelle in Forma normale di Boyce-Codd.
 
     compostada(, , posologia)
 
-    -   codTerapia, nomeFarmaco $\Rightarrow$ posologia
+    -   codTerapia, nomeFarmaco ⇒ posologia
 
     Poichè la parte sinistra è superchiave, compostada è in BCNF
 
@@ -4286,7 +5487,7 @@ tabelle in Forma normale di Boyce-Codd.
 
     Farmaco(, principioAttivo, dosaggio)
 
-    -   nome $\Rightarrow$ pricipioAttivo, dosaggio
+    -   nome ⇒ pricipioAttivo, dosaggio
 
     Poichè la parte sinistra è superchiave, Farmaco è in BCNF
 
@@ -4296,7 +5497,7 @@ tabelle in Forma normale di Boyce-Codd.
     rispostaOculare, emocromo, spessoreZoccolo, fegato, cuore, pancreas,
     codAnimale, codVeterinario)
 
-    -   codiceScheda $\Rightarrow$ massaMagram carenzem patologie, data,
+    -   codiceScheda ⇒ massaMagram carenzem patologie, data,
         rispostaOculare, emocromo, spessoreZoccolo, fegato, cuore,
         pancreas, codAnimale, codVeterinario
 
@@ -4319,7 +5520,7 @@ tabelle in Forma normale di Boyce-Codd.
 
     Cliente(, anticipo)
 
-    -   codCarta $\Rightarrow$ anticipo
+    -   codCarta ⇒ anticipo
 
     Poichè la parte sinistra è superchiave, Cliente è in BCNF
 
@@ -4327,8 +5528,7 @@ tabelle in Forma normale di Boyce-Codd.
 
     Pagamenti(, tipoPagamento, totaleCosto, data, ora, codCliente)
 
-    -   codPagamento $\Rightarrow$ tipoPagamento, totaleCosto, data,
-        ora, codCliente
+    -   codPagamento ⇒ tipoPagamento, totaleCosto, data, ora, codCliente
 
     Poichè la parte sinistra è superchiave, Pagamenti è in BCNF
 
@@ -4336,7 +5536,7 @@ tabelle in Forma normale di Boyce-Codd.
 
     PrenotazioneStanza(, , , , dataPartenza )
 
-    -   dataArrivo, codCliente, numStanza, nomeAgriturismo $\Rightarrow$
+    -   dataArrivo, codCliente, numStanza, nomeAgriturismo ⇒
         dataPartenza
 
     Poichè la parte sinistra è superchiave, PrenotazioneStanza è in BCNF
@@ -4345,8 +5545,8 @@ tabelle in Forma normale di Boyce-Codd.
 
     Stanza(, , costoGiornaliero, suite, numLetti, tipoLetti )
 
-    -   numStanza, codAgriturismo $\Rightarrow$ costoGiornaliero, suite,
-        numLetti, tipoLetti
+    -   numStanza, codAgriturismo ⇒ costoGiornaliero, suite, numLetti,
+        tipoLetti
 
     Poichè la parte sinistra è superchiave, Stanza è in BCNF
 
@@ -4355,7 +5555,7 @@ tabelle in Forma normale di Boyce-Codd.
     ServizioperStanza(, , , , , , dataFineUtilizzo)
 
     -   dataInizioUtilizzo, dataArrivo, codCliente, numStanza,
-        nomeAgriturismo, codServizio $\Rightarrow$ dataFineUtilizzo
+        nomeAgriturismo, codServizio ⇒ dataFineUtilizzo
 
     Poichè la parte sinistra è superchiave, ServizioperStanza è in BCNF
 
@@ -4363,7 +5563,7 @@ tabelle in Forma normale di Boyce-Codd.
 
     ServizioAggiuntivo(, costo)
 
-    -   tipoServizio $\Rightarrow$ costo
+    -   tipoServizio ⇒ costo
 
     Poichè la parte sinistra è superchiave, ServizioAggiuntivo è in BCNF
 
@@ -4378,7 +5578,7 @@ tabelle in Forma normale di Boyce-Codd.
 
     Escursione(, giorno, orario, codGuida)
 
-    -   codice $\Rightarrow$ giorno, orario, codGuida
+    -   codice ⇒ giorno, orario, codGuida
 
     Poichè la parte sinistra è superchiave, Escursione è in BCNF
 
@@ -4386,7 +5586,7 @@ tabelle in Forma normale di Boyce-Codd.
 
     Guida(, nome, cognome, contatto)
 
-    -   codfisc $\Rightarrow$ nome, cognome, contatto
+    -   codfisc ⇒ nome, cognome, contatto
 
     Poichè la parte sinistra è superchiave, Guida è in BCNF
 
@@ -4400,7 +5600,7 @@ tabelle in Forma normale di Boyce-Codd.
 
     Itinerario(, numSentieri, codAgriturismo)
 
-    -   codice $\Rightarrow$ numSentieri, codAgriturismo
+    -   codice ⇒ numSentieri, codAgriturismo
 
     Poichè la parte sinistra è superchiave, Itinerario è in BCNF
 
@@ -4414,7 +5614,7 @@ tabelle in Forma normale di Boyce-Codd.
 
     Tappe(, tempoPermanenza)
 
-    -   nome $\Rightarrow$ tempoPermanenza
+    -   nome ⇒ tempoPermanenza
 
     Poichè la parte sinistra è superchiave, Tappe è in BCNF
 
@@ -4424,10 +5624,9 @@ tabelle in Forma normale di Boyce-Codd.
     scadenzaDoc, numDoc, dataIscrizione, codDoc, cognome, nome,
     enteRilascio, tipoDoc, indirizzo, codiceCarta)
 
-    -   utente, password $\Rightarrow$ damandaRec, rispostaRec,
-        numTelefono, codFiscale, scadenzaDoc, numDoc, dataIscrizione,
-        codDoc, cognome, nome, enteRilascio, tipoDoc, indirizzo,
-        codiceCarta
+    -   utente, password ⇒ damandaRec, rispostaRec, numTelefono,
+        codFiscale, scadenzaDoc, numDoc, dataIscrizione, codDoc,
+        cognome, nome, enteRilascio, tipoDoc, indirizzo, codiceCarta
 
     Poichè la parte sinistra è superchiave, Account è in BCNF
 
@@ -4436,9 +5635,9 @@ tabelle in Forma normale di Boyce-Codd.
     Recensione(, gradimentoGenerale, qualitaPercepita, conservazione,
     campoTestuale, gusto, utente, password, codProdotto)
 
-    -   codiceRecensione $\Rightarrow$ gradimentoGenerale,
-        qualitàPercepita, conservazione, campoTestuale, gusto, utente,
-        password, codProdotto
+    -   codiceRecensione ⇒ gradimentoGenerale, qualitàPercepita,
+        conservazione, campoTestuale, gusto, utente, password,
+        codProdotto
 
     Poichè la parte sinistra è superchiave, Recensione è in BCNF
 
@@ -4447,7 +5646,7 @@ tabelle in Forma normale di Boyce-Codd.
     FormaggioProdotto(, prezzo, peso, lottoAppartenenza, rimastiInStock,
     scadenza, nome, nomeAgriturismo)
 
-    -   codiceProdotto $\Rightarrow$ prezzo, peso, lottoAppartenenza,
+    -   codiceProdotto ⇒ prezzo, peso, lottoAppartenenza,
         rimastiInStock, scadenza, nome, nomeAgriturismo
 
     Poichè la parte sinistra è superchiave, FormaggioProdotto è in BCNF
@@ -4456,7 +5655,7 @@ tabelle in Forma normale di Boyce-Codd.
 
     contenutoordine(, , quantità, reso)
 
-    -   codOrdine, codFormaggioprodotto $\Rightarrow$ quantità, reso
+    -   codOrdine, codFormaggioprodotto ⇒ quantità, reso
 
     Poichè la parte sinistra è superchiave, contenutoordine è in BCNF
 
@@ -4465,8 +5664,8 @@ tabelle in Forma normale di Boyce-Codd.
     OrdineProdotti(, stato, data, tipoConsegnaReso, utente, password,
     codSpedizione)
 
-    -   codiceOrdine $\Rightarrow$ stato, data, tipoConsegnaReso,
-        utente, passsword, codSpedizione
+    -   codiceOrdine ⇒ stato, data, tipoConsegnaReso, utente, passsword,
+        codSpedizione
 
     Poichè la parte sinistra è superchiave, OrdineProdotti è in BCNF
 
@@ -4475,8 +5674,8 @@ tabelle in Forma normale di Boyce-Codd.
     Spedizione(, dataConsegnaEffettiva, dataConsegnaPrevista, percorso,
     stato)
 
-    -   codice $\Rightarrow$ dataConsegnaEffettiva,
-        dataConsegnaPrevista, percorso, stato
+    -   codice ⇒ dataConsegnaEffettiva, dataConsegnaPrevista, percorso,
+        stato
 
     Poichè la parte sinistra è superchiave, Spedizione è in BCNF
 
@@ -4490,7 +5689,7 @@ tabelle in Forma normale di Boyce-Codd.
 
     CentridiSmistamento(, nome, indirizzo, contatto)
 
-    -   codice $\Rightarrow$ nome, indirizzo, contatto
+    -   codice ⇒ nome, indirizzo, contatto
 
     Poichè la parte sinistra è superchiave, CentridiSmistamento è in
     BCNF
@@ -4500,7 +5699,7 @@ Implementazione MySQL
 
 Nota sugli attributi:
 
--   Per sfruttare i tipi di dato offerti dall'architettura mySQL, si è
+-   Per sfruttare i tipi di dato offerti dall’architettura mySQL, si è
     deciso di trasformare tutte le istanze di data e orario in un unico
     attributo data\_orario di tipo TIMESTAMP. Inoltre tutte le
     occorrenze di data sono state opportunamente ridenominate, affinchè
@@ -4516,100 +5715,84 @@ Data Analytics
 Sono state sviluppate quattro funzionalità di data analytic capaci di
 aggregare ed evidenziare dati salienti per il corretto ed efficiente uso
 del database per la gestione delle imprese legate alla catena di
-agriturismi *FarmHouse 4.0*\
+agriturismi *FarmHouse 4.0*  
 
-AN\_salute\_gruppi: 
+AN\_salute\_gruppi:   
+La funzione sfrutta le informazioni dei GPS per selezionare i capi di
+bestiame in gruppi di vicinanza (i gruppi contengono animali vicini
+entro un certo range e vengono formati in modo procedurale attraverso
+l’utilizzo di un cursore e scorrendo gli animali precedentemente
+ordinati per latitudine crescente attraverso un rank). Così facendo si
+ricavano gli indici di salute medi di ogni gruppo tramite gli indici di
+salute associati. La funzione permette di verificare fenomeni di
+emarginamento o vicinanza tra animali di costituzione fisica differente.
+Con sufficienti dati è possibile far emergere pattern ricorrenti,
+soprattutto in fase di pascolo, utili per prevenire il diffondersi di
+eventuali patologie, e per confrontare lo stato di salute di animali che
+pascolano in precise zone geografiche, in modo da poter eventualmente
+spostare le aree di pascolo nelle zone più frequentate così da garantire
+un minore stato di stress fisico agli animali..
 
-:   La funzione sfrutta le informazioni dei GPS per selezionare i capi
-    di bestiame in gruppi di vicinanza (i gruppi contengono animali
-    vicini entro un certo range e vengono formati in modo procedurale
-    attraverso l'utilizzo di un cursore e scorrendo gli animali
-    precedentemente ordinati per latitudine crescente attraverso un
-    rank). Così facendo si ricavano gli indici di salute medi di ogni
-    gruppo tramite gli indici di salute associati. La funzione permette
-    di verificare fenomeni di emarginamento o vicinanza tra animali di
-    costituzione fisica differente. Con sufficienti dati è possibile far
-    emergere pattern ricorrenti, soprattutto in fase di pascolo, utili
-    per prevenire il diffondersi di eventuali patologie, e per
-    confrontare lo stato di salute di animali che pascolano in precise
-    zone geografiche, in modo da poter eventualmente spostare le aree di
-    pascolo nelle zone più frequentate così da garantire un minore stato
-    di stress fisico agli animali..
+AN\_tracciabilità\_filiera:   
+La funzione analizza i singoli prodotti venduti sullo store online
+costruendo una view in cui sono affiancati ad ognuno di essi un
+resoconto dei parametri di processo, la recensione media da parte dei
+clienti, oltre che l’informazione se il il prodotto è stato reso oppure
+no. Da ciò attraverso una tabella pivot si evidenziano quali
+caratteristiche del processo produttivo hanno un maggiore impatto sulla
+qualità percepita del prodotto. La funzione esprime inoltre la
+probabilità con cui il prodotto verrà reso in base a ciascuno dei
+parametri di produzione.
 
-AN\_tracciabilità\_filiera: 
+AN\_controllo\_vendite:   
+La funzione effettua un rank delle tipologie di formaggio vendute sullo
+store in funzione delle vendite e degli incassi generati, tenendo conto
+anche degli eventuali resi. Inoltre affianca ad ognuno di essi la
+valutazione media da parte dei clienti che hanno recensito il prodotto,
+così da evidenziare i formaggi di tendenza, o al contrario, quelli ben
+apprezzati seppur poco conosciuti. Questo permette, tra l’altro, di
+proporre con maggior fiducia i prodotti che hanno generato minor
+guadagno.
 
-:   La funzione analizza i singoli prodotti venduti sullo store online
-    costruendo una view in cui sono affiancati ad ognuno di essi un
-    resoconto dei parametri di processo, la recensione media da parte
-    dei clienti, oltre che l'informazione se il il prodotto è stato reso
-    oppure no. Da ciò attraverso una tabella pivot si evidenziano quali
-    caratteristiche del processo produttivo hanno un maggiore impatto
-    sulla qualità percepita del prodotto. La funzione esprime inoltre la
-    probabilità con cui il prodotto verrà reso in base a ciascuno dei
-    parametri di produzione.
+AN\_controllo\_qualità\_del\_processo:   
+La funzione stila un rank dei singoli lotti della produzione in base
+all’attinenza di questi ultimi con i parametri ideali di produzione e
+all’omogeneità delle componenti utilizzate, dalla composizione
+chimico-fisica del latte agli sbalzi di salute degli animali, in
+funzione anche dell’apporto alimentare dei pasti somministrati. Questi
+dati vengono poi visualizzati attraverso una tabella pivot per garantire
+una visione più immediata dell’andamento della qualità del prodotto
+conseguentemente ai vari parametri.
 
-AN\_controllo\_vendite: 
+[1] In ogni locale viene cambiato pasto 24 volte all’anno(circa ogni 2
+settimane) per un totale di 24 × 500 = 12000 cambiamenti annui.Dunque la
+frequenza giornaliera è di $\\frac{12000}{365}\\approx 33$
 
-:   La funzione effettua un rank delle tipologie di formaggio vendute
-    sullo store in funzione delle vendite e degli incassi generati,
-    tenendo conto anche degli eventuali resi. Inoltre affianca ad ognuno
-    di essi la valutazione media da parte dei clienti che hanno
-    recensito il prodotto, così da evidenziare i formaggi di tendenza, o
-    al contrario, quelli ben apprezzati seppur poco conosciuti. Questo
-    permette, tra l'altro, di proporre con maggior fiducia i prodotti
-    che hanno generato minor guadagno.
+[2] Il numero delle riproduzioni con successo in un anno è 11610. Ogni
+giorno ne vengono effettuate $\\frac{11610}{365}\\approx 32$
 
-AN\_controllo\_qualità\_del\_processo: 
+[3] Le mungiture annuali sono 5475000. Ogni giorno ne vengono eseguite
+$\\frac{5475000}{365}=15000$
 
-:   La funzione stila un rank dei singoli lotti della produzione in base
-    all'attinenza di questi ultimi con i parametri ideali di produzione
-    e all'omogeneità delle componenti utilizzate, dalla composizione
-    chimico-fisica del latte agli sbalzi di salute degli animali, in
-    funzione anche dell'apporto alimentare dei pasti somministrati.
-    Questi dati vengono poi visualizzati attraverso una tabella pivot
-    per garantire una visione più immediata dell'andamento della qualità
-    del prodotto conseguentemente ai vari parametri.
+[4] Ognuno dei 20 agriturismi richiede 2 interventi di pulizia al giorno
 
-[^1]: In questo modo, ognuno dei 25 locali viene pulito
-    ${730\over 25}=29$ volte l'anno
+[5] Ogni agriturismo gestisce circa 20 ordini al giorno: 20 × 20 = 400
 
-[^2]: In ogni locale viene cambiato pasto 24 volte all'anno(circa ogni 2
-    settimane) per un totale di $24\times 500 = 12000$ cambiamenti
-    annui.Dunque la frequenza giornaliera è di
-    $\frac{12000}{365}\approx 33$
+[6] 40000 terapie in un anno corrispondono a circa
+$\\frac{40000}{365}\\approx 110$ nuove terapie ogni giorno
 
-[^3]: Il numero delle riproduzioni con successo in un anno è 11610. Ogni
-    giorno ne vengono effettuate $\frac{11610}{365}\approx 32$
+[7] Viene eseguito un controllo ogni 15 minuti durante le 8 ore
+dell’attività, quindi 32 controlli per ognuna delle
+$\\frac{90000}{365}\\approx 247$ attività giornaliere. Allora vengono
+eseguiti 247 × 32 = 7904 controlli
 
-[^4]: Le mungiture annuali sono 5475000. Ogni giorno ne vengono eseguite
-    $\frac{5475000}{365}=15000$
+[8] I 7000 accounts vengono registrati nel corso di un anno:
+$\\frac{7000}{365}\\approx 19$
 
-[^5]: Ognuno dei 20 agriturismi richiede 2 interventi di pulizia al
-    giorno
+[9] Si stima che in un anno vengano aggiunti 100 nuovi locali, che
+corrispondono per un agriturismo ad un nuovo locale per ognuna della 5
+stalle: $\\frac{100}{365}\\approx 0.27$
 
-[^6]: In questo modo, ognuno dei 25 locali viene pulito
-    ${730\over 25}=29$ volte l'anno
-
-[^7]: Ogni agriturismo gestisce circa 20 ordini al giorno:
-    $20\times 20= 400$
-
-[^8]: Per ipotesi, ogni ordine è composto da 20 prodotti
-
-[^9]: 40000 terapie in un anno corrispondono a circa
-    $\frac{40000}{365}\approx 110$ nuove terapie ogni giorno
-
-[^10]: Viene eseguito un controllo ogni 15 minuti durante le 8 ore
-    dell'attività, quindi 32 controlli per ognuna delle
-    $\frac{90000}{365}\approx 247$ attività giornaliere. Allora vengono
-    eseguiti $247\times 32 = 7904$ controlli
-
-[^11]: I 7000 accounts vengono registrati nel corso di un anno:
-    $\frac{7000}{365}\approx 19$
-
-[^12]: Si stima che in un anno vengano aggiunti 100 nuovi locali, che
-    corrispondono per un agriturismo ad un nuovo locale per ognuna della
-    5 stalle: $\frac{100}{365}\approx 0.27$
-
-[^13]: Infatti anche partitaIva, pur non essendo chiave primaria, è pur
-    sempre una superchiave, in quanto non esistono due istanze diverse
-    di Fornitore che abbiano lo stesso valore di partitaIva
+[10] Infatti anche partitaIva, pur non essendo chiave primaria, è pur
+sempre una superchiave, in quanto non esistono due istanze diverse di
+Fornitore che abbiano lo stesso valore di partitaIva
